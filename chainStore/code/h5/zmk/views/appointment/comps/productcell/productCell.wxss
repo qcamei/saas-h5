@@ -1,0 +1,136 @@
+/* views/appointment/comps/productcell/productCell.wxss */
+@import "../../../../app.wxss";
+.weui-media-box__thumb{
+   height: 70px;
+  width: 70px;
+  border: solid;
+  border-color:white; 
+  background-color: white;
+  border-radius: 5px 
+}
+.weui-media-box__title{
+  margin-left: 10px;
+  font-size: 14px;
+  height: 20px;
+  color: #333333;
+  word-break: break-all;
+  word-wrap: break-word;
+  overflow: hidden;
+  white-space: pre-wrap;
+  
+}
+.weui-media-box__desc{
+  margin-left: 10px;
+  font-size: 10px;
+  color: #4678FA;
+  display: inline;
+  padding: 2px;
+  border-radius: 2px;
+  border: 1px solid #4678FA
+}
+.weui-media-box__price_wrapper{
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 5px;
+  font-size: 12px;
+  padding: 2px;
+}
+.weui-media-box__price{
+  width: 60px;
+  font-size: 12px;
+  color: #FF5A5A;
+  display: inline-block;
+  padding: 2px;
+}
+.display_inline{
+  display: inline;
+}
+.weui-media-box__count_wrapper{
+  margin-left: 0;
+}
+.weui-media-box__count_down{
+  height: 15px;
+  width: 15px;
+  padding:0 10px;
+  font-size: 14px;
+  color: #DCDCDC;
+  border-radius: 2px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border: 1px solid #DCDCDC
+}
+.weui-media-box__count_up{
+  height: 15px;
+  width: 50px;
+  padding:0 10px;
+  font-size: 14px;
+  color: #DCDCDC;
+  border-radius: 2px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border: 1px solid #DCDCDC
+}
+.weui-media-box__count{
+  height: 15px;
+  width: 15px;
+  padding: 0 10px;
+  font-size: 14px;
+  border: 1px solid #DCDCDC;
+  border-left: 0px;
+  border-right: 0px;
+}
+.weui-media-box__hd_in-appmsg{
+  margin-left: 0;
+  padding-left: 0em;
+  margin-right:30rpx;
+  width:16px;
+  height:16px;
+  line-height:16px;
+  text-align:center;
+}
+.weui-media-box__bd {
+  flex-grow: 1;
+
+}
+.beautician-selected{
+  width: 16px;
+  height: 16px;
+  margin-left: 5px;
+}
+.weui-media-box{
+   padding: 15px 12px 
+}
+ .weui-media-box_appmsg{
+  padding: 11px;
+} 
+.line{
+  background-color: #f0f0f0;
+  margin-left: 12px;
+  margin-right: 12px;
+  height: 1px
+}
+.serve {
+  height:80rpx;
+  line-height:80rpx;
+  font-size: 28rpx;
+  color:#333;
+  border:none;
+  padding:0 32rpx;
+  background: #F7F7F7;
+}
+.serve image {
+  flex:none;
+  margin-left:25px;
+}
+.serve .weui-cell__bd{
+  flex:none;
+  margin-right:20rpx;
+}
+.serve .weui-cell__ft{
+  align-self: flex-end;
+  flex:1 1 auto;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

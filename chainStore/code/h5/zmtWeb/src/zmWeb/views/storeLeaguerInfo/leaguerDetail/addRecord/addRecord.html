@@ -1,0 +1,58 @@
+<!--<view-header-comp [headerArr]="['会员列表','查看会员','新建记录']"></view-header-comp>-->
+
+<!--<div class="align-center disFlex pd-lr-30" style="height:60px;border-bottom: 1px solid #ebeef2;background-color: #fff;border-top-left-radius: 4px;border-top-right-radius: 4px;">-->
+  <!--<span class="fz-18 font-bold cur-hand" (click)="goLeaguerList()">会员列表</span>-->
+  <!--<span class="mg-lr-10">></span>-->
+  <!--<span class="fz-16 cur-hand" (click)="goLeaguerDetail()">查看会员</span>-->
+  <!--&lt;!&ndash;<span class="fz-16 curHand">查看会员</span>&ndash;&gt;-->
+  <!--<span class="mg-lr-10">></span>-->
+  <!--<span class="fz-16">新建记录</span>-->
+<!--</div>-->
+
+
+<view-body-comp [headerArr]="['返回','新建记录']">
+    <div class="zmFullWidth" fxLayout="row" fxLayoutGap="60px" style="margin-bottom:50px;">
+        <div fxLayout="row" fxLayoutGap="5px">
+          <div  class="gl_product">关联订单：</div>
+          <span *ngIf="viewData.selectedOrder" class="order_blue rel_order cur-hand" (click)="selectOrder()">{{viewData.selectedOrder.content}}</span>
+          <span *ngIf="viewData.selectedOrder" class="order_blue rel_order" style="width:30px;"><i class="fa fa-close" (click)="clearOrder()"></i></span>
+          <div *ngIf="!viewData.selectedOrder" class="order_blue " style="padding:0 5px; cursor: pointer;font-size:14px;"(click)="selectOrder()">
+            <img style="width:40%;" src="assets/images/icon/icon_Add.png"> 添加</div>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="5px">
+            <div  class="gl_product">关联项目：</div>
+            <div class="order_blue rel_product disFlex flex">
+              <!--<span *ngFor="let item of viewData.selectedProductList; let i = index;"><span class="content" *ngIf="i<3">{{item.pgName}}</span></span>-->
+              <span class="content" *ngFor="let item of viewData.selectedProductList| slice:0:3">{{item.pgName}}</span>
+               <b *ngIf="viewData.selectedProductList&&viewData.selectedProductList.length>3" style="margin-left:-6px;">....</b>
+              <span *ngIf="viewData.selectedProductList&&viewData.selectedProductList.length>0" class="order_blue rel_order" style="width:30px;"><i class="fa fa-close" (click)="clearProducts()">&ngsp;</i></span>
+
+              <!-- 添加按钮 -->
+              <div style="padding:0 5px; cursor: pointer;font-size:14px;"(click)="selectProduct()">
+                <img style="width:40%;" src="assets/images/icon/icon_Add.png"> 添加</div>
+            </div>
+        </div>
+      </div>
+
+      <div  fxLayout="column" fxLayoutGap="50px" style="max-width: 700px" >
+         
+
+          <!--<zm-input-name [label]="'标题'" [placeholder]="'请输入标题'" style="max-width: 250px" [(zmValue)]="viewData.addForm.title" [(zmPass)]="viewData.addForm.titlePass" ></zm-input-name>-->
+          <zm-input-textarea [label]="'内容'" [placeholder]="'请输入内容，限500字'" [maxlength]="500" [(text)]="viewData.addForm.content"></zm-input-textarea>
+
+          <div class=" input-group c-input-group w-100-p">
+            <label class="c-label  mg-t-30">图片</label>
+            <div class="pd-t-10" fxLayout="row">
+              <zm-img-record [(imgArr)]="viewData.addForm.imgPaths"></zm-img-record>
+              <zm-input-file *ngIf="viewData.addForm.imgPaths.length<9" [AppearanceButton]="false" [maxCount]="9" [limitCount]="getLimitCount()" [requestUrl]="viewData.requestUrl" [appendKey]="'imgs'" (callback)="setImgUrl($event)"></zm-input-file>
+            </div>
+          </div>
+
+        <div fxLayout="row" fxFlexAlign="end">
+          <zm-btn-large name="保存" (zmbtnClick)="addLeaguerRecord()"></zm-btn-large>
+        </div>
+
+      </div>
+
+</view-body-comp>

@@ -1,0 +1,44 @@
+<view-body-comp [headerArr]="['总店数据']">
+    <content>
+        <div class="mt-20" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
+            <span><img src="assets/images/icon/ic_pitch.png"></span>
+            <div>
+                <p class="my-4 text-bold"style="color:rgba(0, 0, 0, 0.87);" >同步数据</p>
+            </div>
+        </div>
+        <div fxLayout="start">
+            <div class="text-center mr-12 zmCurHand" (click)="goPullProduct()" style="width:100px;">
+                 <p class="mb-0"><img  src="assets/images/icon/date-product.png" ></p>
+                 <span>项目</span>
+            </div>
+            <div class="text-center mr-12 zmCurHand" (click)="goPullGoods()" st style="width:100px;">
+                     <p class="mb-0"><img  src="assets/images/icon/date-shop.png" ></p>
+                    <span>商品</span>
+               </div>
+               <div class="text-center mr-12 zmCurHand" (click)="goPullPackage()" st  style="width:100px;">
+                     <p class="mb-0"><img  src="assets/images/icon/date-package.png" ></p>
+                    <span>套餐</span>
+               </div>
+               <div class="text-center mr-12 zmCurHand" (click)="goPullCard()" st style="width:100px;">
+                     <p class="mb-0"><img  src="assets/images/icon/date-menverCar.png" ></p>
+                    <span>次卡</span>
+               </div>
+               <div class="text-center mr-12 zmCurHand" (click)="goPullMemberCard()" st style="width:100px;">
+                     <p class="mb-0"><img  src="assets/images/icon/date-findClerk.png" ></p>
+                    <span>会员卡</span>
+               </div>
+               <!--<div class="text-center mr-5 mb-2 cur-hand" (click)="goPullClerk()" st style="width:100px;">-->
+                     <!--<p style="width:100px;"><img  src="assets/images/sideBar/icon-staff.png" ></p>-->
+                    <!--<span>员工获取</span>-->
+               <!--</div>-->
+        </div>
+            <!-- 设置相关 -->
+        <!-- <p class="font-weight-bold">设置相关</p>
+        <div class="d-flex">
+            <div class="text-center mr-5 mb-2"style="width:100px;">
+                    <p><img class="w-100 h-100" src="assets/images/admin.png" ></p>
+                    <span>xxxx设置</span>
+            </div>
+        </div> -->
+    </content>
+</view-body-comp>

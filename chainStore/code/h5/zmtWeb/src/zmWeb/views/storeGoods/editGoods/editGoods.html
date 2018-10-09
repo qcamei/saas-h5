@@ -1,0 +1,60 @@
+<view-body-comp [headerArr]="['商品列表','编辑商品']">
+
+  <div fxLayout="row" fxLayoutGap="20px">
+
+    <div style="width: 50%">
+
+      <zm-input-pcode label="商品编号" placeholder="请输入商品编号"
+                      [(zmValue)]="viewData.defaultNumber" [(zmPass)]="viewData.defaultNumberPass"
+                      [oriCode]="viewData.goodsDetail.number" [existList]="viewData.goodsNumberList"></zm-input-pcode>
+
+
+      <zm-input-name label="商品名称" placeholder="请输入商品名称" maxlength="15"
+                     [(zmValue)]="viewData.goodsDetail.name" [(zmPass)]="viewData.goodsDetail.namePass"></zm-input-name>
+
+      <div fxLayout="row" fxLayoutGap="10px;" fxLayoutAlign="space-between center">
+        <zm-select-string fxFlex="1 1" [noAll]="true" [label]="'商品分类'" [selectList]="viewData.typeList" [name]="'name'"
+                          [value]="'id'"
+                          [(zmValue)]="viewData.goodsDetail.typeId"></zm-select-string>
+        <zm-btn-small fxFlex="0 0 80px" name="新建分类" (zmbtnClick)="addType()"></zm-btn-small>
+      </div>
+
+
+      <zm-input-price [required]="false" [label]="'商品售价'" [placeholder]="'请输入商品售价'"
+                      [(zmValue)]="viewData.goodsDetail.price"></zm-input-price>
+
+      <zm-input-price [required]="false" [label]="'商品成本'" [placeholder]="'请输入商品成本'"
+                      [(zmValue)]="viewData.goodsDetail.cost"></zm-input-price>
+
+      <zm-input-textarea [label]="'商品介绍'" [placeholder]="'请输入200字以内的商品介绍'"
+                         [(text)]="viewData.goodsDetail.descript" [maxlength]="200"></zm-input-textarea>
+
+      <switch-button-comp label="上架状态" [(state)]="viewData.state"></switch-button-comp>
+
+      <switch-button-comp [(state)]="viewData.promotionFlag" label="是否促销"></switch-button-comp>
+
+      <zm-input-price *ngIf="viewData.promotionFlag" [label]="'促销价格'" [placeholder]="'请输入促销价格'"
+                      [(zmValue)]="viewData.goodsDetail.promotionPrice"></zm-input-price>
+
+      <div fxLayout="row" fxLayoutAlign="end" style="margin-top: 20px;">
+        <zm-btn-large fxFlexAlign="end" [disabled]="!(viewData.defaultNumberPass && viewData.goodsDetail.namePass)"
+                      name="保存" (zmbtnClick)="updateGoods(viewData.goodsDetail.goodsId)"></zm-btn-large>
+      </div>
+
+    </div>
+
+    <div style="width: 50%">
+
+      <div class="form-group form-inline">
+        <!--<zm-input-file [label]="'上传图片'" [maxCount]="viewData.maxCount" [limitCount]="viewData.limitCount" [requestUrl]="viewData.requestUrl" [appendKey]="'imgs'" (callback)="showImg($event)"></zm-input-file>-->
+        <div style="width:80px;height:36px;">
+          <zm_img_cropper [label]="'上传图片'" [aspectRatio]="4/3" [requestUrl]="viewData.requestUrl"
+                          (callback)="showImg($event)"></zm_img_cropper>
+        </div>
+      </div>
+      <zm-img-preview [(imgArr)]="viewData.goodsDetail.imgPaths" [(imgLength)]="viewData.limitCount"></zm-img-preview>
+
+    </div>
+  </div>
+
+</view-body-comp>

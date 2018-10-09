@@ -1,0 +1,96 @@
+<view-body-comp [headerArr]="['暂无店铺，请先新增店铺']">
+
+  <div style="max-width:600px">
+
+    <zm-input-name label="店铺名称" placeholder="请输入店铺名称" maxlength="15"
+                   [(zmValue)]="viewData.addForm.name" [(zmPass)]="viewData.addForm.namePass"></zm-input-name>
+
+    <div class="form-group row mb-0">
+      <label class="col-form-label text-center col-md-2 px-0"><span class="text-danger"> *</span>区域</label>
+      <div class="col-md-10">
+        <city-select-comp [(citySetting)]="viewData.citySetting"></city-select-comp>
+      </div>
+    </div>
+
+    <zm-input-textarea [label]="'详细地址'" [placeholder]="'请输入详细地址'"
+                       [(text)]="viewData.addForm.address" [maxlength]="200"></zm-input-textarea>
+
+    <zm-input-tel label="预约电话"  placeholder="请输入预约电话" [(zmValue)]="viewData.addForm.tel" [(zmPass)]="viewData.addForm.telPass" [required]="true"></zm-input-tel>
+
+    <zm-input-textarea maxlength="200" [label]="'店铺介绍'" [placeholder]="'请输入店铺介绍'" [(text)]="viewData.addForm.descript"></zm-input-textarea>
+
+    <div fxLayout="row" fxLayoutAlign="end" style="margin-top: 20px;">
+      <zm-btn-large  notrepeatsubmit fxFlexAlign="end" [disabled]="!(viewData.addForm.namePass && viewData.addForm.telPass)" name="保存" (zmbtnClick)="addStore()"></zm-btn-large>
+    </div>
+
+
+  </div>
+
+
+</view-body-comp>
+
+
+    <!--<view-header-comp [headerArr]="['暂无店铺，请先新增店铺']" ></view-header-comp>-->
+        <!--<view-body-comp>-->
+          <!--<content>-->
+            <!--<div class="col-md-7">-->
+              <!--<form #myForm = "ngForm">-->
+                <!--<div class="form-group row mb-0">-->
+                  <!--<label class="col-form-label text-center col-md-2 px-0"><span style="color:#ff355d;"> *</span>店铺名称</label>-->
+                  <!--<div class="col-md-10">-->
+                    <!--<input type="text" maxlength="20" class="form-control " name="shopName" #shopName="ngModel"  [ngClass]="{'is-invalid':shopName.invalid && (shopName.touched)}" placeholder="请输入店铺名称" style="padding-right: 10%;" [(ngModel)]="viewData.addForm.name" required >-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div class="row" style="height:30px;font-size: 14px;">-->
+                    <!--<div class="col-md-2"></div>-->
+                      <!--<div class="col-md-10 text-danger"*ngIf="shopName.invalid && (shopName.touched)" >-->
+                        <!--店铺名称不能为空-->
+                      <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group row mb-0">-->
+                  <!--<label class="col-form-label text-center col-md-2 px-0"><span style="color:#ff355d;"> *</span>区域</label>-->
+                  <!--<div class="col-md-10">-->
+                    <!--<city-select-comp [(citySetting)]="viewData.citySetting" ></city-select-comp>-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div class="row" style="height:30px;font-size: 14px;"></div>-->
+
+                <!--<div class="form-group row mb-0">-->
+                  <!--<label  class="col-form-label text-center col-md-2 px-0">详细地址</label>-->
+                  <!--<div class="col-md-10">-->
+                    <!--<input type="text" class="form-control" placeholder="请输入详细地址"  [ngModelOptions]="{standalone: true}" [(ngModel)]="viewData.addForm.address" >-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div class="row" style="height:30px;font-size: 14px;"></div>-->
+
+                <!--<div class="form-group row mb-0">-->
+                  <!--<label  class="col-form-label text-center col-md-2 px-0"><span style="color:#ff355d;"> *</span>预约电话 </label>-->
+                  <!--<div class="col-md-10">-->
+                    <!--<input type="number" class="form-control "  [ngClass]="{'is-invalid':phone.invalid && (phone.touched)}" name="phone"  #phone="ngModel"  placeholder="请输入预约电话"  [(ngModel)]="viewData.addForm.tel" required>-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div class="row" style="height:30px;font-size: 14px;">-->
+                    <!--<div class="col-md-2"></div>-->
+                      <!--<div class="col-md-10 text-danger"*ngIf="phone.invalid && (phone.touched)" >-->
+                        <!--<div  *ngIf="phone.errors.required">-->
+                          <!--手机号不能为空-->
+                        <!--</div>-->
+                      <!--</div>-->
+                  <!--</div>-->
+                <!--<div class="form-group row mb-0">-->
+                  <!--<label  class="col-form-label text-center col-md-2 px-0">店铺介绍</label>-->
+                  <!--<div class="col-md-10">-->
+                    <!--<textarea class="form-control" placeholder="请输入店铺介绍" style="height:100px;" [ngModelOptions]="{standalone: true}" [(ngModel)]="viewData.addForm.descript" ></textarea>-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div class="row" style="height:30px;font-size: 14px;"></div>-->
+                <!--<div class="row">-->
+                    <!--<div class="col-md-2"></div>-->
+                    <!--<div class="col-md-10">-->
+                      <!--<button class="btn btn-primary btn-block cur-hand" (click)="addStore()" [disabled]="!myForm.valid">保存</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+              <!--</form>-->
+            <!--</div>-->
+          <!--</content>-->
+        <!--</view-body-comp>-->

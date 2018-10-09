@@ -1,0 +1,20 @@
+<view class="stv-container">
+
+  <view class="top-tab flex-wrp flex-tab ">
+    <view wx:for="{{tabs}}" wx:key="unique" wx:for-index="idx" wx:for-item="itemName" data-index=
+    "{{idx}}"  bindtap="handlerTabTap" class="toptab flex-item {{activeTab==idx ? 'active' : ''}}">
+      <text>{{itemName}}</text>
+      <view class='line' wx:if='{{activeTab==idx}}'></view>
+    </view>
+  </view>
+
+  <view class="scroll-view">
+      <view bindtouchstart="handlerStart" catchtouchmove="handlerMove" bindtouchcancel="handlerCancel" bindtouchend="handlerEnd"  class="scroll-view-wrapper {{!stv.tStart? 'withAnimate': ''}}" style="left: -{{stv.offset}}px">
+          <comp-product is-comp-hidden="{{currentNavtab==0 ? '' : true}}" id="comp-product"></comp-product>
+          <comp-card is-comp-hidden="{{currentNavtab==1 ? '' : true}}" id="comp-card"></comp-card>
+      </view>
+  </view>
+</view>
+<view class='view-bottom'>
+    <button class='sureBtn' hover-class='sureBtnHover' bindtap='sureBtnClick'>确定</button>
+</view>

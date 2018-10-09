@@ -1,0 +1,74 @@
+.form-control:focus{
+  box-shadow: none;
+}
+.disFlex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: flex;
+}
+.flex {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  -webkit-flex: 1;
+  -moz-box-flex: 1;
+  flex: 1;
+}
+.mg-b-20{
+  margin-bottom:20px;
+}
+.mg-l-10{
+  margin-left:10px;
+}
+.form-control{
+  padding: 0.75rem 0.75rem;
+  border: 2px solid #ced4da;
+}
+.c-md-btn-modal{
+  width: 140px;
+  padding: 12px 0 !important;
+  outline: none;
+}
+.c-close-btn-modal{
+  border: 2px solid#03a9f4 !important;
+  color:#03a9f4 !important;
+  background-color: #fff;
+}
+.mg-r-20{
+  margin-right:20px;
+}
+.cur-hand{
+  cursor: pointer;
+}
+.c-btn-blue{
+  color: #fff;
+  border-color:#03a9f4 !important;
+  background-color:#03a9f4 !important;
+}
+
+.paymentHis{
+  width: calc(33.33% - 16px);
+  padding: 20px 25px;
+  border-radius: 6px;
+  box-shadow:2px 2px 15px rgba(219,219,219,0.75);
+  background-color:#F5F5F5;
+}
+.paymentHis p{
+  font-size: 18px;
+  color: #333;
+  height: 40px;
+  line-height: 40px;
+}
+.paymentHis h4{
+  font-size: 26px;
+  color: #333;
+  font-family: bold;
+  height: 50px;
+  line-height: 50px;
+}
+.modal-body h6{
+  word-wrap: break-word;
+  max-height:350px;
+  overflow-y: scroll;
+}

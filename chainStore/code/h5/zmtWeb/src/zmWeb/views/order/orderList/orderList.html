@@ -1,0 +1,62 @@
+
+  <view-body-comp [headerArr]="['订单列表']">
+
+     <!--过滤条件-->
+
+      <mat-toolbar style="padding-top:15px;margin-bottom:15px;">
+        <mat-toolbar-row fxLayout="row wrap" fxLayoutAlign="space-between center">
+          <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px">
+          <zm-search-box [label]=" '订单查询'" [placeholder]="'订单号/会员'" [(zmValue)]="viewData.orderQueryForm.numberOrName" (callBack)="findOrders()"></zm-search-box>
+
+          <zm-btn-tab [tabList]="[{name:'全部',value:''},{name:'待收款',value:'0'},{name:'已收款',value:'1'},{name:'已退单',value:'3,4'}]" [activeValue]="viewData.status" (zmbtnClick)="switchTab($event)"></zm-btn-tab>
+          </div>
+
+
+          <div fxLayout="row">
+            <div class="mr-4">  <zm-btn-new  [name]="'补单'" (zmbtnClick)="goAddOldRecord()"></zm-btn-new></div>
+          </div>
+        </mat-toolbar-row>
+        <mat-toolbar-row fxLayout="row wrap" fxLayoutAlign="start center"  fxLayoutGap="20px" class="zmFullWidth">
+
+          <zm-time-slot [startLabel]="'创建时间'" [startPlaceholder]="'请选择创建时间'"
+                        [endLabel]="'至'" [endPlaceholder]="'请选择创建时间'" [(itemActiveIndex)]="viewData.itemActiveIndex"
+                        [(zmValue)]="viewData.timeSlot"
+                        [timeSlotEnums]="timeSlotEnums" (zmTimeSlotCb)="onTimeSlotCb($event)"></zm-time-slot>
+        </mat-toolbar-row>
+      </mat-toolbar>
+
+
+    <!--列表-->
+    <div>
+
+      <ng-template #tdA let-item="item"><div style="position:relative;"><span *ngIf="isOldRecordOrder(item.recordType)" class="px-4 chainMark">补单</span>{{ item.createdTime  | times}}</div></ng-template>
+      <ng-template #tdB let-item="item">{{item.number?item.number:"-"}}</ng-template>
+      <ng-template #tdC let-item="item">{{item.orderType == 0?'开单收银':'会员充值'}}</ng-template>
+      <ng-template #tdD let-item="item">{{item.name?item.name:"-"}}</ng-template>
+      <ng-template #tdE let-item="item">
+        <div *ngIf="item.status == 0">
+          &yen;{{item.cost | number:'1.2-2'}}
+        </div>
+        <div *ngIf="item.status != 0">
+            &yen;{{item.realPay | number:'1.2-2'}}
+            <p *ngIf="item.chargeBackCost!=0" style="margin:0;color:red;">退款 : {{item.chargeBackCost}}</p>
+        </div>
+      </ng-template>
+      <ng-template #tdF let-item="item">{{item.status|orderStatusPipe}}</ng-template>
+      <ng-template #tdG let-item="item">
+        <a class="cur-hand mg-l-10" *ngIf="item.status == 0" (click)="pay(item)">去收款</a>
+        <a class="cur-hand mg-l-10" *ngIf="item.status != 0" (click)="goEditBonus(item)">修改提成</a>
+        <a class="cur-hand mg-l-10" (click)="goDetail(item)">查看</a>
+        <a class="cur-hand mg-l-10" *ngIf="item.isLeaguer" (click)="goAddOrderRecord(item.id,item.leaguerId)">跟进记录</a>
+        <a *ngIf="item.orderType == 0 && item.status != 0 && item.status != 3" class="cur-hand mg-l-10" (click)="chargeBack(item)">退单</a>
+      </ng-template>
+
+      <zm-mat-table  [tdTemplateList]="[tdA,tdB,tdC,tdD,tdE,tdF,tdG]" [thNameList]="['创建时间','订单编号','订单类型','会员','金额','订单状态','操作']" [itemList]="viewData.orderList"></zm-mat-table>
+
+
+      <no-data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.orderList" [text]=" '没有数据'" [showImg]="'noData'"></no-data>
+
+      <zm-page [totalSize]="viewData.recordCount" [curPage]="viewData.curPage" (pageChange) = "getPageData($event)"></zm-page>
+    </div>
+
+  </view-body-comp>

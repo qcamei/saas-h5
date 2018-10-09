@@ -1,0 +1,25 @@
+<view-body-comp [headerArr]="['管理设置','来源设置']">
+  <content>
+    <div class="text-right" style="margin-bottom: 15px;" fxLayout="row" fxLayoutAlign="end">
+      <zm-btn-new [name]="'新建'" (zmbtnClick)="addOrigin()"></zm-btn-new>
+    </div>
+    <zm-table-detail>
+      <thead>
+      <th style="width:70%;">来源名称</th>
+      <th style="width:30%;">操作</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of viewData.leaguerOriginList">
+        <td style="width:70%;" class="text-center">{{item.originName}}</td>
+        <td style="width:30%;" class="text-center">
+          <span class="font-c1 cur-hand mg-r-10" (click)="editOrigin(item)">编辑</span>
+          <span class="font-c1 cur-hand " (click)="deleteOrigin(item)">删除</span>
+        </td>
+      </tr>
+      </tbody>
+    </zm-table-detail>
+    <no-data [loadingFinish]="viewData.leaguerOriginList" [dataList]="viewData.leaguerOriginList" [text]=" '没有数据'" [showImg]="'noData'"></no-data>
+    <zm-page [elevation]="false" [totalSize]="viewData.recordCount" [curPage]="viewData.page" (pageChange) = "getPageData($event)"></zm-page>
+
+  </content>
+</view-body-comp>

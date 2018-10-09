@@ -1,0 +1,67 @@
+ .zmTable{
+   border:none;
+   tbody {
+     display: block;
+     height: 320px;
+     overflow-y: auto;
+   }
+   thead {
+     display: table;
+     width: 100%;
+     table-layout: fixed;
+     min-height:40px;
+   }
+   thead tr{
+     display: table;
+     width: 100%;
+     height: 36px;
+
+   }
+   tbody tr{
+     display: table;
+     width: 100%;
+     height: 32px;
+     border-bottom: solid 1px rgba(0, 0, 0, 0.12);
+   }
+   td img{
+     background-color: #03a9f4;
+   }
+   th{
+     text-align: center;
+     font-size: 12px;
+     font-weight: 500;
+     color: rgba(0, 0, 0, 0.54);
+   }
+   td{
+     text-align: center;
+     font-size: 14px;
+   }
+ }
+
+ .pos-r{
+   position: relative;
+ }
+ .pos-a{
+   position: absolute;
+ }
+
+ .itemActiveClass{
+   background:#03a9f4 !important;
+   color:#fff;
+   cursor: pointer;
+   td{
+     border:none;
+   }
+ }
+ .maskHover {
+   width: 100%;
+   height: 80%;
+   top:10%;
+   left:0;
+ }
+ tbody::-webkit-scrollbar
+ {
+   display: block;
+
+ }
+

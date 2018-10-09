@@ -1,0 +1,63 @@
+
+.text-center{
+  text-align:center;
+}
+.fz-18{
+  font-size: 18px;
+}
+.fz-14{
+  font-size:14px;
+}
+.mg-b-20{
+  margin-bottom:20px;
+}
+.mg-b-30{
+  margin-bottom:30px;
+}
+.mg-l-30{
+  margin-left:30px;
+}
+.disFlex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: flex;
+}
+
+.c-label {
+  vertical-align: middle;
+  margin-right: 10px;
+  margin-bottom: 0;
+  width: 100px;
+  text-align: right;
+}
+//错误类型
+.c-input-error{
+  height: 30px;
+  padding-left: 110px;
+  color: #FF4c6a;
+  font-size: 12px;
+}
+
+.btn-upload{
+  border: none;
+  outline: none;
+  width:86px;
+  height:32px;
+  background:rgba(69,119,248,1);
+  border-radius: 6px;
+  margin-top: 19px;
+}
+.input-upload {
+  opacity: 0;
+  filter: alpha(opacity=0);
+  top:0px;
+  left:0;
+  width: 86px;
+  height:32px;
+}
+
+button{
+  margin-left:110px;
+}

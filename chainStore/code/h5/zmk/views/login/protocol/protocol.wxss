@@ -1,0 +1,17 @@
+.protocol {
+  padding: 0 60rpx;
+}
+.protocol-title {
+  text-align: center;
+  font-weight: bold;
+  margin: 40rpx 0;
+}
+
+.protocol-section {
+  font-size: 26rpx;
+  text-indent:2em;
+}
+.protocol-section-bold{
+  font-weight: bold;
+  margin: 30rpx 0 10rpx; 
+}

@@ -1,0 +1,58 @@
+
+<view-header-comp [headerArr]="['商户等级','等级列表']"></view-header-comp>
+<view-body-comp >
+  <content>
+    <div class="d-flex justify-content-between">
+      <zm_search_box [label]=" '等级查询'" [placeholder]="'等级名称'" [(zmValue)]="viewData.queryParamsVD.name"
+                     (callBack)="queryListByParams()"></zm_search_box>
+
+      <div class="mr-2">
+        <zm_select_small [label]="'等级分类'" [name]="'name'" [value]="'id'"  [selectList]="viewData.vipLevelTypeList" [(zmValue)]="viewData.queryParamsVD.typeId"
+                         (zmValueChange)="queryListByParams()"></zm_select_small>
+      </div>
+
+      <div class="mr-2">
+        <zm_select_small [label]="'状态'" [selectList]="[{name:'上架',value:0},{name:'下架',value:1}]" [(zmValue)]="viewData.queryParamsVD.state"
+                         (zmValueChange)="queryListByParams()"></zm_select_small>
+      </div>
+
+      <zm_btn_new [name]="'新建'" (zmbtnClick)="goAddPage()"></zm_btn_new>
+    </div>
+
+      <div  style="width: 100%;margin-top: 20px">
+        <table class="table table-bordered text-center mg-b-0">
+          <thead>
+          <th>编号</th>
+          <th>商户等级</th>
+          <th>等级分类</th>
+          <th>店铺上限</th>
+          <th>会员上限</th>
+          <th>开通费用</th>
+          <th>有效时长</th>
+          <th>状态</th>
+          <th>操作</th>
+          </thead>
+          <tbody>
+          <tr class="c-tr" *ngFor="let item of viewData.showList">
+            <td>{{item.number?item.number:"-"}}</td>
+            <td>{{item.name?item.name:"-"}}</td>
+            <td>{{item.vipLevelType?item.vipLevelType.name:"-"}}</td>
+            <td>{{item.storeLimit?item.storeLimit:"-"}}</td>
+            <td>{{item.leaguerLimit?item.leaguerLimit:"-"}}</td>
+            <td>{{item.openCharge?(item.openCharge | moneyF2YPipe |number:'1.2-2'):"-"}}</td>
+            <td>{{item.validPeriod}}{{item.validPeriodUnit|validPeriodUnitPipe}}</td>
+            <td>{{item.state|vipLevelStatePipe}}</td>
+            <td>
+              <span class="font-c1 cur-hand" *ngIf="item.state == 0" (click)="changeState(item.id,1)">{{item.state|vipLevelStatePipe2}}</span>
+              <span class="font-c1 cur-hand" *ngIf="item.state == 1" (click)="changeState(item.id,0)">{{item.state|vipLevelStatePipe2}}</span>
+              <span *ngIf="item.state == 1" class="font-c1 cur-hand" (click)="goEditPage(item.id)">编辑</span>
+            </td>
+
+          </tr>
+          </tbody>
+        </table>
+        <no_data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.showList" [text]=" '没有数据' " [showImg]="'noData'"></no_data>
+        <pagination-comp [recordCount]="viewData.recordCount" [page]="viewData.queryParamsVD.curPage"  (callback)="getPageData($event)"></pagination-comp>
+      </div>
+  </content>
+</view-body-comp>

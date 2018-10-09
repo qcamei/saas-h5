@@ -1,0 +1,86 @@
+<!--选择关联订单弹框-->
+
+<div *ngIf="viewData.showPageIndex == 0" animation-modal style="position:relative;">
+  <h2 mat-dialog-title>
+    选择关联订单
+  </h2>
+  <mat-dialog-content>
+    <ng-template #theadTemplate>
+      <th style="width:auto;text-align: center">订单内容</th>
+      <th style="width:150px;text-align: center">跟进人员</th>
+      <th style="width:150px;text-align: center">金额</th>
+      <th style="width:250px;text-align: center">交易时间</th>
+      <!--<th style="width:150px;text-align: center">操作</th>-->
+    </ng-template>
+
+    <ng-template #tbodyTemplate let-item="item">
+      <td style="width:auto;text-align: center">{{item.content}}</td>
+      <td style="width:150px;text-align: center;text-align: center">{{item.creatorName}}</td>
+      <td style="width:150px;text-align: center" *ngIf="item.status == 0">
+        &yen;{{item.cost | number:'1.2-2'}}
+      </td>
+      <td style="width:150px;text-align: center" *ngIf="item.status != 0">
+        &yen;{{item.realPay | number:'1.2-2'}}
+        <p *ngIf="item.chargeBackCost!=0" style="margin:0;color:red;">退款 : {{item.chargeBackCost}}</p>
+      </td>
+      <td style="width:250px;text-align: center">{{item.createdTime |times}}</td>
+      <!--<td style="width:150px;text-align: center" [class.action]="!item.isSelected"><span (click)="goDetail(item)">查看详情</span></td>-->
+    </ng-template>
+
+
+
+    <zm-table-select-single (onSelected)="selectItem($event)" [checkAttr]="'isSelected'" [itemList]="viewData.orderList" [tbodyTemplate]="tbodyTemplate"  [theadTemplate]="theadTemplate" >
+    </zm-table-select-single>
+
+    <zm-page [elevation] = "false" [totalSize]="viewData.recordCount" [curPage]="viewData.curPage" (pageChange)="getPageData($event)"></zm-page>
+
+  </mat-dialog-content>
+  <mat-dialog-actions fxLayout="row" fxLayoutAlign="end" fxLayoutGap="20px">
+    <zm-btn-md (click)="cancel()" name="取消" [stroked] ="true"></zm-btn-md>
+    <zm-btn-md [disabled]="!viewData.selectedOrder" (click)="confirm()" name="确定" ></zm-btn-md>
+    <!--<zm-btn-md  *ngIf="fromProduct"   [disabled]="!viewData.selectedOrder" (click)="next()" name="下一步" ></zm-btn-md>-->
+  </mat-dialog-actions>
+</div>
+
+<div *ngIf="(viewData.showPageIndex == 1) && viewData.selectedSimpleOrderItem" animation-modal style="position:relative;">
+  <h2 mat-dialog-title>
+    订单详情
+  </h2>
+  <div mat-dialog-content>
+    <div class="font-bold"style="margin-bottom:10px;">消费信息</div>
+    <table class="table table-bordered text-center">
+      <thead class="char_th">
+      <th>名称</th>
+      <th>类型</th>
+      <th>数量</th>
+      <th>结算方式</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of getDetailData(viewData.selectedSimpleOrderItem)">
+        <td>{{item.pgName}}</td>
+        <td>{{item.buyType | orderBuyTypePipe}}</td>
+        <td>{{item.count}}</td>
+        <td>{{item.payType | prdCardPayPipe}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <!-- 支付收款 -->
+    <div *ngIf="viewData.selectedSimpleOrderItem.payItems" class="font-bold"style="margin-bottom:10px;">支付收款</div>
+    <table class="table table-bordered text-center">
+      <tbody>
+      <tr *ngFor="let payItemTmp of viewData.selectedSimpleOrderItem.payItems;">
+        <td>{{payItemTmp.payType|orderPayTypePipe}}</td>
+        <td>￥{{payItemTmp.cost?(payItemTmp.cost|number:'1.2-2'):"-"}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div mat-dialog-actions>
+    <zm-btn-md name="返回" (zmbtnClick)="hideDetail()">返回</zm-btn-md>
+  </div>
+</div>
+
+
+
+

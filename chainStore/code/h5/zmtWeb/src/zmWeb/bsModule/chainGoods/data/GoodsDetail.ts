@@ -1,0 +1,19 @@
+export class GoodsDetail {
+    constructor(){}
+    id:string;
+    chainId:number;
+    number:string;
+    name:string;
+    typeId:string;
+    sellPrice:number;
+    defaultImg:string;
+    cost:number;
+    state:number;
+    entityState:number;
+    descript:string;
+    imgPaths:Array<string>;
+    applyStoreIds:Array<number>;
+    createTime:number;
+    lastUpdateTime:number;
+    ver:number;
+}

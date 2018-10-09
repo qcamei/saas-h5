@@ -1,0 +1,9 @@
+<!--views/appointment/store/store.wxml-->
+<view class='store-page'>
+  <view wx:for='{{storeVMList}}' wx:for-index="idx" wx:for-item="cellModel">
+    <comp-store-cell bindcellclick='storeCellClick' cell-model='{{cellModel}}'></comp-store-cell>
+  </view>
+</view>
+<view class='view-bottom'>
+  <button class='sureBtn' hover-class='sureBtnHover' bindtap='scanBtnClick'>扫码进入店铺</button>
+</view>

@@ -1,0 +1,65 @@
+
+        <view-body-comp  [headerArr]="['商品列表','查看商品']">
+                <zm-table-detail>
+                    <tbody>
+                      <tr>
+                        <th style="width:200px;">商品名称</th>
+                        <td>{{viewData.goods.name}}</td>
+                      </tr>
+                      <tr>
+                        <th >商品编号</th>
+                        <td>{{viewData.goods.number}}</td>
+                      </tr>
+                      <tr>
+                        <th >商品分类</th>
+                        <td>{{viewData.goods.typeId | goodsTypePipe:viewData.goodsTypeMap}}</td>
+                      </tr>
+                      <tr>
+                        <th>售价</th>
+                        <td><i class="fa fa-yen mr-1"></i>{{viewData.goods.price|number:'1.2-2'}}</td>
+                      </tr>
+                      <tr>
+                        <th>成本价</th>
+                        <td><i class="fa fa-yen mr-1"></i>{{viewData.goods.cost|number:'1.2-2'}}</td>
+                      </tr>
+                      <tr>
+                        <th>状态</th>
+                        <td>{{viewData.goods.state | goodsStatePipe}}</td>
+                      </tr>
+                      <tr>
+                        <th>是否促销</th>
+                        <td>{{viewData.goods.promotionFlag==0?'否':'是'}}</td>
+                      </tr>
+                      <tr *ngIf="viewData.goods.promotionFlag == 1">
+                        <th>促销价格</th>
+                        <td><i class="fa fa-yen mr-1"></i>{{viewData.goods.promotionPrice|number:'1.2-2'}}</td>
+                      </tr>
+                      <tr>
+                        <th>商品介绍</th>
+                        <td class="c-spd-td">{{viewData.goods.descript?viewData.goods.descript:"-"}} </td>
+                      </tr>
+                      <tr>
+                        <th class="align-middle bg-th">商品图片</th>
+                        <td>
+                          <ul style="max-width:600px;">
+                            <div *ngIf="viewData.goods.imgPaths!=null" fxLayout="row wrap" fxLayoutAlign="start center">
+                              <li style="width:100px;height:100px;margin:0 10px 10px 0;" *ngFor="let item of viewData.goods.imgPaths">
+                                <img class="w-100 h-100" src="{{item | imgPrePath}}" alt="Avatar" >
+                              </li>
+                            </div>
+                            <li style="width:100px;height:100px;margin:5px 5px 0 0;" *ngIf="viewData.goods.imgPaths==null && viewData.goods.defaultImg">
+                              <img class="w-100 h-100" src="{{viewData.goods.defaultImg |imgPrePath}} " alt="">
+                            </li>
+                            <li style="width:100px;height:100px;margin:5px 5px 0 0;" *ngIf="viewData.goods.imgPaths==null && viewData.goods.defaultImg === ''">
+                              <img class="w-100 h-100" src="{{viewData.defaultImg |imgPrePath}} " alt="">
+                            </li>
+                          </ul>
+                        </td>
+                      </tr>
+                    </tbody>
+                </zm-table-detail>
+
+                <div class="mt-5" style="max-width:100%;margin-top: 20px;" fxLayout="row" fxLayoutAlign="end">
+                  <zm-btn-large *ngIf="viewData.goods.origin==0 &&viewData.goods.state==1" notRepeatSubmit name="编辑" (zmbtnClick)="goEditPage(viewData.goods.id)"></zm-btn-large>
+                </div>
+        </view-body-comp>

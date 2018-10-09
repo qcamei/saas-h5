@@ -1,0 +1,224 @@
+.modal-title{
+  font-size: 18px;
+  font-weight: bold !important;
+  color: #333 !important;
+}
+.text-center{
+  text-align: center;
+}
+.disFlex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: flex;
+}
+.mg-r-10{
+  margin-right:10px;
+}
+.c-btn-blue{
+  color: #fff;
+  border-color: #4678fa !important;
+  background-color: #4678fa !important;
+}
+.align-center{
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  align-items: center;
+}
+.mg-b-0{
+  margin-bottom:0;
+}
+.font-bold{
+  font-weight:bold;
+}
+.fz-12{
+  font-size:12px;
+}
+
+.form-control{
+  padding: 0.75rem 0.75rem;
+  border: 2px solid #ced4da;
+}
+tbody .c-tr:hover{
+  background-color: #e7f3fd;
+}
+.font-c1{
+  color: #4678fa;
+}
+.font-c2{
+  color: #bcc2c8;
+}
+.mg-b-0{
+  margin-bottom:0;
+}
+c-btn-modal{
+  width: 168px;
+  padding: 12px 0 !important;
+  outline: none;
+}
+.c-close-btn-modal{
+  border: 2px solid #4678fa !important;
+  color: #4678fa !important;
+  background-color: #fff;
+}
+.c-btn-blue{
+  color: #fff;
+  border-color: #4678fa !important;
+  background-color: #4678fa !important;
+}
+
+
+//模态
+.c-cardlist-input {
+  .c-first-input {
+    border-radius: 6px 0 0 6px;
+    background: #F4F6FA;
+    height: 30px;
+    border: 1px solid #ECEFF3;
+    font-size: 14px;
+    outline: none;
+    width: 120px;
+    padding-left: 10px;
+  }
+  .c-cardlist-btn {
+    color: #fff;
+    background: #4678fa;
+    border: none;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    height: 30px;
+    padding: 0 8px;
+    font-size: 14px;
+    margin-left: -5px;
+    cursor: pointer;
+    outline: none;
+
+  }
+}
+.c-cardlist-select {
+  .c-form-select {
+    font-size: 14px;
+    padding: 0 25px 0 10px !important;
+    height: 30px !important;
+    width: 100px;
+    margin-left: 5px;
+    display: inline-block;
+    margin-left:5px;
+    border-width: 1px;
+    background-color:#F4F6FA;
+  }
+  .c-form-select:focus{border-width: 1px !important;}
+}
+
+.c-modal {
+  margin-top: 20px;
+  h4 {
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    background-color: #4678fa;
+    margin-bottom: 0;
+  }
+  ul {
+    height: 250px;
+    border: 1px solid #dadfe6;
+    overflow-y: auto;
+    border-top: none;
+    li {
+      position: relative;
+      border-bottom: 1px solid #dadfe6;
+      padding: 8px 0;
+      width: 100%;
+      font-size: 12px;
+      text-align: center;
+    }
+  }
+}
+.ActiveLi{
+  background-color: #4678fa;
+  color: #fff;
+}
+//select背景颜色
+tbody .c-tr:hover .c-modal-se{
+  background-color: #e7f3fd;
+}
+.table {
+  .c-modal-se{
+    position: relative;
+    border: none;
+    width: 100%;
+    height: 42px;
+    padding: 0 50px;
+    outline: none;
+    background: none;
+    appearance:none;
+    moz-appearance:none;/*?Firefox?*/
+    -webkit-appearance:none;/*?Safari?和?Chrome?*/
+  }
+
+  .c-td-modal{
+    border: none;
+    background: none !important;
+    width:50px;
+    outline: none;
+  }
+  .c-trigon{
+    position: absolute;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #4678fa transparent transparent transparent;
+    right:14px;
+    top: 50%;
+    margin-top:-2px;
+  }
+
+}
+.c-table-title {
+  border:none;
+  thead{
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+  tbody{
+    display: block;
+    overflow-y: auto;
+    height:300px;
+    border: 1px solid #dadfe6;
+    border-top: none;
+  }
+  tr{
+    display: table;
+    width: 100%;
+  }
+  td:first-child{
+    border-left: none;
+  }
+  td:last-child{
+    border-right: none;
+  }
+}
+//三角
+.icon-dir{
+  position: absolute;
+  left: 345px;
+  top:250px;
+  width: 7px;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.form-control:focus{
+  box-shadow: none;
+}

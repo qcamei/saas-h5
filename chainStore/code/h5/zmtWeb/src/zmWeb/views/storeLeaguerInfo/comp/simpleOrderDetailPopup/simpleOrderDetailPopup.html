@@ -1,0 +1,49 @@
+<!--选择关联订单弹框-->
+
+<div class="chargeInfo" animation-modal #modal>
+
+        <div class="modal-header">
+          <div style="font-size:20px;" class="font-bold">订单详情</div>
+          <button class="close" aria-label="Close" (click)="closeModal()">
+                <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body" style="max-height:500px;overflow:auto;">
+            <div class="font-bold"style="margin-bottom:10px;">消费信息</div>
+
+                  <table class="table table-bordered text-center">
+                    <thead class="char_th">
+                      <th>名称</th>
+                      <th>类型</th>
+                      <th>数量</th>
+                      <th>结算方式</th>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of buyItems">
+                          <td>{{item.pgName}}</td>
+                          <td>{{item.buyType | orderBuyTypePipe}}</td>
+                          <td>{{item.count}}</td>
+                          <td>{{item.payType | prdCardPayPipe}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+      <!-- 支付收款 -->
+                  <div class="font-bold"style="margin-bottom:10px;">支付收款</div>
+                  <table class="table table-bordered text-center">
+                    <tbody *ngIf="data.payItems">
+                    <tr *ngFor="let payItemTmp of data.payItems;">
+                      <td *ngIf="payItemTmp.cost!=0" >{{payItemTmp.payType|orderPayTypePipe}}</td>
+                      <td *ngIf="payItemTmp.cost!=0" >￥{{payItemTmp.cost?(payItemTmp.cost|number:'1.2-2'):"-"}}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+        </div>
+
+        <div class="modal-footer">
+          <button class="cancel-btn"(click)="closeModal()">返回</button>
+        </div>
+
+      </div>
+
+      <!--选择产品-->

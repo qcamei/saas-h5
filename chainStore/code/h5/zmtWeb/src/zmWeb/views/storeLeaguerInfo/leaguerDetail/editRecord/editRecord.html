@@ -1,0 +1,96 @@
+<view-body-comp [headerArr]="['返回','编辑记录']">
+    <div class="zmFullWidth" fxLayout="row" fxLayoutGap="60px" style="margin-bottom:50px;">
+        <div fxLayout="row" fxLayoutGap="5px">
+          <div  class="gl_product">关联订单：</div>
+          <span *ngIf="viewData.selectedOrder" class="order_blue rel_order cur-hand" (click)="selectOrder()">{{viewData.selectedOrder.content}}</span>
+          <span *ngIf="viewData.selectedOrder" class="order_blue rel_order" style="width:30px;"><i  class="fa fa-close"  (click)="clearOrder()">&ngsp;</i></span>
+          <div *ngIf="!viewData.selectedOrder" class="order_blue " style="padding:0 5px; cursor: pointer;font-size:14px;"(click)="selectOrder()"><img style="width:40%;" src="assets/images/icon/icon_Add.png">添加</div>
+        </div>
+  
+        <div fxLayout="row" fxLayoutGap="5px">
+          <div  class="gl_product">关联项目：</div>
+          <div class="order_blue rel_product disFlex flex">
+            <span class="content" *ngFor="let selectProduct of viewData.selectedProductList|slice:0:3">{{selectProduct.pgName}}</span>
+            <b *ngIf="viewData.selectedProductList&&viewData.selectedProductList.length>3" style="margin-left:-6px;">....</b>
+            <span *ngIf="viewData.selectedProductList&&viewData.selectedProductList.length>0" class="order_blue rel_order" style="width:30px;"><i  class="fa fa-close"  (click)="clearProducts()">&ngsp;</i></span>
+  
+            <!-- 添加按钮 -->
+            <div style="padding:0 5px; cursor: pointer;font-size:14px;"(click)="selectProduct()"><img style="width:40%;" src="assets/images/icon/icon_Add.png">添加</div>
+          </div>
+        </div>
+      </div>
+
+  <div  fxLayout="column" fxLayoutGap="50px" style="max-width: 700px" >
+    
+
+    <!--<zm-input-name [label]="'标题'" [placeholder]="'请输入标题'" style="max-width: 250px" [(zmValue)]="viewData.updateForm.title" [(zmPass)]="viewData.updateForm.titlePass" ></zm-input-name>-->
+    <zm-input-textarea [label]="'内容'" [placeholder]="'请输入内容，限500字'" [maxlength]="500" [(text)]="viewData.updateForm.content"></zm-input-textarea>
+
+    <div lass=" input-group c-input-group w-100-p">
+      <label class="c-label  mg-t-30">图片</label>
+      <div class="pd-t-10" fxLayout="row">
+        <zm-img-record [(imgArr)]="viewData.updateForm.imgPaths"></zm-img-record>
+        <div style="width:100px;">
+          <zm-input-file *ngIf="viewData.updateForm.imgPaths.length<9" [AppearanceButton]="false" [maxCount]="9" [limitCount]="getLimitCount()" [requestUrl]="viewData.requestUrl" [appendKey]="'imgs'" (callback)="setImgUrl($event)"></zm-input-file>
+        </div>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayouAlign="end" style="margin-top: 20px;margin-bottom: 20px;">
+      <zm-btn-large name="保存"  (zmbtnClick)="updateLeaguerRecord()"></zm-btn-large>
+    </div>
+
+  </div>
+      <!--<div style="width:100%;">-->
+          <!--<div class="disFlex order_relevance">-->
+            <!--<div class="disFlex order_rel">-->
+              <!--<div class="gl_product">关联订单：</div>-->
+                <!--<span *ngIf="viewData.selectedOrder" class="order_blue rel_order" class="order_blue rel_order cur-hand"  (click)="selectOrder()">{{viewData.selectedOrder.content}}</span>-->
+                <!--<span *ngIf="viewData.selectedOrder" class="order_blue rel_order" style="width:30px;"><i (click)="clearOrder()">&ngsp;</i></span>-->
+                <!--<div *ngIf="!viewData.selectedOrder" (click)="selectOrder()" style="padding:0 5px; cursor: pointer;font-size:14px;"><img style="width:40%;" src="assets/images/icon/icon_Add.png">添加</div>-->
+
+            <!--</div>-->
+            <!--<div class="disFlex order_rel2">-->
+                <!--<div  class="gl_product">关联项目：</div>-->
+                <!--<div class="order_blue rel_product disFlex flex">-->
+                  <!--<span class="content" *ngFor="let prdName of viewData.relatePrdArr|slice:0:3">{{prdName}}</span>-->
+                  <!--<b *ngIf="viewData.relatePrdArr&&viewData.relatePrdArr.length>3" style="margin-left:-6px;">....</b>-->
+                  <!--<span *ngIf="viewData.relatePrdArr&&viewData.relatePrdArr.length>0" class="order_blue rel_order" style="width:30px;"><i style="width:30px;" (click)="clearProducts()">&ngsp;</i></span>-->
+
+                  <!--&lt;!&ndash; 添加按钮 &ndash;&gt;-->
+                  <!--<div style="padding:0 5px; cursor: pointer;font-size:14px;"(click)="selectProduct()"><img style="width:40%;" src="assets/images/icon/icon_Add.png">添加</div>-->
+                <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--</div>-->
+
+
+
+    <!--<form #myForm="ngForm">-->
+
+        <!--<div style="width:75%;">-->
+          <!--<div style="width:100%;" class="input-group c-input-group form-group mg-b-30">-->
+            <!--<label class="c-label"><span class="font-c3"></span>标题</label>-->
+            <!--<input type="text" class="form-control" required placeholder="请输入标题，限50字" required name="title" maxlength="50" [(ngModel)]="viewData.updateForm.title"/>-->
+          <!--</div>-->
+
+          <!--<zm-input-textarea [label]="'内容'" [placeholder]="'请输入内容，限500字'" [maxlength]="500" [(text)]="viewData.updateForm.content"></zm-input-textarea>-->
+
+          <!--<div class="example-container c-input-group mg-t-30">-->
+            <!--<div class=" input-group c-input-group form-group" style="align-items: flex-start !important;">-->
+              <!--<label class="c-label mg-t-30">图片</label>-->
+              <!--<zm-img-record [(imgArr)]="viewData.updateForm.imgPaths"></zm-img-record>-->
+              <!--<zm-input-file *ngIf="viewData.updateForm.imgPaths.length<9" [AppearanceButton]="false" [maxCount]="9" [limitCount]="getLimitCount()" [requestUrl]="viewData.requestUrl" [appendKey]="'imgs'" (callback)="setImgUrl($event)"></zm-input-file>-->
+            <!--</div>-->
+          <!--</div>-->
+
+          <!--&lt;!&ndash; <button notRepeatSubmit type="button" class="btn c-btn-blue cur-hand pd-lr-80 mg-t-20" (click)="updateLeaguerRecord()">保存</button> &ndash;&gt;-->
+          <!--<div style="margin:60px 0 0 105px;">-->
+              <!--<zm-btn-large name="保存" (zmbtnClick)="updateLeaguerRecord()"></zm-btn-large>-->
+          <!--</div>-->
+        <!--</div>-->
+
+
+    <!--</form>-->
+
+</view-body-comp>

@@ -1,0 +1,3 @@
+<!--pages/auth/auth.wxml-->
+<text>需要您的授权才能使用此功能哦</text>
+<button open-type="openSetting" bindopensetting="openSettingBtnClick">授权</button>

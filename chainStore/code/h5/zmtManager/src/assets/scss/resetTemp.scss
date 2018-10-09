@@ -1,0 +1,271 @@
+/*定义最小宽度 解决适配*/
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: "Microsoft YaHei" !important;
+  background: #EBEFF5;
+}
+
+.menu-sidebar {
+  margin-top: 20px !important;
+}
+
+
+/*
+ *左边导航栏样式处理 start
+ */
+
+.nb-theme-default nb-sidebar .main-container {
+  -moz-border-radius: 0.375rem;
+  border-radius: 0.375rem;
+  /* overflow: hidden;*/
+  width: 220px;
+}
+
+nb-menu ul li {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.nb-theme-default nb-menu .menu-item>.menu-items>.menu-item:last-child {
+  margin-bottom: 0;
+}
+
+.nb-theme-default nb-menu .menu-items>.menu-item {
+  /* padding-left: 25px;*/
+}
+
+.nb-theme-default nb-menu .menu-item a {
+  color: #999;
+}
+
+.nb-theme-default nb-menu .menu-item a.active {
+  color: #2a2a2a;
+}
+
+.menu-item a .menu-title {
+  margin-left: 25px;
+  font-weight: 600;
+  font-family: "Microsoft YaHei";
+  /* color: #999;*/
+}
+
+
+/*
+ * 右边内容栏样式重置
+ */
+
+.nb-theme-default nb-layout .layout .layout-container .content .columns nb-layout-column {
+  padding-top: 20px;
+}
+
+@media screen and (max-width: 1200px) {
+  .nb-theme-default nb-layout .layout .layout-container .content .columns nb-layout-column {
+    padding-left: 20px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .nb-theme-default nb-layout .layout .layout-container .content .columns nb-layout-column {
+    padding-left: 0;
+    margin-left: -10px;
+  }
+}
+
+nb-card-header {
+  font-family: "Microsoft YaHei" !important;
+}
+
+nb-card {
+  min-width: 1000px;
+  /*margin-bottom: 0 !important;*/
+  -webkit-box-shadow: 0 0 0 0 !important;
+  -moz-box-shadow: 0 0 0 0 !important;
+  box-shadow: 0 0 0 0 !important;
+}
+
+.modal-body {
+  font-family: "Microsoft YaHei" !important;
+}
+
+@media (min-width: 992px) {
+  .modal-lg {
+    max-width: 1000px;
+  }
+}
+
+
+/*左边菜单栏样式调整*/
+
+.scrollable {
+  padding-top: 0 !important;
+}
+
+
+/*解决左边菜单栏与右边内容重叠*/
+
+.main-container {
+  z-index: 99;
+}
+
+
+/* }*/
+
+
+/*左边菜单栏展开收起过度动画*/
+
+.menu-item>.menu-items.expanded {
+  -webkit-transition: max-height 0.5s ease-in !important;
+  -moz-transition: max-height 0.5s ease-in !important;
+  transition: max-height 0.5s ease-in !important;
+}
+
+.menu-item>.menu-items.collapsed {
+  -webkit-transition: max-height 0.4s ease-out !important;
+  -moz-transition: max-height 0.4s ease-out !important;
+  transition: max-height 0.4s ease-out !important;
+}
+
+
+/*分页器样式*/
+
+.page-item .nb-theme-default a:focus,
+.page-item .nb-theme-default a:hover {
+  color: #2a2a2a !important;
+}
+
+
+/*单选框样式 IE下兼容处理*/
+
+.nb-theme-default .custom-control.custom-checkbox>.custom-control-input:checked~.custom-control-indicator::before {
+  display: block;
+  content: '';
+  width: 0.5rem;
+  height: 0.75rem;
+  border: solid #2a2a2a;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+/*form元素颜色重置*/
+
+input,
+select,
+textarea {
+  -webkit-box-shadow: 0 0 0 0 !important;
+  -moz-box-shadow: 0 0 0 0 !important;
+  box-shadow: 0 0 0 0 !important;
+}
+
+button:focus {
+  outline: none;
+}
+
+
+/*input type=number 去除默认样式*/
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+/*取消框架自带的form元素聚焦时的边框色*/
+
+.form-control:focus {
+  border: 2px solid #DADFE6 !important;
+}
+
+
+/*侧边菜单栏颜色*/
+
+.nb-theme-default nb-sidebar.compacted nb-menu .menu-item a.active::before {
+  background: #1A8DEB;
+}
+
+
+/*个人中心下拉框颜色重置为主题色*/
+
+.user-context-menu {
+  border: 2px solid #0F88EB !important;
+}
+
+
+/*个人中心下拉框颜色重置为主题色*/
+
+.nb-theme-default nb-user .user-context-menu ul>li.arrow {
+  border-bottom: 11px solid #0F88EB !important;
+}
+
+
+/*个人中心下拉框颜色重置为主题色*/
+
+.nb-theme-default nb-user .user-context-menu ul>li>a:hover {
+  background: #0F88EB;
+}
+
+
+
+/*滚动条*/
+
+div {
+  // webkit
+  /* 滚动条整体部分*/
+   ::-webkit-scrollbar {
+    width: 5px;
+  }
+  /* 滚动条里面的小方块，能上下左右移动（取决于是垂直滚动条还是水平滚动条）*/
+   ::-webkit-scrollbar-thumb {
+    background: #4D435A;
+  }
+  /*滚动条的轨道（里面装有thumb） */
+  /* ::-webkit-scrollbar-track{}      */
+  /* 滚动条轨道两端的按钮，允许通过点击微调小方块的位置*/
+   ::-webkit-scrollbar-button {
+    display: none !important;
+  }
+  /*内层轨道，滚动条中间部分（除去）*/
+  /* ::-webkit-scrollbar-track-piece{}*/
+  /* 边角，及两个滚动条的交汇处 */
+  /* ::-webkit-scrollbar-corner{}   */
+  /*两个滚动条的交汇处上用于通过拖动调整元素大小的小控件*/
+  /* ::-webkit-resizer       */
+  // IE下滚动条处理
+  scrollbar-arrow-color: none;
+  /**/
+  /*三角箭头的颜色*/
+  scrollbar-face-color: #333;
+  /**/
+  /*立体滚动条的颜色*/
+  scrollbar-3dlight-color: #666;
+  /**/
+  /*立体滚动条亮边的颜色*/
+  scrollbar-highlight-color: #666;
+  /**/
+  /*滚动条空白部分的颜色*/
+  scrollbar-shadow-color: #999;
+  /**/
+  /*立体滚动条阴影的颜色*/
+  scrollbar-darkshadow-color: #666;
+  /**/
+  /*立体滚动条强阴影的颜色*/
+  scrollbar-track-color: #666;
+  /**/
+  /*立体滚动条背景颜色*/
+  scrollbar-base-color:#f8f8f8;
+  /**/
+  /*滚动条的基本颜色*/
+}

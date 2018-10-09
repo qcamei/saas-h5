@@ -1,0 +1,23 @@
+<view-body-comp [headerArr]="['商品分类']">
+
+  <mat-toolbar style="padding-top:15px;margin-bottom:15px;">
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="zmFullWidth">
+      <zm_search_box [label]=" '分类查询'" [placeholder]="'分类名称'" [(zmValue)]="typeName" (callBack)="queryTypeListByName()"></zm_search_box>
+      <zm_btn_new [name]="'新建'" (zmbtnClick)="newModal()"></zm_btn_new>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <ng-template #tdA let-item="item">{{item.name}}</ng-template>
+  <ng-template #tdB let-item="item">
+    <a class="zmCurHand" style="margin-right: 5px;" (click)="compileModal(item.id)">编辑</a>
+    <a class="zmCurHand" style="margin-right: 5px;"  (click)="deleteType(item)">删除</a>
+  </ng-template>
+
+  <zm-mat-table  [tdTemplateList]="[tdA,tdB]" [thNameList]="['分类名称','操作']" [itemList]="viewData.goodsTypeListShow"></zm-mat-table>
+
+
+  <no_data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.goodsTypeListShow" [text]=" '没有数据'" [showImg]="'noData'"></no_data>
+  <zm_page [totalSize]="viewData.recordCount" [curPage]="viewData.curPage" (pageChange) = "getPageData($event)"></zm_page>
+
+</view-body-comp>
+

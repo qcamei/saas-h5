@@ -1,0 +1,114 @@
+.disFlex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: flex;
+}
+.flex {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  -webkit-flex: 1;
+  -moz-box-flex: 1;
+  flex: 1;
+}
+.c-input-default{
+  width: 100%;
+  border: none !important;
+  color:#000;
+  font-size: 16px;
+  height: 48px;
+  border-radius: 0.375rem;
+  border-width: 2px;
+  padding-left: 40px;
+  background-color: #ffffff;
+  outline: none;
+}
+.c-login-input{
+  width: 100%;
+  border: none !important;
+  color:#000;
+  font-size: 16px;
+  height: 48px;
+  border-radius: 0.375rem;
+  border-width: 2px;
+  padding-left: 40px;
+  background-color: #ffffff;
+  outline: none;
+}
+.c-login-error{
+  height: 30px;
+  font-size: 12px;
+}
+
+.btn-valid-success{
+  background: #439fed !important;
+  /* 一些不支持背景渐变的浏览器 */
+  background: -webkit-gradient(linear, left top, right top, from(#439fed), to(#4678fa)) !important;
+  background: -webkit-linear-gradient(left, #439fed,#03a9f4) !important;
+  background: -moz-linear-gradient(left, #439fed,#03a9f4) !important;
+  background: linear-gradient(to right, #439fed,#03a9f4) !important;
+  background: -o-linear-gradient(to right, #439fed,#03a9f4) !important;
+}
+
+.btn-valid-error{
+  background-image: -webkit-gradient(linear, left top, right top, from(#ff4c6a), to(#ff4c6a)) !important;
+  background-image: -webkit-linear-gradient(left, #ff4c6a, #ff4c6a) !important;
+  background-image: -moz-linear-gradient(left, #ff4c6a, #ff4c6a) !important;
+  background-image: linear-gradient(to right, #ff4c6a, #ff4c6a) !important;
+  border: none !important;
+}
+
+.form-valid-error{
+  border: 2px solid #FF4c6a !important;
+}
+.form-valid-success
+{
+  border: 2px solid #0A85EA !important;
+}
+
+.c-input-error{
+  height: 30px;
+  font-size: 12px;
+  color: #FF4c6a;
+  //margin-left:95px;
+  //登录页
+  margin-top: 10px;
+}
+
+.text-danger {
+  color: #dc3545 !important;
+}
+.text-green {
+  color: #058a61 !important;
+}
+
+.font-c3{
+  color: #FF4c6a;
+}
+
+.text-center{
+  text-align: center;
+}
+
+.pos-r{
+  position: relative;
+}
+
+.mg-b-10{
+  margin-bottom:10px;
+}
+
+.pos-a{
+  position: absolute;
+}
+
+.c-btn-blue {
+  color: #fff;
+  border-color:#03a9f4 !important;
+  background-color:#03a9f4  !important;;
+}
+
+.fz-18{
+  font-size: 18px;
+}

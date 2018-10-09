@@ -1,0 +1,50 @@
+@import "@fuse/scss/core";
+
+.zmFullWidth{
+  width:100%;
+}
+
+.zmHalfWidth{
+  width:50%;
+}
+
+.zmCurHand{
+  cursor: pointer;
+}
+
+.zmAvatarDiv{
+
+}
+.zmAvatarDiv{
+  width: 60px;
+  height: 60px;
+  padding: 5px;
+  margin:auto;
+}
+.zmAvatarDiv img{
+  width:100%;
+  height:100%;
+  border-radius: 50%;
+}
+
+.zmImgDiv{
+  width:120px;
+  height:100px;
+  padding: 5px;
+  margin:auto;
+}
+.zmImgDiv img{
+  width:100%;
+  height:100%;
+}
+// 全局select滚动条的样式
+.mat-select-panel::-webkit-scrollbar{
+  width: 2px !important;
+}
+.mat-select-panel::-webkit-scrollbar-thumb
+{
+  border-radius: 10px !important;
+  background-color: #03a9f4 !important;
+}
+//全局 input 框上下箭头
+::-webkit-inner-spin-button { -webkit-appearance: none; /* 上下小箭头按钮，你丫太丑了，滚粗，负分 */  }

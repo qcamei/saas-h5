@@ -1,0 +1,60 @@
+<!--&lt;!&ndash; Menu Main Top  &ndash;&gt;-->
+<ion-menu side="left" [content]="content">
+  <ion-header  header-background-image>
+    <ion-toolbar>
+
+      <ion-grid>
+
+        <ion-row>
+          <ion-col col-4>
+            <div class="user-avatar">
+              <img w-100 h-100 [src]="viewData.imgUrl">
+            </div>
+          </ion-col>
+          <ion-col col-8>
+            <h2 header-title>
+              {{viewData.userName}}
+            </h2>
+            <span span-small>{{viewData.userRole}}</span>
+          </ion-col>
+        </ion-row>
+
+        <ion-row no-padding >
+          <ion-col no-padding>
+            <button menuClose ion-button icon-left small full (click)="goUserDetailPage()">
+              <ion-icon name="contact"></ion-icon>
+              {{viewData.appTopLeftItemName}}
+            </button>
+          </ion-col>
+          <ion-col margin-left no-padding >
+            <button menuClose ion-button icon-left small  full (click)="logout()">
+              <ion-icon name="log-out"></ion-icon>
+              {{viewData.appTopRightItemName}}
+            </button>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+
+    </ion-toolbar>
+  </ion-header>
+  <!-- Menu Main List -->
+  <ion-content my-menu>
+    <ion-list no-margin no-padding>
+      <button menuClose ion-item paddinge-left no-lines item-title *ngFor="let menuItem of viewData.appMenuItems" (click)="openPage(menuItem.component)">
+        <ion-icon icon-medium item-left [name]="menuItem.icon" ></ion-icon>
+        {{menuItem.title}}
+      </button>
+    </ion-list>
+
+
+    <!--<ion-list class="user-list">-->
+    <!--<button ion-item menuClose *ngFor="let menuItem of appMenuItems" (click)="openPage(menuItem)">-->
+    <!--<ion-icon item-left [name]="menuItem.icon" ></ion-icon>-->
+    <!--<span ion-text color="primary">{{menuItem.title}}</span>-->
+    <!--</button>-->
+    <!--</ion-list>-->
+  </ion-content>
+</ion-menu>
+<!--&lt;!&ndash; Disable swipe-to-go-back because it's poor UX to combine STGB with side menus &ndash;&gt;-->
+<ion-nav [root]="viewData.rootPage" main #content swipeBackEnabled="false"></ion-nav>

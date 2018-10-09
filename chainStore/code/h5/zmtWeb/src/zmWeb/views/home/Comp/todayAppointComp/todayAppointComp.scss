@@ -1,0 +1,149 @@
+.appointmentToday {
+  background: #fff;
+  margin-top: 20px;
+  height: 65vh;
+  border-radius: 8px;
+  overflow: hidden;
+  color: #2a2a2a;
+}
+.appointmentToday .header {
+  height: 60px;
+  line-height: 60px;
+  font-size: 18px;
+  font-weight: bold;
+  padding-left: 20px;
+  border-bottom: 1px solid #EBEEF2;
+}
+.appointmentToday  .contet {
+  // height: 440px;
+  height: 100%;
+  overflow-y: auto;
+  //padding: 20px;
+  padding-bottom: 100px;
+}
+.appointmentToday .header .contet  .item {
+  height: 130px;
+  border-radius: 8px;
+  border: 1px solid #EBEFF5;
+}
+.item-header {
+  height: 40px;
+  line-height: 40px;
+  border-bottom: 1px solid #EBEFF5;
+  background: #F3F9FE;
+  padding-left: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  color:#03a9f4;
+}
+.item-con {
+  height: 90px;
+  padding: 0 20px;
+}
+.item-con .item-img{
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
+.c-message{
+  width:90px;
+  overflow-x: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+:host{
+  display: block;
+}
+.fz-18{
+  font-size:18px;
+}
+.fz-16{
+  font-size: 16px;
+}
+.fz-14{
+  font-size: 14px;
+}
+.mg-b-0{
+  margin-bottom:0;
+}
+.mg-t-20{
+  margin-top:20px;
+}
+.disFlex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: flex;
+}
+.flex {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  -webkit-flex: 1;
+  -moz-box-flex: 1;
+  flex: 1;
+}
+.align-center {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  align-items: center;
+}
+
+.hor-center {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  -moz-box-pack: center;
+  justify-content: center;
+}
+.dib{
+  display: inline-block;
+}
+.font-bold{
+  font-weight: bold;
+}
+.c-btn-blue{
+  color: #fff;
+  border-color:#03a9f4 !important;
+  background-color:#03a9f4 !important;
+}
+.com-btn {
+  color: #fff;
+  background:#03a9f4;
+  border: none;
+  height: 30px;
+  width: 60px;
+  font-size: 14px;
+  margin-left: -5px;
+  cursor: pointer;
+  outline: none;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+}
+.text-center{
+  text-align: center;
+}
+
+
+div{
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #4D435A;
+  }
+  ::-webkit-scrollbar-button {
+    display: none !important;
+  }
+  scrollbar-arrow-color: none;
+  scrollbar-face-color: #333;
+  scrollbar-3dlight-color: #666;
+  scrollbar-highlight-color: #666;
+  scrollbar-shadow-color: #999;
+  scrollbar-darkshadow-color: #666;
+  scrollbar-track-color: #666;
+  scrollbar-base-color:#f8f8f8;
+}
+

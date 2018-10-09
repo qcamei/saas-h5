@@ -1,0 +1,65 @@
+<view-body-comp [headerArr]="['管理设置','会员属性']">
+
+    <div class="c-addAp-body mg-t-20 pd-b-25" style="width:500px;">
+      <div class="mg-b-20 font-bold">
+        基础信息
+      </div>
+      <zm-table-detail >
+        <thead>
+          <th>名称</th>
+          <th>启用</th>
+          <!--<th>必填</th>-->
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of viewData.leaguerAttributeList; let i = index;">
+            <td class="text-center">{{item.label}}</td>
+            <td class="align-center" >
+              <zm-checkbox [canEdit]="(i>5 && i<10)||(i>11 && i<15)||i==3"  [(zmValue)]="item.enable" (checkCallback)="updateBaseAttribute(item)"></zm-checkbox>
+            </td>
+            <!--<td class="align-center">-->
+              <!--<zm-checkbox [canEdit]="i>2"  [(zmValue)]="item.require" (checkCallback)="updateBaseAttribute(item)"></zm-checkbox>-->
+            <!--</td>-->
+          </tr>
+        </tbody>
+      </zm-table-detail>
+    </div>
+
+    <div class="c-addAp-body mg-t-20 pd-b-25" >
+      <div style="display: flex; justify-content: space-between; ">
+        <div class="mg-b-20 font-bold">
+          扩展信息
+        </div>
+        <zm-btn-new [name]="'新建扩展信息'"  (zmbtnClick)="addExpandAttribute()"></zm-btn-new>
+      </div>
+      <zm-table-detail>
+        <thead>
+          <th>名称</th>
+          <th>启用</th>
+          <!--<th>必填</th>-->
+          <th>移动排序</th>
+          <th>操作</th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of viewData.expandAttributeList; ">
+          <td class="text-center">{{item.label}}</td>
+          <td>
+            <zm-checkbox [(zmValue)]="item.enable" (checkCallback)="setExpandAttributeStatus(item)"></zm-checkbox>
+          </td>
+          <!--<td>-->
+            <!--<zm-checkbox [(zmValue)]="item.require" (checkCallback)="setExpandAttributeStatus(item)"></zm-checkbox>-->
+          <!--</td>-->
+          <td style="position:relative;">
+            <div class="sort">
+              <span class="cur-hand c-trigon-up" (click)="sortExpandAttribute(item,0)"></span>
+              <span class="cur-hand c-trigon-down" (click)="sortExpandAttribute(item,1)"></span>
+            </div>
+          </td>
+          <td class="text-center">
+            <a class="action mg-r-10 text-primary" (click)="editExpandAttribute(item)">编辑</a>
+          </td>
+        </tr>
+        </tbody>
+      </zm-table-detail>
+    </div>
+
+</view-body-comp>

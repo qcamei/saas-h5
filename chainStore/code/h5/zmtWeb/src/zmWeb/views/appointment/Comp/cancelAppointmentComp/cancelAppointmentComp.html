@@ -1,0 +1,33 @@
+<div class="popup">
+    <div class="popup-title disFlex text-center">
+      <span class="flex align-center">确定取消预约</span>
+      <i class="nb-close pd-r-10 text-right" style="font-size:26px;cursor:pointer;"></i>
+    </div>
+    <div class="popup-content">
+        <div class="center_message">
+            <form class="form-inline">
+              <div class="form-group">
+                <label for="">取消原因：</label>
+                <select class="form-control" name="sel" id="my_sel">
+                  <option value="0">会员自己取消</option>
+                  <option value="0">会员自己取消会员自己取消2</option>
+                  <option value="0">会员自己取消3</option>
+                  <option value="0">会员自己取消4</option>
+                </select>
+              </div>
+              <div>
+                <p style="margin:15px 0 5px;text-align: left;">备注</p>
+                <textarea name="text" style="width:310px;"rows="6" [(ngModel)]="textareas" ></textarea>
+              </div>
+            </form>
+        </div>
+    </div>
+    <div class="popup-btn-area disFlex">
+      <div class="flex text-right pd-r-20">
+        <button class="cancel-btn" (click)=cancel()>取消</button>
+      </div>
+      <div class="flex text-left pd-l-20">
+      <button class="confirm-btn"(click)="confirm()">确定</button></div>
+      </div>
+  </div>
+<div class="mask"></div>

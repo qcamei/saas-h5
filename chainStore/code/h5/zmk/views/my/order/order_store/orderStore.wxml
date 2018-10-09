@@ -1,0 +1,6 @@
+<!--views/my/order/order_store/orderStore.wxml-->
+ <view class='store-page'>
+<view   wx:for='{{storeVMList}}' wx:for-index="idx" wx:for-item="cellModel">
+<comp-store-cell bindcellclick='storeCellClick' cell-model='{{cellModel}}'></comp-store-cell>
+</view>
+</view>

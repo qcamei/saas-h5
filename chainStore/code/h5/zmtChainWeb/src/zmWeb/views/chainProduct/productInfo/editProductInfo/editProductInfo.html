@@ -1,0 +1,53 @@
+
+
+<view-body-comp [headerArr]="['项目列表','编辑项目']">
+  <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+    <div style="width:45%">
+      <zm-input-pcode label="项目编号" placeholder="请输入项目编号"
+                      [(zmValue)]="viewData.defaultNumber" [(zmPass)]="viewData.defaultNumberPass"
+                      [oriCode]="viewData.productDetail.number" [existList]="viewData.prdNumberList"  ></zm-input-pcode>
+
+      <zm_input_name label="项目名称" placeholder="请输入项目名称" maxlength="15"
+                     [(zmValue)]="viewData.productDetail.name" [(zmPass)]="viewData.productDetail.namePass"></zm_input_name>
+
+      <div fxLayout="row" fxLayoutAlign="start center" >
+        <zm_select style="width:100%" [noAll]="true" [label]="'项目分类'" [selectList]="viewData.typeList" [name]="'name'" [value]="'id'"
+                   [(zmValue)]="viewData.productDetail.typeId"></zm_select>
+        <zm_btn_small fxFlex ="0 0 80px"  name="新建分类" (zmbtnClick)="addProductType()"></zm_btn_small>
+      </div>
+
+      <zm-input-price [label]="'项目售价'" [placeholder]="'请输入项目售价'" [(zmValue)]="viewData.productDetail.sellPrice"></zm-input-price>
+
+      <zm-input-price [label]="'项目成本'" [placeholder]="'请输入项目成本'" [(zmValue)]="viewData.productDetail.cost"></zm-input-price>
+
+      <div fxLayout="row" fxLayoutAlign="end" style="width:100%">
+        <switch-button-comp  [(state)]="viewData.state" label="上架状态"></switch-button-comp>
+      </div>
+
+      <zm-input-textarea [label]="'项目介绍'" [placeholder]="'请输入200字以内的项目介绍'" [(text)]="viewData.productDetail.descript" [maxlength]="200"></zm-input-textarea>
+      <div fxLayout="row" fxLayoutAlign="end" style="width: 100%">
+        <zm_btn_large name="保存" [disabled]="!viewData.defaultNumberPass" (zmbtnClick)="updatePrd(viewData.productDetail.id)"></zm_btn_large>
+      </div>
+
+    </div>
+
+    <div style="width:45%">
+      <div class=" form-group form-inline">
+        <zm_img_cropper [label]="'上传图片'" [aspectRatio]="4/3" [requestUrl]="viewData.requestUrl"
+                        (callback)="showImg($event)"></zm_img_cropper>
+      </div>
+      <zm_img_preview [(imgArr)]="viewData.imgPathListTmp" [(imgLength)]="viewData.limitCount"></zm_img_preview>
+      <div class="mt-20">
+            <zm_btn_small name="选择门店" (zmbtnClick)="selectStore()"></zm_btn_small>
+      </div>
+
+      <zm_store_preview [(storeArr)]="viewData.selectStoreList" (storeArrChange)="removeStore()"></zm_store_preview>
+
+    </div>
+
+  </div>
+</view-body-comp>
+
+
+
+

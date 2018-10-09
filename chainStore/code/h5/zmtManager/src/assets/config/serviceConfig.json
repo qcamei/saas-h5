@@ -1,0 +1,27 @@
+{
+  "env":"220",
+  "220":{
+    "serviceAddress":"http://192.168.40.220/storemngms/ws/v1",
+    "imgPreUrl":"http://192.168.40.220/"
+  },
+  "221":{
+    "serviceAddress":"http://192.168.40.221/storemngms/ws/v1",
+    "imgPreUrl":"http://192.168.40.221"
+  },
+  "prd":{
+    "serviceAddress":"https://www.zhimeitimes.com/storemngms/ws/v1",
+    "imgPreUrl":"https://www.zhimeitimes.com/"
+  },
+  "prd-test":{
+    "serviceAddress":"https://www.zhimeitimes.com:9110/storemngms/ws/v1",
+    "imgPreUrl":"https://www.zhimeitimes.com:9110/"
+  },
+  "experience":{
+    "serviceAddress":"https://www.zhimeitimes.com:9110/dev/storemngms/ws/v1",
+    "imgPreUrl":"https://www.zhimeitimes.com/"
+  },
+  "local":{
+    "serviceAddress":"http://127.0.0.1:9124/storemngms/ws/v1",
+    "imgPreUrl":"http://192.168.40.220:9116/"
+  }
+}

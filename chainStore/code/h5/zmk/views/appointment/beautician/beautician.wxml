@@ -1,0 +1,15 @@
+<!--views/appointment/beautician/beautician.wxml-->
+<scroll-view scroll-y="true" class="container discovery withtab" bindscrolltoupper="upper" bindscrolltolower="lower"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}" style="height:{{scroll_view}}rpx;">
+    <block wx:if='{{hasData}}'>
+        <view wx:for='{{listVM}}' wx:for-index="idx" wx:for-item="cellModel">
+            <comp-beautician-cell  bindcellclick='cellClick' cell-model="{{cellModel}}"></comp-beautician-cell>
+        </view>
+    </block>
+    <view wx:if='{{!hasData}}' class='nomoredata'>
+        <image class='image-nomoredata' src='../../../images/image_appointment_no_doctor.png'></image>
+        <view class='text-nomoredata'>没有美容师</view>
+    </view>
+</scroll-view>
+<view class='view-bottom'>
+   <button class='sureBtn' hover-class='sureBtnHover' bindtap='sureBtnClick'>确定</button>
+</view>

@@ -1,0 +1,65 @@
+
+<view-body-comp [headerArr]="['返回','编辑会员卡']">
+
+  <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+
+    <div style="width: 50%">
+
+      <zm-input-pcode label="会员卡编号" placeholder="请输入会员卡编号"
+                      [(zmValue)]="viewData.defaultNumber" [(zmPass)]="viewData.defaultNumberPass"
+                      [oriCode]="viewData.memberCardDetail.number" [existList]="viewData.numberList"  ></zm-input-pcode>
+
+
+      <zm_input_name label="会员卡名称" placeholder="请输入会员卡名称" maxlength="15"
+                     [(zmValue)]="viewData.memberCardDetail.name" [(zmPass)]="viewData.memberCardDetail.namePass"></zm_input_name>
+
+
+      <zm-input-price [label]="'赠送金额'" [placeholder]="'请输入赠送金额'" [(zmValue)]="viewData.memberCardDetail.freeMoney"></zm-input-price>
+
+      <zm-input-discount [label]="'项目折扣'" [placeholder]="'请输入项目折扣'" [(zmValue)]="viewData.memberCardDetail.prodDiscount"></zm-input-discount>
+
+      <zm-input-discount [label]="'商品折扣'" [placeholder]="'请输入商品折扣'" [(zmValue)]="viewData.memberCardDetail.goodsDiscount"></zm-input-discount>
+
+      <zm-input-discount [label]="'次卡折扣'" [placeholder]="'请输入次卡折扣'" [(zmValue)]="viewData.memberCardDetail.prdCardDiscount"></zm-input-discount>
+
+      <zm-input-discount [label]="'套餐折扣'" [placeholder]="'请输入套餐折扣'" [(zmValue)]="viewData.memberCardDetail.packagePrjDiscount"></zm-input-discount>
+
+      <zm-input-textarea [label]="'备注'" [placeholder]="'请输入200字以内的备注'"
+                         [(text)]="viewData.memberCardDetail.descript" [maxlength]="200"></zm-input-textarea>
+
+      <switch-button-comp label="启用状态" [(state)]="viewData.state"></switch-button-comp>
+
+      <div fxLayout="row" fxLayoutAlign="end" style="margin-top: 20px;">
+        <zm_btn_large  fxFlexAlign="end" [disabled]="!(viewData.defaultNumberPass && viewData.memberCardDetail.namePass)" name="保存" (zmbtnClick)="updateMemberCard(viewData.memberCardDetail.id)"></zm_btn_large>
+      </div>
+
+    </div>
+
+    <div style="width: 50%">
+
+      <div class="form-group form-inline">
+        <div class="col-md-5" >
+          <zm_btn_small name="选择图片" (zmbtnClick)="showMemCardModal()"></zm_btn_small>
+        </div>
+      </div>
+
+      <div style="margin-left:80px;">
+        <img src="{{viewData.imgUrl|imgPrePath}}" width="340px" height="168px"/>
+      </div>
+
+      <div class="mt-20">
+        <!-- <mat-label>可用门店</mat-label> -->
+        <zm_btn_small name="选择门店" (zmbtnClick)="selectStore()"></zm_btn_small>
+      </div>
+
+      <zm_store_preview [(storeArr)]="viewData.selectStoreList" (storeArrChange)="removeStore()"></zm_store_preview>
+
+    </div>
+
+  </div>
+</view-body-comp>
+
+
+
+
+

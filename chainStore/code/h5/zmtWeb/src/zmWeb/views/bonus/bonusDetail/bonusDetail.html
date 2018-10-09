@@ -1,0 +1,148 @@
+
+
+
+  <view-body-comp [headerArr]="['提成列表','员工提成']" >
+        <zm-card  [expanded]="true" [withCollapse]="false" [header]="'员工信息'">
+              <zm-table-detail>
+                  <thead>
+                      <th >员工姓名</th>
+                      <th >岗位</th>
+                      <th >手机号</th>
+                      <th >性别</th>
+                  </thead>
+                  <tbody style="text-align: center">
+                        <tr>
+                          <td >{{viewData.buserRoleBonusInfo.buser?viewData.buserRoleBonusInfo.buser.name:"-"}}</td>
+                          <td >{{viewData.buserRoleBonusInfo.roleName?viewData.buserRoleBonusInfo.roleName:"-"}}</td>
+                          <td >{{viewData.buserRoleBonusInfo.buser?viewData.buserRoleBonusInfo.buser.phone:"-"}}</td>
+                          <td >{{(viewData.buserRoleBonusInfo.buser?viewData.buserRoleBonusInfo.buser.gender:1) == 1? '男':'女' }}</td>
+                        </tr>
+                  </tbody>
+                </zm-table-detail>
+        </zm-card>
+
+        <zm-card  [expanded]="true" [withCollapse]="false" [header]="'订单提成列表'">
+
+          <!--<div class="disFlex text-center mg-b-20">-->
+            <!--<div class="">-->
+              <!--<zm-search-box [label]=" '订单号查询'" [placeholder]="'订单号'" [(zmValue)]="viewData.orderQueryParam.orderNumber" (callBack)="findOrderBonusList('number','')"></zm-search-box>-->
+            <!--</div>-->
+            <!--<div class="form-group form-inline mg-l-20 align-center">-->
+              <!--<label class="col-form-label mg-b-0 font-bold fz-14">时间</label>-->
+              <!--<input class="c-input-data mg-l-10" placeholder="请选择订单起始时间段" (click)="a.toggle()" id="orderStartDate" name="orderStartDate" ngbDatepicker #a="ngbDatepicker" (ngModelChange)="findOrderBonusList('start',$event)" [(ngModel)]="viewData.orderQueryParam.orderStartDate" readonly>-->
+              <!--<button class="input-group-addon c-client-data disFlex" (click)="a.toggle()" type="button">-->
+                <!--<i class="fa fa-calendar-o" aria-hidden="true" style=" cursor: pointer;font-size: 14px;"></i>-->
+              <!--</button>-->
+            <!--</div>-->
+            <!--<div class=" mg-l-10 form-group disFlex mg-r-20 align-center">-->
+              <!--<label class="col-form-label mg-b-0 font-bold fz-14 mg-r-5">至</label>-->
+              <!--<input class=" c-input-data" placeholder="请选择订单结束时间段" (click)="b.toggle()" id="orderEndDate" name="orderEndDate" ngbDatepicker #b="ngbDatepicker" (ngModelChange)="findOrderBonusList('end',$event)" [(ngModel)]="viewData.orderQueryParam.orderEndDate" readonly>-->
+              <!--<button class="input-group-addon c-client-data disFlex" (click)="b.toggle()" type="button">-->
+                <!--<i class="fa fa-calendar-o" aria-hidden="true" style=" cursor: pointer;font-size: 14px;"></i>-->
+              <!--</button>-->
+            <!--</div>-->
+          <!--</div>-->
+
+          <mat-toolbar style="padding-top:15px;margin-bottom:15px;">
+            <mat-toolbar-row fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px" class="zmFullWidth">
+
+            <zm-search-box [label]=" '订单号查询'" [placeholder]="'订单号'" [(zmValue)]="viewData.orderQueryParam.orderNumber" (callBack)="findOrderBonusList()"></zm-search-box>
+
+            </mat-toolbar-row>
+            <mat-toolbar-row>
+              <zm-search-date [label]=" '起始时间'"   [(curValue)]="viewData.orderQueryParam.orderStartDate" (callback)="findOrderBonusList()"></zm-search-date>
+              <zm-search-date [label]=" '至' " [(curValue)]="viewData.orderQueryParam.orderEndDate" (callback)="findOrderBonusList()"></zm-search-date>
+            </mat-toolbar-row>
+          </mat-toolbar>
+
+
+
+          <div>
+            <!-- <table class="scrollTable table table-bordered"> -->
+            <zm-table-detail>
+              <thead>
+              <th style="width:15%;">订单时间</th>
+              <th style="width:15%">订单号</th>
+              <th style="width:10%;">类型</th>
+              <th style="width:10%;">名称</th>
+              <th style="width:10%;">业绩金额</th>
+              <th style="width:10%;">提成方式</th>
+              <th style="width:10%;">提成比例</th>
+              <th style="width:10%;">提成金额</th>
+              <th style="width:10%;">操作</th>
+              </thead>
+              <tbody style=" text-align: center">
+              <tr *ngFor="let item of viewData.bonusRecordList">
+                <td style="width:15%;">{{item.orderTime|times}}</td>
+                <td style="width:15%;">{{item.orderNumber}}</td>
+                <td style="width:10%;">{{item.buyType | itemTypePipeComp}}</td>
+                <td style="width:10%;">{{item.buyName}}</td>
+                <td style="width:10%;">&yen; {{item.amount |number:'1.2-2'}}</td>
+                <td style="width:10%;">{{item.bonusType | bonusTypePipeComp}}</td>
+                <td style="width:10%;">{{item.bonusType == 0?'-':(item.percentage + '%')}}</td>
+                <td style="width:10%;">&yen; {{item.cost |number:'1.2-2'}}</td>
+                <td style="width:10%;" class="cur-hand text-primary"><a (click)="goOrderDetail(item.orderId,item.buyType)">查看</a></td>
+              </tr>
+              </tbody>
+              <!-- </table> -->
+            </zm-table-detail>
+
+            <no-data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.bonusRecordList" [showImg]="'noData'"></no-data>
+
+          </div>
+        </zm-card>
+
+
+        <zm-card  [expanded]="true" [withCollapse]="false" [header]="'每月提成统计'">
+              <!--<div class="disFlex text-center mg-b-20">-->
+                <!--<div class="disFlex align-center">-->
+                  <!--<label class="mg-b-0 font-bold fz-14 text-left">时间</label>-->
+                  <!--<input class=" c-input-data mg-l-10" placeholder="请选择订单起始时间段" (click)="c.toggle()" id="monthStartDate" name="monthStartDate" ngbDatepicker #c="ngbDatepicker" (ngModelChange)="findMonthBonusList('start',$event)" [(ngModel)]="viewData.monthQueryParam.monthStartDate" readonly>-->
+                  <!--<button class="input-group-addon c-client-data disFlex" (click)="c.toggle()" type="button">-->
+                    <!--<i class="fa fa-calendar-o" aria-hidden="true" style=" cursor: pointer;font-size: 14px;"></i>-->
+                  <!--</button>-->
+                <!--</div>-->
+                <!--<div class=" mg-l-10 disFlex mg-r-20 align-center">-->
+                  <!--<label class="mg-b-0 font-bold fz-14 mg-r-5">至</label>-->
+                  <!--<input class=" c-input-data" placeholder="请选择订单结束时间段" (click)="d.toggle()" id="monthEndDate" name="monthEndDate" ngbDatepicker #d="ngbDatepicker" (ngModelChange)="findMonthBonusList('end',$event)" [(ngModel)]="viewData.monthQueryParam.monthEndDate" readonly>-->
+                  <!--<button class="input-group-addon c-client-data disFlex" (click)="d.toggle()" type="button">-->
+                    <!--<i class="fa fa-calendar-o" aria-hidden="true" style=" cursor: pointer;font-size: 14px;"></i>-->
+                  <!--</button>-->
+                <!--</div>-->
+              <!--</div>-->
+
+            <mat-toolbar style="padding-top:15px;margin-bottom:15px;">
+              <mat-toolbar-row>
+                <zm-search-date [label]=" '起始时间'" [(curValue)]="viewData.monthQueryParam.monthStartDate" (callback)="findMonthBonusList()"></zm-search-date>
+                <zm-search-date [label]=" '至' " [(curValue)]="viewData.monthQueryParam.monthEndDate" (callback)="findMonthBonusList()"></zm-search-date>
+              </mat-toolbar-row>
+            </mat-toolbar>
+              <!-- <table class="scrollTable table table-bordered"> -->
+              <zm-table-detail>
+                <thead>
+                <th style="width: 30%">时间</th>
+                <th style="width: 35%">业绩金额</th>
+                <th style="width: 35%">提成金额</th>
+                </thead>
+                <tbody style=" text-align: center">
+                <tr *ngFor="let item of viewData.buserMonthBonusList">
+                  <td style="width: 30%">{{item.dateStr}}</td>
+                  <td style="width: 35%">&yen; {{item.amount |number:'1.2-2'}}</td>
+                  <td style="width: 35%">&yen; {{item.cost |number:'1.2-2'}}</td>
+                </tr>
+                </tbody>
+                <!-- </table> -->
+              </zm-table-detail>
+              <no-data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.buserMonthBonusList" [text]=" '没有数据'" [showImg]="'noData'"></no-data>
+        </zm-card>
+        
+     
+        
+
+  </view-body-comp>
+
+
+
+
+
+

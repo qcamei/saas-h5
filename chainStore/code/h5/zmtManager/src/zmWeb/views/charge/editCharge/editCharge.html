@@ -1,0 +1,66 @@
+<view-header-comp [headerArr]="['收费管理','编辑收费']"></view-header-comp>
+<view-body-comp>
+  <content>
+    <div class="col-md-6" *ngIf="viewData.charge">
+
+      <div class="form-group row ">
+        <label class="col-md-2 col-form-label text-center px-0"><span class="text-danger">*</span>当前商户</label>
+        <div class="col-md-10"style="line-height:38px;">{{viewData.charge.name}} ( {{viewData.charge.phone}} )</div>
+      </div>
+
+      <!--<div>-->
+        <!--<zm_select [noAll]="true" [label]="'设置等级'" [selectList]="viewData.vipSelectList"-->
+                   <!--[(zmValue)]="viewData.charge.vipLevelId"></zm_select>-->
+      <!--</div>-->
+
+      <!--<div class="form-group row ">-->
+        <!--<label class="col-md-2 col-form-label text-center px-0">当前到期</label>-->
+        <!--<div class="col-md-10"style="line-height:38px;">{{viewData.charge?(viewData.charge.expiredTime | datetimePipe):'-'}}</div>-->
+      <!--</div>-->
+
+      <!--<div class="form-group row mb-0 ">-->
+        <!--<label class="col-md-2 col-form-label text-center px-0">设置到期</label>-->
+        <!--<div class="col-md-10">-->
+          <!--<zm_search_date [isBig]="true" [label]="''" [placeholder]="'请选择到期时间'" [(curValue)]="viewData.expiredTime"></zm_search_date>-->
+        <!--</div>-->
+      <!--</div>-->
+      <div class="row" style="height:30px;font-size:14px;"></div>
+
+      <zm_select [noAll]="true" [label]="'收费渠道'" [selectList]="[{name:'现金',value:0},{name:'支付宝',value:1},{name:'微信',value:2},{name:'银联',value:3}]"
+                 [(zmValue)]="viewData.chargeChannel" ></zm_select>
+
+      <zm_input_price [label]="'收费金额'" [placeholder]="'请输入金额'" [(price)]="viewData.money"></zm_input_price>
+
+      <div class="form-group row mb-0">
+        <label class="col-form-label text-center col-md-2 px-0">区域</label>
+        <div class="col-md-10">
+          <city-select-comp [(citySetting)]="viewData.citySetting"></city-select-comp>
+        </div>
+      </div>
+      <div class="row" style="height:30px;font-size:14px;"></div>
+      <!--<zm_input_text [label]="'代理姓名'" [placeholder]="'请输入姓名'" [(zmValue)]="viewData.charge.agencyName"></zm_input_text>-->
+      <!--<zm_input_text [label]="'代理电话'" [placeholder]="'请输入电话'" [(zmValue)]="viewData.charge.agencyPhone"></zm_input_text>-->
+
+      <div class="form-group row mb-0">
+        <label class="col-md-2 col-form-label text-center px-0"><span class="text-danger"></span>代理姓名</label>
+        <div class="col-md-10">
+          <input type="text" placeholder="请输入姓名" maxlength="20"  class="form-control"  name="agencyName" #agencyName="ngModel"
+                 [(ngModel)]="viewData.charge.agencyName">
+        </div>
+      </div>
+      <div class="row" style="height:30px;font-size:14px;"></div>
+
+      <div class="form-group row mb-0">
+        <label class="col-md-2 col-form-label text-center px-0"><span class="text-danger"></span>代理电话</label>
+        <div class="col-md-10">
+          <input type="number" placeholder="请输入电话" maxlength="20" class="form-control"  name="number" #number="ngModel"
+                 [(ngModel)]="viewData.charge.agencyPhone">
+        </div>
+      </div>
+
+      <div class="row" style="height:30px;font-size:14px;"></div>
+      <zm_input_textarea_order [label]="'备注'" [placeholder]="'请输入200字以内的备注信息，以说明此次收费的目的；例如：“会员等级：普通会员；到期时间：2019-09-11 10:05:16”'" [(text)]="viewData.charge.remark" [maxlength]="200"></zm_input_textarea_order>
+      <div class="w-50 mt-5"><button class="cur-hand btn btn-primary btn-block" (click)="updateCharge()">保存</button></div>
+    </div>
+  </content>
+</view-body-comp>

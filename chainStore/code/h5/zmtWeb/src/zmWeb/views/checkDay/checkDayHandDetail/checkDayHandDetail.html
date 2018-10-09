@@ -1,0 +1,97 @@
+<view-body-comp [headerArr]="['日结详情']">
+        <zm-card [withCollapse]="false" [expanded]="true" [showHeader]="false">
+            <div style="padding-top:16px;" fxLayout="row" fxLayoutAlign="space-between center">
+               <span>交班日结</span>
+            </div>
+        </zm-card >
+        <zm-card [withCollapse]="false" [expanded]="true" [showHeader]="false">
+                <div style="padding-top:16px;" fxLayout="row" fxLayoutAlign="space-between center">
+                    <span>员工</span>
+                    <span>{{viewData.daySnapshot.buserName}}</span>
+                </div>
+        </zm-card >
+        <zm-card [withCollapse]="false" [expanded]="true" [showHeader]="false">
+                <div style="padding-top:16px;" fxLayout="row" fxLayoutAlign="space-between center">
+                     <span>时间</span>
+                     <span>{{viewData.daySnapshot.startTime | times}}至{{viewData.daySnapshot.endTime | times}}</span>
+                </div>
+        </zm-card >
+
+        <div  fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px" fxLayout.xs="column"
+         fxLayoutGap.xs="0" fxFlexFill>
+            <zm-card [header]="'营业金额'" fxFlex="33" [expanded]="true" [withCollapse]="false">
+                <span style="font-size: 18px">￥<b>{{viewData.daySnapshot.amount}}</b></span>
+            </zm-card>
+            <zm-card [header]="'耗卡金额'" fxFlex="33" [expanded]="true" [withCollapse]="false">
+                <span style="font-size: 18px">￥<b>{{viewData.daySnapshot.memberCardCost}}</b></span>
+            </zm-card>
+            <zm-card [header]="'退单金额'" fxFlex="33" [expanded]="true" [withCollapse]="false">
+                <span style="font-size: 18px">￥<b>{{viewData.daySnapshot.chargeBackCost}}</b></span>
+            </zm-card>
+        </div>
+        <div  fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px" fxLayout.xs="column"
+         fxLayoutGap.xs="0" fxFlexFill>
+            <zm-card [header]="'支出金额'" fxFlex="33" [expanded]="true" [withCollapse]="false">
+                <span style="font-size: 18px">￥<b>{{viewData.daySnapshot.payCost}}</b></span>
+            </zm-card>
+            <zm-card [header]="'收入金额'" fxFlex="33" [expanded]="true" [withCollapse]="false">
+                <span style="font-size: 18px">￥<b>{{viewData.daySnapshot.incomeCost}}</b></span>
+            </zm-card>
+            <zm-card [header]="'欠款入账'" fxFlex="33" [expanded]="true" [withCollapse]="false">
+                <span style="font-size: 18px">￥<b>{{viewData.daySnapshot.arrearBackCost}}</b></span>
+            </zm-card>
+        </div>
+        <div  fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px" fxLayout.xs="column"
+         fxLayoutGap.xs="0" fxFlexFill>
+            <zm-card [header]="'总订单数'" fxFlex="33" [expanded]="true" [withCollapse]="false">
+                <span style="font-size: 18px"><b>{{viewData.daySnapshot.orderNum}}</b></span>
+            </zm-card>
+            <zm-card [header]="'未收订单数'" fxFlex="33" [expanded]="true" [withCollapse]="false">
+                <span style="font-size: 18px"><b>{{viewData.daySnapshot.notPayNum}}</b></span>
+            </zm-card>
+        </div>
+        <!-- <div  fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px" fxLayout.xs="column"
+        fxLayoutGap.xs="0" fxFlexFill> -->
+           <zm-card [header]="'应结现金'" [expanded]="true" [withCollapse]="false">
+               <span style="font-size: 18px">￥<b>{{viewData.daySnapshot.cashCost}}</b></span>
+           </zm-card>
+
+       <!-- </div> -->
+       
+      <!-- 操作日志、 -->
+      <zm-card-box [withCollapse]="true" [expanded]="false">
+            <header>
+            <div style="color:rgb(42, 42, 42);">
+               <b>操作日志</b>
+            </div>
+            </header>
+            <content>
+                    <ng-template #tdA let-item="item">{{getTypeName(item.type)}}</ng-template>
+                    <ng-template #tdB let-item="item">{{item.content}}</ng-template>
+                    <ng-template #tdC let-item="item">{{item.newName}}</ng-template>
+                    <ng-template #tdD let-item="item">{{item.createdTime>0 ? (item.createdTime|times) : '-'}}</ng-template>
+
+
+                    <zm-mat-table [tdTemplateList]="[tdA,tdB,tdC,tdD]" [thNameList]="['消息来源','操作记录','相关名称','日期']"
+                                  [itemList]="viewData.oplist"></zm-mat-table>
+
+                    <no-data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.oplist" [text]=" '没有数据'"
+                             [showImg]="'noData'"></no-data>
+                    <zm-page style="padding-top:20px;" [totalSize]="viewData.recordCount" [curPage]="viewData.curPage"
+                             (pageChange)="getPageData($event)"></zm-page>
+            </content>
+            </zm-card-box>
+            <zm-card  [withCollapse]="false" [expanded]="true">
+                    <content>
+                    <zm-input-textarea [rows]=5 [label]="'备注信息'" [placeholder]="'请输入需要备注的信息'" [(text)]="viewData.daySnapshot.remark"></zm-input-textarea>
+                    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20px" fxLayout.xs="column"
+                    fxLayoutGap.xs="0" fxFlexFill>
+                <!-- <zm-btn  [stroked] = "false" (zmbtnClick)="print()" name="打印"></zm-btn> -->
+                <zm-btn-md  [stroked] = "false" (zmbtnClick)="cancel()" name="返回"></zm-btn-md>
+                <!-- <zm-btn  [stroked] = "false" (zmbtnClick)="save()" name="保存并退出"></zm-btn> -->
+                </div>
+                </content>
+               </zm-card>
+
+            
+</view-body-comp>

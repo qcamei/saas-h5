@@ -1,0 +1,9 @@
+<!--views/appointment/comps/scanCodeComp/scanCodeComp.wxml-->
+
+<view>
+  <image src="../../../../images/image_page_haeder_bg.png" class='header_bg'></image>
+  <view class='content-view'>
+    <image class='content_bg' src="../../../../images/image_scan_bg.png"></image>
+  </view>
+  <button class='sureBtn' hover-class='sureBtnHover' bindtap='scanBtnClick'>扫码进入店铺预约</button>
+</view>

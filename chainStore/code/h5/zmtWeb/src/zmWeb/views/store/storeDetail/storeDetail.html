@@ -1,0 +1,31 @@
+  <view-body-comp [headerArr]="['店铺列表','店铺信息']">
+
+        <zm-table-detail>
+              <tbody>
+                <tr>
+                  <th width="20%">店铺编号</th>
+                  <td>{{viewData.store.id}}</td>
+                </tr>
+                <tr>
+                  <th>店铺名称</th>
+                  <td>{{viewData.store.name}}</td>
+                </tr>
+                <tr>
+                  <th>预约电话</th>
+                  <td>{{viewData.store.tel}}</td>
+                </tr>
+                <tr>
+                  <th>区域</th>
+                  <td>{{viewData.store.area}}</td>
+                </tr>
+                <tr>
+                  <th>详细地址</th>
+                  <td colspan="3">{{viewData.store.address?viewData.store.address:'-'}}</td>
+                </tr>
+                <tr>
+                  <th>店铺介绍</th>
+                  <td colspan="3">{{viewData.store.descript?viewData.store.descript:'-'}}</td>
+                </tr>
+              </tbody>
+        </zm-table-detail>
+  </view-body-comp>

@@ -1,0 +1,76 @@
+.chargeInfo{
+    .char_th th{
+      padding:6px 0;
+      background:#f4f6fa;
+    }
+    th, td{
+      vertical-align: middle !important;
+      font-size: 14px;
+      word-wrap:break-word;
+      word-break: break-all;
+    }
+    .font-bold{
+      font-weight:bold;
+    }
+
+    .cancel-btn{
+        background: #fff;
+        border: 2px solid#03a9f4;
+        color:#03a9f4;
+        width: 168px;
+        line-height: 48px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+    .confirm_btn{
+
+      background:#03a9f4;
+      border: 2px solid#03a9f4;
+      color: #fff;
+      width: 168px;
+      line-height: 48px;
+      -moz-border-radius: 8px;
+      border-radius: 8px;
+      cursor: pointer;
+
+    }
+    .confirm_btn.disabled, .confirm_btn:disabled{
+      opacity: 0.65;
+      cursor: default;
+    }
+    // tbody tr:hover{
+    //     background-color: #e7f3fd;
+    //   }
+    .modal-body td{
+      vertical-align: middle;
+      padding: 0.45rem !important;
+
+
+    }
+    .itemActiveClass{
+      background:#03a9f4 !important;
+      color:#fff;
+      cursor: pointer;
+    }
+    .itemActiveClass td{
+      border:1px solid transparent;
+      border-bottom-color:#fff;
+    }
+    .itemDisable{
+      background:rgba(221,221,221,1)
+    }
+    .itemDisable td{
+      // border-color:rgba(221,221,221,1);
+      border:1px solid transparent;
+      border-bottom-color:rgba(221,221,221,1);
+    }
+  }
+  .action{
+      color:#03a9f4;
+      cursor: pointer;
+  }
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;    /* 上下小箭头按钮，你丫太丑了，滚粗，负分 */
+  }

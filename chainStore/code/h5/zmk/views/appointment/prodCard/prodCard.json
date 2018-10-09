@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "选择预约项目",
+    "usingComponents":{
+      "comp-product":"../comps/productComp/productComp",
+      "comp-card":"../comps/cardComp/cardComp"
+    }
+}

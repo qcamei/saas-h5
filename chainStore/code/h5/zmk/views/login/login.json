@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "",
+
+  "usingComponents": {
+    "zm-verify-button": "/views/comComp/input/verify-button/verify"
+  }
+}

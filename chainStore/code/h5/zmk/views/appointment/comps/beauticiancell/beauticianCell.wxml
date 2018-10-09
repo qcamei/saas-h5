@@ -1,0 +1,16 @@
+<!--views/appointment/comps/beauticiancell/beauticianCell.wxml-->
+<view class="weui-panel__bd" data-cellModel='{{cellModel}}' bindtap='cellClick'>
+  <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+      <image wx:if="{{cellModel.selected}}" class="beautician-selected" src='../../../../images/icon_beautician_selected.png'></image>
+      <image wx:if="{{!cellModel.selected}}" class="beautician-selected" src='../../../../images/icon_beautician_un_select.png'></image>
+    </view>
+    <view class="head weui-media-box__hd weui-media-box__hd_in-appmsg">
+      <image class="weui-media-box__thumb" src='{{cellModel.headImg}}' />
+    </view>
+    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+      <view class="weui-media-box__title">{{cellModel.name}}</view>
+    </view>
+  </view>
+</view>
+<view class='line' wx:if='{{listVM}}'></view>

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "comp-appoint": "../comps/appointmentcomp/appointmentComp",
+    "comp-scanCode":"../comps/scancodecomp/scanCodeComp"
+  }
+}

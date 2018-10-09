@@ -1,0 +1,35 @@
+
+    <view-header-comp [headerArr]="['暂无店铺，请先申请加入店铺']" ></view-header-comp>
+        <view-body-comp>
+              <content>
+                <div class="text-right">
+                  <label class="mg-b-0 fz-14 mg-r-10" style="font-weight: bold;">店铺查询 :</label>
+                  <div style="display: inline-block;">
+                    <input type="text" class="mg-l-10 pos-r" class="search-input" placeholder="编号/店铺名称" [(ngModel)]="viewData.queryParam">
+                    <button class="searchBtn" (click)="findStore()">搜索</button>
+                  </div>
+                </div>
+                  <table class="table table-bordered text-center">
+                    <thead>
+                      <th>店铺编号</th>
+                      <th>店铺名称</th>
+                      <th>预约电话</th>
+                      <th>区域</th>
+                      <th>操作</th>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of viewData.storeList">
+                        <td>{{item.id}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.tel}}</td>
+                        <td>{{item.area}}</td>
+                        <td class="text-center">
+                          <span class="action" (click)="applyStore(item.id)">申请加入店铺</span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                <no-data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.storeList" [text]=" '没有数据'" [showImg]="'noData'"></no-data>
+              </content>
+        </view-body-comp>

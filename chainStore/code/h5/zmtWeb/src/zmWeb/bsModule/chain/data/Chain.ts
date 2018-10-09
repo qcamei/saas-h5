@@ -1,0 +1,19 @@
+export class Chain {
+    constructor(){}
+    id:number;
+    bossId:number;
+    number:string;
+    name:string;
+    descript:string;
+    area:string;
+    address:string;
+    contactNumber:string;
+    contacts:string;
+    chainStoreMap:any;
+    applyStoreMap:any;
+    state:number;
+    entityState:number;
+    createdTime:number;
+    lastUpdateTime:number;
+    ver:number;
+}

@@ -1,0 +1,6 @@
+<!--views/comComp/picker/date/datePicker.wxml-->
+  
+    <picker  mode="date" value="{{dateModel.value}}" start='{{dateModel.limitDate}}' end='{{dateModel.maxDate}}' bindchange="bindDateChange">
+     <slot></slot> 
+    </picker>
+

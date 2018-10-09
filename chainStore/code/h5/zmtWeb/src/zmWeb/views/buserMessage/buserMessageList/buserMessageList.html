@@ -1,0 +1,38 @@
+<view-body-comp [headerArr]="['消息中心（最近七天信息）']">
+  <mat-toolbar style="padding-top:15px;margin-bottom:15px;">
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="zmFullWidth">
+      <div style="width:150px">
+        <zm-select-number [label]="'消息来源'" [name]="'name'" [value]="'id'" [selectList]="viewData.messageOrignList"
+                          [(zmValue)]="viewData.origin"
+                          (selectCallback)="queryMessageListByOrigin()"></zm-select-number>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="20px">
+        <zm-btn-new [name]="'刷新'" (zmbtnClick)="refresh()"></zm-btn-new>
+        <zm-btn-new [name]="'批量已读'" (zmbtnClick)="batchRead()"></zm-btn-new>
+      </div>
+
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <ng-template #tdA let-item="item"> <span [ngStyle]="{color: item.status == 1?'#ccc':'rgba(0, 0, 0, 0.87)'}"
+  >{{getOriginNameById(item.messageType)}} </span></ng-template>
+  <ng-template #tdB let-item="item"> <span [ngStyle]="{color: item.status == 1?'#ccc':'rgba(0, 0, 0, 0.87)'}"
+  >{{item.messageBody.length>0?item.messageBody:'-'}}</span>
+  </ng-template>
+  <ng-template #tdC let-item="item"> <span [ngStyle]="{color: item.status == 1?'#ccc':'rgba(0, 0, 0, 0.87)'}"
+  >{{item.createdTime>0?(item.createdTime | times):'-'}}</span>
+  </ng-template>
+  <ng-template #tdD let-item="item">
+    <a *ngIf="item.status == 0" class="zmCurHand" style="margin-right: 5px;" (click)="markItReaded(item.id)">标记已读</a>
+    <a class="zmCurHand" style="margin-right: 5px;" [ngStyle]="{color: item.status == 1 ?'#ccc':''}"
+       (click)="checkMessage(item)">查看</a>
+  </ng-template>
+
+  <zm-mat-table [tdTemplateList]="[tdA,tdB,tdC,tdD]" [thNameList]="['消息来源','消息记录','日期','操作']"
+                [itemList]="viewData.messageList"></zm-mat-table>
+
+
+  <no-data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.messageList" [text]="'没有数据'"
+           [showImg]="'noData'"></no-data>
+  <zm-page [totalSize]="viewData.recordCount" [curPage]="viewData.curPage" (pageChange)="getPageData($event)"></zm-page>
+</view-body-comp>

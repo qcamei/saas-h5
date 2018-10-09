@@ -1,0 +1,129 @@
+<view-body-comp [headerArr]="['收入支出','新增收支']" >
+
+        <div  fxLayout="row" fxLayoutAlign="start center" >
+           <span class="font-size-18 w-10-p">类别</span>
+            <zm-input-radio  [radioList]="viewData.incomeOrPayList" [(curValue)]="viewData.chooseIncomeOrPay" (onChange)="categoryChange()" ></zm-input-radio>
+        </div>
+        <div class="row" style="height:30px;font-size:14px;"></div>
+        <div  fxLayout="row" fxLayoutAlign="start center" >
+                <span class="font-size-18 w-10-p">时间</span>
+                <zm-search-date [label]="'设置日期'" [placeholder]="'请选择日期'" [(curValue)]="incomePayDate" [maxDate]="today"></zm-search-date>
+                                <zm-time [label]="'设置时间'"   [(currentValue)]="curIncomePayTime"></zm-time>
+        </div>
+        <div class="row" style="height:30px;font-size:14px;"></div>
+        <div  fxLayout="row" fxLayoutAlign="start center" >
+            <span class="font-size-18 w-10-p">人员</span>
+          <div class="nameDiv fz-14 zmCurHand" (click)="selectBuser()">
+            <span *ngIf="true">{{viewData.chooseClerk.name}}</span>
+            <!-- <span *ngIf="!viewData.buser" style="color: #A4ABB3">请选择会员</span> -->
+            <i class="fa fa-plus pos-a" style="right:10px;top: 10px;"></i>
+          </div>
+        </div>
+        <div class="row" style="height:30px;font-size:14px;"></div>
+
+
+        <div  fxLayout="row"  fxLayoutAlign="start center">
+            <span class="font-size-18 w-10-p">分类</span>
+            <!-- <div class="w-35-p">
+              <zm-select *ngIf="viewData.chooseIncomeOrPay.category" [noAll]="true" [label]="'收入分类'" name="name" value="id" [selectList]="viewData.incomeTypeListShow"
+                         [(zmValue)]="viewData.chooseIncomeType.id"></zm-select>
+
+              <zm-select *ngIf="!viewData.chooseIncomeOrPay.category" [noAll]="true" [label]="'支出分类'" name="name" value="id" [selectList]="viewData.payTypeListShow"
+                         [(zmValue)]="viewData.choosePayType.id"></zm-select>
+            </div> -->
+
+          <div class="w-35-p" fxLayout="row"  fxLayoutGap="10px;" fxLayoutAlign="space-between center">
+            <zm-select *ngIf="viewData.chooseIncomeOrPay.category"  fxFlex ="1 1" [noAll]="true" [label]="'收入分类'" [selectList]="viewData.incomeTypeListShow" [name]="'name'" [value]="'id'"
+                        [(zmValue)]="viewData.incomeTypeId"></zm-select>
+
+            <zm-select *ngIf="!viewData.chooseIncomeOrPay.category"  fxFlex ="1 1" [noAll]="true" [label]="'支出分类'" [selectList]="viewData.payTypeListShow" [name]="'name'" [value]="'id'"
+                        [(zmValue)]="viewData.payTypeId"></zm-select>
+
+            <zm-btn-small fxFlex ="0 0 80px"  name="新建分类" (zmbtnClick)="addIncomePayType()"></zm-btn-small>
+          </div>
+
+        </div>
+
+
+        <div  fxLayout="row" fxLayoutAlign="start center" >
+            <span class="font-size-18 w-10-p">金额</span>
+            <div class="w-35-p">
+                <zm-input-price [label]="''" [placeholder]="'请输入金额'" [(zmValue)]="viewData.money"></zm-input-price>
+            </div>
+        </div>
+
+        <div  fxLayout="row" fxLayoutAlign="start center" >
+            <span class="font-size-18 w-10-p">备注</span>
+            <div class="w-35-p">
+            <zm-input-textarea [label]="''"  [maxlength]="200" [placeholder]="'备注信息'" [(text)]="viewData.remark" ></zm-input-textarea>
+            </div>
+        </div>
+
+
+
+
+        <div fxLayout="row" fxLayoutAlign="end" class="w-45-p mt-40">
+            <div class="mr-20">
+                    <!-- <zm_btn_large name="保存" [disabled]="!(viewData.pageData.defaultNumberPass && addFormData.namePass)" (zmbtnClick)="addProduct()"></zm_btn_large> -->
+                    <zm-btn-md [stroked]="true" name="返回" (zmbtnClick)="goBack()"></zm-btn-md>
+
+            </div>
+            <div >
+                <!-- <zm_btn_large name="保存" [disabled]="!(viewData.pageData.defaultNumberPass && addFormData.namePass)" (zmbtnClick)="addProduct()"></zm_btn_large> -->
+                <zm-btn-md name="保存" [disabled]="!true" (zmbtnClick)="addIncomepay()"></zm-btn-md>
+            </div>
+        </div>
+                <!-- <mat-toolbar style="padding-top:15px;margin-bottom:15px;">
+                    <mat-toolbar-row fxLayout="row wrap" >
+                            <zm_search_date [label]=" '预约时间' " [placeholder]="'请选择预约时间'"  [(curValue)]="A" (callback)="getAppointmentByReq()"></zm_search_date>
+                            <zm_search_date [label]=" '至' "   [placeholder]="'请选择预约时间'" [(curValue)]="A" (callback)="getAppointmentByReq()"></zm_search_date>
+                           <div class="ml-20">
+                                <zm_btn_Date  [values]="['今日','明日','七日内']" (zmbtnClick)="changeAppointTime($event)" ></zm_btn_Date>
+                           </div>
+
+                            <div class="ml-20 mt-10" style="width:150px">
+                                    <zm_select  [label]="'分类'" nameValues="日常支出:0,赔偿收入:1,损耗收入:2"  [(zmValue)]="A"   (selectCallback)="getAppointmentByReq()"></zm_select>
+                            </div>
+
+                    </mat-toolbar-row>
+                    <mat-toolbar-row  fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="zmFullWidth">
+
+                                    <div  fxLayout="row wrap">
+                                        <mat-form-field class=" example-margin">
+                                                <input matInput type="number" placeholder="金额" ><span>至</span>
+                                        </mat-form-field>
+                                        <div>
+                                        <mat-form-field class="ml-20 example-margin">
+                                                <input matInput type="number" placeholder="金额" [(ngModel)]="value">
+                                        </mat-form-field>
+                                        <button type="button" mat-raised-button  color="accent">查询</button>
+                                    </div>
+                                    </div>
+
+                                        <zm_btn_new [name]="'新增'" (zmbtnClick)="goAddProductInfo()"></zm_btn_new>
+
+                    </mat-toolbar-row>
+                </mat-toolbar> -->
+
+
+
+
+                        <!-- <ng-template #tdA let-item="item">2017/55/21 08:23</ng-template>
+                        <ng-template #tdB let-item="item">￥20158</ng-template>
+                        <ng-template #tdC let-item="item">日常收入</ng-template>
+                        <ng-template #tdD let-item="item">力士</ng-template>
+                        <ng-template #tdE let-item="item" >这两天收入还比较乐观这两天收入还比较乐观</ng-template>
+                        <ng-template #tdF let-item="item">
+                          <a class="zmCurHand mr-4">编辑</a>
+                          <a class="zmCurHand mr-4" (click)="deleteAppt(item.id)">删除</a>
+                        </ng-template>
+
+                        <zm-mat-table  [tdTemplateList]="[tdA,tdB,tdC,tdD,tdE,tdF]" [thNameList]="['时间','金额','分类','人员','备注','操作']" [itemList]="['test1','test2','test3','test4','test5']"></zm-mat-table>
+                   -->
+                        <!-- <no_data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.appointmentList" [text]=" '没有数据'" [showImg]="'noData'"></no_data> -->
+                        <!-- <zm_page style="padding-top:20px;" [totalSize]="2" [curPage]="5" (pageChange)="getPageData($event)"></zm_page> -->
+
+
+
+
+</view-body-comp>

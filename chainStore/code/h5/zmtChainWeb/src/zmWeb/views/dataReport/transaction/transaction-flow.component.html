@@ -1,0 +1,169 @@
+<view-body-comp [headerArr]="['交易流水']">
+  <div class="container" fxLayout="column" fxLayoutAlign="left" fxLayoutGap="10px" fxLayout.xs="column"
+       fxLayoutGap.xs="0">
+
+
+    <div class="container" fxLayout="row wrap" fxLayoutAlign="left" fxLayoutGap="10px" fxLayout.xs="column"
+         style="margin-bottom:15px;">
+      <mat-card fxFlex="100">
+        <header fxLayout="row wrap" fxLayoutAlign="start">
+          <label style="width:140px;color:#2a2a2a;font-size:16px;">相关门店</label>
+          <div class="nameDiv fz-14 zmCurHand" (click)="selectCustomer($event)">
+            <span *ngIf="!true">点击弹框回传的name</span>
+
+            <span *ngIf="true" style="color: #A4ABB3;">请选择门店</span>
+
+            <i class="fa fa-plus" style="color:#03a9f4;position:absolute;right:0px;top: 10px;"></i>
+          </div>
+        </header>
+      </mat-card>
+    </div>
+
+
+    <div class="container" fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px" fxLayout.xs="33"
+         fxLayoutGap.xs="0">
+      <!--<zm-drop-down-menu (onMenuClick)="changePayType($event)" [menuItems] = "['菜单1','菜单2','菜单3','菜单4','菜单5']" [menuName] ="'测试菜单'"></zm-drop-down-menu>-->
+      <button mat-raised-button [class.PriActive]="isActive==0" (click)="checkAll()">全部</button>
+      <!--[class.PriActive]="isActive==1"-->
+      <button mat-raised-button [matMenuTriggerFor]="paymethod">支付方式</button>
+      <mat-menu #paymethod="matMenu" [overlapTrigger]="false">
+        <button mat-menu-item (click)="changePayType(-1)">
+          移动支付
+        </button>
+        <button mat-menu-item (click)="changePayType(2)">
+          微信
+        </button>
+        <button mat-menu-item (click)="changePayType(1)">
+          支付宝
+        </button>
+        <button mat-menu-item (click)="changePayType(-2)">
+          其他支付
+        </button>
+        <button mat-menu-item (click)="changePayType(0)">
+          现金
+        </button>
+        <button mat-menu-item (click)="changePayType(3)">
+          刷卡
+        </button>
+        <button mat-menu-item (click)="changePayType(4)">
+          会员卡
+        </button>
+        <button mat-menu-item (click)="changePayType(5)">
+          欠款
+        </button>
+      </mat-menu>
+      <!--[class.PriActive]="isActive==2"-->
+      <button mat-raised-button [matMenuTriggerFor]="tradeType">交易分类</button>
+      <mat-menu #tradeType="matMenu" [overlapTrigger]="false">
+        <button mat-menu-item (click)="changeTradeType(-1)">
+          全部
+        </button>
+        <button mat-menu-item (click)="changeTradeType(0)">
+          收款
+        </button>
+        <button mat-menu-item (click)="changeTradeType(1)">
+          退款
+        </button>
+      </mat-menu>
+    </div>
+    <div class="container" fxLayout="row wrap" fxLayoutAlign="left" fxLayoutGap="10px" fxFlexFill>
+      <span style="font-size: 14px;padding: 7px;line-height: 32px;width: 75px; display: block;float: left"
+            *ngIf="viewData.payFilterItems.length >0">支付方式:</span>
+      <mat-chip-list #chipList>
+        <mat-chip style="margin-top: 10px"
+                  *ngFor="let filterItem of viewData.payFilterItems"
+                  (removed)="removeFilter(filterItem)"
+                  [removable]="viewData.removable">
+          {{filterItem.typeName}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+
+    </div>
+
+    <div class="container" fxLayout="row wrap" fxLayoutAlign="left" fxLayoutGap="10px" fxFlexFill>
+      <span style="font-size: 14px;padding: 7px;line-height: 32px;width: 75px;display: block;float: left"
+            *ngIf="viewData.tradeFilterItems.length >0">交易类型:</span>
+      <mat-chip-list #chipList>
+        <mat-chip style="margin-top: 10px"
+                  *ngFor="let filterItem of viewData.tradeFilterItems"
+                  (removed)="removeFilter(filterItem)"
+                  [removable]="viewData.removable">
+          {{filterItem.typeName}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+
+    </div>
+
+    <!--过滤条件-->
+    <div class="container" fxLayout="column wrap" fxLayoutAlign="left" fxLayoutGap="10px" fxLayout.xs="column"
+         fxLayoutGap.xs="0" style="padding-top:15px;margin-bottom:15px;">
+      <div class="container" fxLayout="row wrap" fxLayoutAlign="left" fxLayoutGap="10px" fxLayout.xs="column"
+           fxLayoutGap.xs="0">
+        <zm_search_box [label]="'流水查询'" [placeholder]="'会员名/流水号'" [(zmValue)]="viewData.queryForm.queryName"
+                       (callBack)="findConsumeByTime()"></zm_search_box>
+
+        <zm-search-date [label]=" '统计时间' " [placeholder]="'请选择开始时间'" [(curValue)]="viewData.minTime"
+                        (callback)="findConsumeByTime()"></zm-search-date>
+        <zm-search-date [label]=" '至' " [placeholder]="'请选择结束时间'" [(curValue)]="viewData.maxTime"
+                        (callback)="findConsumeByTime()"></zm-search-date>
+      </div>
+      <div class="container" fxLayout="row wrap" fxLayoutAlign="left" fxLayoutGap="10px" fxLayout.xs="column"
+           fxLayoutGap.xs="0">
+        <zm-btn-Date [itemActiveIndex]="0" [values]="['今日','昨日','本月','上月']"
+                     (zmbtnClick)="chooseTime($event)"></zm-btn-Date>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container" fxLayout="column" fxLayoutAlign="left" fxLayoutGap="10px" fxLayout.xs="column"
+       fxLayoutGap.xs="10" style="margin-top: 10px">
+
+    <zm-card [expanded]="true" [withCollapse]="false" [showHeader]="false">
+
+      <ng-template #tdN let-item="item">{{ item.position}}</ng-template>
+      <ng-template #tdA let-item="item">{{ item.payTime | times}}</ng-template>
+      <ng-template #tdB let-item="item">{{item.tradeNo?item.tradeNo:"-"}}</ng-template>
+      <ng-template #tdC let-item="item">{{item.leagueName}}</ng-template>
+      <ng-template #tdD let-item="item">
+        <span *ngIf="item.payType == 0">现金</span>
+        <span *ngIf="item.payType == 1">支付宝</span>
+        <span *ngIf="item.payType == 2">微信</span>
+        <span *ngIf="item.payType == 3">刷卡</span>
+        <span *ngIf="item.payType == 4">会员卡</span>
+        <span *ngIf="item.payType == 5">欠款</span>
+      </ng-template>
+      <ng-template #tdE let-item="item">
+        <span *ngIf="item.tradeType == 0">收款</span>
+        <span *ngIf="item.tradeType == 1">退款</span></ng-template>
+      <ng-template #tdF let-item="item">
+        <span style="color: #2E7D32" *ngIf="item.tradeType == 0">+￥{{item.amount}}</span>
+        <span style="color: #B71C1C" *ngIf="item.tradeType == 1">-￥{{item.amount}}</span>
+      </ng-template>
+      <!--<ng-template #tdG let-item="item">-->
+      <!--<a class="zmCurHand mr-4" (click)="goOrderDetail(item.orderId)">查看订单</a>-->
+      <!--</ng-template>-->
+
+
+      <zm-mat-table [tdTemplateList]="[tdN,tdA,tdB,tdC,tdD,tdE,tdF]"
+                    [thNameList]="['序号','付款时间','流水号','会员','支付方式','交易分类','金额']"
+                    [itemList]="viewData.pageRest.list"
+                    [elevation]="false"></zm-mat-table>
+
+
+      <no_data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.pageRest.list" [text]=" '没有数据'"
+               [showImg]="'noData'"
+               [elevation]="false"></no_data>
+
+      <zm_page [totalSize]="viewData.recordCount" [curPage]="viewData.queryForm.pageNo"
+               (pageChange)="getPageData($event)"
+               [elevation]="false"></zm_page>
+
+    </zm-card>
+
+
+  </div>
+
+</view-body-comp>

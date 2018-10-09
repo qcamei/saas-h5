@@ -1,0 +1,43 @@
+.cur-hand{
+  cursor: pointer;
+}
+.dib{
+  display: inline-block;
+}
+.mg-t-15{
+  margin-top:15px;
+}
+.pos-r{
+  position: relative;
+}
+.pos-a{
+  position: absolute;
+}
+.btn-upload{
+  background:#4678fa;
+  color:#fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  padding: 7px 12px;
+  cursor:pointer;
+}
+.div-upload{
+  width:100px;
+  height:100px;
+  line-height:97px;
+  color:#ced4da;
+  text-align: center;
+  font-size:30px;
+  border:1px dashed #ced4da;
+
+}
+.input-upload {
+  opacity: 0;
+  filter: alpha(opacity=0);
+  top:0;
+  left:0;
+  width: 100%;
+  height:100%;
+  font-size:0;
+}

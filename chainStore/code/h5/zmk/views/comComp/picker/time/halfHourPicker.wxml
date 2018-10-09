@@ -1,0 +1,3 @@
+<!--views/comComp/picker/time/halfHourPicker.wxml-->
+<picker range='{{rangeArr}}' value="{{timeValue}}" bindchange="bindTimeChange">
+</picker>

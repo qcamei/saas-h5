@@ -1,0 +1,65 @@
+<view-body-comp [headerArr]="['产品库管理']" >
+  <mat-toolbar style="padding-top:15px;margin-bottom:15px;">
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="zmFullWidth">
+
+      <div fxLayout="row "  fxLayoutGap="20px" >
+
+        <div style="width:150px">
+          <zm-select-number [noAll]="true" [label]="'状态'" [selectList]="[{name:'全部',value:-1},{name:'上架',value:0},{name:'下架',value:1}]" [(zmValue)]="viewData.state" (selectCallback)="queryList()"></zm-select-number>
+        </div>
+
+        <div style="width:150px">
+          <zm-select-number [noAll]="true" [label]="'产品类型'"  [selectList]="[{name:'全部',value:-1},{name:'商品',value:2},{name:'项目',value:1},{name:'套餐',value:3},{name:'次卡',value:0}]" [(zmValue)]="viewData.sellProductType" (selectCallback)="queryList()"></zm-select-number>
+        </div>
+
+        <div  fxFlexAlign="center"  >
+          <zm_search_box [label]=" '产品查询'" [placeholder]="'产品编号/名称'" [(zmValue)]="viewData.queryForm.numberOrName" (callBack)="queryList()"></zm_search_box>
+        </div>
+
+      </div>
+
+      <div fxLayout="row "  fxLayoutGap="20px" >
+        <div style="width:150px">
+          <zm_select [noAll]="true" [label]="'批量操作'"  [selectList]="[{name:'分配',value:0},{name:'上架',value:1},{name:'下架',value:2}]" (selectCallback)="batchChange($event)"></zm_select>
+        </div>
+        <div style="width:150px">
+          <zm_select [noAll]="true" [label]="'新建产品'"  [selectList]="[{name:'商品',value:0},{name:'项目',value:1},{name:'套餐',value:2},{name:'次卡',value:3}]" (selectCallback)="newTypeChange($event)"></zm_select>
+        </div>
+
+      </div>
+
+    </mat-toolbar-row>
+
+  </mat-toolbar>
+
+  <ng-template #tdA let-item="item">
+    <div class="zmImgDiv">
+      <img *ngIf="item.defaultImg=='' " src="assets/images/pore.png" />
+      <img *ngIf="item.defaultImg!='' " :src="{{item.defaultImg|imgPrePath}}"/>
+    </div>
+  </ng-template>
+  <ng-template #tdB let-item="item">{{item.number}}</ng-template>
+  <ng-template #tdC let-item="item">{{item.name}}</ng-template>
+  <ng-template #tdD let-item="item">{{item.sellProductType|sellProductTypePipe}}</ng-template>
+  <ng-template #tdE let-item="item"><i class="fa fa-yen mr-1"></i>{{item.sellPrice |number:'1.2-2'}}</ng-template>
+  <ng-template #tdF let-item="item">{{item.applyStoreIds|applyStorePipe}}</ng-template>
+  <ng-template #tdG let-item="item">{{item.state|statePipe}}</ng-template>
+  <ng-template #tdH let-item="item">
+    <a class="zmCurHand" style="margin-right: 5px;" *ngIf=" item.state == 0" (click)="changeState(item,1)">{{item.state
+      |statePipe2}}</a>
+    <a class="zmCurHand" style="margin-right: 5px;" *ngIf=" item.state == 1" (click)="changeState(item,0)">{{item.state
+      |statePipe2}}</a>
+    <a class="zmCurHand" style="margin-right: 5px;"  (click)="goProductDetail(item)">查看</a>
+    <a class="zmCurHand" style="margin-right: 5px;" *ngIf=" item.state == 1" (click)="goEditProductPage(item)">编辑</a>
+    <!--<a class="zmCurHand" style="margin-right: 5px;" *ngIf=" item.state == 1" (click)="removeProduct(item)">删除</a>-->
+    <a class="zmCurHand" style="margin-right: 5px;" (click)="allotStores(item)">分配</a>
+  </ng-template>
+
+  <zm-mat-table-checkbox  [tdTemplateList]="[tdA,tdB,tdC,tdD,tdE,tdF,tdG,tdH]" [thNameList]="['图片','产品编号','产品名称','类型','售价','适用门店','状态','操作']" [itemList]="viewData.productList"></zm-mat-table-checkbox>
+
+  <no_data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.productList" [text]=" '没有数据' " [showImg]="'noData'"></no_data>
+
+  <zm_page [totalSize]="viewData.recordCount" [curPage]="curPage" (pageChange) = "getPageData($event)"></zm_page>
+</view-body-comp>
+
+

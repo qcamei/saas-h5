@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="App">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=750,target-densitydpi=device-dpi,maximum-scale=2.0, user-scalable=no">
+    <script type="text/javascript">
+        function setWidth(e)
+        {if(/Andriod/i.test(navigator.userAgent))
+        {var f,d=window.innerWidth;(d!=e)&&(f=d/e),document.addEventListener("DOMContentLoaded",
+            function(){var a=document.getElementsByTagName("body")[0];a.style.webkitTransformOrigin="left top";a.style.webkitTransform="scale("+f+")"},!1)}}			setWidth(750);
+    </script>
+    <title>智美通</title>
+
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap-theme.min.css">
+
+    <link rel="stylesheet" href="assets/css/zmt.css">
+
+</head>
+<body ng-controller="AppCtrl" ng-class="">
+
+    <div ng-view=""></div>
+
+    <script src="vendor/head.load.min.js"></script>
+    <script src="assets/js/boot.js"></script>
+</body>
+</html>
+

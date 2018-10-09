@@ -1,0 +1,6 @@
+<!--使用参考-->
+<!--<zm-btn-block bind:zmTap="submit" name="提交" disabled="{{disabled}}"></zm-btn-block>-->
+
+<view>
+<button disabled="{{disabled}}" class='sureBtn' hover-class='sureBtnHover' bindtap='onTap'>{{name}}</button>
+</view>

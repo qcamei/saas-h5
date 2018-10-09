@@ -1,0 +1,58 @@
+<view-body-comp [headerArr]="['套餐列表']">
+  <div style="margin-bottom:15px;margin-right:15px;" fxLayout="row" fxLayoutAlign="end">
+    <zm-btn *ngIf="getPullDataPerm()" name="获取总部数据" (zmbtnClick)="goPullPackage()"></zm-btn></div>
+    <mat-toolbar style="padding-top:15px;margin-bottom:15px;">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="zmFullWidth">
+          <div fxLayout="row "  fxLayoutGap="20px" >
+
+            <div style="width:150px">
+              <zm-select-number [label]="'状态'" [selectList]="[{name:'上架',value:0},{name:'下架',value:1}]" [(zmValue)]="viewData.status" (selectCallback)="queryList()"></zm-select-number>
+            </div>
+            <div style="width:150px">
+              <zm-select-string [label]="'套餐分类'" name="name" value="id"  [selectList]="viewData.packageProjectTypeList" [(zmValue)]="viewData.queryForm.typeId" (selectCallback)="queryList()"></zm-select-string>
+            </div>
+            <div  fxFlexAlign="center"  >
+              <zm-search-box [label]=" '套餐查询'" [placeholder]="'套餐编号/名称'" [(zmValue)]="viewData.queryForm.nameOrNumber" (callBack)="queryList()"></zm-search-box>
+            </div>
+          </div>
+          <div fxLayout="row "  fxLayoutGap="20px" >
+            <div fxFlexAlign="center" ><zm-btn-small [name]="'上架'" (zmbtnClick)="batchChangeState(0)"></zm-btn-small></div>
+            <div fxFlexAlign="center" ><zm-btn-small [name]="'下架'" (zmbtnClick)="batchChangeState(1)"></zm-btn-small></div>
+            <div fxFlexAlign="center" ><zm-btn-new [name]="'新建'" (zmbtnClick)="goAddPackageProject()"></zm-btn-new></div>
+          </div>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+
+    <ng-template #tdA let-item="item">
+        <div class="zmImgDiv" style="position:relative;">
+            <img *ngIf="item.origin==1" style="width:40%;height:50%;position:absolute;left:4px;top:5px;" src="assets/images/icon/ic_headquarters.png">
+            <img *ngIf="item.origin==1" style="width:40%;height:50%;position:absolute;left:4px;top:5px;" src="assets/images/icon/ic_headquarters.png">
+            <img src="{{item.defaultImg|imgPrePath}}" style="width: 100%; height:100%;" />
+      </div>
+    </ng-template>
+    <ng-template #tdB let-item="item">{{item.number}}</ng-template>
+    <ng-template #tdC let-item="item"><span matTooltip="{{item.name.length>15?item.name:null}}">{{item.name.length>15?item.name.slice(0,15)+'...':item.name}}</span></ng-template>
+    <ng-template #tdD let-item="item">{{item.typeId|packageTypePipe:viewData.packageProjectTypeMap}}</ng-template>
+    <ng-template #tdE let-item="item"><i class="fa fa-yen mr-1"></i>{{item.sellPrice|number:'1.2-2'}}</ng-template>
+    <ng-template #tdF let-item="item">{{item.state|packageStatePipe}}</ng-template>
+    <ng-template #tdG let-item="item">{{item.promotionFlag ==0?'否':'是'}}</ng-template>
+    <ng-template #tdH let-item="item">
+      <a class="zmCurHand" style="margin-right: 5px;" *ngIf="item.state ==0 && item.topFlag == 0" (click)="packageToTop(item)">置顶</a>
+      <a class="zmCurHand" style="margin-right: 5px;" *ngIf=" item.topFlag == 1" (click)="packageCancelTop(item)">取消置顶</a>
+      <a class="zmCurHand" style="margin-right: 5px;" *ngIf=" item.state == 1" (click)="changeState(item.id,0)">{{item.state|packageStatePipe2}}</a>
+      <a class="zmCurHand" style="margin-right: 5px;" *ngIf=" item.state == 0" (click)="changeState(item.id,1)">{{item.state|packageStatePipe2}}</a>
+      <a class="zmCurHand" style="margin-right: 5px;"  (click)="goPackageDetail(item.id)">查看</a>
+      <a class="zmCurHand" style="margin-right: 5px;" *ngIf=" item.origin==0 && item.state == 1 " (click)="goEditPackageProject(item.id)">编辑</a>
+      <a class="zmCurHand" style="margin-right: 5px;" *ngIf=" item.state == 1 " (click)="removePackageProject(item)">删除</a>
+    </ng-template>
+
+    <zm-mat-table-checkbox  [tdTemplateList]="[tdA,tdB,tdC,tdD,tdE,tdF,tdG,tdH]" [thNameList]="['图片','套餐编号','套餐名称','套餐分类','售价','状态','是否促销','操作']" [itemList]="viewData.packageProjectList"></zm-mat-table-checkbox>
+
+    <no-data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.packageProjectList" [text]=" '没有数据'" [showImg]="'noData'"></no-data>
+
+    <zm-page [totalSize]="viewData.recordCount" [curPage]="viewData.curPage" (pageChange) = "getPageData($event)"></zm-page>
+
+
+
+</view-body-comp>

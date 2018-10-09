@@ -1,0 +1,42 @@
+<view-body-comp [headerArr]="['返回','查看记录']">
+    <!--<div style="padding:0 115px;">-->
+      <!--<div class="title text-center fz-18 mg-b-20" style="font-weight: 600;">{{viewData.leaguerRecord.title}}</div>-->
+      <!--<div class="disFlex mg-b-30 fz-14" style="justify-content:center;">-->
+        <!--<span>{{viewData.leaguerRecord.createdTime | times}}</span>-->
+        <!--<span class="mg-l-30">{{viewData.leaguerRecord.creatorName}}</span>-->
+        <!--<span class="mg-l-30">关联订单：<span style="color:#4678fa;">{{viewData.leaguerRecord&&viewData.leaguerRecord.relateOrder?viewData.leaguerRecord.relateOrder.orderContent:null}}</span></span>-->
+        <!--<div class="mg-l-30">-->
+            <!--关联项目：-->
+          <!--<span class="content" style="margin-right: 5px;" *ngFor="let prdName of viewData.relatePrdArr|slice:0:3">{{prdName}}</span>-->
+          <!--<b *ngIf="viewData.relatePrdArr&&viewData.relatePrdArr.length>3" style="margin-left:0px;">....</b>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div><p>{{viewData.leaguerRecord.content}}</p></div>-->
+      <!--<div class="img">-->
+        <!--<zm-img-record [(imgArr)]="viewData.leaguerRecord.imgPaths" [delImg]="false"></zm-img-record>-->
+      <!--</div>-->
+    <!--</div>-->
+
+
+    <div class="zmFullWidth" fxLayout="column" fxLayoutGap="10px" fxFlexAlign="center center">
+
+      <div class="title text-center fz-18 mg-b-20" style="font-weight: 600;">{{viewData.leaguerRecord.title}}</div>
+      <div class="disFlex mg-b-30 fz-14" style="justify-content:center;">
+        <span>{{viewData.leaguerRecord.createdTime | times}}</span>
+        <span class="mg-l-30">{{viewData.leaguerRecord.creatorName}}</span>
+        <span class="mg-l-30">关联订单：<span style="color:#4678fa;" *ngIf="viewData.leaguerRecord && viewData.leaguerRecord.relateOrder" matTooltip="{{viewData.leaguerRecord.relateOrder.orderContent}}">
+          {{viewData.leaguerRecord.relateOrder.orderContent}}</span></span>
+        <div class="mg-l-30">
+          关联项目：
+          <span class="content" style="margin-right: 5px;" *ngFor="let prdName of viewData.relatePrdArr|slice:0:3">{{prdName}}</span>
+          <b *ngIf="viewData.relatePrdArr&&viewData.relatePrdArr.length>3" style="margin-left:0px;">....</b>
+        </div>
+      </div>
+      <div><p>{{viewData.leaguerRecord.content}}</p></div>
+      <div class="img">
+        <zm-img-record [(imgArr)]="viewData.leaguerRecord.imgPaths" [delImg]="false"></zm-img-record>
+      </div>
+
+  </div>
+
+</view-body-comp>

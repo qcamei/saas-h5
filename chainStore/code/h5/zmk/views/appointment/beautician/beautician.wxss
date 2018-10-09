@@ -1,0 +1,28 @@
+/* views/appointment/beautician/beautician.wxss */
+page{
+  background-color: #F7F7F7;
+}
+.container {
+  padding:0;
+  display: block;
+}
+.view-bottom {
+  height:108rpx;
+  width:100%;
+  background: white;
+  position: fixed;
+  bottom:0;
+}
+.image-nomoredata{
+  width: 200rpx;
+  height: 200rpx;
+}
+.nomoredata{
+  text-align: center;
+  margin-top: 350rpx
+}
+.text-nomoredata{
+  text-align: center;
+  color: #999;
+  font-size: 16px
+}

@@ -1,0 +1,57 @@
+<view-header-comp [headerArr]="['收费管理']"></view-header-comp>
+<view-body-comp >
+  <content>
+      <div class="d-flex justify-content-between">
+            <div  class="d-flex ">
+
+                <div class="mr-2">
+                    <zm_search_box [label]="'收费查询'" [placeholder]="'手机号'" [(zmValue)]="viewData.phone" (callBack)="findCharge()"></zm_search_box>
+                </div>
+
+                <div class="mr-2">
+                    <zm_select_small [label]="'收费渠道'" [selectList]="[{name:'现金',value:0},{name:'支付宝',value:1},{name:'微信',value:2},{name:'银联',value:3}]" [(zmValue)]="viewData.chargeChannel" (zmValueChange)="findCharge()"></zm_select_small>
+                </div>
+
+                <div class="d-flex">
+                    <zm_search_date [label]="'时间'" [placeholder]="'请选择时间'" [(curValue)]="viewData.minTime" (callback)="findCharge()"></zm_search_date>
+                    <zm_search_date [label]="'至'" [placeholder]="'请选择时间'" [(curValue)]="viewData.maxTime" (callback)="findCharge()"></zm_search_date>
+                </div>
+            </div>
+           <zm_btn_new [name]="'新建'" (zmbtnClick)="goAddCharge()"></zm_btn_new>
+
+      </div>
+
+      <div  style="width: 100%">
+            <table class="table table-bordered text-center mg-b-0">
+              <thead>
+                <th>时间</th>
+                <th>手机号</th>
+                <th>姓名</th>
+                <th>收费金额</th>
+                <th>收费渠道</th>
+                <th>地区</th>
+                <th>代理姓名</th>
+                <th>代理电话</th>
+                <th>操作</th>
+              </thead>
+              <tbody>
+              <tr class="c-tr" *ngFor="let item of viewData.chargeVDList">
+                <td>{{item.createdTime | datetimePipe}}</td>
+                <td>{{item.phone?item.phone:'-'}}</td>
+                <td>{{item.name?item.name:'-'}}</td>
+                <td>{{item.money | moneyF2YPipe | number:'1.2-2'}}</td>
+                <td>{{item.chargeChannel | chargeChannelPipe}}</td>
+                <td>{{item.agencyArea?item.agencyArea:'-'}}</td>
+                <td>{{item.agencyName?item.agencyName:'-'}}</td>
+                <td>{{item.agencyPhone?item.agencyPhone:'-'}}</td>
+                <td>
+                  <span class="font-c1 cur-hand" (click)="goEditCharge(item.id)">编辑</span>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <zm_page [totalSize]="viewData.recordCount" [curPage]="viewData.curPage" (pageChange)="getPageData($event)"></zm_page>
+            <no_data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.chargeVDList" [text]="'没有数据'" [showImg]="'noData'"></no_data>
+          </div>
+  </content>
+</view-body-comp>

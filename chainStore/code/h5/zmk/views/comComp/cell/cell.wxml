@@ -1,0 +1,5 @@
+<view id="{{cellId}}" class="zmk-cell" data-url="{{cellUrl}}" bindtap='clickEvent'>
+  <image class="zmk-cell-icon" src="{{cellIcon}}"></image>
+  <view class="zmk-cell-name">{{cellName}}</view>
+  <image class="zmk-cell-img" src="{{cellImg}}"></image>
+</view>

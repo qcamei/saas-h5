@@ -1,0 +1,253 @@
+//重置样式
+.clear{clear:both;}
+ol, ul, dl{margin: 0 !important;padding: 0 !important;}
+li{list-style-type: none;}
+a:focus{outline: none;}
+//公共样式   响应样式
+//滚动条
+//::-webkit-scrollbar {
+//   width: 18px !important;
+//   height: 18px !important;
+// }
+//::-webkit-scrollbar-track {
+//  border: 1px #FF4c6a solid;
+//  box-shadow: 0px 0px 3px #ff9344 inset;
+//  border-radius: 10px;
+//  background: red;
+//}
+//::-webkit-scrollbar-thumb {
+//  border: 1px #FF4c6a solid;
+//  border-radius: 10px;
+//  background: #FF4c6a;
+//}
+//::-webkit-scrollbar-thumb:hover {
+//  background: #FF4c6a;
+//}
+  //MOZ
+
+//滚动条
+.pd-r-38 {
+    padding-right:38px !important;
+  }
+.mg-b-40 {
+  margin-bottom: 40px;
+}
+
+.c-input{
+  display: block;
+  padding: 0.375rem 0.75rem;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-image: none;
+  background-clip: padding-box;
+  border: 2px solid #ced4da;
+  border-radius: 0.25rem;
+  outline: none;
+}
+.c-input-group{
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  align-items: center;
+  width: 100%;
+
+}
+.c-label{
+  margin-bottom: 0;
+}
+.c-form-control{
+  display: block;
+  padding: 0.375rem 0.75rem;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-image: none;
+  background-clip: padding-box;
+  border: 2px solid #ced4da;
+  border-radius: 0.25rem;
+  outline: none;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  -webkit-flex: 1;
+  -moz-box-flex: 1;
+  flex: 1;
+}
+.c-btn{
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  border-radius: 0.25rem;
+}
+
+
+//兼容IE下的input框*
+input::-ms-clear{display:none;}
+input::-ms-reveal{display: none;}
+
+.disTab{
+  display: inline-table;
+  -moz-display:inline-table;
+  -webkit-display:inline-table;
+  -ms-display:inline-table;
+}
+//select一些不支持的浏览器
+select.c-form-control:not([size]):not([multiple]){
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background-image:url(~assets/images/arrow.png);
+  background-repeat: no-repeat;
+  background-position:95% 50%;
+  font-size: 14px;
+  padding-right: 25px;
+  cursor: pointer;
+}
+//输入框
+// .form-control{
+//   padding: 0.75rem 0.75rem;
+//   border: 2px solid #ced4da;
+// }
+//IE下的select
+select::-ms-expand { display: none; }
+//IE下的select
+.set-bg{
+  background-color:#F4F6FA !important;
+}
+.c-hued{
+   width: 100px;
+ }
+
+.c-troupe{
+  width:75px;
+}
+.c-eight{
+  width:80px;
+}
+//select
+//手型
+.c-cur{
+  cursor:pointer !important;
+}
+//重用表格样式
+.table {
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 0 !important;
+  thead th {
+    font-weight: bold;
+    background-color: #f4f6fa !important;
+  }
+  tbody tr{
+    margin-top: -1px;
+  }
+  tbody tr:nth-of-type(odd){
+    background-color: #ffffff;
+  }
+  tbody tr:nth-of-type(even),tbody tr:nth-of-type(even) input,tbody tr:nth-of-type(even) select{
+    background-color:#f9fafc;
+  }
+  tbody .c-tr:hover{
+    background-color: #e7f3fd;
+  }
+  a{cursor:pointer;}
+  a:hover{text-decoration: none;color: #0f88ed !important;}
+}
+.table th, .table td{
+  vertical-align: middle !important;
+  font-size: 14px;
+}
+.table-bordered thead th{
+  border-bottom-width: 1px !important;
+}
+//保存按钮
+.c-my-btn{
+  width: calc(100% - 120px);
+  margin-left: 120px;
+
+}
+//模态按钮
+.c-btn-modal{
+  width: 168px;
+  padding: 12px 0 !important;
+  outline: none;
+}
+.c-close-btn-modal{
+  border: 2px solid #0f88de !important;
+  color: #0f88ed !important;
+  background-color: #fff;
+}
+.c-md-btn-modal{
+  width: 140px;
+  padding: 12px 0 !important;
+  outline: none;
+}
+.c-btn-modal:focus{
+  border: none !important;
+  outline: none;
+}
+.modal-title{
+  font-size: 18px;
+  font-weight: bold !important;
+  color: #333 !important;
+}
+//模态按钮
+
+//不可点击按钮
+.elect{
+  background-color: #80bff3 !important;
+  }
+//不可点击input
+.input{
+  background-color: #dadfe6 !important;
+}
+//单选按钮
+.nb-theme-default .custom-control .custom-control-input:checked ~ .custom-control-indicator{
+  border-color: #0f88ed !important;
+}
+.custom-control-indicator::before {
+  color: #fff;
+  border-color: #0f88ed !important;
+}
+.nb-theme-default .custom-control:hover  .custom-control-indicator{
+  border-color: #0f88ed !important;
+}
+//全局btn
+// .btn{
+//   padding: 0.75rem 0.35rem;
+// }
+//date
+ .btn-link{
+  border: none !important;
+}
+.time-list .form-control{
+  padding: 1px 9px !important;
+}
+html { scrollbar-face-color:#f6f6f6; scrollbar-highlight-color:#fff; scrollbar-shadow-color:#eeeeee; scrollbar-3dlight-color:#eeeeee; scrollbar-arrow-color:#000; scrollbar-track-color:#fff; scrollbar-darkshadow-color:#fff; }
+//针对只读输入框
+.form-control[readonly] {
+  background: none !important;
+}
+//时间按钮背景色
+.c-client-data{
+  background: none !important;
+}
+//针对只读输入框

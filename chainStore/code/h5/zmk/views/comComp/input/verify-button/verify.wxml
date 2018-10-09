@@ -1,0 +1,1 @@
+<view class="verify" style="{{ verifyClick || !reasonablePhone ? 'color: #BFC1C2' : '' }} " bindtap="clickEvent">{{ verifyClick ? '等待' + countdownCount + 's' : title }}</view>

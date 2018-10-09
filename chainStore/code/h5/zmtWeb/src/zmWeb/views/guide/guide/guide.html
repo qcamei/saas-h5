@@ -1,0 +1,127 @@
+<view-body-comp [headerArr]="['使用引导']" >
+  <content>
+  <div class="disFlex align-center pd-t-15">
+      <div class="pos-r cur-hand text-center TabControl" (click)="selectItem(0)">
+          <img src="assets/images/guide/icon-clerk-on.png" alt="" *ngIf="viewData.index === 0">
+          <img src="assets/images/guide/icon-clerk.png" alt="" *ngIf="viewData.index !== 0">
+          <p class="fz-14 mg-t-10">添加员工</p>
+          <img src="assets/images/guide/guide-arrow.png" alt="" class="pos-a x-center" *ngIf="viewData.index === 0">
+      </div>
+      <div class="line"></div>
+      <div class="pos-r cur-hand text-center TabControl" (click)="selectItem(1)">
+          <img src="assets/images/guide/icon-customer-on.png" alt="" *ngIf="viewData.index === 1">
+          <img src="assets/images/guide/icon-customer.png" alt="" *ngIf="viewData.index !== 1">
+          <p class="fz-14 mg-t-10">添加会员</p>
+          <img src="assets/images/guide/guide-arrow.png" alt="" class="pos-a x-center" *ngIf="viewData.index === 1">
+      </div>
+      <div class="line"></div>
+      <div class="pos-r cur-hand text-center TabControl" (click)="selectItem(2)">
+          <img src="assets/images/guide/icon-project-on.png" alt="" *ngIf="viewData.index === 2">
+          <img src="assets/images/guide/icon-project.png" alt="" *ngIf="viewData.index !== 2">
+          <p class="fz-14 mg-t-10">添加项目</p>
+          <img src="assets/images/guide/guide-arrow.png" alt="" class="pos-a x-center" *ngIf="viewData.index === 2">
+      </div>
+      <div class="line"></div>
+      <div class="pos-r cur-hand text-center TabControl " (click)="selectItem(3)">
+          <img src="assets/images/guide/icon-goods-on.png" alt="" *ngIf="viewData.index === 3">
+          <img src="assets/images/guide/icon-goods.png" alt="" *ngIf="viewData.index !== 3">
+          <p class="fz-14 mg-t-10">添加商品</p>
+          <img src="assets/images/guide/guide-arrow.png" alt="" class="pos-a x-center" *ngIf="viewData.index === 3">
+      </div>
+      <div class="line"></div>
+      <div class="pos-r cur-hand text-center TabControl" (click)="selectItem(4)">
+          <img src="assets/images/guide/icon-project-on.png" alt="" *ngIf="viewData.index === 4">
+          <img src="assets/images/guide/icon-project.png" alt="" *ngIf="viewData.index !== 4">
+          <p class="fz-14 mg-t-10">添加套餐</p>
+          <img src="assets/images/guide/guide-arrow.png" alt="" class="pos-a x-center" *ngIf="viewData.index === 4">
+      </div>
+      <div class="line"></div>
+      <div class="pos-r cur-hand text-center TabControl" (click)="selectItem(5)">
+          <img src="assets/images/guide/icon-onceCard-on.png" alt="" *ngIf="viewData.index === 5">
+          <img src="assets/images/guide/icon-onceCard.png" alt="" *ngIf="viewData.index !== 5">
+          <p class="fz-14 mg-t-10">添加次卡</p>
+          <img src="assets/images/guide/guide-arrow.png" alt="" class="pos-a x-center" *ngIf="viewData.index === 5">
+      </div>
+      <div class="line"></div>
+      <div class="pos-r cur-hand text-center TabControl" (click)="selectItem(6)">
+          <img src="assets/images/guide/icon-onceCard-on.png" alt="" *ngIf="viewData.index === 6">
+          <img src="assets/images/guide/icon-onceCard.png" alt="" *ngIf="viewData.index !== 6">
+          <p class="fz-14 mg-t-10">添加会员卡</p>
+          <img src="assets/images/guide/guide-arrow.png" alt="" class="pos-a x-center" *ngIf="viewData.index === 6">
+      </div>
+      <div class="line"></div>
+      <div class="pos-r cur-hand text-center TabControl" (click)="selectItem(7)">
+          <img src="assets/images/guide/icon-appointment-on.png" alt="" *ngIf="viewData.index === 7">
+          <img src="assets/images/guide/icon-appointment.png" alt="" *ngIf="viewData.index !== 7">
+          <p class="fz-14 mg-t-10">添加预约</p>
+          <img src="assets/images/guide/guide-arrow.png" alt="" class="pos-a x-center" *ngIf="viewData.index === 7">
+      </div>
+      <div class="line"></div>
+      <div class="pos-r cur-hand text-center TabControl" (click)="selectItem(8)">
+          <img src="assets/images/guide/icon-consume-on.png" alt="" *ngIf="viewData.index === 8">
+          <img src="assets/images/guide/icon-consume.png" alt="" *ngIf="viewData.index !== 8">
+          <p class="fz-14 mg-t-10">开单收银</p>
+          <img src="assets/images/guide/guide-arrow.png" alt="" class="pos-a x-center" *ngIf="viewData.index === 8">
+      </div>
+      <div class="line"></div>
+      <div class="pos-r cur-hand text-center TabControl" (click)="selectItem(9)">
+          <img src="assets/images/guide/icon-recharge-on.png" alt="" *ngIf="viewData.index === 9">
+          <img src="assets/images/guide/icon-recharge.png" alt="" *ngIf="viewData.index !== 9">
+          <p class="fz-14 mg-t-10">会员充值</p>
+          <img src="assets/images/guide/guide-arrow.png" alt="" class="pos-a x-center" *ngIf="viewData.index === 9">
+      </div>
+  </div>
+  <div class="content pd-all-20" style="margin-top: 8px;">
+        <div>
+            <div *ngIf="viewData.index === 0"><zm-btn-md [name]="'员工管理'" (zmbtnClick)="goClerkManage()"></zm-btn-md><zm-btn-md [name]="'添加员工'" (zmbtnClick)="goAddClerk()" class="mg-l-20"></zm-btn-md></div>
+            <div *ngIf="viewData.index === 1"><zm-btn-md [name]="'会员档案'" (zmbtnClick)="goLeaguerManage()"></zm-btn-md><zm-btn-md [name]="'添加会员'" (zmbtnClick)="goAddLeaguer()" class="mg-l-20"></zm-btn-md></div>
+            <div *ngIf="viewData.index === 2"><zm-btn-md [name]="'项目管理'" (zmbtnClick)="goProductManage()"></zm-btn-md><zm-btn-md [name]="'添加项目'" (zmbtnClick)="goAddProduct()" class="mg-l-20"></zm-btn-md></div>
+            <div *ngIf="viewData.index === 3"><zm-btn-md [name]="'商品管理'" (zmbtnClick)="goGoodsManage()"></zm-btn-md><zm-btn-md [name]="'添加商品'" (zmbtnClick)="goAddGoods()" class="mg-l-20"></zm-btn-md></div>
+            <div *ngIf="viewData.index === 4"><zm-btn-md [name]="'套餐管理'" (zmbtnClick)="goPackageManage()"></zm-btn-md><zm-btn-md [name]="'添加套餐'" (zmbtnClick)="goAddPackage()" class="mg-l-20"></zm-btn-md></div>
+            <div *ngIf="viewData.index === 5"><zm-btn-md [name]="'次卡管理'" (zmbtnClick)="goProductCardManage()"></zm-btn-md><zm-btn-md [name]="'添加次卡'" (zmbtnClick)="goAddProductCard()" class="mg-l-20"></zm-btn-md></div>
+            <div *ngIf="viewData.index === 6"><zm-btn-md [name]="'会员卡管理'" (zmbtnClick)="goMemcardCardManage()"></zm-btn-md><zm-btn-md [name]="'添加会员卡'" (zmbtnClick)="goAddMemberCard()" class="mg-l-20"></zm-btn-md></div>
+            <div *ngIf="viewData.index === 7"><zm-btn-md [name]="'预约管理'" (zmbtnClick)="goAppointManage()"></zm-btn-md><zm-btn-md [name]="'添加预约'" (zmbtnClick)="goAddAppoint()" class="mg-l-20"></zm-btn-md></div>
+            <div *ngIf="viewData.index === 8"><zm-btn-md [name]="'开单收银'" (zmbtnClick)="goPurchase()"></zm-btn-md></div>
+            <div *ngIf="viewData.index === 9"><zm-btn-md [name]="'会员充值'" (zmbtnClick)="goRecharge()"></zm-btn-md></div>
+        </div>
+        <div class="pd-t-20 imgDiv">
+          <div [hidden]="!(viewData.index === 0)">
+            <img src="assets/images/guide/clerk-1.png" alt="" class="mg-t-10" >
+            <img src="assets/images/guide/clerk-2.png" alt="" class="mg-t-10" >
+          </div>
+          <div [hidden]="!(viewData.index === 1)">
+            <img src="assets/images/guide/customer.png" alt="" class="mg-t-10" >
+          </div>
+          <div [hidden]="!(viewData.index === 2)" >
+            <img src="assets/images/guide/project.png" alt="" class="mg-t-10" >
+          </div>
+
+          <div [hidden]="!(viewData.index === 3)">
+            <img src="assets/images/guide/goods.png" alt="" class="mg-t-10" >
+          </div>
+
+          <div [hidden]="!(viewData.index === 4)">
+              <img src="assets/images/guide/package.png" alt="" class="mg-t-10" >
+            </div>
+
+          <div [hidden]="!(viewData.index === 5)">
+            <img src="assets/images/guide/onceCard.png" alt="" class="mg-t-10" >
+          </div>
+          <div [hidden]="!(viewData.index === 6)">
+            <img src="assets/images/guide/vipCard.png" alt="" class="mg-t-10" >
+          </div>
+          <div [hidden]="!(viewData.index === 7)">
+            <img src="assets/images/guide/appoint.png" alt="" class="mg-t-10" >
+          </div>
+
+          <div [hidden]="!(viewData.index === 8)">
+            <img src="assets/images/guide/billing.png" alt="" class="mg-t-10" >
+          </div>
+
+          <div [hidden]="!(viewData.index === 9)">
+            <img src="assets/images/guide/menberPay.png" alt="" class="mg-t-10" >
+          </div>
+        </div>
+  </div>
+  </content>
+</view-body-comp>

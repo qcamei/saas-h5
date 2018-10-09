@@ -1,0 +1,44 @@
+.c-label{
+  width: 100px;
+  text-align: right;
+  margin-right: 20px;
+  font-weight: bold;
+}
+//时间选择
+.c-input-data{
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+
+}
+.c-client-data{
+  outline: none;
+  height: 37px;
+  padding:0 0.75rem;
+  border: 2px solid #ced4da;
+  border-left:none;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-top-right-radius: 0.375rem !important;
+  border-bottom-right-radius: 0.375rem !important;
+
+}
+.c-client-data:focus{
+  border-color: #dadfe6;
+  border-left:none;
+}
+//时间选择
+
+
+.collapsed{
+  max-height:0;
+  overflow:hidden;
+  padding:0;
+   max-height:0;
+   transition: max-height 5s ease-out;
+}
+.expanded{
+  max-height: 500px;
+  overflow:hidden;
+  transition: max-height 5s ease-in;
+  -webkit-transition: max-height 5s ease-in;
+}

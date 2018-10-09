@@ -1,0 +1,17 @@
+<!--views/appointment/comps/appointmentComp/appointmentComp.wxml-->
+<image src="../../../../images/image_page_haeder_bg.png" class='header_bg'></image>
+<form report-submit='true' bindsubmit='appointClick'>
+<view class='content-list'>
+  <block wx:for="{{cellModels}}" wx:for-index="idx" wx:for-item="cellModel">
+    <comp-appointcell wx:if="{{idx<1||idx>2 &&idx!=4}}" cell-model='{{cellModel}}' bindcellclick='cellClick'></comp-appointcell>
+     <comp-datepicker wx:if="{{idx==1}}"  date-model="{{dateModel}}" bind:dateChange="bindDateChange"> 
+           <comp-appointcell cell-model='{{cellModel}}' bindcellclick='cellClick'></comp-appointcell> 
+     </comp-datepicker> 
+    <picker wx:if="{{idx==2}}" range='{{timeRange}}' value="{{timeValue}}" bindchange="bindTimeChange">
+      <comp-appointcell cell-model='{{cellModel}}' bindcellclick='cellClick'></comp-appointcell>
+    </picker>
+    <view wx:if="{{idx!=3}}" class="line"></view>
+  </block>
+</view>
+<button formType="submit" class='sureBtn' hover-class='sureBtnHover'>马上预约</button>
+</form>

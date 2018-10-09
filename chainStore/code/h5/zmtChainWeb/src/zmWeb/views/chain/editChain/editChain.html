@@ -1,0 +1,30 @@
+<view-body-comp [headerArr]="['连锁店','编辑店铺']">
+  <div style="max-width:600px">
+
+    <zm_input_name label="总部编号" placeholder="请输入总部名称" maxlength="15" disabled = "true"
+                   [(zmValue)]="viewData.chain.number"></zm_input_name>
+
+    <zm_input_name label="总部名称" placeholder="请输入总部名称" maxlength="15"
+                   [(zmValue)]="viewData.chain.name" [(zmPass)]="viewData.chain.namePass"></zm_input_name>
+
+    <div class="form-group row mb-0">
+      <label class="col-form-label text-center col-md-2 px-0"><span class="text-danger"> *</span>区域</label>
+      <div class="col-md-10">
+        <city-select-comp [(citySetting)]="viewData.citySetting"></city-select-comp>
+      </div>
+    </div>
+
+    <zm-input-textarea [label]="'详细地址'" [placeholder]="'请输入详细地址'"
+                       [(text)]="viewData.chain.address" [maxlength]="200"></zm-input-textarea>
+
+    <zm_input_name label="联系人"  placeholder="请输入联系人" [(zmValue)]="viewData.chain.contacts" [(zmPass)]="viewData.chain.contactsPass" [required]="true"></zm_input_name>
+
+    <zm-input-tel label="联系电话"  placeholder="请输入联系电话" [(zmValue)]="viewData.chain.contactNumber" [(zmPass)]="viewData.chain.contactNumberPass" [required]="true"></zm-input-tel>
+
+    <zm-input-textarea maxlength="200" [label]="'总部介绍'" [placeholder]="'请输入总部介绍'" [(text)]="viewData.chain.descript"></zm-input-textarea>
+
+    <div fxLayout="row" fxLayoutAlign="end" style="margin-top: 20px;">
+      <zm_btn_large  fxFlexAlign="end" [disabled]="!(viewData.chain.namePass && viewData.chain.contactsPass && viewData.chain.contactNumberPass)" name="保存" (zmbtnClick)="updateChainInfo()"></zm_btn_large>
+    </div>
+  </div>
+</view-body-comp>

@@ -1,0 +1,22 @@
+export class DaySnapshot {
+    constructor(){}
+    id:number;
+    storeId:number;
+    startTime:string;
+    endTime:string;
+    buserId:number;
+    buserName:string;
+    amount:number;
+    memberCardCost:number;
+    payCost:number;
+    incomeCost:number;
+    orderNum:number;
+    notPayNum:number;
+    cashCost:number;
+    chargeBackCost:number;
+    arrearBackCost:number;
+    remark:string;
+    createTime:string;
+    lastUpdateTime:string;
+    ver:number;
+}

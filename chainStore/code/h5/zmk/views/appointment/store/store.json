@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "选择美容店铺",    
+  "usingComponents":{
+ "comp-store-cell":"../comps/storecell/storeCell"
+  }
+}

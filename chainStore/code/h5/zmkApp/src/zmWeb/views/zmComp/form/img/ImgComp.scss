@@ -1,0 +1,58 @@
+.remove-image {
+  z-index: 100;
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  padding: 5px 6px;
+  font-size: 20px;
+  font-weight: bold;
+  color: color($colors, danger);
+}
+
+.image {
+  position: relative;
+  background-size: cover;
+  background-position: center center;
+  border:2px solid color($colors, border) ;
+}
+
+.image ion-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  * {
+    stroke: white;
+  }
+}
+
+.image img {
+  width: 100%;
+  &.uploading {
+    background: rgba(0, 0, 0, 0.20);
+  }
+}
+.image ion-icon {
+  font-size: 50px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  font-weight: bold;
+  //color: color($colors, third) ;
+}
+.image .progress-bar {
+  height: 6px;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  overflow: hidden;
+  .progress {
+    background: map_get($colors, 'success');
+    height: 100%;
+  }
+}
+
+.add-image-btn .image {
+  background: #DDD;
+}

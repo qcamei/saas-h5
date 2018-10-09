@@ -1,0 +1,78 @@
+
+    <view-body-comp [headerArr]="['总店数据','次卡','查看详情']">
+            <div>
+                <zm-table-detail>
+                <tbody>
+
+                <tr>
+                  <th style="width:230px;">次卡名称</th>
+                  <td class="text-left">{{viewData.productCardDetail.name}}</td>
+                </tr>
+                <tr>
+                  <th >次卡编号</th>
+                  <td class="text-left">{{viewData.productCardDetail.number}}</td>
+                </tr>
+                <tr>
+                <th>次卡分类</th>
+                <td class="text-left">{{viewData.productCardDetail.typeId|prdCardTypeNamePipe:viewData.productCardTypeMap}}</td>
+                </tr>
+                <tr>
+                  <th>有效日期</th>
+                  <td class="text-left" *ngIf="viewData.productCardDetail.validPeriodUnit==0">
+                    {{viewData.productCardDetail.validPeriodUnit|validPeriodUnitPipe}}
+                  </td>
+                  <td class="text-left" *ngIf="viewData.productCardDetail.validPeriodUnit!=0">
+                    {{viewData.productCardDetail.validPeriod}}{{viewData.productCardDetail.validPeriodUnit|validPeriodUnitPipe}}
+                  </td>
+                </tr>
+                <tr>
+                  <th >售价</th>
+                  <td class="text-left"><span class="fa fa-yen mg-r-5 mr-1"></span>{{viewData.productCardDetail.sellPrice|number:'1.2-2'}}</td>
+                </tr>
+                <tr>
+                  <th >状态</th>
+                  <td class="text-left">{{viewData.productCardDetail.status==1?'上架':'下架'}}</td>
+                </tr>
+                <tr>
+                  <th>次卡内容</th>
+                  <td style="padding:5px;">
+                <zm-table-detail style="text-align:center">
+                    <thead>
+                      <th>内容名称</th>
+                      <th>内容类型</th>
+                      <th>售价</th>
+                      <th>数量</th>
+                      <th>单个平均价格</th>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item of viewData.productCardContentList">
+                      <td>{{item.name}}</td>
+                      <td>{{item.itemType|itemTypePipe}}</td>
+                      <td><i class="fa fa-yen mr-1"></i>{{item.price|number:'1.2-2'}}</td>
+                      <td>{{item.count==-1?"无限":item.count}}</td>
+                      <td>{{item.discountPrice|number:'1.2-2'}}</td>
+                    </tr>
+                    </tbody>
+                </zm-table-detail>
+
+                </td>
+                </tr>
+                <tr>
+                  <th >次卡介绍</th>
+                  <td class="text-left">{{viewData.productCardDetail.descript?viewData.productCardDetail.descript:"-"}}</td>
+                </tr>
+
+                <tr>
+                  <th  class="align-middle">次卡图片</th>
+                  <td class="text-left" *ngIf="viewData.productCardDetail.imgPath == undefined">
+                      <span style="display: inline-block;width:20%;">  <img  class="w-100" src="{{viewData.defaultImg|imgPrePath}}" height="168" width="100%"/></span>
+                  </td>
+                  <td class="text-left" *ngIf="viewData.productCardDetail.imgPath">
+                      <span style="display: inline-block;width:20%;"> <img  class="w-100" src="{{viewData.productCardDetail.imgPath|imgPrePath}}" height="168" width="100%"/></span>
+                  </td>
+
+                </tr>
+                </tbody>
+              </zm-table-detail>
+            </div>
+    </view-body-comp>

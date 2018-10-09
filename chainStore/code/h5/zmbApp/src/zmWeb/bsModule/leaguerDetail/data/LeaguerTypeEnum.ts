@@ -1,0 +1,7 @@
+export enum LeaguerTypeEnum {
+  ALL = 0,
+  HIGH_GRADE_CUSTOMER = 1,
+  RISK_CUSTOMER = 2,
+  QUIESCENCE_CUSTOMER = 3,
+  ATTENTION_CUSTOMER = 4,
+}

@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "comp-appointcell":"../appointmentcell/appointmentCell",
+    "comp-datepicker":"/views/comComp/picker/date/datePicker"
+  }
+}

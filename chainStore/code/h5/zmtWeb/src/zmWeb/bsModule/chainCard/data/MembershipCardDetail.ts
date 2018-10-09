@@ -1,0 +1,20 @@
+export class MembershipCardDetail {
+    constructor(){}
+    id:string;
+    chainId:number;
+    number:string;
+    name:string;
+    freeMoney:number;
+    prodDiscount:number;
+    goodsDiscount:number;
+    prdCardDiscount:number;
+    packagePrjDiscount:number;
+    status:number;
+    entityState:number;
+    imgPath:string;
+    applyStoreIds:Array<number>;
+    descript:string;
+    createdTime:number;
+    lastUpdateTime:number;
+    ver:number;
+}

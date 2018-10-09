@@ -1,0 +1,74 @@
+<view-body-comp [headerArr]="['次卡列表','编辑次卡']">
+
+  <zm-card  [expanded]="true" [withCollapse]="false" >
+    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+
+      <div style="width: 50%">
+
+        <zm-input-pcode label="次卡编号" placeholder="请输入次卡编号"
+                        [(zmValue)]="viewData.pageData.defaultNumber" [(zmPass)]="viewData.pageData.defaultNumberPass"
+                        [oriCode]="viewData.productCardDetail.number"  [existList]="viewData.numberList"  ></zm-input-pcode>
+
+
+        <zm_input_name label="次卡名称" placeholder="请输入次卡名称" maxlength="15"
+                       [(zmValue)]="viewData.productCardDetail.name" [(zmPass)]="viewData.productCardDetail.namePass"></zm_input_name>
+
+
+        <div fxLayout="row"  fxLayoutAlign="start center">
+          <zm_select style="width:100%;" [noAll]="true" [label]="'次卡分类'" [selectList]="viewData.typeList" [name]="'name'" [value]="'id'"
+                     [(zmValue)]="viewData.productCardDetail.typeId"></zm_select>
+          <zm_btn_small fxFlex ="0 0 80px"  name="新建分类" (zmbtnClick)="addType()"></zm_btn_small>
+        </div>
+
+        <zm-input-period [(zmValue)] ="viewData.productCardDetail.validPeriod" [(zmUnit)]="viewData.productCardDetail.validPeriodUnit"  ></zm-input-period>
+
+      </div>
+
+      <div style="width: 50%">
+
+        <div class="form-group form-inline">
+          <div class="col-md-5" >
+            <zm_btn_small name="选择图片" (zmbtnClick)="showPrdCardModal()"></zm_btn_small>
+          </div>
+
+        </div>
+
+        <div style="margin-left:80px;">
+          <img src="{{viewData.productCardDetail.imgPath|imgPrePath}}" width="340px" height="168px"/>
+        </div>
+        <div class="mt-20">
+           <zm_btn_small name="选择门店" (zmbtnClick)="selectStore()"></zm_btn_small>
+        </div>
+
+        <zm_store_preview [(storeArr)]="viewData.selectStoreList" (storeArrChange)="removeStore()"></zm_store_preview>
+
+      </div>
+
+
+    </div>
+
+  <zm-card  [expanded]="true" [withCollapse]="false" >
+    <productCard-content-comp [(productCardContentList)]="viewData.productCardContentList"
+                              [(sellPrice)]="viewData.productCardDetail.sellPrice" (hasUnLimit)="hasUnlimitCallback($event)" [(totalPrice)]="viewData.pageData.totalPrice"></productCard-content-comp>
+
+    <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="5px" style="width:100%;margin-top: 5px;">
+      <label >产品总价</label>
+      <span  style="width:10px;color:#555;">￥</span>
+      <span  *ngIf="!viewData.pageData.hasUnLimit">{{viewData.pageData.totalPrice|number:'1.2-2'}}</span>
+      <span  *ngIf="viewData.pageData.hasUnLimit">-</span>
+    </div>
+  </zm-card>
+
+
+    <zm-input-price [label]="'次卡售价'" [placeholder]="'请输入次卡售价'" [(zmValue)]="viewData.productCardDetail.sellPrice" (keyup.enter)="autoSetDiscount()" (mouseleave)="autoSetDiscount()"></zm-input-price>
+    <zm-input-textarea [label]="'备注'" [placeholder]="'请输入200字以内的备注'"
+                       [(text)]="viewData.productCardDetail.descript" [maxlength]="200"></zm-input-textarea>
+    <switch-button-comp label="上架状态" [(state)]="viewData.pageData.state"></switch-button-comp>
+
+    <div fxLayout="row" fxLayoutAlign="end" style="margin-top: 20px;">
+      <zm_btn_large  fxFlexAlign="end" [disabled]="!(viewData.pageData.defaultNumberPass && viewData.productCardDetail.namePass && viewData.productCardContentList.length>0)" name="保存" (zmbtnClick)="updateProductCard()"></zm_btn_large>
+    </div>
+
+  </zm-card>
+
+</view-body-comp>

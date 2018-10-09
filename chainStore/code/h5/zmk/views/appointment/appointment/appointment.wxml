@@ -1,0 +1,7 @@
+<!--views/appointment/appointment/appointment.wxml-->
+<view wx:if = '{{!hasStore}}'>
+<comp-scanCode bindmyevent='getCodeDone'></comp-scanCode>
+</view>
+<view wx:if = '{{hasStore}}'>
+<comp-appoint id='appoint-view'></comp-appoint>
+</view>

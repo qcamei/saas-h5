@@ -1,0 +1,11 @@
+{
+  "backgroundTextStyle": "white",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "智美预约",
+  "navigationBarBackgroundColor": "#4678fa",
+  "enablePullDownRefresh": false,
+
+  "usingComponents": {
+    "zm-cell": "/views/comComp/cell/cell"
+  }
+}

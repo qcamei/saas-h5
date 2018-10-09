@@ -1,0 +1,61 @@
+page {
+  line-height: 1;
+}
+.order-detail-container {
+  color: #333;
+  font-size: 32rpx;
+  padding: 34rpx 25rpx 0 25rpx;
+}
+.store-name {
+  font-weight: bold;
+  font-size: 32rpx;
+  margin-bottom: 29rpx;
+}
+
+.store-address {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 32rpx;
+  border-bottom: 1rpx solid #F0F0F0;
+}
+.store-address image{
+  width: 26rpx;
+  height: 26rpx;
+  margin-right: 11rpx;
+}
+.store-address view {
+  font-size: 24rpx;
+  color: #999;
+}
+
+
+.detail-item {
+  background-color: #FFF;
+  padding: 32rpx 0;
+  display: flex;
+  align-content: center;
+  border-bottom: 1rpx solid  #F0F0F0;
+}
+.item-value {
+  font-size: 28rpx;
+  flex: 1;
+  text-align: right;
+  align-self: flex-end;
+  
+}
+.item-service {
+  display: flex;
+  flex-direction: row;
+}
+
+.cancel-order {
+  margin: 100rpx 0;
+}
+.cancel-order button {
+  background-color: #4678FA;
+  color: #FFF;
+}
+.cancel-order .hover-button {
+  background-color: #4678FA;
+  opacity: 0.8;
+}

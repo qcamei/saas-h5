@@ -1,0 +1,101 @@
+
+    <view-body-comp [headerArr]="['会员列表','编辑会员']">
+          <div class="mg-b-20 pos-r font-bold" style="height: 40px;">基础信息</div>
+
+          <div class="c-addlea-body">
+            <div fxLayout="row wrap"  fxLayoutGap="20px" fxLayoutAlign="space-between center" >
+              <div fxLayout="column" >
+                <div fxLayout="row" fxLayoutAlign="start center"  fxLayoutGap="100px"  *ngIf="getAttributeEnable('headImg')" class="mg-b-40" style="padding: 22px 0;">
+                  <label class="c-label text-center" >头像</label>
+                  <div class="c-clent-img pos-r disFlex hor-center align-center" style="width:100px;height:110px;margin-left: 30px;">
+                    <zm-input-file  class="img" [limitCount]="1" [label]="''" [requestUrl]="viewData.requestUrl" [appendKey]="'imgs'" (callback)="setImgUrl($event)"></zm-input-file>
+                    <zm-img-circle [imgSrc]="viewData.imgUrl"></zm-img-circle>
+                  </div>
+                </div>
+
+                <div *ngIf="getAttributeEnable('sex')" class="demo-radio c-input-group mg-b-40 disFlex align-center" style="height: 52px;line-height: 52px;">
+                  <zm-input-radio label="性别" [radioList]="viewData.genderRadioList" [(curValue)]="viewData.genderValue"></zm-input-radio>
+                </div>
+
+
+                <div *ngIf="getAttributeEnable('name')">
+                  <div class="input-group c-input-group form-group" style="margin-bottom: 10px; ">
+                    <zm-input-name [label]="'会员姓名'" placeholder="请输入会员姓名" [(zmValue)]="viewData.leaguer.name"  [(zmPass)] = "viewData.leaguer.namePass"></zm-input-name>
+                  </div>
+                </div>
+
+                <div *ngIf="getAttributeEnable('phone')">
+                  <div class="input-group c-input-group form-group" style="margin-bottom: 10px;">
+                    <zm-input-phone [label]="'手机号'" placeholder="请输入手机号"  [(zmValue)]="viewData.leaguer.phone"  [(zmPass)] = "viewData.leaguer.phonePass"  ></zm-input-phone>
+                  </div>
+                </div>
+
+                <div  *ngIf="getAttributeEnable('buserIds')" class="pos-r input-group c-input-group form-group mg-b-40">
+                  <zm-input-text label="负责人" [placeholder]="getPlaceholder('buserIds','请选择负责人')" [(zmValue)]="viewData.choosedClerkName"  (click)="openChooseClerk()"></zm-input-text>
+
+                  <i class="fa fa-plus pos-a zmCurHand" style="right:10px;bottom: 23px;" (click)="openChooseClerk()"></i>
+                </div>
+
+                <div *ngIf="getAttributeEnable('recommender')" class="input-group c-input-group form-group mg-b-40">
+                  <zm-input-text label="介绍人" [placeholder]="getPlaceholder('recommender','请输入介绍人')" [(zmValue)]="viewData.leaguer.recommender"></zm-input-text>
+                </div>
+
+
+                <div *ngIf="getAttributeEnable('originId')" class="input-group c-input-group form-group mg-b-40 pos-r">
+                  <zm-select [noAll]="true" [label]="'会员来源'" [selectList]="viewData.originList" [(zmValue)]="viewData.leaguer.originId" [name]="'originName'" [value]="'id'"></zm-select>
+                </div>
+
+              </div>
+              <div fxLayout="column" >
+                <div *ngIf="getAttributeEnable('idCard')" >
+
+                  <div class="input-group c-input-group form-group" style="margin-bottom: 10px;">
+                    <zm-input-text label="身份证" [placeholder]="getPlaceholder('idCard','请输入身份证号')"  [maxlength]="20" [(zmValue)]="viewData.leaguer.idCard"></zm-input-text>
+                  </div>
+                </div>
+
+
+                <div *ngIf="getAttributeEnable('birthday')" class="input-group c-input-group form-group mg-b-40">
+                  <div *ngIf="getAttributeEnable('birthday')" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px">
+                    <zm-date [label]="'生日'" [placeholder]="getPlaceholder('birthday','请选择生日')" [(curValue)]="viewData.birthday" ></zm-date>
+                    <zm-input-radio [radioList]="viewData.dateTypeRadioList" [(curValue)]="viewData.dateTypeValue"></zm-input-radio>
+                  </div>
+
+                </div>
+                <div *ngIf="getAttributeEnable('wechatNumber')" class="input-group c-input-group form-group mg-b-40">
+                  <zm-input-text label="微信" [placeholder]="getPlaceholder('wechatNumber','请输入微信')" maxlength="32" [(zmValue)]="viewData.leaguer.wechatNumber"></zm-input-text>
+                </div>
+                <div *ngIf="getAttributeEnable('aliasName')" class="input-group c-input-group form-group mg-b-40">
+                  <zm-input-text label="昵称" [placeholder]="getPlaceholder('aliasName','请输入昵称')" maxlength="10" [(zmValue)]="viewData.leaguer.aliasName"></zm-input-text>
+                </div>
+                <div *ngIf="getAttributeEnable('address')" class="input-group  c-input-group form-group mg-b-40">
+                  <zm-input-text label="联系地址" [placeholder]="getPlaceholder('address','请输入详细地址')" maxlength="30" [(zmValue)]="viewData.leaguer.address"></zm-input-text>
+                </div>
+                <div *ngIf="getAttributeEnable('company')" class="input-group  c-input-group  form-group mg-b-40 ">
+                  <zm-input-text label="工作单位" [placeholder]="getPlaceholder('company','请输入工作单位')" maxlength="30"  [(zmValue)]="viewData.leaguer.company"></zm-input-text>
+                </div>
+                <div *ngIf="getAttributeEnable('job')" class="input-group c-input-group form-group mg-b-40">
+                  <zm-input-text label="职位" [placeholder]="getPlaceholder('job','请输入职位')" maxlength="10"  [(zmValue)]="viewData.leaguer.job"></zm-input-text>
+                </div>
+                <div *ngIf="getAttributeEnable('labelIds')" class="pos-r input-group c-input-group form-group mg-b-40">
+                  <zm-labels [label]="'标签'" [(zmValue)]="viewData.choosedLabels" [removable]="false" [disabled]="true" (click)="openLabel()" ></zm-labels>
+                  <i class="fa fa-plus pos-a zmCurHand" style="right:10px;bottom: 23px;" (click)="openLabel()"></i>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="mg-b-20 pos-r font-bold" style="height: 40px;">扩展信息</div>
+              <div style="flex-wrap: wrap;">
+                <div class="input-group c-input-group form-group mg-b-40" *ngFor="let item of viewData.attritubeList" style="width:480px;">
+                  <zm-input-text *ngIf="item.attributeType==0" [label]="item.label"  [placeholder]="item.tips" [maxlength]="item.length"  [(zmValue)]="item.value"></zm-input-text>
+                  <zm-input-textarea  *ngIf="item.attributeType==1" [label]="item.label" [placeholder]="item.tips"  [maxlength]="item.length" [(text)]="item.value"></zm-input-textarea>
+                </div>
+              </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="end">
+              <zm-btn-large disabled="true"  name="保存" [disabled]="!viewData.leaguer.namePass || !viewData.leaguer.phonePass" (click)="updateLeaguerInfo()"></zm-btn-large>
+            </div>
+          </div>
+    </view-body-comp>

@@ -1,0 +1,35 @@
+.fz-14{
+  font-size:14px;
+}
+.mg-l-5{
+  margin-left:5px;
+}
+.mg-t-10{
+  margin-top:10px;
+}
+.mg-l-15{
+  margin-left:15px;
+}
+.cur-hand{
+  cursor: pointer;
+}
+.mg-t-40{
+  margin-top:40px;
+}
+
+table tbody tr td {
+  word-wrap: break-word;
+  vertical-align: middle;
+}
+
+table tbody tr td:nth-child(1) {
+  background: #F4F6FA;
+  font-weight: bold;
+  width: 20%;
+}
+
+table tbody tr td:nth-child(2) {
+  width: 60%;
+  background:#fff;
+  text-align: left;
+}

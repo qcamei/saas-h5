@@ -1,0 +1,78 @@
+@media (min-width: 306px) and (max-width: 767.98px) {
+  .row{
+    width:calc(100% - -15px)
+  }
+  .text-right{
+    text-align: left !important;
+    margin-top:16px;
+  }
+  // 字体
+  .statistics-fontZize{
+    font-size:18px !important;
+  }
+  // p标签下外边距
+  p{
+    margin-bottom:5px !important;
+  }
+  .echart_pl{
+    padding-left:5px !important;
+  }
+  //   左右padding为零
+  .pl-0{
+    padding-left:0 !important;
+    padding-right:0 !important;
+  }
+
+  //   图表左填充
+  .echart_pl{
+    padding-left:20px !important;
+  }
+
+  .d-flex{
+    display:block !important;
+  }
+  .data_pl{
+    padding-left:20px !important;
+    padding-right:5px !important;
+  }
+  .data_ml{
+    padding-left:20px !important;
+    padding-top:0 !important;
+  }
+
+  .sm_ml{
+    margin-left:50px !important;
+    margin-top:5px !important;
+  }
+  .custom_height{
+    height:auto !important;
+    overflow: auto;
+  }
+}
+
+
+
+
+
+// 营业收入
+// .my-pl{
+//     padding-right:10px;
+// }
+.mb-16{
+  margin-bottom:16px;
+}
+.echart_pl{
+  padding-left:48px;
+}
+
+.activeDefault{
+  color:#4678fa;
+  border-bottom:2px solid #4678fa;
+}
+.custom_height{
+  height:464px;
+  overflow: auto;
+}
+// @media (min-width: 768px) and (max-width: 2299.98px) {
+
+//  }

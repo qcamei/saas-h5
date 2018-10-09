@@ -1,0 +1,51 @@
+
+  <view-body-comp [headerArr]="['个人中心']" >
+    <zm-card [header]="'个人信息'" [withCollapse]="false">
+      <div fxLayout="column" fxLayoutGap="30px">
+        <div fxLayout="row"  fxLayoutAlign="start" fxLayoutGap="50px">
+          <label class="c-label font-bold">头像</label>
+          <div class="c-user-img pos-r" style="padding: 0;width: 100px;height: 100px;">
+            <zm-input-file *ngIf="viewData.isEdit" style="opacity:0;filter:alpha(opacity=0);position: absolute;top:0;left:0;height:100px;width:100px;" [limitCount]="1" [label]="''" [requestUrl]="viewData.requestUrl" [appendKey]="'imgs'" (callback)="setImgUrl($event)"></zm-input-file>
+            <img class="c-head-img" src={{viewData.imgUrl}} alt="" style="width: 100%;height: 100%;">
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="50px">
+          <label class="c-label font-bold">手机号</label>
+          <span>{{viewData.user.phone}}</span>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="50px">
+          <label class="c-label font-bold">姓名</label>
+          <input *ngIf="viewData.isEdit" type="text" placeholder="请输入您的姓名" maxlength="10" class="form-control" style="margin-bottom: 0;" name = "job" [(ngModel)]="viewData.user.name"/>
+          <label *ngIf="!viewData.isEdit" style="margin: 0;">{{viewData.user.name}}</label>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="50px">
+          　<label class="c-label font-bold">性别</label>
+          <zm-input-radio *ngIf="viewData.isEdit" [radioList]="viewData.genderRadioList" [(curValue)]="viewData.genderValue" style="margin-left: -13px"></zm-input-radio>
+          <label *ngIf="!viewData.isEdit" style="margin: 0;">{{viewData.user.gender == 1?'男':'女'}}</label>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="50px">
+          <zm-btn-md *ngIf="!viewData.isEdit" name="编辑" (zmbtnClick)="editUser()"></zm-btn-md>
+          <zm-btn-md *ngIf="viewData.isEdit" name="取消" (zmbtnClick)="cancelEdit()">取消</zm-btn-md>
+          <zm-btn-md *ngIf="viewData.isEdit" name="保存" (zmbtnClick)="updateUser()">保存</zm-btn-md>
+        </div>
+      </div>
+    </zm-card>
+
+    <zm-card [header]="'会员信息'" [withCollapse]="false" *ngIf="viewData.isBoss">
+      <div fxLayout="column" fxLayoutGap="30px">
+        <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="50px">
+          <label class="c-label font-bold" style="margin:0;">会员类型</label>
+          <span>{{viewData.user.vipType | buserVipTypePipe}}</span>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="50px">
+          <label class="c-label font-bold" style="margin:0;">会员到期时间</label>
+          <span>{{viewData.user.expiredTime > 0?(viewData.user.expiredTime | date:'yyyy/MM/dd'):'-'}}</span>
+        </div>
+      </div>
+    </zm-card>
+  </view-body-comp>
+

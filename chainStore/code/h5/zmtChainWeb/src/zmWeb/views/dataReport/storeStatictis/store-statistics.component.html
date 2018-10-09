@@ -1,0 +1,40 @@
+<view-body-comp [headerArr]="['门店统计']">
+  <!--统计时间选择-->
+  <div class="container" fxLayout="column" fxLayoutAlign="start" fxLayout.xs="column"
+       style="padding-top:15px;margin-bottom:15px;">
+
+    <zm-time-slot [startLabel]="'日志时间'" [startPlaceholder]="'起始时间'"
+                  [endLabel]="'至'" [endPlaceholder]="'结束时间'"
+                  [(zmValue)]="viewData.timeSlot"
+                  [timeSlotEnums]="timeSlotEnums" [itemActiveIndex]="0"
+                  (zmTimeSlotCb)="onTimeSlotCb($event)"></zm-time-slot>
+
+    <div class="container" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px" fxLayout.xs="column"
+         fxFlex="100">
+      <zm-card [header]="'门店业绩明细'" fxFlex="100" [expanded]="true" [withCollapse]="false">
+        <zm-group-bar-chart [title]="''" [optionsData]="viewData.barChartData"></zm-group-bar-chart>
+      </zm-card>
+    </div>
+
+    <div class="container" fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="10px" fxLayout.xs="column"
+         fxFlex="100">
+      <zm-card [header]="''" fxFlex="100" [expanded]="true" [withCollapse]="false">
+        <ng-template #hotA let-item="item">{{item.position +1}}</ng-template>
+        <ng-template #hotB let-item="item">{{item.storeName}}</ng-template>
+        <ng-template #hotC let-item="item">￥{{item.operatingIncome}}</ng-template>
+        <ng-template #hotD let-item="item"><span style="cursor: pointer;color: #0A85EA">查看详情</span></ng-template>
+        <zm-mat-table [tdTemplateList]="[hotA,hotB,hotC,hotD]"
+                      [thNameList]="['序号','门店名称','营业收入','操作']"
+                      [itemList]="viewData.currStoreIncomeDataArray"
+                      [elevation]="false"></zm-mat-table>
+        <no_data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.currStoreIncomeDataArray"
+                 [text]=" '没有数据'"
+                 [showImg]="'noData'"
+                 [elevation]="false"></no_data>
+        <zm_page [totalSize]="viewData.storeIncomeDataArray.length" [curPage]="viewData.curPage"
+                 (pageChange)="getPageData($event)"
+                 [elevation]="false"></zm_page>
+      </zm-card>
+    </div>
+  </div>
+</view-body-comp>

@@ -1,0 +1,52 @@
+{
+  "pages": [
+    "views/appointment/appointment/appointment",
+    "views/login/login",
+    "views/my/index/index",
+    "views/my/order/order_store/orderStore",
+    "views/my/order/orderDetail/orderDetail",
+    "views/my/order/order",
+    "views/my/about/about",
+    "views/login/protocol/protocol",
+    "views/appointment/store/store",
+    "views/appointment/beautician/beautician",
+    "views/appointment/makesureinfo/makeSureInfo",
+    "views/appointment/appointsuccess/appointSuccess",
+    "views/appointment/prodCard/prodCard"
+
+  ],
+  "window": {
+    "backgroundTextStyle": "black",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "智美预约",
+    "navigationBarBackgroundColor": "#FFF",
+    "enablePullDownRefresh": false
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#333333",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "views/appointment/appointment/appointment",
+        "iconPath": "images/-s-ic_new_resn2.png",
+        "selectedIconPath": "images/-s-ic_new_resn.png",
+        "text": "预约"
+      },
+      {
+        "pagePath": "views/my/index/index",
+        "iconPath": "images/-s-ic_new_clien2.png",
+        "selectedIconPath": "images/-s-ic_new_clien.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 3000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  },
+  "debug": true
+}

@@ -1,0 +1,147 @@
+
+<view-body-comp [headerArr]="['返回','订单详情']">
+  <!--基本信息-->
+  <zm-card  [header]="'基本信息'">
+    <zm-table-detail style="text-align:center">
+      <thead>
+      <th>创建时间</th>
+      <th>付款时间</th>
+      <th>订单编号</th>
+      <th>订单类型</th>
+      <th>跟进人员</th>
+      <th>应结金额</th>
+      <th>订单状态</th>
+      </thead>
+      <tbody>
+      <tr>
+        <td>{{viewData.simpleOrderInfo.createdTime|times}}</td>
+        <td>{{viewData.simpleOrderInfo.payTime |times}}</td>
+        <td>{{viewData.simpleOrderInfo.number?viewData.simpleOrderInfo.number:"-"}}</td>
+        <td>{{viewData.simpleOrderInfo.orderType|orderTypePipe}}</td>
+        <td>{{viewData.simpleOrderInfo.buserName?viewData.simpleOrderInfo.buserName:"-"}}</td>
+        <td>{{viewData.simpleOrderInfo.cost?(viewData.simpleOrderInfo.cost|number:'1.2-2'):"-"}}</td>
+        <td>{{viewData.simpleOrderInfo.status |orderStatusPipe}}</td>
+      </tr>
+      </tbody>
+    </zm-table-detail>
+  </zm-card>
+
+  <!--会员信息-->
+  <zm-card  [header]="'会员信息'">
+    <zm-table-detail style="text-align:center">
+      <thead>
+      <th>会员姓名</th>
+      <th>手机号</th>
+      <th>会员卡</th>
+      <th>项目折扣</th>
+      <th>商品折扣</th>
+      <th>次卡折扣</th>
+      <th>套餐折扣</th>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="cur-hand" (click)="goLeaguer(viewData.simpleLeaguerInfo.id)">
+          {{viewData.simpleLeaguerInfo&&viewData.simpleLeaguerInfo.name?viewData.simpleLeaguerInfo.name:'-'}}
+        </td>
+        <td>{{viewData.simpleLeaguerInfo.phone&&(viewData.simpleLeaguerInfo.phone!='0')?viewData.simpleLeaguerInfo.phone:'-'}}</td>
+        <td>{{viewData.membershipCard&&viewData.membershipCard.name?viewData.membershipCard.name:'-'}}</td>
+        <td>{{viewData.membershipCard&&viewData.membershipCard.prodDiscount|discountPipe}}</td>
+        <td>{{viewData.membershipCard&&viewData.membershipCard.goodsDiscount|discountPipe}}</td>
+        <td>{{viewData.membershipCard&&viewData.membershipCard.prdCardDiscount|discountPipe}}</td>
+        <td>{{viewData.membershipCard&&viewData.simpleLeaguerInfo.packagePrjDiscount|discountPipe}}</td>
+      </tr>
+      </tbody>
+    </zm-table-detail>
+  </zm-card>
+
+  <!--设置会员卡-->
+  <zm-card  [header]="'设置会员卡'">
+    <zm-table-detail style="text-align:center">
+      <thead>
+      <th>会员卡</th>
+      <th>有效期</th>
+      <th>会员卡卡号</th>
+      <th>项目折扣</th>
+      <th>商品折扣</th>
+      <th>次卡折扣</th>
+      <th>套餐折扣</th>
+      </thead>
+      <tbody>
+      <tr *ngIf="viewData.leaguerDetail.leaguerMemberCard">
+        <td class="cur-hand">
+          {{viewData.membershipCard&&viewData.membershipCard.name?viewData.membershipCard.name:'-'}}
+        </td>
+        <td>
+          {{viewData.leaguerDetail.leaguerMemberCard&&viewData.leaguerDetail.leaguerMemberCard.limitUnit==0?'永久':viewData.leaguerDetail.leaguerMemberCard.limitTime+(viewData.leaguerDetail.leaguerMemberCard.limitUnit
+          | orderLimitUnitPipe)}}
+        </td>
+        <td>{{viewData.leaguerDetail.leaguerMemberCard && viewData.leaguerDetail.leaguerMemberCard.number?viewData.leaguerDetail.leaguerMemberCard.number:'-'}}</td>
+        <td>{{viewData.membershipCard && viewData.membershipCard.prodDiscount|discountPipe}}</td>
+        <td>{{viewData.membershipCard && viewData.membershipCard.goodsDiscount|discountPipe}}</td>
+        <td>{{viewData.membershipCard && viewData.membershipCard.prdCardDiscount|discountPipe}}</td>
+        <td>{{viewData.membershipCard&&viewData.simpleLeaguerInfo.packagePrjDiscount|discountPipe}}</td>
+      </tr>
+      </tbody>
+    </zm-table-detail>
+  </zm-card>
+
+  <!--支付收款-->
+  <zm-card  [header]="'支付收款'" *ngIf="viewData.rechargeDetail && viewData.payItems && viewData.payItems.length>0">
+    <zm-table-detail style="text-align:center">
+      <tbody>
+      <tr>
+        <td class="font-bold">实收金额</td>
+        <td>￥{{viewData.rechargeDetail.pay | number:'1.2-2'}}</td>
+      </tr>
+      <tr *ngFor="let item of viewData.payItems">
+        <td class="font-bold">{{item.payType | orderPayTypePipe}}</td>
+        <td>￥{{item.cost | number:'1.2-2'}}</td>
+      </tr>
+      </tbody>
+    </zm-table-detail>
+  </zm-card>
+
+  <!--会员充值信息-->
+  <zm-card [header]="'会员充值信息'" *ngIf="viewData.rechargeDetail">
+    <zm-table-detail style="text-align:center">
+      <tr>
+        <td class="font-bold">实收金额</td>
+        <td>￥{{viewData.rechargeDetail.pay | number:'1.2-2'}}</td>
+      </tr>
+      <tr>
+        <td class="font-bold">额外赠送金额</td>
+        <td>￥{{viewData.rechargeDetail.largess | number:'1.2-2'}}</td>
+      </tr>
+      <tr>
+        <td class="font-bold">实充金额</td>
+        <td>￥{{viewData.rechargeDetail.amount | number:'1.2-2'}}</td>
+      </tr>
+    </zm-table-detail>
+  </zm-card>
+
+  <!--服务提成-->
+  <zm-card [header]="'服务提成'" *ngIf="viewData.userBonusList&&viewData.userBonusList.length>0">
+    <zm-table-detail style="text-align:center">
+      <thead>
+      <th>员工姓名</th>
+      <th>业绩金额</th>
+      <th>提成类型</th>
+      <th>提成比例</th>
+      <th>提成金额</th>
+      </thead>
+      <tbody >
+      <tr *ngFor="let userBonus of viewData.userBonusList">
+        <td>{{userBonus.buserName}}</td>
+        <td>&yen; {{userBonus.amount}}</td>
+        <td>{{userBonus.bonusType == 0?'固定提成':'比例提成'}}</td>
+        <td>{{userBonus.bonusType == 1?userBonus.percentage+'%':'-'}}</td>
+        <td>&yen;{{userBonus.cost}}</td>
+      </tr>
+      </tbody>
+    </zm-table-detail>
+  </zm-card>
+</view-body-comp>
+
+
+
+

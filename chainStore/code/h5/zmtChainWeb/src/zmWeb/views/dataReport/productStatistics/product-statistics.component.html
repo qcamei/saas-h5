@@ -1,0 +1,140 @@
+<view-body-comp [headerArr]="['产品统计']">
+
+  <div class="container" fxLayout="row wrap" fxLayoutAlign="left center" fxLayoutGap="10px" fxLayout.xs="column"
+       style="padding-top:15px;margin-bottom:15px;">
+    <zm-card [showHeader]="false" fxFlex="100" [expanded]="true" [withCollapse]="false">
+      <header fxLayout="row wrap" fxLayoutAlign="start">
+        <label style="width:140px;color:#2a2a2a;font-size:16px; margin-top: 15px">相关门店</label>
+        <div class="nameDiv fz-14 zmCurHand" style="margin-top: 15px" (click)="selectCustomer($event)">
+          <span *ngIf="!true">点击弹框回传的name</span>
+
+          <span *ngIf="true" style="color: #A4ABB3;">请选择门店</span>
+
+          <i class="fa fa-plus" style="color:#03a9f4;position:absolute;right:0px;top: 10px;"></i>
+        </div>
+
+      </header>
+    </zm-card>
+  </div>
+
+  <div class="container" fxLayout="column" fxLayoutAlign="left" fxLayoutGap="10px" fxLayout.xs="column"
+       fxLayoutGap.xs="0">
+    <div class="container" fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px" fxLayout.xs="column"
+         fxLayoutGap.xs="0" fxFlexFill>
+      <zm-card [header]="'产品总数'" fxFlex="50" [expanded]="true" [withCollapse]="false">
+        <span style="font-size: 18px"><b>{{viewData.productStatisticsData.totalProductCount}}</b></span>
+      </zm-card>
+      <zm-card [header]="'滞销产品'" fxFlex="50" [expanded]="true" [withCollapse]="false"
+               [matTooltipText]="'所选时间段内销量为零的商品'">
+        <span style="font-size: 18px"><b>{{viewData.productStatisticsData.unsalableProductCount}}</b></span>
+      </zm-card>
+    </div>
+
+    <!--统计时间选择-->
+    <div class="container" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px" fxLayout.xs="column"
+         style="padding-top:15px;margin-bottom:15px;">
+      <zm-search-date [label]=" '统计时间' " [placeholder]="'请选择开始时间'" [(curValue)]="viewData.minTime"
+                      (callback)="findConsumeByTime()"></zm-search-date>
+      <zm-search-date [label]=" '至' " [placeholder]="'请选择结束时间'" [(curValue)]="viewData.maxTime"
+                      (callback)="findConsumeByTime()"></zm-search-date>
+      <zm-btn-Date [values]="['今日','昨日','本月','上月']" (zmbtnClick)="chooseTime($event)"></zm-btn-Date>
+    </div>
+
+    <div class="container" fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px" fxLayout.xs="column" fxFlexFill>
+      <zm-card [expanded]="true" [withCollapse]="false" [showHeader]="false" fxFlex="50">
+        <div class="container" fxLayout="column" fxLayoutAlign="left" fxLayout.xs="column" style="padding-top: 15px">
+          <div class="container" fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px" fxLayout.xs="column" fxFlexFill>
+            <span aria-label="Button that displays a tooltip when focused or hovered over" class="pl-2 float-left"
+                  fxFlex="90" style="line-height: 50px">热销排行榜
+            <img class="ml-2 mt-1 float-right" matTooltip="区间时间内购买次数的排序，不包含划卡消费" [matTooltipPosition]="'after'"
+                 src="assets/images/icon/question_gray.png"
+                 style="margin-top: 15px;margin-left: 5px;width: 18px;height: 18px">
+            </span>
+            <zm-btn-Date [itemActiveIndex]="0" [values]="['全部','项目','商品','套餐','次卡']"
+                         (zmbtnClick)="hotSell($event)"></zm-btn-Date>
+          </div>
+          <div>
+            <ng-template #hotA let-item="item">{{item.position}}</ng-template>
+            <ng-template #hotB let-item="item">{{item.pgName}}</ng-template>
+            <ng-template #hotC let-item="item">
+              <span *ngIf="viewData.salesTabIndex == 0 && item.itemType == 0">次卡</span>
+              <span *ngIf="viewData.salesTabIndex == 0 && item.itemType == 1">项目</span>
+              <span *ngIf="viewData.salesTabIndex == 0 && item.itemType == 2">商品</span>
+              <span *ngIf="viewData.salesTabIndex == 0 && item.itemType == 4">套餐</span>
+              <span *ngIf="viewData.salesTabIndex != 0">{{item.typeName}}</span>
+            </ng-template>
+            <ng-template #hotD let-item="item">{{item.salesVolume}}</ng-template>
+            <zm-mat-table [tdTemplateList]="[hotA,hotB,hotC,hotD]"
+                          [thNameList]="['序号','产品名称','分类','销量']"
+                          [itemList]="viewData.currSalesList"
+                          [elevation]="false"></zm-mat-table>
+            <no_data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.currSalesList" [text]=" '没有数据'"
+                     [showImg]="'noData'"
+                     [elevation]="false"></no_data>
+            <zm_page [totalSize]="viewData.hotTotalSize" [curPage]="viewData.salesPageNo"
+                     (pageChange)="getHotPageData($event)"
+                     [elevation]="false"></zm_page>
+          </div>
+        </div>
+      </zm-card>
+
+      <zm-card [expanded]="true" [showHeader]="false" [withCollapse]="false" fxFlex="50">
+        <div class="container" fxLayout="column" fxLayoutAlign="left" fxLayout.xs="column" style="padding-top: 15px">
+          <div class="container" fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px" fxLayout.xs="column" fxFlexFill>
+            <span  class="pl-2 float-left" fxFlex="90" style="line-height: 50px">滞销排行榜
+              <img
+              class="ml-2 mt-1 float-right" matTooltip="在区间时间内滞销产品排序"  [matTooltipPosition]="'after'" src="assets/images/icon/question_gray.png"
+              style="margin-top: 15px;margin-left: 5px;width: 18px;height: 18px">
+            </span>
+            <zm-btn-Date [itemActiveIndex]="0" [values]="['全部','项目','商品','套餐','次卡']"
+                         (zmbtnClick)="dullSell($event)"></zm-btn-Date>
+          </div>
+          <div>
+            <ng-template #tdA let-item="item">{{item.position}}</ng-template>
+            <ng-template #tdB let-item="item">{{item.pgName}}</ng-template>
+            <ng-template #tdC let-item="item">
+              <span *ngIf="viewData.unsalesTabIndex == 0 && item.itemType == 0">次卡</span>
+              <span *ngIf="viewData.unsalesTabIndex == 0 && item.itemType == 1">项目</span>
+              <span *ngIf="viewData.unsalesTabIndex == 0 && item.itemType == 2">商品</span>
+              <span *ngIf="viewData.unsalesTabIndex == 0 && item.itemType == 4">套餐</span>
+              <span *ngIf="viewData.unsalesTabIndex != 0">{{item.typeName}}</span>
+            </ng-template>
+            <ng-template #tdD let-item="item">{{viewData.unsalseDuration}}天</ng-template>
+            <zm-mat-table [tdTemplateList]="[tdA,tdB,tdC,tdD]"
+                          [thNameList]="['序号','产品名称','分类','滞销天数']"
+                          [itemList]="viewData.currUnsalableList"
+                          [elevation]="false"></zm-mat-table>
+            <no_data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.currUnsalableList" [text]=" '没有数据'"
+                     [showImg]="'noData'"
+                     [elevation]="false"></no_data>
+            <zm_page [totalSize]="viewData.unsaleTotalSize" [curPage]="viewData.unSalesPageNo"
+                     (pageChange)="getUnSalesPageData($event)"
+                     [elevation]="false"></zm_page>
+
+          </div>
+        </div>
+      </zm-card>
+    </div>
+    <div class="container" fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px" fxLayout.xs="column" fxFlexFill>
+      <zm-card [expanded]="true" [showHeader]="false" [withCollapse]="false" fxFlex="50">
+        <div class="container" fxLayout="column" fxLayoutAlign="left" fxLayout.xs="column" style="padding-top: 15px">
+          <div class="container" fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px" fxLayout.xs="column" fxFlexFill>
+            <span class="pl-2 float-left"
+                  fxFlex="90" style="line-height: 50px">产品销售占比
+              <img
+              class="ml-2 mt-1 float-right" matTooltip="产品购买次数的占比" [matTooltipPosition]="'after'" src="assets/images/icon/question_gray.png"
+              style="margin-top: 15px;margin-left: 5px;width: 18px;height: 18px">
+            </span>
+            <zm-btn-Date [itemActiveIndex]="0" [values]="['全部','项目','商品','套餐','次卡']"
+                         (zmbtnClick)="pieSell($event)"></zm-btn-Date>
+          </div>
+          <zm-pieCharts-tool [options]="viewData.options"></zm-pieCharts-tool>
+        </div>
+
+      </zm-card>
+
+    </div>
+  </div>
+</view-body-comp>
+
+

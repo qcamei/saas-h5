@@ -1,0 +1,138 @@
+
+  <view-body-comp [headerArr]="['开单列表']" >
+
+
+     <!--过滤条件-->
+      <mat-toolbar style="padding-top:15px;margin-bottom:15px;">
+        <mat-toolbar-row fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="zmFullWidth">
+          <div fxLayout="row wrap"  fxLayoutAlign="start center" fxLayoutGap="20px">
+            <zm-search-box [label]=" '流程查询'" [placeholder]="'编号/姓名/手机号'" [(zmValue)]="viewData.workFlowDataQueryForm.leaguerNameOrPhone" (callBack)="find()"></zm-search-box>
+
+            <zm-btn-tab [tabList]="[{name:'全部',value:''},{name:'待提交',value:'0'},{name:'待收款',value:'1'},{name:'已完成',value:'3'},{name:'已作废',value:'2'}]" [activeValue]="viewData.status" (zmbtnClick)="switchTab($event)"></zm-btn-tab>
+          </div>
+          <div fxLayout="row" fxLayoutGap="20px" >
+              <zm-btn-new [name]="'开单'" (zmbtnClick)="goConsume()"></zm-btn-new>
+              <div class="mr-4">  <zm-btn-new  [name]="'补单'" (zmbtnClick)="goAddOldRecord()"></zm-btn-new></div>
+
+
+          </div>
+        </mat-toolbar-row>
+        <mat-toolbar-row>
+            <div fxLayout="row" fxLayoutAlign="start center"  fxLayoutGap="20px" class="fullwidth">
+              <zm-time-slot [startLabel]="'创建时间'" [startPlaceholder]="'请选择创建时间'"
+                            [endLabel]="'至'" [endPlaceholder]="'请选择创建时间'" [(itemActiveIndex)]="viewData.itemActiveIndex"
+                            [(zmValue)]="viewData.timeSlot"
+                            [timeSlotEnums]="timeSlotEnums" (zmTimeSlotCb)="onTimeSlotCb($event)"></zm-time-slot>
+              <!--<zm-search-date [label]=" '创建时间' " [placeholder]="'请选择创建时间'" [(curValue)]="viewData.minTime" (callback)="find()"></zm-search-date>-->
+              <!--<zm-search-date [label]=" '至' " [placeholder]="'请选择创建时间'" [(curValue)]="viewData.maxTime" (callback)="find()"></zm-search-date>-->
+              <!--<zm-btn-Date  [values]="['今日','昨日','七日内']" (zmbtnClick)="chooseTimeTab($event)"></zm-btn-Date>-->
+            </div>
+            </mat-toolbar-row>
+      </mat-toolbar>
+
+    <!--列表-->
+
+
+          <ng-template #tdA let-item="item"><div style="position:relative;"><span *ngIf="isOldRecordOrder(item.recordType)" class="px-4 chainMark">补单</span>{{item.lastUpdateTime | times}}</div></ng-template>
+          <ng-template #tdB let-item="item">{{item.number?item.number:'-'}}</ng-template>
+          <ng-template #tdC let-item="item">{{item.leaguerName}}</ng-template>
+          <ng-template #tdD let-item="item">{{item.leaguerPhone&&(item.leaguerPhone!='0')?item.leaguerPhone:'-'}}</ng-template>
+          <ng-template #tdE let-item="item">
+            <div style="position: relative">
+              <!-- 已作废 -->
+              <div *ngIf="item.status == 2" class="position-absolute cancellation ">
+                <img class="position-relative" style="height:60px;" src="assets/images/new_invalid_small.png ">
+              </div>
+              <!-- 流程 -->
+              <div class="w-100-p py-8" fxLayout="row wrap" fxLayoutAlign="space-between center">
+
+                <div *ngIf="item.hasAppoint" class="w-15-p">
+                    <div style="width:85%;color:#A8A8A8;border-radius: 20px;border:1px solid #A8A8A8;" class="py-4 zmCurHand" (click)="goAppoint(item)">
+                      预约
+                    </div>
+                </div>
+
+                <div *ngIf="!item.hasAppoint" class="w-15-p">
+                    <div style="width:85%;color:#A8A8A8;border-radius: 20px;border:1px solid #A8A8A8;"class="py-4" >
+                      到店开单
+                    </div>
+                </div>
+
+                <div style="width:1px;height:29px;border-left:1px solid #039be5;"></div>
+
+                <div class="w-40-p" fxLayout="row" fxLayoutAlign="center center">
+                   <div  style="position:relative;width:45px;height:43px;line-height:14px;border-radius: 50%;color:#A8A8A8;border:1px solid #A8A8A8;"class="zmCurHand py-8"  [ngClass]="(item.status != 2)?'bg-active':''" (click)="goBillDetail(item.id)">
+                  选择<br>会员
+                    <div class="w-100-p h-100-p" fxLayout="row" fxLayoutAlign="center center" style="position:absolute;left:0;top:0">
+                      <img *ngIf="item.hasLeaguer && (item.status != 2)" src="assets/images/icon/correct-on.png">
+                       <img *ngIf="item.hasLeaguer && (item.status == 2)" src="assets/images/icon/correct.png">
+                    </div>
+                  </div>
+                  <div style="position:relative;width:45px;height:43px;line-height:14px;border-radius: 50%;color:#A8A8A8;border:1px solid #A8A8A8;"  class="zmCurHand py-8 " [ngClass]="(item.status != 2)?'bg-active':''" (click)="goBillDetail(item.id)">
+                    跟进<br>人员
+                    <div class="w-100-p h-100-p" fxLayout="row" fxLayoutAlign="center center" style="position:absolute;left:0;top:0">
+                      <img *ngIf="item.hasFollowClerk && (item.status != 2)" src="assets/images/icon/correct-on.png">
+                       <img *ngIf="item.hasFollowClerk  && (item.status == 2)" src="assets/images/icon/correct.png">
+                    </div>
+                  </div>
+                  <div style="position:relative;width:45px;height:43px;line-height:14px;border-radius: 50%;color:#A8A8A8;border:1px solid #A8A8A8;"  class="zmCurHand py-8 " [ngClass]="(item.status != 2)?'bg-active':''" (click)="goBillDetail(item.id)">
+                    选择<br>产品
+                    <div class="w-100-p h-100-p" fxLayout="row" fxLayoutAlign="center center" style="position:absolute;left:0;top:0">
+                      <img *ngIf="item.hasPurchase && (item.status != 2)" src="assets/images/icon/correct-on.png">
+                       <img *ngIf="item.hasPurchase && (item.status == 2)" src="assets/images/icon/correct.png">
+                    </div>
+                  </div>
+                  <div style="position:relative;width:45px;height:43px;line-height:14px;border-radius: 50%;color:#A8A8A8;border:1px solid #A8A8A8;"  class="zmCurHand py-8 " [ngClass]="(item.status != 2)?'bg-active':''" (click)="goBillDetail(item.id)">
+                    提交<br>订单
+                    <div class="w-100-p h-100-p" fxLayout="row" fxLayoutAlign="center center" style="position:absolute;left:0;top:0">
+                      <img *ngIf="item.hasOrder && (item.status != 2)" src="assets/images/icon/correct-on.png">
+                       <img *ngIf="item.hasOrder && (item.status == 2)" src="assets/images/icon/correct.png">
+                    </div>
+                  </div>
+                  <div style="position:relative;width:45px;height:1px;color:#A8A8A8;border:1px dotted #A8A8A8;" ></div>
+                  <div style="position:relative;width:45px;height:43px;line-height:14px;border-radius: 50%;color:#A8A8A8;border:1px solid #A8A8A8;"  [ngStyle]="{'cursor':item.status == 1 ? 'pointer' : 'default' }"   class="zmCurHand py-8 " [ngClass]="item.status == 1 ?'bg-active':''" (click)="goOrderPay(item)">
+                    确认<br>收款
+                    <div class="w-100-p h-100-p" fxLayout="row" fxLayoutAlign="center center" style="position:absolute;left:0;top:0">
+                      <img *ngIf="item.status == 3" src="assets/images/icon/correct-on.png">
+                    </div>
+                  </div>
+                </div>
+
+                <div style="width:1px;height:29px;border-left:1px solid #039be5;"></div>
+                <div class="w-15-p pl-8">
+
+                    <div class="py-4" style="border-radius: 8px;" [ngClass]="item.hasOrder && item.status != 2 ?'bg-active zmCurHand':'bg-inActive'"  (click)="goEditBonus(item)">
+                      设置提成
+                    </div>
+
+                </div>
+
+                <div style="width:1px;height:29px;border-left:1px solid #039be5;"></div>
+                <div class="w-15-p pl-8" >
+                  <div class="py-4" style="border-radius: 8px;" [ngClass]="item.status != 2 ?'bg-active zmCurHand':''" (click)="goDetailRecord(item)">
+                    跟进记录
+                  </div>
+                </div>
+
+              </div>
+              <!-- 流程结束 -->
+            </div>
+          </ng-template>
+          <ng-template #tdF let-item="item">
+            <div FxLayout="row" FxLayoutAlign ="center center" FxLayoutGap="5px">
+              <a  style="margin-right: 5px;" *ngIf="(item.status!=2)&&(item.status!=3)" (click)="continue(item)" class="zmCurHand">继续</a>
+              <a  style="margin-right: 5px;" *ngIf="(item.status!=2)&&(!item.hasOrder)" (click)="cancelWorkFlowData(item.id)" class="zmCurHand">作废</a>
+              <a  style="margin-right: 5px;" *ngIf="(item.status==2)||(item.hasOrder)" (click)="goBillDetail(item.id)" class="zmCurHand">查看</a>
+              <a  style="margin-right: 5px;" *ngIf="item.status==3" (click)="chargeback(item)" class="zmCurHand">退单</a>
+
+            </div>
+          </ng-template>
+          <zm-mat-table  [tdTemplateList]="[tdA,tdB,tdC,tdD,tdE,tdF]" [thNameList]="['更新时间','开单编号','会员','手机号','流程状态','操作']" [itemList]="viewData.wfList"></zm-mat-table>
+
+          <no-data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.wfList" [text]="'没有数据'" [showImg]="'noData'"></no-data>
+          <zm-page [totalSize]="viewData.recordCount" [curPage]="viewData.curPage" (pageChange) = "getPageData($event)"></zm-page>
+
+
+
+</view-body-comp>
+

@@ -1,0 +1,107 @@
+thead th {
+  font-weight: bold;
+  background-color: #f4f6fa !important;
+}
+tbody tr{
+  margin-top: -1px;
+}
+tbody tr:nth-of-type(odd){
+  background-color: #ffffff;
+}
+tbody tr:nth-of-type(even),tbody tr:nth-of-type(even) input,tbody tr:nth-of-type(even) select{
+  background-color:#f9fafc;
+}
+tbody .c-tr:hover{
+  background-color: #e7f3fd;
+}
+tbody a{cursor:pointer;}
+tbody a:hover{text-decoration: none;color:#03a9f4 !important;}
+
+th, td{
+  vertical-align: middle !important;
+  font-size: 14px;
+  word-wrap:break-word;
+  word-break: break-all;
+}
+thead th{
+  border-bottom-width: 1px !important;
+}
+select.form-control:not([size]):not([multiple]){
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background-image:url(../../../../assets/images/arrow.png);
+  background-repeat: no-repeat;
+  background-position:95% 50%;
+  font-size: 14px;
+  padding-right: 25px;
+}
+select.c-form-select:not([size]):not([multiple]){
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background-image:url(../../../../assets/images/arrow.png);
+  background-repeat: no-repeat;
+  background-position:95% 50%;
+  font-size: 14px;
+  padding-right: 25px;
+}
+select::-ms-expand { display: none; }
+input[type=number] {
+  -moz-appearance: textfield;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.table {
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.mg-b-20{
+  margin-bottom:20px;
+}
+.mg-b-0{
+  margin-bottom:0;
+}
+.mg-t-10{
+  margin-top:10px;
+}
+.pd-lr-30{
+  padding-left:30px;
+  padding-right:30px;
+}
+.pd-t-20{
+  padding-top:20px;
+}
+.pd-b-20{
+  padding-bottom: 20px;
+}
+.fz-18{
+  font-size:18px;
+}
+.font-bold{
+  font-weight: bold;
+}
+.text-center{
+  text-align: center;
+}
+.cur-hand{
+  cursor: pointer;
+}
+.align-center {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  align-items: center;
+}
+
+
+.sp-table tbody tr td:first-child{
+  background-color:#f4f6fa !important;
+  width:30%;
+}
+.sp-table tbody tr td:last-child{
+  background-color:#fff !important;
+}

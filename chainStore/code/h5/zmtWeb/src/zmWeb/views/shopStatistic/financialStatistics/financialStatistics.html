@@ -1,0 +1,133 @@
+<view-body-comp [headerArr]="['财务统计']">
+  <div class="container" fxLayout="column" fxLayoutAlign="left" fxLayoutGap="10px" fxLayout.xs="column"
+       fxLayoutGap.xs="0">
+    <!--统计时间选择-->
+    <div class="container" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px" fxLayout.xs="column"
+         style="padding-top:15px;margin-bottom:15px;">
+
+      <zm-search-date [label]=" '统计时间' " [placeholder]="'请选择开始时间'" [(curValue)]="viewData.minTime"
+                      (callback)="findConsumeByTime()"></zm-search-date>
+      <zm-search-date [label]=" '至' " [placeholder]="'请选择结束时间'" [(curValue)]="viewData.maxTime"
+                      (callback)="findConsumeByTime()"></zm-search-date>
+      <zm-btn-Date [itemActiveIndex]="0" [values]="['今日','昨日','本月','上月']" (zmbtnClick)="chooseTime($event)"></zm-btn-Date>
+    </div>
+
+    <!-- 营业收入支出 -->
+    <div class="container" fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px" fxLayout.xs="column"
+         fxLayoutGap.xs="0" fxFlexFill>
+      <zm-card [header]="'营业收入'" fxFlex="50" [expanded]="true" [withCollapse]="false">
+        <span style="font-size: 18px">￥<b>{{viewData.financeReport.operatingIncome}}</b></span>
+      </zm-card>
+      <zm-card [header]="'营业支出'" fxFlex="50" [expanded]="true" [withCollapse]="false">
+        <span style="font-size: 18px">￥<b>{{viewData.financeReport.operatingExpenses}}</b></span>
+      </zm-card>
+    </div>
+
+    <div class="container" fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px" fxLayout.xs="column"
+         fxLayoutGap.xs="0" fxFlexFill>
+      <zm-card [header]="'售卡金额'" fxFlex="33" [expanded]="true" [withCollapse]="false">
+        <span style="font-size: 18px">￥<b>{{viewData.financeReport.cardSalesAmount}}</b></span>
+      </zm-card>
+      <zm-card [header]="'耗卡金额'" fxFlex="33" [expanded]="true" [withCollapse]="false">
+        <span style="font-size: 18px">￥<b>{{viewData.financeReport.memberCardPayAmount}}
+          <!--<span style="font-size:18px;"> (划卡{{viewData.financeReport.delimitCardCount}}次)</span>-->
+        </b></span>
+      </zm-card>
+      <zm-card [header]="'退单金额'" fxFlex="33" [expanded]="true" [withCollapse]="false">
+        <span style="font-size: 18px">￥<b>{{viewData.financeReport.chargeBackAmount}}</b></span>
+      </zm-card>
+    </div>
+
+    <div class="container" fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px" fxLayout.xs="column" fxFlexFill>
+      <zm-card [expanded]="true" [withCollapse]="false" [showHeader]="false" fxFlex="50">
+        <div class="container" fxLayout="column" fxLayoutAlign="left" fxLayout.xs="column" style="padding-top: 15px">
+          <div class="container" fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px" fxLayout.xs="column" fxFlexFill>
+            <span aria-label="Button that displays a tooltip when focused or hovered over" class="pl-2 float-left"
+                  fxFlex="90" style="line-height: 50px" >营业收入<img
+              class="ml-2 mt-1 float-right" matTooltip="购买支付页面选择的支付方式" src="assets/images/icon/question_gray.png"
+              style="margin-top: 15px;margin-left: 5px"></span>
+          </div>
+          <div>
+            <ng-template #hotA let-item="item">{{item.position}}</ng-template>
+            <ng-template #hotB let-item="item">{{item.payMethod}}</ng-template>
+            <ng-template #hotC let-item="item">￥{{item.cost}}</ng-template>
+            <ng-template #hotD let-item="item">{{getRate(item.cost,viewData.financeReport.operatingIncome) | number:'1.2-2'}}%</ng-template>
+            <zm-mat-table [tdTemplateList]="[hotA,hotB,hotC,hotD]"
+                          [thNameList]="['序号','收款方式','实收金额','收款占比']"
+                          [itemList]="viewData.financeReport.payItemDetails"></zm-mat-table>
+            <no-data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.financeReport.payItemDetails" [text]=" '没有数据'"
+                     [showImg]="'noData'"></no-data>
+          </div>
+        </div>
+      </zm-card>
+
+      <zm-card [expanded]="true" [showHeader]="false" [withCollapse]="false" fxFlex="50">
+        <div class="container" fxLayout="column" fxLayoutAlign="left" fxLayout.xs="column" style="padding-top: 15px">
+          <div class="container" fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px" fxLayout.xs="column" fxFlexFill>
+            <span aria-label="Button that displays a tooltip when focused or hovered over" class="pl-2 float-left"
+                  fxFlex="90" style="line-height: 50px" >会员卡统计</span>
+          </div>
+          <div>
+            <zm-table>
+              <thead>
+              <tr>
+                <th class="w-25-p">类型</th>
+                <th class="w-25-p">方式</th>
+                <th class="w-50-p">总计算</th>
+              </tr>
+              </thead>
+              <tbody style="height:300px;">
+              <!-- 会员卡 -->
+              <tr>
+                <td class="align-middle w-25-p">会员卡</td>
+                <td class="align-middle w-25-p">
+                  <p class="mb-0 pt-3" style="padding-bottom:6px;">充值</p>
+                  <p class="mb-0 pb-3">支付</p>
+                </td>
+                <td class="align-middle w-50-p">
+                  <p class="mb-0 pt-3 " style="padding-bottom:6px;">￥{{viewData.financeReport.rechargeAmount}}
+                    含赠送金额：￥{{viewData.financeReport.donationAmount}} </p>
+                  <p class="mb-0 pb-3">￥{{viewData.financeReport.memberCardPayAmount}}</p>
+                </td>
+              </tr>
+              <!-- 次卡 -->
+              <tr>
+                <td class="align-middle  w-25-p">次卡</td>
+                <td class="align-middle  w-25-p">
+                  <p class="mb-0 pt-3" style="padding-bottom:6px;">售卡</p>
+                  <p class="mb-0 pb-3">划卡</p>
+                </td>
+                <td class="align-middle  w-50-p">
+                  <p class="mb-0 pt-3" style="padding-bottom:6px;">办卡{{viewData.financeReport.saleProductCardCount}}张</p>
+                  <p class="mb-0 pb-2">划卡{{viewData.financeReport.delimitCardCount}}次</p>
+                </td>
+              </tr>
+              </tbody>
+            </zm-table>
+          </div>
+        </div>
+      </zm-card>
+    </div>
+
+    <div class="container" fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px" fxLayout.xs="column" fxFlexFill>
+      <zm-card [expanded]="true" [showHeader]="false" [withCollapse]="false" fxFlex="100">
+        <div class="container" fxLayout="column" fxLayoutAlign="left" fxLayout.xs="column" style="padding-top: 15px">
+          <div class="container" fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px" fxLayout.xs="column" fxFlexFill>
+            <span aria-label="Button that displays a tooltip when focused or hovered over" class="pl-2 float-left"
+                  fxFlex="90" style="line-height: 50px">财务分析图<img
+              class="ml-2 mt-1 float-right"  matTooltip="选择时间区间内营业额的线性图表" src="assets/images/icon/question_gray.png"
+              style="margin-top: 15px;margin-left: 5px"></span>
+          </div>
+
+          <zm-line-Echarts [option]="viewData.options"></zm-line-Echarts>
+
+        </div>
+
+      </zm-card>
+
+    </div>
+
+  </div>
+</view-body-comp>
+
+

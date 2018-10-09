@@ -1,0 +1,54 @@
+<view-body-comp [headerArr]="['商品列表']" >
+  <mat-toolbar style="padding-top:15px;margin-bottom:15px;">
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="zmFullWidth">
+      <div fxLayout="row "  fxLayoutGap="20px" >
+
+        <div style="width:150px">
+          <zm-select-number [label]="'状态'" [selectList]="[{name:'上架',value:0},{name:'下架',value:1}]" [(zmValue)]="viewData.state" (selectCallback)="getGoodsDetailListByReq()"></zm-select-number>
+        </div>
+        <div style="width:150px">
+          <zm-select-string [label]="'商品分类'" name="name" value="id"  [selectList]="viewData.goodsTypeList" [(zmValue)]="viewData.queryForm.typeId" (selectCallback)="getGoodsDetailListByReq()"></zm-select-string>
+        </div>
+        <div  fxFlexAlign="center"  >
+          <zm_search_box [label]=" '商品查询'" [placeholder]="'商品编号/名称'" [(zmValue)]="viewData.queryForm.numberOrName" (callBack)="getGoodsDetailListByReq()"></zm_search_box>
+        </div>
+      </div>
+      <div fxLayout="row "  fxLayoutGap="20px" >
+        <div fxFlexAlign="center" ><zm_btn_small [name]="'上架'" (zmbtnClick)="batchChangeState(0)"></zm_btn_small></div>
+        <div fxFlexAlign="center" ><zm_btn_small [name]="'下架'" (zmbtnClick)="batchChangeState(1)"></zm_btn_small></div>
+        <div fxFlexAlign="center" ><zm_btn_new [name]="'新建商品'" (zmbtnClick)="goAddGoods()"></zm_btn_new></div>
+        <div fxFlexAlign="center" ><zm_btn_new [name]="'新建分类'" (zmbtnClick)="goAddGoodsType()"></zm_btn_new></div>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <ng-template #tdA let-item="item">
+    <div class="zmImgDiv">
+      <img *ngIf="item.defaultImg=='' " src="assets/images/goodList.png" style="width: 100%; height:100%;"/>
+      <img *ngIf="item.defaultImg!='' " :src="{{item.defaultImg|imgPrePath}}" style="width: 100%; height:100%;"/>
+    </div>
+  </ng-template>
+  <ng-template #tdB let-item="item">{{item.number}}</ng-template>
+  <ng-template #tdC let-item="item">{{item.name}}</ng-template>
+  <ng-template #tdD let-item="item">{{item.typeId | goodsTypePipe:viewData.goodsTypeMap}}</ng-template>
+  <ng-template #tdE let-item="item"><i class="fa fa-yen mr-1"></i>{{item.sellPrice|number:'1.2-2'}}</ng-template>
+  <ng-template #tdF let-item="item">{{item.applyStoreIds && item.applyStoreIds.length}}</ng-template>
+  <ng-template #tdG let-item="item">{{item.state |statePipe}}</ng-template>
+  <ng-template #tdH let-item="item">
+    <a class="zmCurHand" style="margin-right: 5px;" *ngIf=" item.state == 0" (click)="changeState(item.id,1)">{{item.state
+      | statePipe2}}</a>
+    <a class="zmCurHand" style="margin-right: 5px;" *ngIf=" item.state == 1" (click)="changeState(item.id,0)">{{item.state
+      |statePipe2}}</a>
+    <a class="zmCurHand" style="margin-right: 5px;"  (click)="goGoodsDetail(item.id)">查看</a>
+    <a class="zmCurHand" style="margin-right: 5px;" *ngIf=" item.state == 1" (click)="goEditGoods(item.id)">编辑</a>
+    <!--<a class="zmCurHand" style="margin-right: 5px;" *ngIf=" item.state == 1" (click)="removeGoods(item)">删除</a>-->
+    <!--<a class="zmCurHand" style="margin-right: 5px;" (click)="allotStores(item)">分配</a>-->
+  </ng-template>
+
+
+  <zm-mat-table-checkbox  [tdTemplateList]="[tdA,tdB,tdC,tdD,tdE,tdF,tdG,tdH]" [thNameList]="['图片','商品编号','商品名称','商品分类','售价','适用门店','状态','操作']" [itemList]="viewData.goodsList"></zm-mat-table-checkbox>
+
+  <no_data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.goodsList" [text]=" '没有数据'" [showImg]="'noData'"></no_data>
+
+  <zm_page [totalSize]="viewData.recordCount" [curPage]="viewData.curPage" (pageChange) = "getPageData($event)"></zm_page>
+</view-body-comp>

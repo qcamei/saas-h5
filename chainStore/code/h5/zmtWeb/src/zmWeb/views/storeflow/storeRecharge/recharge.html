@@ -1,0 +1,33 @@
+
+
+<view-body-comp [headerArr]="['会员充值']">
+    <!-- 开单时间 -->
+    <zm-card [withCollapse]="false" [expanded]="true" *ngIf="isAddOldRecord">
+            <div style="padding-top:16px;" fxLayout="column" fxLayoutAlign="start">
+
+                <div  fxLayout="row" fxLayoutAlign="start center"fxLayoutGap="20px">
+                    <span  class="text-bold" style="width:120px;font-size:18px;">开单日期</span>
+                        <zm-search-date [label]=" '开单时间' " [placeholder]="'请选择开单时间'"  [(curValue)]="date"  (curValueChange)="onDateChange()"></zm-search-date>
+                        <zm-time [label]="'设置时间'"   [(currentValue)]="time"></zm-time>
+                    <!-- <zm-search-date [label]=" '预约时间' " [placeholder]="'请选择预约时间'"  [(curValue)]="viewData.minTime" (callback)="getAppointmentByReq()"></zm-search-date>
+                    <zm-search-date [label]=" '至' " [placeholder]="'请选择预约时间'" [(curValue)]="viewData.maxTime" (callback)="getAppointmentByReq()"></zm-search-date> -->
+                </div>
+                <p class="my-0"><b class="mr-12">说明:</b>补单支持选择开单日期和时间，默认为系统当前时间，选择并提交订单后的付款时间将与开单时间保存为同一时间</p>
+            </div>
+    </zm-card >
+    <!-- 选择会员 start -->
+    <select-leaguer-comp [wFDataWraper]="wfDataWraper" [fromPage]="3" ></select-leaguer-comp>
+    <!-- 选择会员 end -->
+    <!--*ngIf="wfDataWraper.getCuserWFCompData().selectLeaguer"-->
+    <!-- 选择跟进人员 start -->
+    <select-follow-comp [wFDataWraper]="wfDataWraper" ></select-follow-comp>
+    <!-- 选择跟进人员 end -->
+
+    <!--充值设置 start-->
+    <recharge-setting-comp [wFDataWraper]="wfDataWraper"></recharge-setting-comp>
+    <!--充值设置 end-->
+
+    <!--结算 start-->
+    <recharge-order-comp [wFDataWraper]="wfDataWraper"></recharge-order-comp>
+<!--结算 end-->
+</view-body-comp>

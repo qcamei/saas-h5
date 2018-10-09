@@ -1,0 +1,76 @@
+<view-body-comp [headerArr]="['岗位管理','编辑岗位']">
+
+  <div fxLayout="row" class="align-center  c-input-group mg-l-10">
+    <label class="c-label"><span style="color:#ff355d;"> *</span>岗位名称</label>
+    <div class="w-30-p" style="padding-left: 0;padding-right: 0;">
+      <input type="text" class="form-control w-100-p" required
+             [ngClass]="{'form-valid-error':name.invalid && (name.touched)}" name="name" #name="ngModel"
+             placeholder="请输入岗位名称" maxlength="10" [(ngModel)]="viewData.role.name">
+    </div>
+  </div>
+  <div class="c-input-error">
+    <div class="text-danger " *ngIf="name.invalid && (name.touched)">
+      <div *ngIf="name.errors.required">
+        岗位名称不能为空
+      </div>
+    </div>
+  </div>
+
+  <div fxLayout="row" class="align-center  c-input-group mg-l-10">
+    <label class="c-label">权限设置</label>
+    <div class="w-30-p form-control">
+      <p>管理权限（建议给店铺负责人开启）</p>
+      <span *ngFor="let item of viewData.managePermList;let i = index" class="dib"
+            style="width: 50%;margin-bottom: 20px;">
+               <zm_list_checkbox [(zmValue)]="viewData.managePermList[i]">
+                 <content class="mg-l-15 cur-hand">{{ viewData.managePermList[i].permItem.permName}}</content>
+               </zm_list_checkbox>
+            </span>
+      <!--<p>店务流程（建议给前台开启）</p>-->
+      <!--<span *ngFor="let item of viewData.businessPermList;let i = index" class="dib" style="width: 50%;margin-bottom: 20px;">-->
+      <!--<zm_list_checkbox  [(zmValue)]="viewData.businessPermList[i]">-->
+      <!--<content class="mg-l-15 cur-hand">{{ viewData.businessPermList[i].permItem.permName}}</content>-->
+      <!--</zm_list_checkbox>-->
+      <!--</span>-->
+      <!--<p>保密权限</p>-->
+      <!--<span *ngFor="let item of viewData.secrecyPermList;let i = index" class="dib" style="width: 50%;margin-bottom: 20px;">-->
+      <!--<zm_list_checkbox  [(zmValue)]="viewData.secrecyPermList[i]">-->
+      <!--<content class="mg-l-15 cur-hand">{{ viewData.secrecyPermList[i].permItem.permName}}</content>-->
+      <!--</zm_list_checkbox>-->
+      <!--</span>-->
+    </div>
+  </div>
+
+  <!--<div fxLayout="row" class="align-center  c-input-group mg-l-10">-->
+  <!--<label  class="c-label">权限设置</label>-->
+  <!--<div class="col-sm-6 form-control" >-->
+  <!--<p>管理权限（建议给店铺负责人开启）</p>-->
+  <!--<span *ngFor="let item of viewData.managePermList;let i = index" class="dib" style="width: 50%;margin-bottom: 20px;">-->
+  <!--<zm_list_checkbox  [(zmValue)]="viewData.managePermList[i]">-->
+  <!--<content class="mg-l-10 cur-hand">{{ viewData.managePermList[i].permItem.permName}}</content>-->
+  <!--</zm_list_checkbox>-->
+  <!--</span>-->
+  <!--&lt;!&ndash;<p>店务流程（建议给前台开启）</p>&ndash;&gt;-->
+  <!--&lt;!&ndash;<span *ngFor="let item of viewData.businessPermList;let i = index" class="dib" style="width: 50%;margin-bottom: 20px;">&ndash;&gt;-->
+  <!--&lt;!&ndash;<zm_list_checkbox  [(zmValue)]="viewData.businessPermList[i]">&ndash;&gt;-->
+  <!--&lt;!&ndash;<content class="mg-l-10 cur-hand">{{ viewData.businessPermList[i].permItem.permName}}</content>&ndash;&gt;-->
+  <!--&lt;!&ndash;</zm_list_checkbox>&ndash;&gt;-->
+  <!--&lt;!&ndash;</span>&ndash;&gt;-->
+  <!--&lt;!&ndash;<p>保密权限</p>&ndash;&gt;-->
+  <!--&lt;!&ndash;<span *ngFor="let item of viewData.secrecyPermList;let i = index" class="dib" style="width: 50%;margin-bottom: 20px;">&ndash;&gt;-->
+  <!--&lt;!&ndash;<zm_list_checkbox  [(zmValue)]="viewData.secrecyPermList[i]">&ndash;&gt;-->
+  <!--&lt;!&ndash;<content class="mg-l-10 cur-hand">{{ viewData.secrecyPermList[i].permItem.permName}}</content>&ndash;&gt;-->
+  <!--&lt;!&ndash;</zm_list_checkbox>&ndash;&gt;-->
+  <!--&lt;!&ndash;</span>&ndash;&gt;-->
+  <!--</div>-->
+  <!--</div>-->
+  <div fxLayout="row" class="mt-40 c-input-group mg-l-10">
+    <label class="c-label"></label>
+    <button class="w-30-p zmCurHand" color="accent" mat-raised-button (click)="updateAdminRole()"
+            [disabled]="name.invalid && (name.touched)">保存
+    </button>
+  </div>
+
+</view-body-comp>
+
+

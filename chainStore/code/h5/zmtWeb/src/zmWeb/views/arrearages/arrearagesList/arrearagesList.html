@@ -1,0 +1,23 @@
+<view-body-comp [headerArr]="['欠款管理']">
+
+  <mat-toolbar style="padding-top:15px;margin-bottom:15px;">
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="zmFullWidth">
+      <zm-search-box [label]="'欠款查询'" [placeholder]="'姓名/手机号'" [(zmValue)]="viewData.queryForm.leaguerNameOrPhone" (callBack)="findArrearage()"></zm-search-box>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+      <ng-template #tdA let-item="item">{{item.leaguerName}}</ng-template>
+      <ng-template #tdB let-item="item">{{item.leaguerPhone}}</ng-template>
+      <ng-template #tdC let-item="item"><i class="fa fa-yen mg-r-5"></i>{{item.totalAmount |number:'1.2-2'}}</ng-template>
+      <ng-template #tdD let-item="item">
+        <a class="zmCurHand" style="margin-right: 5px;"  (click)="goArrearageDetail(item.leaguerId)" >详情</a>
+      </ng-template>
+
+      <zm-mat-table [tdTemplateList]="[tdA,tdB,tdC,tdD]" [thNameList]="['姓名','手机号','当前欠款总额','操作']" [itemList]="viewData.arrearageGroupList"></zm-mat-table>
+
+
+
+      <no-data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.arrearageGroupList" [text]=" '没有数据'" [showImg]="'noData'"></no-data>
+
+      <zm-page [totalSize]="viewData.recordCount" [curPage]="viewData.page" (pageChange)="getPageData($event)"></zm-page>
+</view-body-comp>

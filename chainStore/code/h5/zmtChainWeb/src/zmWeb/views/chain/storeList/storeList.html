@@ -1,0 +1,78 @@
+
+<view-body-comp [headerArr]="['店铺管理']">
+  <ng-template #tabA></ng-template>
+  <ng-template #tabB></ng-template>
+
+  <ng-template  #tabA>
+
+      <mat-toolbar style="padding-top:15px;margin-top:15px;margin-bottom:15px;">
+
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="zmFullWidth">
+          <div fxLayout="row "  fxLayoutGap="20px" >
+
+            <div  fxFlexAlign="center"  >
+              <zm_search_box [label]=" '店铺查询'" [placeholder]="'店铺名称'" [(zmValue)]="viewData.storeName" (callBack)="findStoreList()"></zm_search_box>
+            </div>
+          </div>
+          <div fxLayout="row "  fxLayoutGap="20px" >
+            <p>总部编号：{{viewData.chain.number}}</p>
+          </div>
+        </mat-toolbar-row>
+
+      </mat-toolbar>
+
+      <ng-template #tdA let-item="item">{{item.name?item.name:"-"}}</ng-template>
+      <ng-template #tdB let-item="item">{{item.tel?item.tel:"-"}}</ng-template>
+      <ng-template #tdC let-item="item">{{item.area?item.area:"-"}}</ng-template>
+      <ng-template #tdD let-item="item">{{viewData.chain.name?viewData.chain.name:"未加入"}}</ng-template>
+      <ng-template #tdE let-item="item">
+        <a class="zmCurHand" style="margin-right: 5px;" *ngIf="!item.isChain"  (click)="goStoreDetail(item.id)">查看</a>
+        <a class="zmCurHand" style="margin-right: 5px;" *ngIf="!item.isChain" (click)="unRelate(item)">解除关联</a>
+        <a class="zmCurHand" style="margin-right: 5px;" *ngIf="item.isChain"  (click)="goChainDetail(viewData.chain.id)">查看</a>
+        <a class="zmCurHand" style="margin-right: 5px;" *ngIf="item.isChain" (click)="goEditChain(viewData.chain.id)">编辑</a>
+      </ng-template>
+
+      <zm-mat-table [tdTemplateList]="[tdA,tdB,tdC,tdD,tdE]" [thNameList]="['店铺名称','预约电话','区域','上级总部','操作']" [itemList]="viewData.storeList"></zm-mat-table>
+
+      <no_data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.storeList" [text]=" '没有数据' "  [showImg]="'noData'"></no_data>
+
+      <zm_page [totalSize]="viewData.storeRecordCount" [curPage]="viewData.storeCurPage" (pageChange) = "getStorePageData($event)"></zm_page>
+
+  </ng-template>
+
+  <ng-template  #tabB>
+    <mat-toolbar style="padding-top:15px;margin-top:15px;margin-bottom:15px;">
+
+      <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="zmFullWidth">
+        <div fxLayout="row "  fxLayoutGap="20px" >
+
+          <div  fxFlexAlign="center"  >
+            <zm_search_box [label]=" '店铺查询'" [placeholder]="'店铺名称'" [(zmValue)]="viewData.applyStoreName" (callBack)="findApplyStoreList()"></zm_search_box>
+          </div>
+        </div>
+        <div fxLayout="row "  fxLayoutGap="20px" >
+          <p>总部编号：{{viewData.chain.number}}</p>
+        </div>
+      </mat-toolbar-row>
+
+    </mat-toolbar>
+
+    <ng-template #tdA let-item="item">{{item.name?item.name:"-"}}</ng-template>
+    <ng-template #tdB let-item="item">{{item.tel?item.tel:"-"}}</ng-template>
+    <ng-template #tdC let-item="item">{{item.area?item.area:"-"}}</ng-template>
+    <ng-template #tdD let-item="item">
+      <a class="zmCurHand" style="margin-right: 5px;" (click)="handleApplyChain(item.id,0)">通过</a>
+      <a class="zmCurHand" style="margin-right: 5px;" (click)="handleApplyChain(item.id,1)">拒绝</a>
+      <a class="zmCurHand" style="margin-right: 5px;" (click)="goStoreDetail(item.id)">查看</a>
+    </ng-template>
+
+    <zm-mat-table [tdTemplateList]="[tdA,tdB,tdC,tdD]" [thNameList]="['店铺名称','预约电话','区域','操作']" [itemList]="viewData.applyStoreList"></zm-mat-table>
+
+    <no_data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.applyStoreList" [text]=" '没有数据' "  [showImg]="'noData'"></no_data>
+
+    <zm_page [totalSize]="viewData.applyStoreRecordCount" [curPage]="viewData.applyStoreCurPage" (pageChange) = "getApplyStorePageData($event)"></zm_page>
+  </ng-template>
+
+  <zm-mat-tabs  [tabTemplateList]="[tabA,tabB]" [tabNameList]="['店铺列表','审核名单']" [selectedIndex]="0"></zm-mat-tabs>
+
+</view-body-comp>

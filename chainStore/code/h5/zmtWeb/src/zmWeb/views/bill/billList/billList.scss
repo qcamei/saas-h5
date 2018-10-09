@@ -1,0 +1,189 @@
+.disFlex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: flex;
+  flex-wrap: wrap;
+}
+.flex {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  -webkit-flex: 1;
+  -moz-box-flex: 1;
+  flex: 1;
+}
+.align-center {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  align-items: center;
+}
+
+.orderStatus span{
+  margin-right:30px;
+  font-size:18px;
+
+}
+.activeDefault{
+  color:#4678fa;
+  border-bottom:2px solid #4678fa;
+}
+.color-theme{
+  color: #4678fa;
+}
+.cur-hand{
+  cursor: pointer;
+}
+
+
+.hor-center {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  -moz-box-pack: center;
+  justify-content: center;
+}
+// .text-center{
+//   text-align: center;
+// }
+// .mg-l-20{
+//   margin-left:20px;
+// }
+// .mg-r-20{
+//   margin-right:20px;
+// }
+// .mg-l-10{
+//   margin-left:10px;
+// }
+// .mg-r-10{
+//   margin-right:10px;
+// }
+
+// .table td{
+//   vertical-align: middle;
+//   // padding: 0.45rem !important;
+
+
+// }
+// .mg-b-0{
+//   margin-bottom:0;
+// }
+// .fz-12{
+//   font-size:12px;
+// }
+// 流程
+
+// .step-item .imgDiv {
+//   background: #dcdcdc;
+//   height: 40px;
+//   width: 40px;
+//   border-radius: 50%;
+//   margin: 0 auto;
+//   cursor: pointer;
+// }
+// .step-item .imgDivActive {
+//   @extend .imgDiv;
+//   background: #4678fa;
+// }
+// .progressbar {
+//   height:1px;
+//   background:#4678fa;
+//   margin-top:15px;
+// }
+// .progressbar_gray {
+//   height:1px;
+//   background:#999999;
+//   margin-top:15px;
+// }
+// .progressbar2 {
+//   height:1px;
+//   background:#4678fa;
+//   margin-top:21px;
+// }
+// .progressbar_gray2 {
+//   height:1px;
+//   background:#999999;
+//   margin-top:21px;
+// }
+
+// .gray-set{
+//   background:#dddddd;
+// }
+// bootstrap样式类
+
+
+
+// .text-muted{
+//   color: #999999;
+// }
+// .text-muted-on{
+//   color: #666666;
+// }
+// .step-item:nth-last-child{
+//   width:13.5%;
+// }
+
+// .step-item .progressbarActive {
+//   // @extend .progressbar;
+//   background: #4678fa;
+// }
+// .step-item .textActive {
+//   color: #4678fa;
+// }
+// .pos-r{
+//   position: relative;
+// }
+// .hor-center {
+//   -webkit-box-pack: center;
+//   -ms-flex-pack: center;
+//   -webkit-justify-content: center;
+//   -moz-box-pack: center;
+//   justify-content: center;
+// }
+// .pos-a{
+//   position: absolute;
+// }
+// .table_heaad th{
+//   padding:0.65rem;
+//   background-color: #f4f6fa !important;
+//   border-bottom-width: 1px !important;
+// }
+
+// 高亮
+.bg-active{
+  color:#039be5 !important;
+  border:1px solid #039be5 !important;
+}
+
+// 不高亮
+.bg-inActive{
+  color:#A8A8A8 !important;
+  border:1px solid #A8A8A8 !important;
+}
+
+// // 作废
+.cancellation{
+  width:100%;
+  height:100%;
+  left:0;
+  top:0;
+  text-align: right;
+  background:rgba(0,0,0,0);
+  line-height: 80px;
+  z-index: 100;
+}
+.cancellation img{
+  z-index: 3;
+}
+
+// 补单样式
+.chainMark{
+  border-radius:20px;
+  background:#03a9f4;
+  color:#ffffff;
+  position: absolute;
+   top:0;
+   left:-30px;
+} 

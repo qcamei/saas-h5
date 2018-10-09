@@ -1,0 +1,9 @@
+<!--views/appointment/comps/storecell/storeCell.wxml-->
+<view class='storeCell' bindtap='cellClick' data-cellModel='{{cellModel}}'>
+<view class='cell-title'>{{cellModel.title}}</view>
+<view class='cell-location'>
+<image class='location-icon' src='../../../../images/icon_store_location.png'></image>
+<view class='location-content'>{{cellModel.location}}</view>
+</view>
+<view class="line"></view>
+</view>

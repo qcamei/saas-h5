@@ -1,0 +1,79 @@
+
+<div class="mb-36">
+  <!--<div class="text-bold">流程状态</div>-->
+  <div class="w-100-p py-8  px-12" fxLayout="row wrap" fxLayoutAlign="space-between center">
+
+    <div *ngIf="viewData.wfProgress.hasAppoint" class="w-15-p" (click)="showPage(0)">
+        <div class="py-12 text-center"  style="width:85%;color:#A8A8A8;border-radius: 20px;border:1px solid #A8A8A8;">
+          预约
+        </div>
+    </div>
+
+    <div  *ngIf="!viewData.wfProgress.hasAppoint" class="w-15-p" (click)="showPage(0)">
+        <div class="py-12 text-center" style="width:85%;color:#A8A8A8;border-radius: 20px;border:1px solid #A8A8A8;">
+          到店开单
+        </div>
+    </div>
+
+    <div style="width:1px;height:45px;border-left:1px solid #039be5;"></div>
+
+    <div class="w-35-p" fxLayout="row" fxLayoutAlign="center center">
+
+        <div  style="position:relative;width:70px;height:70px;padding:16px 0;line-height:18px;border-radius: 50%;color:#A8A8A8;border:1px solid #A8A8A8;" (click)="showPage(1)" class="text-center" [ngClass]="viewData.wfProgress.status != 2 ?'bg-active zmCurHand':''">
+          选择<br>会员
+          <div class="w-100-p h-100-p" fxLayout="row" fxLayoutAlign="center center" style="position:absolute;left:0;top:0">
+                  <img class="w-50-p" *ngIf="viewData.wfProgress.hasLeaguer && (viewData.wfProgress.status != 2)" src="assets/images/icon/correct-on.png">
+                   <img *ngIf="viewData.wfProgress.hasLeaguer && (viewData.wfProgress.status == 2)" src="assets/images/icon/correct.png">
+          </div>
+
+        </div>
+        <div  style="position:relative;width:70px;height:70px;padding:16px 0;line-height:18px;border-radius: 50%;color:#A8A8A8;border:1px solid #A8A8A8;margin-left:-5px;background:#fff;" (click)="showPage(1)" class="text-center" [ngClass]="viewData.wfProgress.status != 2 ?'bg-active zmCurHand':''">
+          跟进<br>人员
+          <div class="w-100-p h-100-p" fxLayout="row" fxLayoutAlign="center center" style="position:absolute;left:0;top:0">
+                   <img class="w-50-p" *ngIf="viewData.wfProgress.hasFollowClerk && (viewData.wfProgress.status != 2)" src="assets/images/icon/correct-on.png">
+             <img *ngIf="viewData.wfProgress.hasFollowClerk && (viewData.wfProgress.status == 2)" src="assets/images/icon/correct.png">
+          </div>
+        </div>
+
+        <div  style="position:relative;width:70px;height:70px;padding:16px 0;line-height:18px;border-radius: 50%;color:#A8A8A8;border:1px solid #A8A8A8;margin-left:-5px;background:#fff;" (click)="showPage(1)" class="text-center" [ngClass]="viewData.wfProgress.status != 2 ?'bg-active zmCurHand':''">
+          选择<br>产品
+          <div class="w-100-p h-100-p" fxLayout="row" fxLayoutAlign="center center" style="position:absolute;left:0;top:0">
+                 <img class="w-50-p" *ngIf="viewData.wfProgress.hasPurchase && (viewData.wfProgress.status != 2)" src="assets/images/icon/correct-on.png">
+             <img *ngIf="viewData.wfProgress.hasPurchase && (viewData.wfProgress.status == 2)" src="assets/images/icon/correct.png">
+          </div>
+        </div>
+        <div  style="position:relative;width:70px;height:70px;padding:16px 0;line-height:18px;border-radius: 50%;color:#A8A8A8;border:1px solid #A8A8A8;margin-left:-5px;background:#fff;" (click)="showPage(1)" class="text-center" [ngClass]="viewData.wfProgress.status != 2 ?'bg-active zmCurHand':''">
+          提交<br>订单
+          <div class="w-100-p h-100-p" fxLayout="row" fxLayoutAlign="center center" style="position:absolute;left:0;top:0">
+                 <img class="w-50-p" *ngIf="viewData.wfProgress.hasOrder && (viewData.wfProgress.status != 2)" src="assets/images/icon/correct-on.png">
+             <img *ngIf="viewData.wfProgress.hasOrder && (viewData.wfProgress.status == 2)" src="assets/images/icon/correct.png">
+          </div>
+        </div>
+        <div style="position:relative;width:70px;height:1px;color:#A8A8A8;border:1px dotted #A8A8A8;" ></div>
+
+        <div style="position:relative;width:70px;height:70px;padding:16px 0;line-height:18px;border-radius: 50%;color:#A8A8A8;border:1px solid #A8A8A8;background:#fff;" (click)="goOrderPay()" class="text-white rounded text-center p-2" [ngClass]="viewData.wfProgress.status == 1?'bg-active zmCurHand':''">
+          确认<br>收款
+          <div class="w-100-p h-100-p" fxLayout="row" fxLayoutAlign="center center" style="position:absolute;left:0;top:0">
+                   <img class="w-50-p" *ngIf="viewData.wfProgress.hasPay" src="assets/images/icon/correct-on.png">
+          </div>
+        </div>
+
+
+    </div>
+    <div style="width:1px;height:45px;border-left:1px solid #039be5;"></div>
+
+    <div class="w-15-p pl-8" (click)="showPage(2)">
+        <div class="py-12 text-center"  [ngClass]=" viewData.wfProgress.hasOrder && viewData.wfProgress.status != 2 ?'bg-active':'bg-inActive'">
+          设置提成
+        </div>
+    </div>
+    <div style="width:1px;height:45px;border-left:1px solid #039be5;"></div>
+
+    <div class="w-15-p pl-8" (click)="goRecord()">
+        <div class="py-12 text-center"  [ngClass]="viewData.wfProgress.status != 2 ?'bg-active':'bg-inActive'">
+          跟进记录
+        </div>
+    </div>
+
+  </div>
+</div>

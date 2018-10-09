@@ -1,0 +1,65 @@
+<view-body-comp [headerArr]="['店铺列表','店铺信息']">
+
+    <div *ngIf="viewData.chain">
+      <zm_table_detail>
+        <tbody>
+        <tr>
+          <th class="bg-th" style="width:200px;">店铺编号</th>
+          <td>{{viewData.chain.number}}</td>
+        </tr>
+        <tr>
+          <th class="bg-th">店铺名称</th>
+          <td>{{viewData.chain.name}}</td>
+        </tr>
+        <tr>
+          <th class="bg-th">预约电话</th>
+          <td>{{viewData.chain.contactNumber}}</td>
+        </tr>
+        <tr>
+          <th class="bg-th">区域</th>
+          <td>{{viewData.chain.area}}</td>
+        </tr>
+        <tr>
+          <th class="bg-th">详细地址</th>
+          <td colspan="3">{{viewData.chain.address?viewData.chain.address:'-'}}</td>
+        </tr>
+        <tr>
+          <th class="bg-th">店铺介绍</th>
+          <td colspan="3">{{viewData.chain.descript?viewData.chain.descript:'-'}}</td>
+        </tr>
+        </tbody>
+      </zm_table_detail>
+    </div>
+
+    <div *ngIf="viewData.storeDetail">
+      <zm_table_detail>
+        <tbody>
+        <tr>
+          <th class="bg-th" style="width:200px;">店铺编号</th>
+          <td>{{viewData.storeDetail.id}}</td>
+        </tr>
+        <tr>
+          <th class="bg-th">店铺名称</th>
+          <td>{{viewData.storeDetail.name}}</td>
+        </tr>
+        <tr>
+          <th class="bg-th">预约电话</th>
+          <td>{{viewData.storeDetail.tel}}</td>
+        </tr>
+        <tr>
+          <th class="bg-th">区域</th>
+          <td>{{viewData.storeDetail.area}}</td>
+        </tr>
+        <tr>
+          <th class="bg-th">详细地址</th>
+          <td colspan="3">{{viewData.storeDetail.address?viewData.storeDetail.address:'-'}}</td>
+        </tr>
+        <tr>
+          <th class="bg-th">店铺介绍</th>
+          <td colspan="3">{{viewData.storeDetail.descript?viewData.storeDetail.descript:'-'}}</td>
+        </tr>
+        </tbody>
+      </zm_table_detail>
+    </div>
+
+</view-body-comp>

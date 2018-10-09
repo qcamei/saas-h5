@@ -1,0 +1,88 @@
+ <view-body-comp [headerArr]="['员工信息']">
+
+           <ng-template  #tabA>
+
+             <mat-toolbar style="padding-top:15px;margin-top:15px;margin-bottom:15px;">
+               <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="zmFullWidth">
+                 <div fxLayout="row "  fxLayoutGap="20px" >
+
+                   <div style="width:150px">
+                     <zm-select [noAll]="true" [label]="'是否服务人员'" [selectList]="[{name:'全部',value:0},{name:'是',value:1},{name:'否',value:2}]" [(zmValue)]="viewData.isBeautician" (selectCallback)="findClerk()"></zm-select>
+                   </div>
+                   <div style="width:150px">
+                     <mat-form-field style="width:100%">
+                       <mat-select [placeholder]="'岗位'" [(ngModel)]="viewData.clerkRoleName" (selectionChange)="findClerk()" >
+                         <mat-option [value]="'0'">全部</mat-option>
+                         <mat-option *ngFor="let item of viewData.roleList" [value]="item.name">{{item.name}}</mat-option>
+                       </mat-select>
+                     </mat-form-field>
+                   </div>
+                   <div  fxFlexAlign="center"  >
+                     <zm-search-box [label]=" '员工查询'" [placeholder]="'姓名/手机号'" [(zmValue)]="viewData.clerkName" (callBack)="findClerk()"></zm-search-box>
+                   </div>
+                 </div>
+                 <div fxLayout="row "  fxLayoutGap="20px" >
+                   <zm-btn-small [name]="'员工加入'"  (zmbtnClick)="goAddClerk()"></zm-btn-small>
+                 </div>
+               </mat-toolbar-row>
+             </mat-toolbar>
+
+             <ng-template #tdA let-item="item" style="position: relative;">
+               <span *ngIf="item.origin==1" class="px-8 mr-8 chainMark">总部</span>{{item.name}}
+             </ng-template>
+             <ng-template #tdB let-item="item">{{item.gender == 1?'男':'女'}}</ng-template>
+             <ng-template #tdC let-item="item">{{item.phone}}</ng-template>
+             <ng-template #tdD let-item="item" >
+               <span matTooltip="{{item.roleSetName && item.roleSetName.length>25?item.roleSetName:null}}">
+                 {{item.roleSetName?(item.roleSetName.length>20?item.roleSetName.slice(0,20)+'...':item.roleSetName):'-'}}</span>
+             </ng-template>
+             <ng-template #tdE let-item="item">{{item.isBeautician?'是':'否'}}</ng-template>
+             <ng-template #tdF let-item="item">
+               <a class="zmCurHand" style="margin-right: 5px;"  (click)="goAllocationRole(item.id)">岗位分配</a>
+               <a class="zmCurHand" style="margin-right: 5px;"  (click)="deleteClerk(item)">删除</a>
+             </ng-template>
+
+             <zm-mat-table [tdTemplateList]="[tdA,tdB,tdC,tdD,tdE,tdF]" [thNameList]="['姓名','性别','手机号','岗位','是否服务人员','操作']" [itemList]="viewData.clerkList"></zm-mat-table>
+
+             <no-data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.clerkList" [text]=" '没有数据' "  [showImg]="'noData'"></no-data>
+
+             <zm-page [totalSize]="viewData.clerkRecordCount" [curPage]="viewData.clerkPage" (pageChange) = "getClerkPageData($event)"></zm-page>
+
+           </ng-template>
+
+
+
+
+          <ng-template  #tabB>
+
+            <mat-toolbar style="padding-top:15px;margin-top:15px;margin-bottom:15px;">
+              <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="zmFullWidth">
+                <zm-search-box [label]=" '查询'" [placeholder]="'姓名/手机号'" [(zmValue)]="viewData.applyClerkName" (callBack)="findApplyClerk()"></zm-search-box>
+                <div fxLayout="row "  fxLayoutGap="20px" >
+                  <zm-btn-small [name]="'通过'"  (zmbtnClick)="handleGroup(true)"></zm-btn-small>
+                  <zm-btn-small [name]="'不通过'"  (zmbtnClick)="handleGroup(false)" class="mg-l-10"></zm-btn-small>
+                </div>
+              </mat-toolbar-row>
+            </mat-toolbar>
+
+            <ng-template #tdA let-item="item" style="position:relative;">
+              <span *ngIf="item.origin==1" class="px-8 mr-8 chainMark">总部</span>{{item.name}}
+            </ng-template>
+            <ng-template #tdB let-item="item">{{item.gender == 1?'男':'女'}}</ng-template>
+            <ng-template #tdC let-item="item">{{item.phone}}</ng-template>
+            <ng-template #tdD let-item="item">
+              <a class="zmCurHand" style="margin-right: 5px;"  (click)="handleApplyClerk(item.id,true)">通过</a>
+              <a class="zmCurHand" style="margin-right: 5px;"  (click)="handleApplyClerk(item.id,false)">不通过</a>
+            </ng-template>
+
+            <zm-mat-table-checkbox [tdTemplateList]="[tdA,tdB,tdC,tdD]" [thNameList]="['姓名','性别','手机号','操作']" [itemList]="viewData.applyClerkList"></zm-mat-table-checkbox>
+
+             <no-data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.applyClerkList" [text]=" '没有数据' " [showImg]="'noData'"></no-data>
+
+             <zm-page [totalSize]="viewData.applyClerkRecordCount" [curPage]="viewData.applyClerkPage" (pageChange) = "getApplyClerkPageData($event)"></zm-page>
+          </ng-template>
+
+          <zm-mat-tabs  [tabTemplateList]="[tabA,tabB]" [tabNameList]="['员工列表','审核名单']" [selectedIndex]="0"></zm-mat-tabs>
+
+
+ </view-body-comp>

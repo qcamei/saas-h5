@@ -1,0 +1,58 @@
+<view-body-comp [headerArr]="['续费升级支付','订单详情']" >
+  <zm-card-box [withCollapse]="false">
+      <content>
+        <div *ngIf="viewData.charge" class="mt-12 pb-64" fxLayout="row" fxLayoutGap="15px">
+          <div fxLayout="column" class="w-45-p">
+              <p class="my-8 pl-32 text-bold"><span style="width:120px;display:inline-block;">订单编号:</span><span>{{viewData.charge.number}}</span></p>
+              <p class="my-8 pl-32 text-bold"><span style="width:120px;display:inline-block;">创建时间:</span><span>{{viewData.charge.createdTime|times}}</span></p>
+              <p class="my-8 pl-32 text-bold"><span style="width:120px;display:inline-block;">等级名称:</span><span>{{viewData.vipLevel.name}}</span></p>
+              <p class="my-8 pl-32 text-bold"><span style="width:120px;display:inline-block;">购买时长:</span><span>{{viewData.charge.validPeriod + "个月"}}</span></p>
+              <p class="my-8 pl-32 text-bold"><span style="width:120px;display:inline-block;">有效日期:</span><span>{{viewData.charge.expiredTime | times:'yyyy/MM/dd'}}</span></p>
+              <p class="my-8 pl-32 text-bold"><span style="width:120px;display:inline-block;">等级费用:</span><span>￥{{viewData.charge.vipAmount?(viewData.charge.vipAmount | pricePipe):'0.00'}}</span></p>
+              <p class="my-8 pl-32 text-bold"><span style="width:120px;display:inline-block;">剩余时长抵扣:</span><span>￥{{viewData.charge.offsetAmount | pricePipe}}</span></p>
+              <p class="my-8 pl-32 text-bold"><span style="width:120px;display:inline-block;">优惠金额:</span><span>￥{{viewData.charge.discountAmount | pricePipe}}</span></p>
+          </div>
+
+           <!-- 未支付 -->
+           <div *ngIf="viewData.charge.status == 0" fxLayout="column" fxLayoutAlign="space-between" class="w-45-p">
+              <div fxLayout="row" fxLayoutAlign="end center" class="pb-25 w-100-p">
+                  <zm-btn stroked="true" name="刷新支付状态" (zmbtnClick)="refreshPay()"></zm-btn>
+              </div>
+              <div  fxLayout="column"  class="w-100-p">
+
+                    <div class="my-8 pl-32 text-bold" style="font-size:18px;"><span  style="width:120px;display:inline-block;">实付金额:</span><span>￥{{getPayMoney() | pricePipe}}</span></div>
+                    <div class="my-8 pl-32  text-bold" style="font-size:18px;"><span style="width:120px;display:inline-block;">支付状态:</span><span>未支付</span></div>
+                    <div class="py-20 w-100-p" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
+                        <div (click)="alipay()" class="zmCurHand"  [ngClass]="isTrueZfb?'pay-active':'pay-uncheck'" fxLayout="row"fxLayoutAlign="start center">
+                                  <img  src="assets/images/icon/zfb-big.png">
+                                  <span class="ml-12">支付宝</span>
+                        </div>
+                        <div (click)="wechatPay()" class="zmCurHand" [ngClass]="isTrueWx?'pay-active':'pay-uncheck'"  fxLayout="row"fxLayoutAlign="start center">
+                                <img  src="assets/images/icon/weixin-big.png">
+                                <span class="ml-12">微信支付</span>
+                        </div>
+                  </div>
+              </div>
+
+
+
+          </div>
+
+          <!-- 已支付 -->
+          <div  *ngIf="viewData.charge.status == 1" fxLayout="column" class="w-45-p">
+
+            <div class="my-8 pl-32 text-bold" style="font-size:18px;"><span  style="width:120px;display:inline-block;">实付金额:</span><span>￥{{viewData.charge.money | pricePipe}}</span></div>
+
+            <p class="my-8 pl-32  text-bold"><span style="width:120px;display:inline-block;">支付状态:</span><span>已支付</span></p>
+            <p class="my-8 pl-32  text-bold"><span style="width:120px;display:inline-block;">支付方式:</span>
+              <span class="text-bold" >{{viewData.charge.payItems&&viewData.charge.payItems[0].payType | chargeChannelPipe}}</span>
+            </p>
+            <p class="my-8 pl-32  text-bold"><span style="width:120px;display:inline-block;">支付时间:</span><span>{{viewData.charge.payItems[0].createdTime | times}}</span></p>
+            <p class="my-8 pl-32  text-bold"><span style="width:120px;display:inline-block;">支付编号:</span><span>{{viewData.charge.payItems[0].tradeNo}}</span></p>
+          </div>
+        </div>
+      </content>
+  </zm-card-box>
+
+
+</view-body-comp>

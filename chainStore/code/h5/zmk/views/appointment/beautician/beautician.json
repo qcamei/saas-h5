@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "选择美容师",
+  "usingComponents": {
+    "comp-beautician-cell": "../comps/beauticiancell/beauticianCell"
+  }
+}

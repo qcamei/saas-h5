@@ -1,0 +1,39 @@
+<view-body-comp [headerArr]="['开单列表','开单详情']">
+
+  <!-- 流程状态进度 start -->
+  <bill-progress [workFlowData]="viewData.workFlowData" (show)="showCallback($event)"></bill-progress>
+  <!-- 流程状态进度 end -->
+
+  <!-- 作废信息 -->
+  <div *ngIf="viewData.workFlowData&&(viewData.workFlowData.status == 2)">
+    <div class="font-bold" style="margin-bottom:20px;">作废信息</div>
+    <zm-table-detail>
+      <thead class="table_heaad">
+      <th style="width:15%">操作人</th>
+      <th style="width:85%">作废原因</th>
+      </thead>
+      <tbody class="table">
+      <tr>
+        <td class="text-center">{{viewData.workFlowData.cancelReason.operator}}</td>
+        <td  class="text-center"><span>{{viewData.workFlowData.cancelReason.cancelReason?viewData.workFlowData.cancelReason.cancelReason:'-'}}</span></td>
+      </tr>
+      </tbody>
+    </zm-table-detail>
+  </div>
+  <!-- 作废信息 -->
+
+
+
+  <!-- 动态组件容器 start -->
+  <div class="position-relative">
+    <div *ngIf="viewData.workFlowData&&(viewData.workFlowData.status == 2)" class="position-absolute" style="top:0;left:0;width:100%;background:rgba(0,0,0,0.1);height:100%;z-index: 10;">
+      <img class="position-absolute" style="top:0;right:0;" src="assets/images/new_invalid_big.png">
+    </div>
+
+    <ng-template #compContainer></ng-template>
+  </div>
+  <!-- 动态组件容器 end -->
+
+</view-body-comp>
+
+

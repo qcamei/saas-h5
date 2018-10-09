@@ -1,0 +1,36 @@
+
+<!--<div class="pd-lr-30 disFlex align-center  fz-18 font-bold" style="margin-bottom: 20px;background-color: #fff;height: 60px;">-->
+  <!--<span><img src="assets/images/home/geren.png" height="28" width="28" class="mg-r-10"/>个人中心</span>-->
+<!--</div>-->
+
+<view-body-comp [headerArr]="['个人中心']" >
+  <zm-card [header]="'个人信息'" [withCollapse]="false">
+
+    <div fxLayout="column" fxLayoutGap="30px">
+
+      <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="40px">
+        <label class="c-label font-bold">手机号</label>
+        <span>{{viewData.user.phone}}</span>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="50px">
+        <label class="c-label font-bold">姓名</label>
+        <input *ngIf="viewData.isEdit" type="text" placeholder="请输入您的姓名" maxlength="10" class="form-control"  name = "job" [(ngModel)]="viewData.user.name"/>
+        <span *ngIf="!viewData.isEdit">{{viewData.user.name}}</span>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="50px">
+        　<label class="c-label font-bold">性别</label>
+        <zm_input_radio *ngIf="viewData.isEdit" [radioList]="viewData.genderRadioList" [(curValue)]="viewData.genderValue"></zm_input_radio>
+        <span *ngIf="!viewData.isEdit">{{viewData.user.gender == 1?'男':'女'}}</span>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="50px">
+        <zm_btn_md *ngIf="!viewData.isEdit" name="编辑" (zmbtnClick)="editUser()"></zm_btn_md>
+        <zm_btn_md *ngIf="viewData.isEdit" name="取消" (zmbtnClick)="cancelEdit()">取消</zm_btn_md>
+        <zm_btn_md *ngIf="viewData.isEdit" name="保存" (zmbtnClick)="updateUser()">保存</zm_btn_md>
+      </div>
+    </div>
+  </zm-card>
+
+</view-body-comp>

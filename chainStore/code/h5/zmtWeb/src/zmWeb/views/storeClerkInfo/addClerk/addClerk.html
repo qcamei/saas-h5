@@ -1,0 +1,21 @@
+
+        <view-body-comp [headerArr]="['员工信息','添加员工']">
+            <content>
+              <div class="row" style="padding-left: 15px;">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="col-lg-12 col-md-12 col-sm-12" style="padding-left: 15px;">
+                  <p class="fz-18 font-bold mg-t-40">第一步</p>
+                  <p>员工通过智美通APP扫描以下店铺二维码直接加入</p>
+                  <img src={{viewData.joinStoreImg}} alt="">
+                </div>
+                    <div class="mg-t-40">
+                      <p class="font-bold">第二步</p>
+                      <p class="font-bold">管理者或有员工管理权限的工作者进行审核通过</p>
+                      <div><button (click)="goFindClerk()" type="button" mat-raised-button color="accent" class=" mg-b-30 mg-t-10 cur-hand" >进入审核名单</button></div>
+                      <img src="assets/images/guide/content-clerk-2.png" alt="" style="width: 80%">
+                    </div>
+                </div>
+                </div>
+              </content>
+            </view-body-comp>
+

@@ -1,0 +1,50 @@
+<view-header-comp [headerArr]="['绑定商户']"></view-header-comp>
+<view-body-comp >
+  <content>
+    <div class="">
+      <div class="mg-b-15 disFlex " style="width: 100%">
+        <div class="c-devinfo disFlex align-center">
+          <label class=" mg-b-0 fz-14 font-bold mg-r-10">商家搜索</label>
+          <input class=" c-devinfo-input mg-r-20" type="text " placeholder="输入商家账号" [(ngModel)]="viewData.buserPhone" (keydown)="onKeyPress($event)"/>
+          <button class="c-devinfo-btn" (click)="getListByReq()">查询</button>
+        </div>
+      </div>
+
+      <div  style="width: 100%">
+        <table class="table table-bordered text-center mg-b-0">
+          <thead>
+            <th>商家姓名</th>
+            <th>商家账号</th>
+            <th>地区</th>
+            <th>客户代表</th>
+            <th>客户代表手机</th>
+            <th>绑定设备数</th>
+            <th>操作</th>
+          </thead>
+          <tbody>
+          <tr class="c-tr" *ngFor="let item of viewData.buserBindDeviceListShow">
+            <td>{{item.buserName}}</td>
+            <td>{{item.buserPhone}}</td>
+            <td>{{item.storeArea}}</td>
+            <td>{{item.salesman}}</td>
+            <td>{{item.salesmanPhone}}</td>
+            <td>{{item.bindDeviceCount}}</td>
+            <td>
+              <span class="mg-r-10 font-c1 cur-hand" [routerLink]="['/main/mngDevice/deviceDetailList/'+item.buserPhone]">仪器详情</span>
+              <span class="mg-r-10 font-c1 cur-hand" (click)="addBindDeviceModel(item)">绑定仪器</span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div *ngIf="viewData.loadingFinish && viewData.buserBindDeviceListShow.length == 0"
+             class="text-center disFlex hor-center " style="border: 1px solid #e9ecef;border-top: none;align-items:center;height: 300px;">
+          <div style="">
+            <!--<img src="assets/images/noData.png" height="220" width="220"/>-->
+            <h4 class="font-bold fz-18">没有数据</h4>
+          </div>
+        </div>
+        <pagination-comp [recordCount]="viewData.recordCount" [(page)]="viewData.currentPage"  (callback)="getPageData($event)"></pagination-comp>
+      </div>
+    </div>
+  </content>
+</view-body-comp>

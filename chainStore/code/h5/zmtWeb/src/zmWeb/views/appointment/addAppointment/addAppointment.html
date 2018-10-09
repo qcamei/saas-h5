@@ -1,0 +1,45 @@
+<view-body-comp [headerArr]="['预约列表','新建预约']">
+  <content>
+    <!-- 选择会员 start -->
+    <leaguer-comp [appointWraper]="appointWraper"></leaguer-comp>
+    <!-- 选择会员 end -->
+
+
+    <!-- 选择项目 start -->
+    <product-comp *ngIf="hasLeaguer" [appointWraper]="appointWraper"></product-comp>
+    <!-- 选择项目 end -->
+
+    <!-- 选择服务人员 start -->
+    <servicePerson-comp *ngIf="hasProduct" [appointWraper]="appointWraper"></servicePerson-comp>
+    <!-- 选择服务人员 end -->
+
+    <!--预约时间-->
+
+    <zm-card *ngIf="hasLeaguer" [expanded]="true" [withCollapse]="false" [textBold]="true" [header]="'预约时间'">
+      <div style="padding: 1.01rem">
+        说明：该店铺可预约时间为
+        <span style="color:red">
+        {{minAppointTime.hour}}:{{minAppointTime.minute}}-{{maxAppointTime.hour}}:{{maxAppointTime.minute}}
+      </span>,其他时间无法预约。
+      </div>
+      <div class="col-md-12 col-lg-12 col-sm-12  disFlex time" style="padding: 0;padding: 1.25rem;">
+
+        <zm-search-date [label]="'设置日期'" [placeholder]="'请选择日期'" [(curValue)]="appointDate"
+                        [minDate]="today"></zm-search-date>
+        <appoint-time-comp [label]="'设置时间'" [minTime]="minAppointTime" [maxTime]="maxAppointTime"
+                           [(currentValue)]="curAppointTime"></appoint-time-comp>
+      </div>
+    </zm-card>
+
+
+    <div *ngIf="hasLeaguer" fxLayout="row" fxLayoutAlign="end" style="margin-top: 20px;">
+      <zm-btn-large notRepeatSubmit fxFlexAlign="end" [disabled]="!hasProduct || submitSuccess" name="保存"
+                    (zmbtnClick)="addAppointment()"></zm-btn-large>
+    </div>
+
+
+  </content>
+</view-body-comp>
+
+
+

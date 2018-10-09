@@ -1,0 +1,183 @@
+// http://ionicframework.com/docs/v2/theming/
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+// Settings Style Main Meni
+[header-background-image] {
+    //height: 200px;
+    background-size: cover;
+    background-position: center;
+    @include darkening-blend-mode;
+
+    [item-title] {
+      color: theme-colors('textColors', 'accent-first') !important;
+      position: relative;
+      z-index: 9;
+    }
+  }
+  // Settings Main  Menu
+
+  [main-menu] {
+    button {
+      padding-left: 30px;
+    }
+
+
+    .item-inner {
+      margin-left: 0 !important;
+    }
+
+    [icon-small] {
+      margin-top: 18px !important;
+    }
+  }
+  // Settings Submenu
+
+  [submenu] {
+    ion-label {
+      padding-left: 30px !important;
+    }
+  }
+
+// Menu user profile
+.user-avatar {
+  margin:10px;
+  width: 68px;
+  height: 68px;
+  display: inline-block;
+  border-radius: 50%;
+  -webkit-box-shadow: inset 0 0 10rem rgba(0, 0, 0, 0.25), 0 0 4rem rgba(255, 255, 255, 0.45);
+  box-shadow: inset 0 0 10rem rgba(0, 0, 0, 0.25), 0 0 4rem rgba(255, 255, 255, 0.45);
+}
+
+ .user-avatar img {
+  border-radius: 50%;
+}
+
+
+ion-icon {
+  &[class*="zm-"] {
+    // Instead of using the font-based icons
+    // We're applying SVG masks
+    //-webkit-mask-size:  contain;
+    -webkit-mask-repeat: no-repeat;
+    background: currentColor;
+    width: 1.2em;
+    height: 1.2em;
+    vertical-align:middle;
+  }
+  // custom icons
+  &[class*="zm-vcode"] {
+    -webkit-mask-image: url(../assets/icon/vcode.svg);
+  }
+
+  &[class*="zm-female"] {
+    -webkit-mask-image: url(../assets/icon/female.svg);
+  }
+
+  &[class*="zm-male"] {
+    -webkit-mask-image: url(../assets/icon/male.svg);
+  }
+
+  &[class*="zm-work"] {
+    -webkit-mask-image: url(../assets/icon/work.svg);
+  }
+
+  &[class*="zm-admin"] {
+    -webkit-mask-image: url(../assets/icon/admin.svg);
+  }
+
+  &[class*="zm-home"] {
+    -webkit-mask-image: url(../assets/icon/home.svg);
+  }
+
+  &[class*="zm-my"] {
+    -webkit-mask-image: url(../assets/icon/my.svg);
+  }
+
+  &[class*="zm-order"] {
+    -webkit-mask-image: url(../assets/icon/order.svg);
+  }
+
+  &[class*="zm-appointment"] {
+    -webkit-mask-image: url(../assets/icon/appointment.svg);
+  }
+
+  &[class*="zm-client"] {
+    -webkit-mask-image: url(../assets/icon/client.svg);
+  }
+  &[class*="zm-business"] {
+    -webkit-mask-image: url(../assets/icon/business.svg);
+  }
+
+  &[class*="zm-achievement"] {
+    -webkit-mask-image: url(../assets/icon/business.svg);
+  }
+
+  &[class*="zm-stock"] {
+    -webkit-mask-image: url(../assets/icon/stock.svg);
+  }
+  &[class*="zm-agent"] {
+    -webkit-mask-image: url(../assets/icon/agent.svg);
+  }
+  &[class*="zm-wunit"] {
+    -webkit-mask-image: url(../assets/icon/wunit.svg);
+  }
+  &[class*="zm-goods"] {
+    -webkit-mask-image: url(../assets/icon/goods.svg);
+  }
+
+}
+::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/****** 自定义toast的样式begin ******/
+.error{
+  .toast-message{
+    color: #fff;
+  }
+  .toast-wrapper {
+    background: #F44336;
+  }
+}
+
+.success{
+  .toast-message{
+    color: #fff;
+  }
+  .toast-wrapper {
+    background: #8BC34A;
+  }
+}
+
+.warn{
+  .toast-message{
+    color: #fff;
+  }
+  .toast-wrapper {
+    background: #FFB10E;
+  }
+}
+
+.info{
+  .toast-message{
+    color: #fff;
+  }
+  .toast-wrapper {
+    background: #000;
+  }
+}
+/****** 自定义toast的样式end ******/

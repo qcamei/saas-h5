@@ -1,0 +1,5 @@
+export enum SmsTypeEnum{
+  B_VERIFICATION_CODE = 0,
+  C_VERIFICATION_CODE = 1,
+  INVITATION_CODE = 2,
+}

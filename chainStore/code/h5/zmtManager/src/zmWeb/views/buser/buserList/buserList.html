@@ -1,0 +1,55 @@
+
+<view-header-comp [headerArr]="['账号管理','账号列表']"></view-header-comp>
+<view-body-comp >
+  <content>
+    <div class="">
+      <div class="mg-b-15 disFlex " style="width: 100%">
+        <div class="c-devinfo disFlex align-center">
+          <label class=" mg-b-0 fz-14 font-bold mg-r-10">账号查询</label>
+          <input class=" c-devinfo-input" type="text " placeholder="请输入手机号" [(ngModel)]="viewData.phone" (keydown)="onKeyPress($event)"/>
+          <button class="c-devinfo-btn"  (click)="getListByReq()">查询</button>
+        </div>
+      </div>
+
+      <div  style="width: 100%">
+        <table class="table table-bordered text-center mg-b-0">
+          <thead>
+            <th>注册时间</th>
+            <th>手机号</th>
+            <th>姓名</th>
+            <th>状态</th>
+            <th>会员等级</th>
+            <th>等级分类</th>
+            <th>到期时间</th>
+            <th>状态</th>
+            <th>操作</th>
+          </thead>
+          <tbody>
+          <tr class="c-tr" *ngFor="let item of viewData.buserList">
+            <td>{{item.createdTime | datetimePipe}}</td>
+            <td>{{item.phone}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.roleSet | buserRolePipe}}</td>
+            <td>{{item.vipType | vipTypePipe:viewData.vipLevelList}}</td>
+            <td>{{item.vipLevelTypeId | vipLevelTypePipe:viewData.vipLevelTypeList}}</td>
+            <td>{{item.expiredTime | expiredTimePipe:item.roleSet}}</td>
+            <td>{{item.expiredTime | expiredStatePipe:item.roleSet}}</td>
+            <td>
+              <span *ngIf="item.roleSet !=null && (item.roleSet[0]==0 || item.roleSet[0]==2)" class="font-c1 cur-hand" [routerLink]="['/main/buser/buserEdit']" [queryParams]="{phone:item.phone,roleSet:item.roleSet}">编辑</span>
+              <span *ngIf="item.roleSet ==null || item.roleSet[0]==1">-</span>
+            </td>
+
+          </tr>
+          </tbody>
+        </table>
+        <div *ngIf="viewData.loadingFinish && (viewData.buserList == null || viewData.buserList.length == 0)"
+             class="text-center disFlex hor-center " style="border: 1px solid #e9ecef;border-top: none;align-items:center;height: 300px;">
+          <div style="">
+            <!--<img src="assets/images/noData.png" height="220" width="220"/>-->
+            <h4 class="font-bold fz-18">没有数据</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </content>
+</view-body-comp>

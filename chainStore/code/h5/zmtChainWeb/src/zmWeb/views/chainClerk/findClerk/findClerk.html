@@ -1,0 +1,50 @@
+
+<view-body-comp [headerArr]="['员工列表']">
+  <mat-toolbar style="padding-top:15px;margin-top:15px;margin-bottom:15px;">
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="zmFullWidth">
+      <div fxLayout="row "  fxLayoutGap="20px" >
+
+        <div style="width:150px">
+          <zm-select-number [noAll]="true" [label]="'是否跨店员工'" [selectList]="[{name:'全部',value:-1},{name:'是',value:0},{name:'否',value:1}]" [(zmValue)]="viewData.isStoreClerk" (selectCallback)="getChainClerkList()"></zm-select-number>
+        </div>
+        <div style="width:150px">
+          <zm-select-string [label]="'岗位'" name="name" value="id"  [selectList]="viewData.roleList" [(zmValue)]="viewData.queryForm.roleId" (selectCallback)="getChainClerkList()"></zm-select-string>
+          <!--<mat-form-field style="width:100%" color="accent">-->
+            <!--<mat-select [placeholder]="'岗位'" [(ngModel)]="viewData.queryForm.roleId" (selectionChange)="getChainClerkList()" >-->
+              <!--<mat-option [value]="'0'">全部</mat-option>-->
+              <!--<mat-option *ngFor="let item of viewData.roleList" [value]="item.id">{{item.name}}</mat-option>-->
+            <!--</mat-select>-->
+          <!--</mat-form-field>-->
+        </div>
+        <div  fxFlexAlign="center"  >
+          <zm_search_box [label]=" '员工查询'" [placeholder]="'姓名/手机号'" [(zmValue)]="viewData.queryForm.phoneOrName" (callBack)="getChainClerkList()"></zm_search_box>
+        </div>
+      </div>
+      <div fxLayout="row "  fxLayoutGap="20px" >
+        <zm_btn_small [name]="'分配'" (zmbtnClick)="batchAllotStores()" class="mr-2"></zm_btn_small>
+        <zm_btn_new [name]="'新建'" (zmbtnClick)="addChainClerk()"></zm_btn_new>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <ng-template #tdA let-item="item">{{item.name}}</ng-template>
+  <ng-template #tdB let-item="item">{{item.gender|genderPipe}}</ng-template>
+  <ng-template #tdC let-item="item">{{item.phone}}</ng-template>
+  <ng-template #tdD let-item="item">{{item.roleNames?item.roleNames:"-"}}</ng-template>
+  <ng-template #tdE let-item="item">{{item.crossClerk==0?'是':'否'}}</ng-template>
+  <ng-template #tdF let-item="item">{{item.storeNames?item.storeNames:"-"}}</ng-template>
+  <ng-template #tdG let-item="item">{{item.storeCount}}</ng-template>
+  <ng-template #tdH let-item="item">
+    <a class="zmCurHand" style="margin-right: 5px;" *ngIf="item.crossClerk==0" (click)="allotStores(item)">门店分配</a>
+    <a class="zmCurHand" style="margin-right: 5px;"  (click)="allotRole(item.id)">岗位设置</a>
+    <a class="zmCurHand" style="margin-right: 5px;"  (click)="editChainClerk(item.id)">编辑</a>
+    <a class="zmCurHand" style="margin-right: 5px;"  (click)="deleteChainClerk(item)">删除</a>
+  </ng-template>
+
+  <clerk-mat-table-checkbox [tdTemplateList]="[tdA,tdB,tdC,tdD,tdE,tdF,tdG,tdH]" [thNameList]="['姓名','性别','手机号','岗位','是否跨店员工','所属门店','适用门店','操作']" [itemList]="viewData.chainClerkListShow"></clerk-mat-table-checkbox>
+
+  <no_data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.chainClerkListShow" [text]=" '没有数据' "  [showImg]="'noData'"></no_data>
+
+  <zm_page [totalSize]="viewData.chainRecordCount" [curPage]="viewData.chainCurPage" (pageChange) = "getChainClerkPageData($event)"></zm_page>
+
+</view-body-comp>

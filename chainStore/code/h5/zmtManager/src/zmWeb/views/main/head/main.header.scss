@@ -1,0 +1,66 @@
+.header {
+  height: 77px;
+  background: #fff;
+  padding-right: 50px;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+  -webkit-flex-direction: row-reverse;
+  -moz-box-orient: horizontal;
+  -moz-box-direction: reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+  position:relative;
+  z-index: 999;
+    .avatar {
+      height: 40px;
+      width: 40px;
+      -moz-border-radius: 50%;
+      border-radius: 50%;
+      overflow: hidden;
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+
+  .user-dropList {
+    background: #fff;
+    border: 2px solid #4678fa;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    width: 150px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    top: 51px;
+    &:before {
+      content: '';
+      position: absolute;
+      top: -24px;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+      -moz-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      transform: translateX(-50%);
+      border: 11px solid #4678fa;
+      border-left-color: transparent;
+      border-top-color: transparent;
+      border-right-color: transparent;
+    }
+    a {
+      display: block;
+      text-decoration: none;
+      color: #2a2a2a;
+      height: 36px;
+      line-height: 36px;
+      text-align: center;
+      &:hover {
+        background: #4678fa;
+        color: #fff;
+      }
+    }
+  }
+

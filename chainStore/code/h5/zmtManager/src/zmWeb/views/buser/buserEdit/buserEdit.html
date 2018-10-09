@@ -1,0 +1,93 @@
+<view-header-comp [headerArr]="['账号管理','编辑账号']"></view-header-comp>
+<view-body-comp>
+  <content>
+    <div class="mg-t-30"></div>
+    <ng-template #tabContentTemplate let-tabName="name">
+      <ng-container [ngSwitch]="tabName">
+        <div  *ngSwitchCase="'基本信息'">
+
+          <div class="col-sm-12 col-md-12 mt-3 col-lg-5">
+
+            <div class="c-input-group mg-b-30">
+              <label class="c-label">手机号</label>
+              <span class="">{{viewData.buser.phone}}</span>
+            </div>
+
+            <div class="c-input-group mg-b-30">
+              <label class="c-label">姓名</label>
+              <span class="">{{viewData.buser.name}}</span>
+            </div>
+
+            <div class="c-input-group mg-b-30">
+              <label class="c-label">性别</label>
+              <span class="">{{viewData.buser.gender == 1 ?'男':'女'}}</span>
+            </div>
+
+            <div class="c-input-group mg-b-30">
+              <label class="c-label">设置状态</label>
+              <select *ngIf="viewData.buser.roleSet != null && viewData.buser.roleSet[0]==2" class="c-form-control"  [(ngModel)]="viewData.buser.roleSet">
+                <option [value] ="2">未分配</option>
+                <option [value] ="0">管理者</option>
+              </select>
+              <span *ngIf="viewData.buser.roleSet != null && viewData.buser.roleSet[0]==0">管理者</span>
+            </div>
+
+            <div *ngIf="viewData.buser.roleSet != null && viewData.buser.roleSet[0]==0">
+              <div class="c-input-group mg-b-30">
+                <label class="c-label">等级分类</label>
+                <select class="c-form-control"  [(ngModel)]="viewData.buserVipLevelTypeId" (ngModelChange)="onSelectVipLevelTypeId($event)">
+                  <option *ngFor="let item of viewData.vipLevelTypeList" [value]="item.id">{{item.name}}</option>
+                </select>
+              </div>
+
+              <div class="c-input-group mg-b-30">
+                <label class="c-label">设置等级</label>
+                <select class="c-form-control"  [(ngModel)]="viewData.buser.vipType">
+                  <option *ngFor="let item of viewData.vipLevelListShow" [value]="item.id">{{item.name}}</option>
+                </select>
+              </div>
+
+              <div class="c-input-group mg-b-30">
+                <label class="c-label">当前到期时间</label>
+                <span class="">{{viewData.buser.expiredTime | expiredTimePipe:viewData.buser.roleSet}}</span>
+              </div>
+
+              <div class="c-input-group mg-b-30">
+                <label class="c-label">设置到期时间</label>
+                <input class="c-input c-input-data cur-hand flex"  (click)="a.toggle()" [(ngModel)]="viewData.newExpiredTime"  placeholder="请设置到期时间"  name="dp"  ngbDatepicker #a="ngbDatepicker" readonly>
+                <button class="c-client-data cur-hand" (click)="a.toggle()" type="button">
+                  <i class="fa fa-calendar-o" aria-hidden="true" style=" cursor: pointer;"></i>
+                </button>
+              </div>
+
+            </div>
+
+            <div class="">
+              <button class="c-btn c-btn-blue c-my-btn cur-hand"  (click)="editBUser(viewData.buser.id)" >保存</button>
+            </div>
+          </div>
+        </div>
+
+        <div  *ngSwitchCase="'账号权限'">
+          <div class="d-flex mt-2">
+            <div class="col-md-4">
+              <zm_input_text_Group [(zmValue)]="viewData.buserRole.vipContent"></zm_input_text_Group>
+            </div>
+
+            <div class="col-md-8 mt-3">
+                <div *ngIf="viewData.loadingFinish">
+                  <zm_role_menu [storeMenu] = "viewData.storeMenu" [permSet]="viewData.buserRole.vipContent.permSet" (callback)="getPermSet($event)"></zm_role_menu>
+                </div>
+              </div>
+          </div>
+          <div class="mt-5">
+            <button  class="w-25 btn btn-primary btn-block cur-hand" (click)="updateBUserRole(viewData.buser.id)">保存</button>
+          </div>
+        </div>
+      </ng-container>
+    </ng-template>
+
+    <zm_tabs  [tabContentTemplate]="tabContentTemplate" [tabNames]="'基本信息,账号权限'" [default]="defaultTab"></zm_tabs>
+
+  </content>
+</view-body-comp>

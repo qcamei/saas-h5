@@ -1,0 +1,44 @@
+
+<view-header-comp [headerArr]="['排行榜列表']"></view-header-comp>
+<view-body-comp >
+  <content>
+    <div class="">
+      <div class="mg-b-15 disFlex " style="width: 100%">
+        <div class="c-devinfo disFlex align-center">
+          <zm_search_box [label]=" '姓名搜索'" [placeholder]="'输入员工姓名'" [(zmValue)]="viewData.name" (callBack)="queryByName()"></zm_search_box>
+        </div>
+      </div>
+      <div  style="width: 100%">
+        <table class="table table-bordered text-center mg-b-0">
+          <thead>
+          <th>编号</th>
+          <th>姓名</th>
+          <th>昵称</th>
+          <th>积分</th>
+          <th>操作</th>
+          </thead>
+          <tbody>
+          <tr class="c-tr" *ngFor="let item of viewData.buserListShow;let index = index;">
+            <td>{{index+1}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.nickName}}</td>
+            <td>{{item.integral}}</td>
+            <td>
+              <span class="mg-r-10 font-c1 cur-hand" (click)="openModal(item)">编辑积分</span>
+              <span class="mg-r-10 font-c1 cur-hand" (click)="removeBuser(item)">删除员工</span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div *ngIf="viewData.loadingFinish && viewData.buserListShow.length == 0"
+             class="text-center disFlex hor-center " style="border: 1px solid #e9ecef;border-top: none;align-items:center;height: 560px;">
+          <div style="">
+            <img src="assets/images/noData.png" height="220" width="220"/>
+            <h4 class="font-bold fz-18">没有数据</h4>
+          </div>
+        </div>
+        <pagination-comp [recordCount]="viewData.recordCount" [page]="curPage" (callback)="getPageData($event)"></pagination-comp>
+      </div>
+    </div>
+  </content>
+</view-body-comp>

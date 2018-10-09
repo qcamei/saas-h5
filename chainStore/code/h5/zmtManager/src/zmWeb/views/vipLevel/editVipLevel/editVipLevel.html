@@ -1,0 +1,57 @@
+<view-header-comp [headerArr]="['等级列表','编辑等级']"></view-header-comp>
+<view-body-comp>
+  <content>
+    <div class="d-flex">
+      <div class="col-md-6">
+        <zm_input_number [label]=" '等级编号'" [placeholder]="'请输入等级编号'" [numberList]="viewData.numberList"
+                         [(zmValue)]="viewData.editForm.number"></zm_input_number>
+
+        <zm_input_text [label]=" '等级名称'" [placeholder]="'请输入等级名称'" [(zmValue)]="viewData.editForm.name"
+                       [(zmPass)]="viewData.editForm.namePass"></zm_input_text>
+
+        <div class="row">
+          <div class="col-md-10">
+            <zm_select_type [label]="'等级分类'" [selectList]="viewData.typeList"
+                            [(zmValue)]="viewData.editForm.typeId" ></zm_select_type>
+          </div>
+            <zm_btn_small name="新建分类" (zmbtnClick)="addVipLevelType()"></zm_btn_small>
+        </div>
+
+
+        <zm_input_text [label]=" '时长（月）'" [placeholder]="'请输入时长'" [(zmValue)]="viewData.editForm.validPeriod" [(zmPass)]="viewData.editForm.validPeriodPass"></zm_input_text>
+
+        <zm_input_text_Group [(zmValue)]="viewData.editForm.vipContent"></zm_input_text_Group>
+
+        <zm_input_price [label]="'开通收费'" [placeholder]="'请输入金额'" [(price)]="viewData.editForm.openCharge"></zm_input_price>
+
+        <zm_input_price [label]="'续费收费'" [placeholder]="'请输入金额'" [(price)]="viewData.editForm.renewCharge"></zm_input_price>
+
+        <div class="form-group row mb-0 ">
+          <label class="col-md-2 col-form-label text-center px-0">是否上架</label>
+          <div class="col-md-10 pt-1">
+            <switch-button-comp [(state)]="viewData.editForm.state"></switch-button-comp>
+          </div>
+        </div>
+        <div class="w-50 mt-5">
+          <zm_btn_md notRepeatSubmit name="保存" (zmbtnClick)="editVipLevel(viewData.editForm.id)"></zm_btn_md>
+        </div>
+
+      </div>
+
+
+      <div class="col-md-6">
+        <div *ngIf="viewData.loadingFinish" style="margin-bottom:20px">
+          <zm_role_menu [storeMenu] = "viewData.storeMenu"  [permSet]="viewData.editForm.vipContent.permSet" (callback)="getPermSet($event)"></zm_role_menu>
+        </div>
+
+        <div class="form-group form-inline">
+          <label class="col-md-2 col-form-label text-center px-0">等级图片</label>
+          <zm_single_file [label]="'上传图片'" [requestUrl]="viewData.pageData.requestUrl"
+                         [appendKey]="'imgs'" (callback)="showImg($event)"></zm_single_file>
+        </div>
+        <zm_img_preview [(imgArr)]="viewData.pageData.imgArr" [(imgLength)]="viewData.pageData.limitCount"></zm_img_preview>
+
+      </div>
+    </div>
+  </content>
+</view-body-comp>

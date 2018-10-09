@@ -1,0 +1,136 @@
+.dib{
+  display: inline-block;
+}
+.disFlex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: flex;
+}
+.flex {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  -webkit-flex: 1;
+  -moz-box-flex: 1;
+  flex: 1;
+}
+.align-center {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  align-items: center;
+}
+
+.hor-center {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  -moz-box-pack: center;
+  justify-content: center;
+}
+.pos-r{
+  position: relative;
+}
+.mg-l-25{
+  margin-left:25px;
+}
+
+ol, ul, dl{
+  margin: 0 !important;
+  padding: 0 !important;
+}
+div {
+  // webkit
+  /* 滚动条整体部分*/
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  /* 滚动条里面的小方块，能上下左右移动（取决于是垂直滚动条还是水平滚动条）*/
+  ::-webkit-scrollbar-thumb {
+    background: #4D435A;
+  }
+  /*滚动条的轨道（里面装有thumb） */
+  /* ::-webkit-scrollbar-track{}      */
+  /* 滚动条轨道两端的按钮，允许通过点击微调小方块的位置*/
+  ::-webkit-scrollbar-button {
+    display: none !important;
+  }
+  /*内层轨道，滚动条中间部分（除去）*/
+  /* ::-webkit-scrollbar-track-piece{}*/
+  /* 边角，及两个滚动条的交汇处 */
+  /* ::-webkit-scrollbar-corner{}   */
+  /*两个滚动条的交汇处上用于通过拖动调整元素大小的小控件*/
+  /* ::-webkit-resizer       */
+  // IE下滚动条处理
+  scrollbar-arrow-color: none;
+  /**/
+  /*三角箭头的颜色*/
+  scrollbar-face-color: #333;
+  /**/
+  /*立体滚动条的颜色*/
+  scrollbar-3dlight-color: #666;
+  /**/
+  /*立体滚动条亮边的颜色*/
+  scrollbar-highlight-color: #666;
+  /**/
+  /*滚动条空白部分的颜色  IE*/
+  scrollbar-shadow-color: #999;
+  /**/
+  /*立体滚动条阴影的颜色 IE*/
+  scrollbar-darkshadow-color: #666;
+  /**/
+  /*立体滚动条强阴影的颜色 IE*/
+  scrollbar-track-color: #666;
+  /**/
+  /*立体滚动条背景颜色*/
+  scrollbar-base-color:#f8f8f8;
+  /**/
+  /*滚动条的基本颜色*/
+}
+
+.sideBar {
+  width: 230px;
+  height: 100%;
+  padding-top: 77px;
+  background: #23202d;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  transition: all 2s;
+  .logo {
+    height: 77px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #23202d;
+    z-index: 88;
+  }
+  .content {
+    height: 100%;
+    color: #bdbdc0;
+    font-size: 16px;
+    font-weight: bold;
+    overflow-y: auto;
+    overflow-x: hidden;
+    .cutOff {
+      height: 50px !important;
+      margin: 10px 0;
+      padding-left: 0 !important;
+      .left-dec {
+        // position: absolute;
+        background: #4678fa;
+        width: 10px;
+        height: 30px;
+        -moz-border-radius-topright: 8px;
+        border-top-right-radius: 8px;
+        -moz-border-radius-bottomright: 8px;
+        border-bottom-right-radius: 8px;
+      }
+    }
+
+  }
+}
+

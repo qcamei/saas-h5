@@ -1,0 +1,19 @@
+<scroll-view scroll-y="true" class="container withtab" hidden="{{isCompHidden}}" bindscrolltoupper="upper" bindscrolltolower="lower" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}" style="display:block; height:{{scroll_view}}rpx;" >
+    <block wx:if='{{hasData}}'>
+      <view wx:for='{{listVM}}' wx:for-index="idx" wx:for-item="cellModel">
+          <view class="item-container card">
+              <text class="title">{{cellModel.cardName}}</text>
+              <view class='line'></view>
+              <block wx:for='{{cellModel.useProdCardCountList}}' wx:for-index="idx" wx:for-item="subCellModel">
+                  <comp-card-cell bindcellclick='cellClick'  bindcountupclick='countUpClick'  bindcountdownclick='countDownClick'  bindselectbeauticianclick='selectBeauticianClick'  cell-model="{{subCellModel}}" ></comp-card-cell>
+              </block>
+          </view>
+      </view>
+    </block>
+
+    <view wx:if='{{!hasData}}' class='nomoredata'>
+        <image class='image-nomoredata' src='../../../../images/image_appointment_nomoredata.png'></image>
+        <view class='text-nomoredata'>没有划卡</view>
+    </view>
+
+</scroll-view>

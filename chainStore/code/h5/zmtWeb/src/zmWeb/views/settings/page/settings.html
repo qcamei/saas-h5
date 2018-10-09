@@ -1,0 +1,57 @@
+
+<view-body-comp [headerArr]="['管理设置']">
+
+    <div class="title fz-14 mg-t-5 mg-b-5 font-bold"><span class="icons dib mg-r-10"></span><span class="dib">数据导入</span></div>
+    <div class="disFlex align-center pd-t-15" >
+      <div class="text-center  cur-hand" [routerLink] = "['/main/settings/setLeaguer']" style="outline: none;">
+        <img src="assets/images/setting/setCustomer.png" alt="">
+        <p class="mg-t-10 font-c6">会员导入</p>
+      </div>
+      <div class="text-center mg-l-20 mg-r-20 cur-hand" [routerLink] = "['/main/settings/setProduct']" style="outline: none;">
+        <img src="assets/images/setting/setProject.png" alt="">
+        <p class="mg-t-10 font-c6">项目导入</p>
+      </div>
+      <div class="text-center cur-hand" [routerLink] = "['/main/settings/setGoods']" style="outline: none;">
+        <img src="assets/images/setting/setCommodity.png" alt="">
+        <p class="mg-t-10 font-c6">商品导入</p>
+      </div>
+    </div>
+
+    <div class="title fz-14 mg-t-20 mg-b-5 font-bold"><span class="icons dib mg-r-10"></span><span class="dib">会员设置</span></div>
+    <div class="disFlex align-center pd-t-15" >
+      <div class="text-center  cur-hand" [routerLink] = "['/main/settings/setSource']" style="outline: none;">
+        <img src="assets/images/setting/setSourProperty.png" alt="">
+        <p class="mg-t-10 font-c6">来源设置</p>
+      </div>
+      <div class="text-center mg-l-20 mg-r-20 cur-hand" [routerLink] = "['/main/settings/setType']" style="outline: none;">
+        <img src="assets/images/setting/setTypeProperty.png" alt="">
+        <p class="mg-t-10 font-c6">分析设置</p>
+      </div>
+
+      <div class="text-center cur-hand" [routerLink] = "['/main/settings/setAttribute']" style="outline: none;">
+        <img src="assets/images/setting/setCustProperty.png" alt="">
+        <p class="mg-t-10 font-c6">会员属性</p>
+      </div>
+    </div>
+
+    <!--<div class="title fz-14 mg-t-20 mg-b-5 font-bold"><span class="icons dib mg-r-10"></span><span class="dib">预约设置</span></div>-->
+    <!--<div class="disFlex align-center pd-t-15" >-->
+      <!--<div class="text-center  cur-hand" [routerLink] = "['/main/settings/setAppointment']" style="outline: none;">-->
+        <!--<img src="assets/images/setting/setAppoProperty.png" alt="">-->
+        <!--<p class="mg-t-10 font-c6">预约设置</p>-->
+      <!--</div>-->
+    <!--</div>-->
+
+
+    <div class="title fz-14 mg-t-20 mg-b-5 font-bold"><span class="icons dib mg-r-10"></span><span class="dib">店铺设置</span></div>
+    <div class="disFlex align-center pd-t-15" >
+      <div class="text-center  cur-hand" [routerLink] = "['/main/settings/setAppointment']" style="outline: none;">
+        <img src="assets/images/setting/setAppoProperty.png" alt="">
+        <p class="mg-t-10 font-c6">预约设置</p>
+      </div>
+      <div class="text-center mg-l-20 cur-hand" [routerLink] = "['/main/settings/setBossPayInfo']" style="outline: none;">
+        <img src="assets/images/setting/Shopx.png" alt="">
+        <p class="mg-t-10 font-c6">支付配置</p>
+      </div>
+    </div>
+</view-body-comp>

@@ -1,0 +1,128 @@
+<view-body-comp [headerArr]="['会员统计']">
+
+
+  <div class="container" fxLayout="row wrap" fxLayoutAlign="left center" fxLayoutGap="10px" fxLayout.xs="column"
+       style="padding-top:15px;margin-bottom:15px;">
+    <zm-card [showHeader]="false" fxFlex="100" [expanded]="true" [withCollapse]="false">
+      <header fxLayout="row wrap" fxLayoutAlign="start">
+        <label style="width:140px;color:#2a2a2a;font-size:16px; margin-top: 15px">相关门店</label>
+        <div class="nameDiv fz-14 zmCurHand" style="margin-top: 15px" (click)="selectCustomer($event)">
+          <span *ngIf="!true">点击弹框回传的name</span>
+
+          <span *ngIf="true" style="color: #A4ABB3;">请选择门店</span>
+
+          <i class="fa fa-plus" style="color:#03a9f4;position:absolute;right:0px;top: 10px;"></i>
+        </div>
+
+      </header>
+    </zm-card>
+  </div>
+
+
+  <ng-template #tabA>
+    <div class="container" fxLayout="row wrap" fxLayoutAlign="left center" fxLayoutGap="10px" fxLayout.xs="column"
+         style="padding-top:15px;margin-bottom:15px;">
+
+      <zm-search-date [label]=" '统计时间' " [placeholder]="'请选择开始时间'" [(curValue)]="viewData.minTime"
+                      (callback)="findConsumeByTime()"></zm-search-date>
+
+      <zm-search-date [label]=" '至' " [placeholder]="'请选择结束时间'" [(curValue)]="viewData.maxTime"
+                      (callback)="findConsumeByTime()"></zm-search-date>
+
+      <zm-btn-Date [itemActiveIndex]="viewData.itemActiveIndex" [values]="['今日','昨日','本月','上月']"
+                   (zmbtnClick)="chooseTime($event)"></zm-btn-Date>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px">
+      <zm-card [header]="'会员总数'" fxFlex="50" [expanded]="true" [withCollapse]="false" [matTooltipText]="'所选门店会员总数'">
+        <span style="font-size: 18px"><b>{{viewData.memberStatisticsData.totalMembershipCount}}</b></span>
+      </zm-card>
+
+      <zm-card [header]="'消费次数'" fxFlex="50" [expanded]="true" [withCollapse]="false" [matTooltipText]="'所选门店会员消费总次数'">
+        <span style="font-size: 18px"><b>{{viewData.memberStatisticsData.totalConsumptionTimes}}</b></span>
+      </zm-card>
+
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px">
+      <zm-card [header]="'会员消费排行榜'" fxFlex="50" [expanded]="true" [withCollapse]="false">
+
+        <ng-template #hotA let-item="item">{{item.position}}</ng-template>
+        <ng-template #hotB let-item="item">{{item.leagueName}}</ng-template>
+        <ng-template #hotC let-item="item">{{item.leagueType}}</ng-template>
+        <ng-template #hotD let-item="item">￥{{item.totalCost}}</ng-template>
+        <zm-mat-table [tdTemplateList]="[hotA,hotB,hotC,hotD]"
+                      [thNameList]="['序号','用户名','会员类型','消费金额']"
+                      [itemList]="viewData.currConsumptionList"
+                      [elevation]="false"></zm-mat-table>
+        <no_data [loadingFinish]="loadingFinish" [dataList]="viewData.currConsumptionList" [text]=" '没有数据'"
+                 [showImg]="'noData'"
+                 [elevation]="false"></no_data>
+        <zm_page [totalSize]="viewData.consumptionList.length" [curPage]="viewData.curPage"
+                 (pageChange)="getPageData($event)"
+                 [elevation]="false"></zm_page>
+      </zm-card>
+
+
+      <zm-card [header]="'会员散客比例图'" fxFlex="50" [expanded]="true" [withCollapse]="false">
+        <zm-pieCharts-tool [options]="viewData.consumptionOptions"></zm-pieCharts-tool>
+      </zm-card>
+
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px">
+      <zm-card [header]="'会员消费频次'" fxFlex="50" [expanded]="true" [withCollapse]="false">
+        <zm-line-Echarts [optionsData]="viewData.lineData"></zm-line-Echarts>
+      </zm-card>
+    </div>
+
+  </ng-template>
+
+
+  <ng-template #tabB>
+    <div class="container" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px" fxLayout.xs="column"
+         style="padding-top:15px;margin-bottom:15px;">
+
+      <zm-search-date [label]=" '统计时间' " [placeholder]="'请选择开始时间'" [(curValue)]="viewData.minTime"
+                      (callback)="findConsumeByTime()"></zm-search-date>
+      <zm-search-date [label]=" '至' " [placeholder]="'请选择结束时间'" [(curValue)]="viewData.maxTime"
+                      (callback)="findConsumeByTime()"></zm-search-date>
+      <zm-btn-Date [itemActiveIndex]="viewData.itemActiveIndex" [values]="['今日','昨日','本月','上月']"
+                   (zmbtnClick)="chooseTime($event)"></zm-btn-Date>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px">
+      <zm-card [header]="'会员总数'" fxFlex="50" [expanded]="true" [withCollapse]="false" [matTooltipText]="'所选门店会员总数'">
+        <span style="font-size: 18px"><b>{{viewData.memberStatisticsData.totalMembershipCount}}</b></span>
+      </zm-card>
+      <zm-card [header]="'新增会员人数'" fxFlex="50" [expanded]="true" [withCollapse]="false" [matTooltipText]="'所选门店新增会员数'">
+        <span style="font-size: 18px"><b>{{viewData.memberStatisticsData.newMembershipCount}}</b></span>
+      </zm-card>
+    </div>
+
+    <div class="container" fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px">
+
+      <zm-card [header]="'新增会员频次'" fxFlex="50" [expanded]="true" [withCollapse]="false">
+        <zm-line-Echarts [optionsData]="viewData.newMemberAddOptions"></zm-line-Echarts>
+      </zm-card>
+      <zm-card [header]="'新增会员来源占比'" fxFlex="50" [expanded]="true" [withCollapse]="false">
+        <zm-pieCharts-tool [options]="viewData.originDataOptions"></zm-pieCharts-tool>
+      </zm-card>
+
+    </div>
+
+    <div class="container" fxLayout="row" fxLayoutAlign="left" fxLayoutGap="10px">
+      <zm-card [header]="'新增会员消费统计'" fxFlex="50" [expanded]="true" [withCollapse]="false">
+        <zm-line-Echarts [optionsData]="viewData.newMemberCostAmountOptions"></zm-line-Echarts>
+      </zm-card>
+      <zm-card [header]="'新增会员消费频次'" fxFlex="50" [expanded]="true" [withCollapse]="false">
+        <zm-line-Echarts [optionsData]="viewData.newMemberCostTimesOptions"></zm-line-Echarts>
+
+      </zm-card>
+    </div>
+
+  </ng-template>
+
+  <zm-mat-tabs [tabTemplateList]="[tabA,tabB]" [tabNameList]="['会员统计','新增统计']" [selectedIndex]="0"
+               (onSelect)="changePageTab($event)"></zm-mat-tabs>
+</view-body-comp>

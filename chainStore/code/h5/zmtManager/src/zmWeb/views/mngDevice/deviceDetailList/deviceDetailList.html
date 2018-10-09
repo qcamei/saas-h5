@@ -1,0 +1,58 @@
+<!--<view-header-comp [headerArr]="['绑定商户','仪器详情']"></view-header-comp>-->
+<nb-card-header class="disFlex">
+  <div class="align-center disFlex">
+    <a [routerLink]="['/main/mngDevice/buserBindDeviceList']">绑定商户</a>　&gt;　仪器详情
+  </div>
+</nb-card-header>
+<view-body-comp >
+  <content>
+    <div class="">
+      <div  style="width: 100%">
+        <table class="table table-bordered text-center mg-b-0">
+          <thead>
+          <th width="10%">设备系列</th>
+          <th width="10%">设备型号</th>
+          <th width="5%">联网状态</th>
+          <th width="8%">控制状态</th>
+          <th width="8%">锁定状态</th>
+          <th width="7%">设备SN</th>
+          <th width="9%">设备ID</th>
+          <th width="10%">初次绑定时间</th>
+          <th width="8%">绑定店铺</th>
+          <th width="8%">绑定账号</th>
+          <th width="17%">操作</th>
+          </thead>
+          <tbody>
+          <tr class="c-tr" *ngFor="let item of viewData.deviceDetailListShow" >
+            <td>{{item.mseriesName}}</td>
+            <td>{{item.mtypeName}}</td>
+            <td>{{item.status | mclientStatusPipe}}</td>
+            <td>{{item.ctrlState | mclientCtrlStatePipe}}</td>
+            <td>{{item.lockState | mclientLockStatePipe}}</td>
+            <td>{{item.snCode}}</td>
+            <td>{{item.clientId}}</td>
+            <td>{{item.bandingTime | datetimePipe}}</td>
+            <td>{{item.storeName}}</td>
+            <td>{{item.bandingAccount}}</td>
+            <td>
+              <span class="font-c1 cur-hand" *ngIf="item.ctrlState!='6' && item.ctrlState!='7' && (item.lockState!=null && item.lockState=='0')"
+                    (click)="lockDevice(item)">锁定仪器</span>
+              <span class="font-c1 cur-hand" *ngIf="item.ctrlState=='6' || item.ctrlState=='7' || (item.lockState!=null && (item.lockState=='1' || item.lockState=='2'))"
+                    (click)="unlockDevice(item)">解锁仪器</span>
+              <span class="mg-r-10 mg-l-10 font-c1 cur-hand" (click)="unbinding(item)">解绑设备</span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div *ngIf="viewData.loadingFinish && viewData.deviceDetailListShow.length == 0"
+             class="text-center disFlex hor-center " style="border: 1px solid #e9ecef;border-top: none;align-items:center;height: 300px;">
+          <div style="">
+            <!--<img src="assets/images/noData.png" height="220" width="220"/>-->
+            <h4 class="font-bold fz-18">没有数据</h4>
+          </div>
+        </div>
+        <pagination-comp [recordCount]="viewData.recordCount" [(page)]="viewData.currentPage"  (callback)="getPageData($event)"></pagination-comp>
+      </div>
+    </div>
+  </content>
+</view-body-comp>

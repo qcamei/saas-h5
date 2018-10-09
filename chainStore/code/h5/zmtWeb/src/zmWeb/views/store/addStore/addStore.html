@@ -1,0 +1,34 @@
+
+
+<view-body-comp [headerArr]="['店铺列表','新建店铺']">
+
+  <div style="max-width:600px">
+
+      <zm-input-name label="店铺名称" placeholder="请输入店铺名称" maxlength="15"
+                     [(zmValue)]="viewData.addForm.name" [(zmPass)]="viewData.addForm.namePass"></zm-input-name>
+
+      <div class="form-group row mb-0">
+        <label class="col-form-label text-center col-md-2 px-0"><span class="text-danger"> *</span>区域</label>
+        <div class="col-md-10">
+          <city-select-comp [(citySetting)]="viewData.citySetting"></city-select-comp>
+        </div>
+      </div>
+
+      <zm-input-textarea [label]="'详细地址'" [placeholder]="'请输入详细地址'"
+                         [(text)]="viewData.addForm.address" [maxlength]="200"></zm-input-textarea>
+
+      <zm-input-tel label="预约电话"  placeholder="请输入预约电话" [(zmValue)]="viewData.addForm.tel" [(zmPass)]="viewData.addForm.telPass" [required]="true"></zm-input-tel>
+
+      <zm-input-textarea maxlength="200" [label]="'店铺介绍'" [placeholder]="'请输入店铺介绍'" [(text)]="viewData.addForm.descript"></zm-input-textarea>
+
+      <div fxLayout="row" fxLayoutAlign="end" style="margin-top: 20px;">
+        <zm-btn-large  notrepeatsubmit fxFlexAlign="end" [disabled]="!(viewData.addForm.namePass && viewData.addForm.telPass)" name="保存" (zmbtnClick)="addStore()"></zm-btn-large>
+      </div>
+
+
+  </div>
+
+
+</view-body-comp>
+
+

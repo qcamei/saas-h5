@@ -1,0 +1,228 @@
+<script src="setBossPayInfo.ts"></script>
+<view-body-comp [headerArr]="['管理设置','配置商户支付信息']">
+  <zm-card [textBold]="true" [header]="'配置说明：'" [expanded]="true" [withCollapse]="false" >
+    <span style="color: grey">接入微信或支付宝支付时，需要先开通企业版的微信支付和支付宝支付获取商户支付资料，然后在智美通配置商户信息中上传相关信息进行配置，支付信息配置成功后才能实现客户通过微信或支付宝付款结算。
+      <a class="zmCurHand" :href="{{viewData.payInstructionsDocUrl}}">点击下载说明文档>></a>
+    </span>
+  </zm-card>
+
+  <zm-card  [expanded]="true" [withCollapse]="false" >
+    <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="20px;">
+      <div style="width:45%">
+        <p class="font-weight-bold col-md-3 ">微信配置</p>
+
+        <zm-select-string [noAll]="true" [label]="'商户模式'" [selectList]="[{name:'未选择',value:0},{name:'普通商户模式',value:1},{name:'子商户模式',value:2}]" [name]="'name'" [value]="'value'"
+                          [(zmValue)]="viewData.bossPayInfo.wxpayModel"></zm-select-string>
+
+        <div *ngIf="viewData.bossPayInfo.wxpayModel==1">
+
+          <zm-input-text label="商户号" placeholder="请输入商户号"  maxlength="50"
+                         [(zmValue)]="viewData.bossPayInfo.wxpayMchId" ></zm-input-text>
+
+          <zm-input-text label="APP ID" placeholder="请输入APP ID"  maxlength="50"
+                         [(zmValue)]="viewData.bossPayInfo.wxpayAppId" ></zm-input-text>
+
+          <zm-input-text label="API密钥" placeholder="请输入API密钥"  maxlength="100"
+                         [(zmValue)]="viewData.bossPayInfo.wxpayKey" ></zm-input-text>
+
+          <div class="form-group row mb-0  form-inline">
+            <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
+              <label >商户证书</label>
+              <uploadCertFile_comp [label]="'上传证书'" (callback)="showFile($event)"></uploadCertFile_comp>
+            </div>
+            <a class="ml-2" :href="{{viewData.certFileUrl}}">
+              {{viewData.bossPayInfo.wxpayCertPath}}
+            </a>
+          </div>
+
+        </div>
+
+        <div *ngIf="viewData.bossPayInfo.wxpayModel==2">
+          <zm-input-text label="子商户号" placeholder="请输入子商户号"  maxlength="50"
+                         [(zmValue)]="viewData.bossPayInfo.wxpaySubMchId" ></zm-input-text>
+        </div>
+
+      </div>
+
+
+      <div style="width:45%">
+        <p class="font-weight-bold col-md-3">支付宝配置</p>
+
+        <zm-input-text label="APP ID" placeholder="请输入APP ID"  maxlength="50"
+                       [(zmValue)]="viewData.bossPayInfo.alipayAppId" ></zm-input-text>
+
+        <zm-input-text label="商户私钥" placeholder="请输入商户私钥"  maxlength="2000"
+                       [(zmValue)]="viewData.bossPayInfo.alipayPrivateKey"  ></zm-input-text>
+
+        <zm-input-text label="商户公钥" placeholder="请输入商户公钥"  maxlength="2000"
+                       [(zmValue)]="viewData.bossPayInfo.alipayDevPublicKey"  ></zm-input-text>
+
+        <zm-input-text label="支付宝公钥" placeholder="请输入支付宝公钥"  maxlength="2000"
+                                       [(zmValue)]="viewData.bossPayInfo.alipayZfbPublicKey"  ></zm-input-text>
+      </div>
+
+
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="end">
+
+      <zm-btn-large  *ngIf="viewData.bossPayInfo.id == null || viewData.bossPayInfo.id < 1"  name="提交" (zmbtnClick)="add()"></zm-btn-large>
+      <zm-btn-large  *ngIf="viewData.bossPayInfo.id != null && viewData.bossPayInfo.id > 1"   name="提交" (zmbtnClick)="update(viewData.bossPayInfo.id)"></zm-btn-large>
+
+    </div>
+  </zm-card>
+
+
+  <!--<content>-->
+    <!--<form #myForm="ngForm">-->
+      <!--<div class="d-flex">-->
+
+        <!--<div class="col-md-6 pr-4" style="border-right:1px solid #ccc;">-->
+          <!--<p class="font-weight-bold col-md-3 ">微信配置</p>-->
+          <!--<div class="form-group row mb-0 ">-->
+            <!--<label class="col-md-2 col-form-label text-center px-0"><span class="text-danger">*</span>商户号</label>-->
+            <!--<div class="col-md-10">-->
+              <!--<input type="text" placeholder="请输入商户号" [ngClass]="{'is-invalid':name.invalid && (name.touched)}" maxlength="50"-->
+                     <!--class="form-control" name="menchar" #name="ngModel" [(ngModel)]="viewData.bossPayInfo.wxpayMchId"/>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="row" style="height:30px;font-size:14px;">-->
+            <!--&lt;!&ndash;<div class="col-md-2"></div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="col-md-10 text-danger">&ndash;&gt;-->
+              <!--&lt;!&ndash;<div  *ngIf="name.invalid && (name.touched)">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div *ngIf="name.errors.required">&ndash;&gt;-->
+                  <!--&lt;!&ndash;商户号不能为空&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+              <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--</div>-->
+
+          <!--<div class="form-group row mb-0 ">-->
+            <!--<label class="col-md-2 col-form-label text-center px-0"><span class="text-danger">*</span>APP ID</label>-->
+            <!--<div class="col-md-10">-->
+              <!--<input type="text" placeholder="请输入APP ID" [ngClass]="{'is-invalid':AppId.invalid && (AppId.touched)}" maxlength="50"-->
+                     <!--class="form-control" name="menchar2" #AppId="ngModel"  [(ngModel)]="viewData.bossPayInfo.wxpayAppId"/>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="row" style="height:30px;font-size:14px;">-->
+            <!--&lt;!&ndash;<div class="col-md-2"></div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="col-md-10 text-danger">&ndash;&gt;-->
+              <!--&lt;!&ndash;<div  *ngIf="AppId.invalid && (AppId.touched)">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div *ngIf="AppId.errors.required">&ndash;&gt;-->
+                  <!--&lt;!&ndash;APP ID不能为空&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+              <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--</div>-->
+
+          <!--<div class="form-group row mb-0 ">-->
+            <!--<label class="col-md-2 col-form-label text-center px-0"><span class="text-danger">*</span>API密钥</label>-->
+            <!--<div class="col-md-10">-->
+              <!--<input type="text" placeholder="请输入API密钥" [ngClass]="{'is-invalid':ApiPos.invalid && (ApiPos.touched)}" maxlength="100"-->
+                     <!--class="form-control" name="menchar3" #ApiPos="ngModel"  [(ngModel)]="viewData.bossPayInfo.wxpayKey"/>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="row" style="height:30px;font-size:14px;">-->
+            <!--&lt;!&ndash;<div class="col-md-2"></div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="col-md-10 text-danger">&ndash;&gt;-->
+              <!--&lt;!&ndash;<div  *ngIf="ApiPos.invalid && (ApiPos.touched)">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div *ngIf="ApiPos.errors.required">&ndash;&gt;-->
+                  <!--&lt;!&ndash;Api 密钥不能为空&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+              <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--</div>-->
+
+          <!--<div class="form-group row mb-0  form-inline">-->
+            <!--<label class="col-md-2 col-form-label text-center mr-3 px-0">商户证书</label>-->
+            <!--<uploadCertFile_comp [label]="'上传证书'" (callback)="showFile($event)"></uploadCertFile_comp>-->
+            <!--<a class="ml-2" :href="{{viewData.certFileUrl}}" >-->
+              <!--{{viewData.bossPayInfo.wxpayCertPath}}-->
+            <!--</a>-->
+          <!--</div>-->
+          <!--<div class="row" style="height:30px;font-size:14px;"></div>-->
+        <!--</div>-->
+
+        <!--<div class="col-md-6 pl-3">-->
+          <!--<p class="font-weight-bold col-md-3">支付宝配置</p>-->
+          <!--<div class="form-group row mb-0 ">-->
+            <!--<label class="col-md-2 col-form-label text-center px-0"><span class="text-danger">*</span>APP ID</label>-->
+            <!--<div class="col-md-10">-->
+              <!--<input type="text" placeholder="请输入APP ID" [ngClass]="{'is-invalid':alipayName.invalid && (alipayName.touched)}" maxlength="50"-->
+                     <!--class="form-control" name="alipaymenchar" #alipayName="ngModel"  [(ngModel)]="viewData.bossPayInfo.alipayAppId"/>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="row" style="height:30px;font-size:14px;">-->
+            <!--&lt;!&ndash;<div class="col-md-2"></div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="col-md-10 text-danger">&ndash;&gt;-->
+              <!--&lt;!&ndash;<div  *ngIf="alipayName.invalid && (alipayName.touched)">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div *ngIf="alipayName.errors.required">&ndash;&gt;-->
+                  <!--&lt;!&ndash;APP ID不能为空&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+              <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--</div>-->
+
+          <!--<div class="form-group row mb-0 ">-->
+            <!--<label class="col-md-2 col-form-label text-center px-0"><span class="text-danger">*</span>商户私钥</label>-->
+            <!--<div class="col-md-10">-->
+              <!--<input type="text" placeholder="请输入商户私钥" [ngClass]="{'is-invalid':alipayApiPos.invalid && (alipayApiPos.touched)}" maxlength="2000"-->
+                     <!--class="form-control" name="alipaymenchar3" #alipayApiPos="ngModel"  [(ngModel)]="viewData.bossPayInfo.alipayPrivateKey"/>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="row" style="height:30px;font-size:14px;">-->
+            <!--&lt;!&ndash;<div class="col-md-2"></div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="col-md-10 text-danger">&ndash;&gt;-->
+              <!--&lt;!&ndash;<div  *ngIf="alipayApiPos.invalid && (alipayApiPos.touched)">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div *ngIf="alipayApiPos.errors.required">&ndash;&gt;-->
+                  <!--&lt;!&ndash;商户私钥不能为空&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+              <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--</div>-->
+
+          <!--<div class="form-group row mb-0 ">-->
+            <!--<label class="col-md-2 col-form-label text-center px-0"><span class="text-danger">*</span>商户公钥</label>-->
+            <!--<div class="col-md-10">-->
+              <!--<input type="text" placeholder="请输入商户公钥" [ngClass]="{'is-invalid':alipayAppId.invalid && (alipayAppId.touched)}" maxlength="2000"-->
+                     <!--class="form-control" name="alipaymenchar2" #alipayAppId="ngModel"  [(ngModel)]="viewData.bossPayInfo.alipayDevPublicKey"/>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="row" style="height:30px;font-size:14px;">-->
+            <!--&lt;!&ndash;<div class="col-md-2"></div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="col-md-10 text-danger">&ndash;&gt;-->
+              <!--&lt;!&ndash;<div  *ngIf="alipayAppId.invalid && (alipayAppId.touched)">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div *ngIf="alipayAppId.errors.required">&ndash;&gt;-->
+                  <!--&lt;!&ndash;商户公钥不能为空&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+              <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--</div>-->
+
+          <!--<div class="form-group row mb-0 ">-->
+            <!--<label class="col-md-2 col-form-label text-center px-0"><span class="text-danger">*</span>支付宝公钥</label>-->
+            <!--<div class="col-md-10">-->
+              <!--<input type="text" placeholder="请输入支付宝公钥" [ngClass]="{'is-invalid':alipayPubKey.invalid && (alipayPubKey.touched)}" maxlength="2000"-->
+                     <!--class="form-control" name="alipaymenchar4" #alipayPubKey="ngModel"  [(ngModel)]="viewData.bossPayInfo.alipayZfbPublicKey"/>-->
+            <!--</div>-->
+          <!--</div>-->
+
+          <!--<div class="row" style="height:30px;font-size:14px;">-->
+            <!--&lt;!&ndash;<div class="col-md-2"></div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="col-md-10 text-danger">&ndash;&gt;-->
+              <!--&lt;!&ndash;<div  *ngIf="alipayPubKey.invalid && (alipayPubKey.touched)">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div *ngIf="alipayPubKey.errors.required">&ndash;&gt;-->
+                  <!--&lt;!&ndash;支付宝公钥不能为空&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+              <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--</div>-->
+
+        <!--</div>-->
+
+      <!--</div>-->
+      <!--<div class="w-25 mt-5" style="margin:0 auto;"><button class="btn  cur-hand btn-primary btn-block" type="button" *ngIf="viewData.bossPayInfo.id == null || viewData.bossPayInfo.id < 1" (click)="add()">提交</button></div>-->
+      <!--<div class="w-25 mt-5" style="margin:0 auto;"><button class="btn  cur-hand btn-primary btn-block" type="button" *ngIf="viewData.bossPayInfo.id != null && viewData.bossPayInfo.id > 1" (click)="update(viewData.bossPayInfo.id)">提交</button></div>-->
+    <!--</form>-->
+  <!--</content>-->
+</view-body-comp>

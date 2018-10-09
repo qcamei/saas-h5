@@ -1,0 +1,15 @@
+
+<scroll-view scroll-y="true" class="container discovery withtab" hidden="{{isCompHidden}}" bindscrolltoupper="upper" bindscrolltolower="lower"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}"  style="height:{{scroll_view}}rpx;">
+    <block wx:if='{{hasData}}'>
+
+         <view class="item-container" wx:for='{{listVM}}' wx:for-index="idx" wx:for-item="cellModel">
+            <comp-product-cell bindcellclick='cellClick' bindcountupclick='countUpClick'  bindcountdownclick='countDownClick' bindselectbeauticianclick='selectBeauticianClick' cell-model="{{cellModel}}"></comp-product-cell>
+         </view>
+    </block>
+
+    <view wx:if='{{!hasData}}' class='nomoredata'>
+        <image class='image-nomoredata' src='../../../../images/image_appointment_nomoredata.png'></image>
+        <view class='text-nomoredata'>没有项目</view>
+    </view>
+
+</scroll-view>

@@ -1,0 +1,129 @@
+<view-body-comp [headerArr]="['收入支出']">
+  <ng-template #tabA>
+    <mat-toolbar style="padding-top:15px;margin-bottom:15px;">
+      <mat-toolbar-row fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="zmFullWidth">
+
+        <div fxLayout="row wrap">
+          <mat-form-field  color="accent" class=" example-margin">
+            <input matInput type="text" placeholder="最小金额"
+                   [(ngModel)]="viewData.minPrice"><span>至</span>
+          </mat-form-field>
+          <div>
+            <mat-form-field  color="accent" class="ml-20 example-margin">
+              <input matInput type="text" placeholder="最大金额" [(ngModel)]="viewData.maxPrice">
+            </mat-form-field>
+            <button type="button" mat-raised-button color="accent" (click)="getIncomePayListByReq()">查询</button>
+          </div>
+        </div>
+
+        <zm-btn-new [name]="'新建'" (zmbtnClick)="goAddIncomePay()"></zm-btn-new>
+
+      </mat-toolbar-row>
+
+      <mat-toolbar-row fxLayout="row wrap">
+        <zm-search-date [label]=" '支出时间' " [placeholder]="'请选择最小时间'"
+                        [(curValue)]="viewData.minTime"
+                        (callback)="getIncomePayListByReq()"></zm-search-date>
+        <zm-search-date [label]=" '至' " [placeholder]="'请选择最大时间'"
+                        [(curValue)]="viewData.maxTime"
+                        (callback)="getIncomePayListByReq()"></zm-search-date>
+        <div class="ml-20">
+          <zm-btn-Date [values]="['今日','昨日','七日内']" (zmbtnClick)="chooseIncomePayTime($event)"></zm-btn-Date>
+        </div>
+
+        <div class="ml-20 mt-10" style="width:150px">
+          <zm-select [label]="'分类'" nameValues="{{viewData.incomePayTypeList}}"
+                     [(zmValue)]="viewData.chooseIncomePayType" (selectCallback)="getIncomePayListByReq()"></zm-select>
+        </div>
+
+      </mat-toolbar-row>
+
+    </mat-toolbar>
+
+    <ng-template #tdA let-item="item">{{item.incomePayTime>0?(item.incomePayTime | times):'-'}}</ng-template>
+    <ng-template #tdB let-item="item">{{item.money > 0 ? '￥' + item.money: '-'}}</ng-template>
+    <ng-template #tdC let-item="item">{{item.typeId?getTypeNameWithId(item.typeId):'-'}}</ng-template>
+    <ng-template #tdD let-item="item">{{item.buserId?getBuserNameWithId(item.buserId):'-'}}</ng-template>
+    <ng-template #tdE let-item="item"><div style="max-width:500px;margin:0 auto;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;" matTooltip="{{item.remark.length>50?item.remark:null}}">{{item.remark?item.remark:'-'}}</div></ng-template>
+    <ng-template #tdF let-item="item">
+      <a class="zmCurHand mr-4" (click)="goEditIncomePay(item.id)">编辑</a>
+      <a class="zmCurHand mr-4" (click)="removeIncomePay(item.id)">删除</a>
+    </ng-template>
+
+    <zm-mat-table [tdTemplateList]="[tdA,tdB,tdC,tdD,tdE,tdF]" [thNameList]="['时间','金额','分类','人员','备注','操作']"
+                  [itemList]="viewData.payList"></zm-mat-table>
+
+    <no-data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.incomePayList" [text]=" '没有数据'"
+             [showImg]="'noData'"></no-data>
+    <zm-page style="padding-top:20px;" [totalSize]="viewData.recordCount" [curPage]="viewData.curPage"
+             (pageChange)="getPageData($event)"></zm-page>
+
+
+  </ng-template>
+
+  <ng-template #tabB>
+    <mat-toolbar style="padding-top:15px;margin-bottom:15px;">
+
+      <mat-toolbar-row fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="zmFullWidth">
+
+        <div fxLayout="row wrap">
+          <mat-form-field color="accent" class=" example-margin">
+            <input matInput type="number" placeholder="最小金额"
+                   [(ngModel)]="viewData.minPrice"><span>至</span>
+          </mat-form-field>
+          <div>
+            <mat-form-field color="accent" class="ml-20 example-margin">
+              <input matInput type="number" placeholder="最大金额" [(ngModel)]="viewData.maxPrice">
+            </mat-form-field>
+            <button type="button" mat-raised-button color="accent" (click)="getIncomePayListByReq()">查询</button>
+          </div>
+        </div>
+
+        <zm-btn-new [name]="'新增'" (zmbtnClick)="goAddIncomePay()"></zm-btn-new>
+
+      </mat-toolbar-row>
+
+      <mat-toolbar-row fxLayout="row wrap">
+        <zm-search-date [label]=" '收入时间' " [placeholder]="'请选择最小时间'"
+                        [(curValue)]="viewData.minTime"
+                        (callback)="getIncomePayListByReq()"></zm-search-date>
+        <zm-search-date [label]=" '至' " [placeholder]="'请选择最大时间'"
+                        [(curValue)]="viewData.maxTime"
+                        (callback)="getIncomePayListByReq()"></zm-search-date>
+        <div class="ml-20">
+          <zm-btn-Date [values]="['今日','昨日','七日内']" (zmbtnClick)="chooseIncomePayTime($event)"></zm-btn-Date>
+        </div>
+
+        <div class="ml-20 mt-10" style="width:150px">
+          <zm-select [label]="'分类'" nameValues="{{viewData.incomePayTypeList}}"
+                     [(zmValue)]="viewData.chooseIncomePayType" (selectCallback)="getIncomePayListByReq()"></zm-select>
+        </div>
+
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+
+    <ng-template #tdA let-item="item">{{item.incomePayTime>0?(item.incomePayTime | times):'-'}}</ng-template>
+    <ng-template #tdB let-item="item">{{item.money > 0 ?'￥' + item.money  : '-'}}</ng-template>
+    <ng-template #tdC let-item="item">{{item.typeId?getTypeNameWithId(item.typeId):'-'}}</ng-template>
+    <ng-template #tdD let-item="item">{{item.buserId?getBuserNameWithId(item.buserId):'-'}}</ng-template>
+    <ng-template #tdE let-item="item"><div style="max-width:500px;margin:0 auto;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;" matTooltip="{{item.remark.length>50?item.remark:null}}">{{item.remark?item.remark:'-'}}</div></ng-template>
+    <ng-template #tdF let-item="item">
+      <a class="zmCurHand mr-4" (click)="goEditIncomePay(item.id)">编辑</a>
+      <a class="zmCurHand mr-4" (click)="removeIncomePay(item.id)">删除</a>
+    </ng-template>
+
+    <zm-mat-table [tdTemplateList]="[tdA,tdB,tdC,tdD,tdE,tdF]" [thNameList]="['时间','金额','分类','人员','备注','操作']"
+                  [itemList]="viewData.incomeList"></zm-mat-table>
+
+    <no-data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.incomeList" [text]=" '没有数据'"
+             [showImg]="'noData'"></no-data>
+    <zm-page style="padding-top:20px;" [totalSize]="viewData.recordCount" [curPage]="viewData.curPage"
+             (pageChange)="getPageData($event)"></zm-page>
+
+
+  </ng-template>
+
+  <zm-mat-tabs [tabTemplateList]="[tabA,tabB]" [tabNameList]="['支出','收入']" [selectedIndex]="0"
+               (onSelect)="onTabSelect($event)"></zm-mat-tabs>
+</view-body-comp>

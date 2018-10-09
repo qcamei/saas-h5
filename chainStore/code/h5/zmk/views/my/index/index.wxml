@@ -1,0 +1,25 @@
+<view>
+  <view class="user">
+    <image class="user-img" wx:if="{{!isAuthorization}}" src="../../../images/head_img.png" width="100%" height="100%"></image>
+    <image class="user-img" wx:if="{{isAuthorization}}" src="{{authInfo.avatarUrl}}" width="100%" height="100%"></image>
+    <button plain="true" class="login-button" bindtap="clickLoginButton" hover-class="other-button-hover" wx:if="{{!hasUserInfo}}">登录</button>
+    <view class="nickname" wx:if="{{hasUserInfo}}">{{userInfo.phone}}</view>
+  </view>
+  
+  <view style="height:40rpx;"></view>
+
+
+  <view class="list">
+    <block wx:for-items="{{list}}" wx:key="{{item.id}}">
+      <zm-cell cell-name="{{item.name}}" cell-id="{{item.id}}" cell-icon="{{item.icon}}" cell-img="../../../images/u301.png" cell-url="../{{item.page}}/{{item.pages}}" bindclickEvent="ckeckLogin"></zm-cell>
+    </block>
+  </view>
+
+  
+  <!-- <view id="{{item.id}}" class="list-item" data-url="../{{item.page}}/{{item.pages}}" bindtap="ckeckLogin">
+    <image class="list-item-icon" src="{{item.icon}}"></image>
+    <view class="list-item-name">{{item.name}}</view>
+    <image class="list-item-img" src="../../../images/u301.png"></image>
+  </view> -->
+
+</view>

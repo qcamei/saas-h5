@@ -1,0 +1,17 @@
+<view-body-comp [headerArr]="['管理设置','商品导入']">
+    <div class="setTitle" fxLayout="row" fxLayoutAlign="start center" >
+      <span></span>
+      <h4>模板导入</h4>
+    </div>
+    <div class="setTitle" fxLayout="row" fxLayoutAlign="start start" >
+      <download_comp  [section]="'商品'" [type]="2" style="margin-right: 70px;"></download_comp>
+      <upload_comp  [section]="'商品'" [type]="2"></upload_comp>
+    </div>
+    <div class="setTitle" fxLayout="row" fxLayoutAlign="start center" >
+      <span></span>
+      <h4>店铺导入</h4>
+    </div>
+    <div class="setTitle" fxLayout="row" fxLayoutAlign="start start" >
+      <importData_comp [section]="'商品'" [type]="2"></importData_comp>
+    </div>
+</view-body-comp>

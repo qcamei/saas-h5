@@ -1,0 +1,27 @@
+/**app.wxss**/
+@import "style/weui.wxss";
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+/* page{
+  background-color: #FFF;
+} */
+.sureBtn{
+  background-color: #4678FA;
+  color: white;
+  margin-left: 15px;
+  margin-right: 15px;
+  height: 45px;
+   font-size: 18px; 
+}
+.sureBtnHover{
+  background-color: #486Bd5;
+}
+

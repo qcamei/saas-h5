@@ -1,0 +1,187 @@
+<view-body-comp [headerArr]="['商城订单','订单详情']">
+<div style="position:relative;">
+    <img *ngIf="isCanceled()" style="width:80px;position:absolute;left:130px;top:25px;" src="assets/images/icon/canceled.png">
+
+  <div [class.opacity]="isCanceled()" class="w-100-p" fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start center" style="padding:0 20px 50px 20px;">
+    <!-- 下单 -->
+    <div [class.opacity]="getOrderTrackStatus()< 0" fxLayout="column" fxLayoutAlign="start center">
+      <img src="assets/images/icon/logistics1.png">
+      <span>客户下单</span>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" style="width:20%;">
+      <div [class.opacity]="getOrderTrackStatus()<0" style="width:100%;border:1px dashed #4678FA;height:0;"></div>
+      <mat-icon *ngIf="getOrderTrackStatus()>=0" style="color:#4678FA;">chevron_right</mat-icon>
+    </div>
+    <!-- 付款 -->
+    <div [class.opacity]="getOrderTrackStatus()<1" fxLayout="column" fxLayoutAlign="start center">
+      <img src="assets/images/icon/logistics2.png">
+      <span *ngIf="getOrderTrackStatus()<1">等待付款</span>
+      <span *ngIf="getOrderTrackStatus()>=1"> 已付款</span>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" style="width:20%;">
+      <div [class.opacity]="getOrderTrackStatus()<1" class="flowActive"
+           style="width:100%;border:1px dashed #4678FA;height:0;"></div>
+      <mat-icon *ngIf="getOrderTrackStatus()>=1" style="color:#4678FA;">chevron_right</mat-icon>
+    </div>
+    <!-- 发货 -->
+    <div [class.opacity]="getOrderTrackStatus()<2" fxLayout="column"
+         fxLayoutAlign="start center">
+      <img src="assets/images/icon/logistics3.png">
+      <span *ngIf="getOrderTrackStatus()<2">等待发货</span>
+      <span *ngIf="getOrderTrackStatus()>=2">已发货</span>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" style="width:20%;">
+      <div [class.opacity]="getOrderTrackStatus()<2" class="flowActive"
+           style="width:100%;border:1px dashed #4678FA;height:0;"></div>
+      <mat-icon *ngIf="getOrderTrackStatus()>=2" style="color:#4678FA;">chevron_right</mat-icon>
+    </div>
+    <!-- 确认 -->
+    <div [class.opacity]="getOrderTrackStatus()<3" fxLayout="column" fxLayoutAlign="start center">
+      <img src="assets/images/icon/logistics4.png">
+      <span *ngIf="getOrderTrackStatus()<3">等待确认</span>
+      <span *ngIf="getOrderTrackStatus()>=3">已确认</span>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" style="width:20%;">
+      <div [class.opacity]="getOrderTrackStatus()<3" class="flowActive"
+           style="width:100%;border:1px dashed #4678FA;height:0;"></div>
+      <mat-icon *ngIf="getOrderTrackStatus()>=3" style="color:#4678FA;">chevron_right</mat-icon>
+    </div>
+    <!-- 完成 -->
+    <div [class.opacity]="getOrderTrackStatus()<3" fxLayout="column" fxLayoutAlign="start center">
+      <img src="assets/images/icon/logistics5.png">
+      <span>交易完成</span>
+    </div>
+
+  </div>
+  </div>
+  <!-- 订单信息 -->
+  <div fxLayout="row">
+    <div class="w-30-p" style="min-width:300px;height:450px;overflow:auto;border:1px solid #E0E0E0;color:#999999;">
+      <h5 class="px-20 py-8 mt-0" style="color:#000;background:#E0E0E0">订单信息</h5>
+      <p class="px-20" fxLayout="row wrap" fxLayoutGap="15px"><span>订单标号:</span><span>{{getOrderNum()}}</span></p>
+      <p class="px-20" fxLayout="row wrap" fxLayoutGap="15px"><span>创建时间:</span><span>{{getOrderCreateTime()}}</span>
+      </p>
+      <p class="px-20" fxLayout="row wrap" fxLayoutGap="15px"><span>会员姓名:</span><span>{{getLeaguerName()}}</span></p>
+      <p class="px-20" fxLayout="row wrap" fxLayoutGap="15px"><span>会员电话:</span><span>{{getLeaguerPhone()}}</span></p>
+
+      <div style="width:90%;height:0;border:1px solid #E0E0E0;margin:0 auto;"></div>
+
+      <p class="px-20" fxLayout="row wrap" fxLayoutGap="15px"  *ngIf="getOrderTrackStatus()>=1"><span>支付时间:</span><span>{{getPayTime()}}</span></p>
+      <p class="px-20" fxLayout="row wrap" fxLayoutGap="15px"  *ngIf="getOrderTrackStatus()>=1"><span>流水号:</span><span>{{getTradeNo()}}</span></p>
+      <p class="px-20" fxLayout="row wrap" fxLayoutGap="15px"  *ngIf="getOrderTrackStatus()>=1"><span>支付方式:</span><span>{{getPayType()}}</span></p>
+      <p class="px-20" fxLayout="row wrap" fxLayoutGap="15px"><span>配送方式:</span><span>{{getOrderTrackType()}}</span></p>
+      <p class="px-20" fxLayout="row wrap" fxLayoutGap="15px"><span>收货地址:</span><span class="w-70-p">{{getAddress()}}</span>
+      </p>
+    </div>
+    <!-- 订单状态 -->
+    <div class="w-70-p" style="height:450px;border:1px solid #E0E0E0;">
+
+      <div *ngIf="getOrderTrackStatus()==0" class="w-100-p h-50-p" fxLayout="column" fxLayoutAlign="center center">
+        <p class="my-0 w-50-p" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="17px"><img
+          src="assets/images/icon/notice.png"><span>订单状态：买家已下单，等待买家付款。</span></p>
+        <p class="my-0 w-50-p pl-44" fxLayoutAlign="start center"><span style="color:#999;">买家提交订单，请耐心等待买家付款...</span>
+        </p>
+
+      </div>
+      <div *ngIf="getOrderTrackStatus()==1" class="w-100-p h-50-p" fxLayout="column" fxLayoutAlign="center center">
+        <p class="my-0 w-50-p" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="17px"><img
+          src="assets/images/checkout-success.png"><span>订单状态：买家已付款，等待商家发货。</span></p>
+        <p class="my-0 w-50-p pl-44" fxLayoutAlign="start center"><span style="color:#999;">买家已付款，请尽快将买家购买的商品按照订单地址发货，购买的项目、套餐、次卡已默认进入买家预存，买家到店后可进行消费。</span>
+        </p>
+        <p class=" w-50-p pl-44">
+          <zm-btn-md [stroked]="true " (click)="shipMentClick()" name="立即发货"></zm-btn-md>
+        </p>
+      </div>
+
+      <div *ngIf="getOrderTrackStatus()>=2&&!isCanceled()" class="w-100-p h-50-p" fxLayout="column" fxLayoutAlign="center center">
+
+            <p *ngIf="getOrderTrackStatus()>2" class="py-12 px-8 m-0 w-75-p logistics" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="17px">
+              <span>{{getconfirmTime()}}</span>
+              <span> 买家已签收确认收货</span>
+              <b [class.logiActive]="getOrderTrackStatus()==3"></b>
+              <!-- <span>运单号:98974487484584884</span> -->
+            </p>
+            <p class="py-12 px-8 m-0 w-75-p logistics" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="17px">
+                <span>{{getDeliverTime()}}</span>
+                <span> 订单商品已发货，交付{{getCompany()}}</span>
+                <span>运单号:{{getCourierNum()}}</span>
+                <b [class.logiActive]="getOrderTrackStatus()==2"></b>
+            </p>
+        </div>
+      <div *ngIf="isCanceled()" class="w-100-p h-50-p" fxLayout="column" fxLayoutAlign="center center">
+        <p class="my-0 w-50-p" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="17px"><img style="width:28px;"
+          src="assets/images/canceled.png"><span>订单状态：买家已取消订单。</span></p>
+
+      </div>
+      <!-- 物流信息 -->
+      <div class="w-100-p h-50-p"  style="border-top:1px solid #E0E0E0;">
+
+      <div *ngIf="getOrderTrackStatus()>=2&&!isCanceled()" class="w-100-p h-100-p" fxLayout="column" fxLayoutAlign="center center">
+        <p class="my-4 w-75-p" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="17px">
+          <span>物流信息：{{getCompany()}}</span>
+
+        </p>
+        <p class="my-4 w-75-p" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="17px">
+           <span>发货时间：{{getDeliverTime()}}</span>
+          </p>
+          <p class="my-4 w-75-p" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="17px">
+             <span>货运单号：{{getCourierNum()}}</span>
+            </p>
+
+
+      </div>
+      </div>
+    </div>
+
+  </div>
+
+  <ng-template #tdA let-item="item">
+    <div style="width:280px;margin:0 auto;" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+      <div class="zmImgDiv" style="position:relative;">
+        <!-- <img *ngIf="item.defaultImg=='' " src="assets/images/goodList.png" style="width: 100%; height:100%;"/> -->
+        <!-- <img *ngIf="item.defaultImg!='' " :src="{{item.defaultImg|imgPrePath}}" style="width: 100%; height:100%;"/> -->
+        <img *ngIf="true " src="{{getImg(item.defaultImg)}}" style="width: 100%; height:100%;"/>
+
+      </div>
+      <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="20px">
+        <div class="text-truncate text-left" style="width:160px;">{{item.pgName}}</div>
+        <div fxLayout="row wrap" fxLayoutAlign="start center">
+          <span style="background:#666;color:#fff;font-size:10px;border-radius:10px;padding:0 5px;margin:5px 5px 0 0;">{{item.typeName}}</span>
+        </div>
+      </div>
+
+    </div>
+
+  </ng-template>
+  <ng-template #tdB let-item="item">
+    <div style="min-width:150px;">{{item.itemType}}</div>
+  </ng-template>
+  <ng-template #tdC let-item="item">
+    <div style="min-width:50px;">￥{{item.price}}</div>
+  </ng-template>
+  <ng-template #tdD let-item="item">
+    <div style="min-width:50px;">{{item.count}}</div>
+  </ng-template>
+  <ng-template #tdE let-item="item">
+    <div style="min-width:100px;">￥{{item.total}}</div>
+  </ng-template>
+
+
+  <zm-mat-table [tdTemplateList]="[tdA,tdB,tdC,tdD,tdE]" [thNameList]="['产品','类型','价格','数量','小计']"
+                [itemList]="getList()"></zm-mat-table>
+
+  <!--
+     <no-data [loadingFinish]="true" [dataList]="getList()" [text]=" '没有数据'" [showImg]="'noData'"></no-data>
+  -->
+
+  <div style="font-size:18px;">
+    <p fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20px"><span>商品总额:</span> <span
+      style="width:150px;">￥{{getSumPrice()}}</span></p>
+    <p fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20px"><span>折扣:</span> <span
+      style="width:150px;">￥{{getDiscountPrice()}}</span></p>
+    <p fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20px"><b>应付总额:</b> <b
+      style="width:150px;">￥{{getRealPay()}}</b></p>
+
+  </div>
+
+</view-body-comp>

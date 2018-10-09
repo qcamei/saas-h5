@@ -1,0 +1,43 @@
+<!--views/appointment/makesureinfo/makeSureInfo.wxml-->
+<text class='content-title'>核对预约信息</text>
+           <view class="weui-cell">
+                    <text>姓名</text>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" bindinput='appointmentNameInput' bindfocus='inputonfocus' type="text" value='{{appointName}}' placeholder="请输入姓名" />
+                </view>
+            </view>
+      <view class="weui-cell">
+                    <text>联系电话</text>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" bindinput='appointmentPhoneInput'  type="number" value='{{appointPhone}}' placeholder="请输入手机号码" />
+                </view>
+            </view>
+<label class='appointment-title'>预约信息</label>
+
+   <view class='weui-cell top'>
+   <view class='weui-cell__bd'>
+  <text>预约时间</text>
+  </view>
+  <view class='weui-cell__ft'>
+  <label class='content'>{{appointData.appointmentDate}} {{appointData.appointmentTime}}</label>
+  </view>
+  </view>
+   <view wx:if = '{{appointData.beauticianName}}' class='weui-cell'>
+      <view class='weui-cell__bd'>
+  <text>服务人员</text>
+  </view>
+  <view class='weui-cell__ft'>
+  <label class='content'>{{appointData.beauticianName}}</label>
+  </view>
+  </view>
+     <view class='weui-cell'>
+      <view class='weui-cell__bd'>
+  <text>美容店铺</text>
+  </view>
+  <view class='weui-cell__ft'>
+  <label class='content'>{{appointData.storeName}}</label>
+  </view> 
+  </view>
+  <button disabled="{{btnDisable}}" class='sureBtn' hover-class='sureBtnHover' bindtap='appointClick'>确定</button>
+
+  

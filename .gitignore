@@ -1,0 +1,42 @@
+# Compiled class file 
+*.class
+bin/
+
+#zmDevHelper
+codeGen/
+fieldInput
+
+# Log file 
+*.log
+
+# Eclipse Project files
+.classpath
+.project
+target/
+.settings/
+*.jar
+*.bak
+
+.idea
+
+# Android Mac
+*.iml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+
+chainStore/code/res/
+chainStore/code/Android/YMD/gradle/wrapper/gradle-wrapper.properties
+chainStore/code/Android/YMD/app/src/test/java/com/yml/saas/ExampleUnitTest.java
+*.jks
+chainStore/code/java/comPrj/.metadata/
+chainStore/code/java/comPrj/.recommenders/
+chainStore/code/java/storePrj/.metadata/
+chainStore/code/java/storePrj/.recommenders/
+
+node_modules

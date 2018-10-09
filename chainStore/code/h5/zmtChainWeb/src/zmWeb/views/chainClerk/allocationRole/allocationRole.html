@@ -1,0 +1,37 @@
+<view-body-comp  [headerArr]="['员工信息','岗位分配']">
+  <div style="width:700px;">
+    <zm_table_detail>
+      <tbody>
+      <tr>
+        <td style="width:200px">姓名</td>
+        <td>{{viewData.allocationClerkData.name}}</td>
+      </tr>
+      <tr>
+        <td>手机号</td>
+        <td>{{viewData.allocationClerkData.phone}}</td>
+      </tr>
+      <tr>
+        <td>性别</td>
+        <td>{{viewData.allocationClerkData.gender == 1?'男':'女'}}</td>
+      </tr>
+      <tr>
+        <td>岗位分配</td>
+        <td>
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+                        <span *ngFor="let item of viewData.allocationClerkData.roleSet;let i = index;" >
+                            <zm_list_checkbox  [(zmValue)]="viewData.allocationClerkData.roleSet[i]">
+                                  <content class="mg-l-15 cur-hand">{{ item.name}}</content>
+                               </zm_list_checkbox>
+                        </span>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </zm_table_detail>
+
+    <div fxLayout="row" fxLayoutAlign="end">
+      <zm_btn_large  [name]="'保存'" (zmbtnClick)="addRoleSet2Clerk()" style="margin-top: 40px;" ></zm_btn_large>
+    </div>
+
+  </div>
+</view-body-comp>

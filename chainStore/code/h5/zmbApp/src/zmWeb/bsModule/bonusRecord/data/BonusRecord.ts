@@ -1,0 +1,22 @@
+export class BonusRecord {
+  id:string;
+  storeId:string;
+  orderNumber:string;
+  orderId:string;
+  orderTime:number;
+  buyType:number;
+  buyName:string;
+  buyId:string;
+  pgId:string;
+  buserId:string;
+  buserName:string;
+  amount:number;
+  bonusType:number;
+  percentage:number;
+  cost:number;
+  status:number;
+  createdTime:number;
+  lastUpdateTime:number;
+  ver:number;
+  constructor(){}
+}

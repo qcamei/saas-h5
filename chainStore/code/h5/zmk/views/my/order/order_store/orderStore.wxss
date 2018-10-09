@@ -1,0 +1,4 @@
+/* views/my/order/order_store/orderStore.wxss */
+page{
+  background-color: white
+}

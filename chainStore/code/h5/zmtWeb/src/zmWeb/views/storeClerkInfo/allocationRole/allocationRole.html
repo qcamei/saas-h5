@@ -1,0 +1,42 @@
+    <view-body-comp  [headerArr]="['员工信息','岗位分配']">
+      <div style="width:700px;">
+          <zm-table-detail>
+            <tbody>
+              <tr>
+                <td style="width:200px">姓名</td>
+                <td>{{viewData.allocationClerkData.name}}</td>
+              </tr>
+              <tr>
+                <td>手机号</td>
+                <td>{{viewData.allocationClerkData.phone}}</td>
+              </tr>
+              <tr>
+                <td>性别</td>
+                <td>{{viewData.allocationClerkData.gender == 1?'男':'女'}}</td>
+              </tr>
+              <tr>
+                <td>是否服务人员</td>
+                <td>
+                  <switch-button-comp [(state)] ="viewData.isBeautician" (changeCallback)="changeBeautician($event)"></switch-button-comp>
+                <div class="fz-14 mg-l-5 mg-t-10" style="color:#ff355d;">注：服务人员才能接受预约</div>
+                </td>
+              </tr>
+              <tr>
+                <td>岗位分配</td>
+                <td>
+                  <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px">
+                        <span *ngFor="let item of viewData.allocationClerkData.roleSet;let i = index;" style="width:200px;margin-top: 10px">
+                            <zm-list-checkbox  [(zmValue)]="viewData.allocationClerkData.roleSet[i]">
+                                  <content class="mg-l-15 cur-hand">{{ item.name}}</content>
+                            </zm-list-checkbox>
+                        </span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </zm-table-detail>
+          <div fxLayout="row" fxLayoutAlign="end">
+              <zm-btn-large  [name]="'保存'" (zmbtnClick)="addRoleSet2Clerk()" style="margin-top: 40px;" ></zm-btn-large>
+          </div>
+      </div>
+    </view-body-comp>

@@ -1,0 +1,4 @@
+<!--pages/pay/pay.wxml-->
+<view class='payTextContainer'>
+<image src="../../images/loading.gif" class='loadingImg'></image>
+</view>

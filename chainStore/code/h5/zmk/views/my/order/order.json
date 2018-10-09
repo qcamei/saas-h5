@@ -1,0 +1,11 @@
+{
+  "backgroundTextStyle": "black",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "我的订单",
+  "enablePullDownRefresh": false,
+
+  "usingComponents": {
+
+    "zm-tab":"/views/comComp/tab/zmTabComp"
+  }
+}

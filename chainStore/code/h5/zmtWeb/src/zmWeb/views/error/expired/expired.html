@@ -1,0 +1,31 @@
+<div class="text-center" style="padding-top: 130px;" *ngIf="viewData.showPage == 0">
+	<img src="assets/images/error/error-1.png" alt="">
+	<p class="font-bold mg-t-20 fz-18" style="letter-spacing: 8px;">请开通会员服务</p>
+	<div class="error-btn mg-t-20" (click)="contact()">咨询客服</div>
+</div>
+<div class="text-center" style="padding-top: 130px;" *ngIf="viewData.showPage == 1">
+  <img src="assets/images/error/error-2.png" alt="">
+  <p class="font-bold mg-t-20 fz-18" style="letter-spacing: 8px;">会员过期，请续费</p>
+  <div class="error-btn mg-t-20" (click)="goVipCharge()">续费</div>
+</div>
+<div class="text-center" style="padding-top: 130px;" *ngIf="viewData.showPage == 2">
+  <img src="assets/images/error/error-1.png" alt="">
+  <p class="font-bold mg-t-20 fz-18" style="letter-spacing: 8px;">会员服务还有{{viewData.expiredDay}}天过期，请及时续费</p>
+  <div class="error-btn mg-t-20" (click)="goVipCharge()">续费</div>
+  <div class="error-btn mg-t-20" (click)="goHome()">确定</div>
+</div>
+<div class="text-center" style="padding-top: 130px;" *ngIf="viewData.showPage == 3">
+  <img src="assets/images/error/error-2.png" alt="">
+  <p class="font-bold mg-t-20 fz-18" style="letter-spacing: 8px;">店铺会员服务过期，请通知店铺管理者续费</p>
+</div>
+<div class="text-center" style="padding-top: 130px;" *ngIf="viewData.showPage == 4">
+  <img src="assets/images/error/error-1.png" alt="">
+  <p class="font-bold mg-t-20 fz-18" style="letter-spacing: 8px;">店铺会员服务还有{{viewData.expiredDay}}天到期，请及时通知管理者续费</p>
+  <div class="error-btn mg-t-20" (click)="goHome()">确定</div>
+</div>
+<div class="text-center" style="padding-top: 130px;" *ngIf="viewData.showPage == 5">
+  <img src="assets/images/error/error-1.png" alt="">
+  <p class="font-bold mg-t-20 fz-18" style="letter-spacing: 8px;">会员服务还有{{viewData.expiredDay}}天过期，请及时续费</p>
+  <div class="error-btn mg-t-20" (click)="goVipCharge()">续费</div>
+  <div class="error-btn mg-t-20" (click)="goBossAddStore()">确定</div>
+</div>

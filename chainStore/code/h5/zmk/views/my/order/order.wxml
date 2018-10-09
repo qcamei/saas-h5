@@ -1,0 +1,99 @@
+<view >
+    <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
+        <view class="tab-item {{currentTab==0?'active':''}}"  data-current="0" bindtap="switchStatusTab">待接单</view>
+        <view class="tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="switchStatusTab">待服务</view>
+        <view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="switchStatusTab">已取消</view>
+        <view class="tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="switchStatusTab">服务完成</view>
+    </scroll-view>
+    <swiper class="tab-content" current="{{currentTab}}" duration="300" bindchange="switchTab" style="height:{{winHeight}}rpx;">
+      <swiper-item wx:for="{{[0,1,2,3]}}">
+        <view class='no-order-img' wx:if="{{!hasList}}">
+          <image src='../../../images/ic_no_order.png'></image>
+          <text>暂无订单</text>
+        </view>
+        <scroll-view scroll-y="true" class="scoll-h" >
+            <block wx:for="{{list}}" wx:key="*this" wx:for-item="item">
+              <navigator url="orderDetail/orderDetail?id={{item.id}}">
+                <view class="item-ans">
+                  <view class="store-name">{{item.name}}</view>
+                  <view class="order-info">
+                    <image class="time-img" src="../../../images/ic_new_122.png"></image>
+                    <view class="order-date">{{item.dayTime}}</view>
+                    <view class="order-time">{{item.time}}</view>
+                  </view>
+                </view>
+              </navigator>
+            </block>
+        </scroll-view>
+      </swiper-item>
+    </swiper>
+</view>
+
+<!--<zm-tab tabNames="待接单,待服务,服务完成,已取消" initTab="待接单" >-->
+
+    <!--<view slot="待接单">-->
+        <!--<scroll-view scroll-y="true" class="scoll-h" >-->
+            <!--<block wx:for="{{[1,2,3,4,5]}}" wx:key="*this">-->
+                <!--<navigator url="orderDetail/orderDetail">-->
+                    <!--<view class="item-ans">-->
+                        <!--<view class="store-name">医美莱乌当区保利温泉103店</view>-->
+                        <!--<view class="order-info">-->
+                            <!--<image class="time-img" src="../../../images/ic_new_122.png"></image>-->
+                            <!--<view class="order-date">今天</view>-->
+                            <!--<view class="order-time">18:30 </view>-->
+                        <!--</view>-->
+                    <!--</view>-->
+                <!--</navigator>-->
+            <!--</block>-->
+        <!--</scroll-view>-->
+    <!--</view>-->
+    <!--<view slot="待服务">-->
+        <!--<scroll-view scroll-y="true" class="scoll-h" >-->
+            <!--<block wx:for="{{[1,2,3,4,5]}}" wx:key="*this">-->
+                <!--<navigator url="orderDetail/orderDetail">-->
+                    <!--<view class="item-ans">-->
+                        <!--<view class="store-name">医美莱乌当区保利温泉103店</view>-->
+                        <!--<view class="order-info">-->
+                            <!--<image class="time-img" src="../../../images/ic_new_122.png"></image>-->
+                            <!--<view class="order-date">今天</view>-->
+                            <!--<view class="order-time">18:30 </view>-->
+                        <!--</view>-->
+                    <!--</view>-->
+                <!--</navigator>-->
+            <!--</block>-->
+        <!--</scroll-view>-->
+    <!--</view>-->
+    <!--<view slot="服务完成">-->
+        <!--<scroll-view scroll-y="true" class="scoll-h" >-->
+            <!--<block wx:for="{{[1,2,3,4,5]}}" wx:key="*this">-->
+                <!--<navigator url="orderDetail/orderDetail">-->
+                    <!--<view class="item-ans">-->
+                        <!--<view class="store-name">医美莱乌当区保利温泉103店</view>-->
+                        <!--<view class="order-info">-->
+                            <!--<image class="time-img" src="../../../images/ic_new_122.png"></image>-->
+                            <!--<view class="order-date">今天</view>-->
+                            <!--<view class="order-time">18:30 </view>-->
+                        <!--</view>-->
+                    <!--</view>-->
+                <!--</navigator>-->
+            <!--</block>-->
+        <!--</scroll-view>-->
+    <!--</view>-->
+    <!--<view slot="已取消">-->
+        <!--<scroll-view scroll-y="true" class="scoll-h" >-->
+            <!--<block wx:for="{{[1,2,3,4,5]}}" wx:key="*this">-->
+                <!--<navigator url="orderDetail/orderDetail">-->
+                    <!--<view class="item-ans">-->
+                        <!--<view class="store-name">医美莱乌当区保利温泉103店</view>-->
+                        <!--<view class="order-info">-->
+                            <!--<image class="time-img" src="../../../images/ic_new_122.png"></image>-->
+                            <!--<view class="order-date">今天</view>-->
+                            <!--<view class="order-time">18:30 </view>-->
+                        <!--</view>-->
+                    <!--</view>-->
+                <!--</navigator>-->
+            <!--</block>-->
+        <!--</scroll-view>-->
+    <!--</view>-->
+
+<!--</zm-tab>-->

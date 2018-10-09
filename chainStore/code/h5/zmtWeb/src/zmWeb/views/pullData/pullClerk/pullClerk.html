@@ -1,0 +1,70 @@
+<view-header-comp [headerArr]="['数据获取','获取员工']"></view-header-comp>
+
+<view-body-comp>
+    <content>
+<div class="d-flex justify-content-between p-3">
+        <div class="d-flex">
+            <div class="mr-4">
+                <button type="button" class="btn btn-primary btn-sm cur-hand">批量获取</button>
+             </div>
+            <div class="mr-4">
+            <zm-search-box [label]=" '产品查询'" [placeholder]="'产品编号/名称'" [(zmValue)]="a" (callBack)="getProductDetailListByReq()"></zm-search-box>
+            </div>
+        <div class="form-group form-inline mr-4">
+            <label class="font-weight-bold col-form-label col-form-label-sm  mr-2">项目分类</label>
+            <select class="form-control form-control-sm set-bg c-hued cur-hand "
+                    (ngModelChange)="getProductDetailListByReq()">
+            <option [value]=" '-1' ">全部</option>
+            <option>祛皱嫩肤</option>
+            </select>
+
+        </div>
+        <div>
+
+            <zm-select [label]="'状态'" [selectList]="[{name:'上架',value:1},{name:'下架',value:2}]" [(zmValue)]="a" (change)="getProductDetailListByReq()"></zm-select>
+
+        </div>
+        </div>
+        <!-- <div>
+            <zm-btn-small [name]="'上架'"  (zmbtnClick)="batchChangeState(1)"></zm-btn-small>
+            <zm-btn-small [name]="'下架'"  (zmbtnClick)="batchChangeState(2)"></zm-btn-small>
+            <zm-btn-new [name]="'新建'" (zmbtnClick)="goAddProductInfo()"></zm-btn-new>
+        </div> -->
+        </div>
+
+
+    <zm-table>
+            <thead class="bg-th">
+            <th class="align-middle"  width="10%">
+            </th>
+            <th class="align-middle">图片</th>
+            <th class="align-middle" style="width: 9%">产品编号</th>
+            <th class="align-middle" style="width: 12%">产品名称</th>
+            <th class="align-middle">售价</th>
+            <th class="align-middle">状态</th>
+            <th class="align-middle" style="width: 15%">操作</th>
+            </thead>
+            <tbody>
+            <tr>
+              <td class="align-middle">
+              </td>
+              <td class="align-middle">
+                <div style="width:120px; height:92px; margin: 0 auto;">
+                  <img *ngIf="true" src="assets/images/pore.png" style="width: 100%; height:100%;"/>
+                  <!-- <img *ngIf="item.defaultImg!='' " :src="{{item.defaultImg|imgPrePath}}" style="width: 100%; height:100%;"/> -->
+                </div>
+              </td>
+              <td class="align-middle">S01001</td>
+              <td class="align-middle">光子嫩肤精油七八九十</td>
+              <td class="align-middle"><i class="fa fa-yen mr-1"></i>{{5224.2544 |number:'1.2-2'}}</td>
+              <td class="align-middle">已获取</td>
+              <td class="align-middle">
+                <a class="text-primary cur-hand mr-1" *ngIf=" true" >取消获取</a>
+                <a class="text-primary cur-hand mr-1" *ngIf="true">获取</a>
+                <a class="text-primary cur-hand mr-1" *ngIf=" true">查看</a>
+              </td>
+            </tr>
+            </tbody>
+          </zm-table>
+    </content>
+</view-body-comp>

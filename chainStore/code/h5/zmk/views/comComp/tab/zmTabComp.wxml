@@ -1,0 +1,23 @@
+<!--使用参考-->
+<!--<zm-tab tabNames="待接单,待服务,服务完成" initTab="待服务" >-->
+
+<!--<view slot="待接单">这里是插入到组件slot name="待接单"中的内容</view>-->
+<!--<view slot="待服务">这里是插入到组件slot name="待服务"中的内容</view>-->
+<!--<view slot="服务完成">这里是插入到组件slot name="服务完成"中的内容</view>-->
+
+<!--</zm-tab>-->
+
+<view  class="tab-h">
+    <block wx:for="{{tabList}}" wx:for-item="tabItem">
+        <view class="tab-item {{tabItem.selected?'active':''}}"  bindtap="onTap" data-tab="{{tabItem}}">{{tabItem.name}}</view>
+    </block>
+</view>
+
+<swiper class="tab-content" current-item-id="{{curTab.name}}" bindchange="bindChange" indicator-dots="{{false}}" autoplay="{{false}}" interval="5000" duration="300">
+    <block wx:for="{{tabList}}" wx:for-item="tabItem">
+        <swiper-item item-id="{{tabItem.name}}">
+            <slot name="{{tabItem.name}}"></slot>
+        </swiper-item>
+    </block>
+</swiper>
+

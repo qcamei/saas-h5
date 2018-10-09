@@ -1,0 +1,90 @@
+  <view-body-comp [headerArr]="['会员列表']">
+      <mat-toolbar style="padding-top:15px;margin-bottom:15px;">
+        <mat-toolbar-row fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="zmFullWidth">
+          <div fxLayout="row wrap"  fxLayoutGap="20px" class="fullwidth">
+
+            <div  fxFlexAlign="center"  >
+              <zm-search-box [label]=" '会员查询'" [placeholder]="'姓名/手机号'" [(zmValue)]="viewData.queryForm.leaguerNameOrPhone" (callBack)="findLeaguer()"></zm-search-box>
+            </div>
+          </div>
+          <div fxFlexAlign="center" ><zm-btn-new [name]="'新建'" (zmbtnClick)="goAddLeaguer()"></zm-btn-new></div>
+        </mat-toolbar-row>
+      </mat-toolbar>
+
+      <ng-template #tdA let-item="item">{{item.name}}</ng-template>
+      <ng-template #tdB let-item="item">{{item.phone}}</ng-template>
+      <ng-template #tdC let-item="item">{{item.createdTime>0?(item.createdTime | times):'-'}}</ng-template>
+      <ng-template #tdD let-item="item"><span class="fa fa-yen mg-r-5"></span>{{item.leaguerMemberCard.balance}}</ng-template>
+      <ng-template #tdE let-item="item">{{getDay(item.lastConsumeTime) >= 0 && item.lastConsumeTime > 0 ? getDay(item.lastConsumeTime) + '天' : '-' }}</ng-template>
+      <ng-template #tdF let-item="item"><span matTooltip="{{getBuserNames(item).length > 0 ? getBuserNames(item).join('、'): ''}}">{{getBuserNames(item).length > 0 ? getBuserNames(item)[0] : '-'  }}</span></ng-template>
+      <ng-template #tdG let-item="item">
+        <a class="zmCurHand" style="margin-right: 5px;"  (click)="openChooseClerk(item)">分配负责人</a>
+        <a class="zmCurHand" style="margin-right: 5px;"  (click)="openSettingMemberCard(content,item)">设置会员卡</a>
+        <a class="zmCurHand" style="margin-right: 5px;"  (click)="goLeaguerDetail(item.id)">查看</a>
+        <a class="zmCurHand" style="margin-right: 5px;" (click)="goEditLeaguer(item.id)">编辑</a>
+        <a class="zmCurHand" style="margin-right: 5px;"  (click)="deleteLeaguer(item)">删除</a>
+      </ng-template>
+
+      <zm-mat-table  [tdTemplateList]="[tdA,tdB,tdC,tdD,tdE,tdF,tdG]" [thNameList]="['姓名','手机号','注册时间','会员卡余额','距上次消费','分配负责人','操作']" [itemList]="viewData.leaguerList"></zm-mat-table>
+
+
+      <no-data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.leaguerList"  [text]="'没有数据'" [showImg]="'noData'"></no-data>
+
+      <zm-page [totalSize]="viewData.recordCount" [curPage]="viewData.page" (pageChange) = "getPageData($event)"></zm-page>
+      <!--模态框-->
+      <ng-template #content let-c="close" let-d="dismiss">
+
+        <div animation-modal>
+          <h2 mat-dialog-title>
+            设置会员卡
+          </h2>
+          <mat-dialog-content>
+            <div fxLayout="column" fxLayoutGap="60px;">
+
+                  <zm-input-text [label]="'会员'" [(zmValue)]="viewData.choosedLeaguer.name" [disabled]="true" ></zm-input-text>
+
+                  <zm-select [label]="'会员卡'" [noAll]="true"
+                             [selectList]="viewData.memberCardList" [name]="'name'" [value]="'id'"
+                             [(zmValue)] = "viewData.choosedCardId"></zm-select>
+                  <zm-input-text label="会员卡号" placeholder="请输入会员卡号" [(zmValue)]="viewData.updateMemberCardForm.number" ></zm-input-text>
+                <!--<div class="">-->
+                  <!--<label class="c-label">会员卡</label>-->
+                  <!--<select class="form-control cur-hand " [(ngModel)]="viewData.choosedCardId" [ngModelOptions]="{standalone: true}">-->
+                    <!--<option *ngFor="let item of viewData.memberCardList" [value]="item.id">{{item.name}}</option>-->
+                  <!--</select>-->
+                <!--</div>-->
+                <div class="">
+                  <label class="c-label text-right mg-b-0">有效期</label>
+                  <zm-validPeriod-radio   [(curValue)]="viewData.validPerioItem"></zm-validPeriod-radio>
+                </div>
+
+
+              <!---->
+                <!--<div class="">-->
+                  <!--<label class="c-label">会员卡号</label>-->
+                  <!--<input type="text" maxlength="20" placeholder="请输入会员卡号" pattern="^[A-Za-z0-9]+$" [ngClass]="{'form-valid-error':member.invalid && (member.touched)}" class="form-control" name="member " #member="ngModel" [(ngModel)]="viewData.updateMemberCardForm.number" [ngModelOptions]="{standalone: true}" />-->
+                <!--</div>-->
+              <!---->
+                <!--<div class="c-input-error">-->
+                  <!--<div class="text-danger " *ngIf="member.invalid && (member .touched)">-->
+                    <!--<div *ngIf="member.errors.pattern">-->
+                      <!--请输入由字母、数字组成的会员卡号-->
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+
+            </div>
+          </mat-dialog-content>
+          <mat-dialog-actions fxLayout="row" class="mt-20" fxLayoutAlign="end" fxLayoutGap="20px">
+            <zm-btn-md  [stroked]="true" (click)="closeModal()" name="取消"></zm-btn-md>
+            <zm-btn-md  (click)="updateMemberCard()" name="确定"></zm-btn-md>
+          </mat-dialog-actions>
+        </div>
+
+
+
+
+      </ng-template>
+      <!--模态框-->
+
+  </view-body-comp>

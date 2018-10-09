@@ -1,0 +1,129 @@
+.disFlex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: flex;
+}
+
+.flex {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  -webkit-flex: 1;
+  -moz-box-flex: 1;
+  flex: 1;
+}
+
+.text-center {
+  text-align: center;
+}
+.text-right{
+  text-align: right;
+}
+.text-left {
+  text-align: left;
+}
+.mg-b-20{
+  margin-bottom: 20px;
+}
+.mg-l-10{
+  margin-left:10px;
+}
+.align-center {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  align-items: center;
+}
+.font-c5 {
+  color: #fff !important;
+}
+.cur-hand{
+  cursor: pointer;
+}
+
+
+.c-login-body{
+  width:100%;
+  height:100vh;
+  background:url(assets/images/sign_bg.jpg)no-repeat 100% 100% ;
+  background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+  -webkit-background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  .c-login{
+    .c-login-title{
+      margin-bottom: 8vh;
+    }
+    .input-group{
+      margin-bottom: 10px;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      -moz-box-align: center;
+      align-items: center;align-items: center;
+    }
+    .c-login-input{
+      width: 100%;
+      border: none !important;
+      color:#000;
+      font-size: 16px;
+      height: 48px;
+      border-radius: 0.375rem;
+      border-width: 2px;
+      padding-left: 40px;
+      background-color: #ffffff;
+    }
+    .c-login-input:focus{
+      outline: none;
+    }
+    //logo错误类型
+    .c-login-error{
+      height: 30px;
+      font-size: 12px;
+    }
+    //错误类型
+  .c-input-error{
+    height: 30px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (min-width:992px) and (max-width:1366px){
+    .c-login-body{
+      .c-login{
+        .c-login-title{
+          .title{
+            margin:5px 0 45px 0;
+
+          }
+        }
+      }
+    }
+}
+
+// 总店登录，店铺登录
+.tab-login{
+  padding:20px;
+  background:rgba(225,225,225,0.3);
+  border-radius: 10px;
+  .tab-shop{
+    border-bottom:3px solid #fff;
+    margin-bottom:40px;
+    color:#fff;
+    font-size:18px;
+    .tab-shop-active{
+      font-size:18px;
+      border-bottom:3px solid #6DA8DB;
+      color:#6DA8DB;
+      margin-bottom:-3px;
+    }
+    .d-inline-block{
+      display:inline-block;
+    }
+  }
+}

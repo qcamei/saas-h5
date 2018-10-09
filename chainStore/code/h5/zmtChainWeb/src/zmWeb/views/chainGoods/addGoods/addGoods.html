@@ -1,0 +1,50 @@
+<view-body-comp [headerArr]="['商品列表','新建商品']" >
+
+  <div fxLayout="row" fxLayoutGap="20px">
+
+    <div style="width: 50%">
+
+      <zm-input-pcode label="商品编号" placeholder="请输入商品编号"
+                      [(zmValue)]="viewData.goodsAddForm.number" [(zmPass)]="viewData.goodsAddForm.numberPass"
+                      [existList]="viewData.goodsNumberList"  ></zm-input-pcode>
+
+
+      <zm_input_name label="商品名称" placeholder="请输入商品名称" maxlength="15"
+                     [(zmValue)]="viewData.goodsAddForm.name" [(zmPass)]="viewData.goodsAddForm.namePass"></zm_input_name>
+
+      <div fxLayout="row"  fxLayoutAlign="start center">
+        <zm_select style="width:100%" [noAll]="true" [label]="'商品分类'" [selectList]="viewData.typeList" [name]="'name'" [value]="'id'"
+                   [(zmValue)]="viewData.goodsAddForm.typeId"></zm_select>
+        <zm_btn_small fxFlex ="0 0 80px"  name="新建分类" (zmbtnClick)="addType()"></zm_btn_small>
+      </div>
+
+      <zm-input-price [label]="'商品售价'" [placeholder]="'请输入商品售价'" [(zmValue)]="viewData.goodsAddForm.sellPrice"></zm-input-price>
+
+      <zm-input-price [label]="'商品成本'" [placeholder]="'请输入商品成本'" [(zmValue)]="viewData.goodsAddForm.cost"></zm-input-price>
+
+      <zm-input-textarea [label]="'商品介绍'" [placeholder]="'请输入200字以内的商品介绍'"
+                         [(text)]="viewData.goodsAddForm.descript" [maxlength]="200"></zm-input-textarea>
+
+      <switch-button-comp label="上架状态" [(state)]="viewData.pageData.state"></switch-button-comp>
+
+      <div fxLayout="row" fxLayoutAlign="end" style="margin-top: 20px;">
+        <zm_btn_large  fxFlexAlign="end" [disabled]="!(viewData.goodsAddForm.numberPass && viewData.goodsAddForm.namePass)" name="保存" (zmbtnClick)="addGoods()"></zm_btn_large>
+      </div>
+
+    </div>
+
+    <div style="width: 50%">
+      <div class="form-group form-inline">
+        <zm_img_cropper [label]="'上传图片'" [aspectRatio]="4/3" [requestUrl]="viewData.pageData.requestUrl"
+                        (callback)="showImg($event)"></zm_img_cropper>
+      </div>
+      <zm_img_preview [(imgArr)]="viewData.goodsAddForm.imgPaths" [(imgLength)]="viewData.pageData.limitCount"></zm_img_preview>
+      <div class="mt-20">
+           <zm_btn_small name="选择门店" (zmbtnClick)="selectStore()"></zm_btn_small>
+      </div>
+
+      <zm_store_preview [(storeArr)]="viewData.selectStoreList" (storeArrChange)="removeStore()"></zm_store_preview>
+    </div>
+
+  </div>
+</view-body-comp>

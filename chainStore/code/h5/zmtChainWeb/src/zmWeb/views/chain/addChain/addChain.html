@@ -1,0 +1,23 @@
+<view-body-comp [headerArr]="['连锁店','创建连锁店']">
+  <div style="max-width:600px">
+
+    <zm_input_name label="总部名称" placeholder="请输入总部名称" maxlength="15"
+                   [(zmValue)]="viewData.addForm.name" [(zmPass)]="viewData.addForm.namePass"></zm_input_name>
+
+    
+    <city-select-comp [(citySetting)]="viewData.citySetting"></city-select-comp>
+    
+    <zm-input-textarea [label]="'详细地址'" [placeholder]="'请输入详细地址'"
+                       [(text)]="viewData.addForm.address" [maxlength]="200"></zm-input-textarea>
+
+    <zm_input_name label="联系人"  placeholder="请输入联系人" [(zmValue)]="viewData.addForm.contacts" [(zmPass)]="viewData.addForm.contactsPass" [required]="true"></zm_input_name>
+
+    <zm-input-tel label="联系电话"  placeholder="请输入联系电话" [(zmValue)]="viewData.addForm.contactNumber" [(zmPass)]="viewData.addForm.contactNumberPass" [required]="true"></zm-input-tel>
+
+    <zm-input-textarea maxlength="200" [label]="'总部介绍'" [placeholder]="'请输入总部介绍'" [(text)]="viewData.addForm.descript"></zm-input-textarea>
+
+    <div fxLayout="row" fxLayoutAlign="end" style="margin-top: 20px;">
+      <zm_btn_large  fxFlexAlign="end" [disabled]="!(viewData.addForm.namePass && viewData.addForm.contactsPass && viewData.addForm.contactNumberPass)" name="保存" (zmbtnClick)="addChain()"></zm_btn_large>
+    </div>
+  </div>
+</view-body-comp>

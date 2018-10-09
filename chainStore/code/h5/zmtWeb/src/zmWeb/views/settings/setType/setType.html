@@ -1,0 +1,33 @@
+<view-body-comp [headerArr]="['管理设置','分析设置']">
+  <content>
+    <div class="disFlex fz-14 mg-t-20 mg-b-15">
+      <label class="c-label font-bold mg-r-20" >优质会员</label>
+      已在<input class="form-control mg-l-5 mg-r-5 fz-12 text-center" type="number" oninput="if(value>9999||value<0)value=null" style="width:100px;" [(ngModel)]="viewData.highGrade"/>天内到店消费的会员
+    </div>
+    <div class="disFlex fz-14 mg-b-15">
+      <label class="c-label font-bold mg-r-20">风险流失会员</label>
+      超过<input class="form-control mg-l-5 mg-r-5 fz-12 text-center" type="number" oninput="if(value>9999||value<0)value=null" style="width:100px;" [(ngModel)]="viewData.risk"/>天—{{viewData.quiescence}}天没有到店消费的会员
+    </div>
+    <div class="disFlex fz-14 mg-b-15">
+      <label class="c-label font-bold mg-r-20">静止会员</label>
+      超过<input class="form-control mg-l-5 mg-r-5 fz-12 text-center" type="number" oninput="if(value>9999||value<0)value=null" style="width:100px;" [(ngModel)]="viewData.quiescence"/>天没有到店消费的会员
+    </div>
+    <div class="disFlex fz-14 mg-b-15">
+      <label class="c-label font-bold mg-r-20">次卡即将过期</label>
+      剩余<input class="form-control mg-l-5 mg-r-5 fz-12 text-center" type="number" oninput="if(value>9999||value<0)value=null" style="width:100px;" [(ngModel)]="viewData.productCardExpiredThreshold"/>天将过期的次卡
+    </div>
+    <div class="disFlex fz-14 mg-b-15">
+      <label class="c-label font-bold mg-r-20">会员卡即将过期</label>
+      剩余<input class="form-control mg-l-5 mg-r-5 fz-12 text-center" type="number" oninput="if(value>9999||value<0)value=null" style="width:100px;" [(ngModel)]="viewData.memberCardExpiredThreshold"/>天将过期的会员卡
+    </div>
+    <div class="disFlex fz-14 mg-b-30">
+      <label class="c-label font-bold mg-r-20">充值余额不足</label>
+      剩余<input class="form-control mg-l-5 mg-r-5 fz-12 text-center" type="number" oninput="if(value>9999||value<0)value=null" style="width:100px;" [(ngModel)]="viewData.memberCardBalanceThreshold"/>元充值金额的会员
+    </div>
+    <div class="text-right">
+      <!-- <button type="button" class="btn-md" (click)="updateLeaguerType()">保存</button> -->
+      <zm-btn-large name="保存" (zmbtnClick)="updateLeaguerType()"></zm-btn-large>
+    </div>
+
+  </content>
+</view-body-comp>

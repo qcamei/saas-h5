@@ -1,0 +1,19 @@
+<view-body-comp [headerArr]="['岗位管理']" >
+
+  <div class="text-right" style="margin-bottom: 15px;"  fxLayout="row" fxLayoutAlign="end center">
+    <zm_btn_new [name]="'新建'" (zmbtnClick)="goAddAdminRole()"></zm_btn_new>
+  </div>
+
+  <ng-template #tdA let-item="item">{{item.name}}</ng-template>
+  <ng-template #tdB let-item="item">
+    <a class="zmCurHand" style="margin-right: 5px;"  (click)="goEditAdminRole(item.id)">编辑</a>
+    <a class="zmCurHand" style="margin-right: 5px;"  (click)="deleteAdminRole(item)">删除</a>
+  </ng-template>
+
+  <zm-mat-table [tdTemplateList]="[tdA,tdB]" [thNameList]="['岗位名称','操作']" [itemList]="viewData.roleList"></zm-mat-table>
+
+
+  <no_data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.roleList" [text]=" '没有数据'" [showImg]="'noData'"></no_data>
+
+  <zm_page [totalSize]="viewData.recordCount" [curPage]="viewData.page" (pageChange) = "getPageData($event)"></zm_page>
+</view-body-comp>

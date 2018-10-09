@@ -1,0 +1,170 @@
+
+
+::-webkit-inner-spin-button {
+  -webkit-appearance: none;    /* 上下小箭头按钮，你丫太丑了，滚粗，负分 */
+}
+
+div::-webkit-scrollbar-thumb {
+  background: #a2bbfc;
+}
+div::-webkit-scrollbar {
+  width: 5px;
+}
+.chargeInfo{
+  tr{
+    cursor: pointer;
+  }
+  .char_th th{
+    padding:6px 0;
+    background:#f4f6fa;
+  }
+  th, td{
+    vertical-align: middle !important;
+    font-size: 14px;
+    word-wrap:break-word;
+    word-break: break-all;
+  }
+  .font-bold{
+    font-weight:bold;
+  }
+  .confirm_btn{
+
+    background:#03a9f4;
+    border: 2px solid#03a9f4;
+    color: #fff;
+    width: 168px;
+    line-height: 48px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+
+  }
+  tbody tr{
+      background-color: #fff;
+    }
+  .modal-body td{
+    vertical-align: middle;
+    padding: 0.45rem !important;
+
+
+  }
+
+
+  .itemActiveClass{
+    background:#03a9f4 !important;
+    color:#fff;
+    cursor: pointer;
+  }
+  .itemActiveClass td{
+    border:1px solid transparent;
+    border-bottom-color:#fff;
+  }
+  .itemDisable{
+    background:rgba(221,221,221,1) !important;
+  }
+  .itemDisable td{
+    // border-color:rgba(221,221,221,1);
+    border:1px solid transparent;
+    border-bottom-color:rgba(221,221,221,1)!important;
+  }
+}
+
+
+
+.chargeNext{
+  // div::-webkit-scrollbar-thumb { background: #a2bbfc !important;}
+
+  .char_th th{
+    padding:7px 0;
+    background:#f4f6fa;
+    width:16%;
+  }
+
+  .font-bold{
+    font-weight:bold;
+  }
+  .cancel-btn{
+    background: #fff;
+    border: 2px solid#03a9f4;
+    color:#03a9f4;
+    width: 168px;
+    line-height: 48px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .confirm_btn{
+
+    background:#03a9f4;
+    border: 2px solid#03a9f4;
+    color: #fff;
+    width: 168px;
+    line-height: 48px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+
+  }
+  // .modal-body td{
+  //   vertical-align: middle;
+  //   padding: 0.20rem !important;
+
+
+  // }
+  tbody tr:nth-of-type(even) input {
+    background-color: #fff !important;
+  }
+
+  .freight td input{
+    border:none;
+    text-align: center;
+    margin-top:2px;
+    // cursor: pointer;
+  }
+  .freight_2 td input{
+    border:none;
+    text-align: center;
+    margin-top:3px;
+    // cursor: pointer;
+  }
+  .freight tr:hover{
+    background-color: #e7f3fd;
+  }
+  mg-b-1{
+    margin-bottom:1px;
+  }
+
+  // 支付信息
+  .pay_info::after{
+    content: '';
+    height:0;
+    display: table;
+    clear: both;
+  }
+
+  .pay_info>div{
+    width:25%;
+    padding:10px 0;
+    float:left;
+    text-align: center
+  }
+  .disFlex {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: flex;
+  }
+
+  .modal-body td{
+    vertical-align: middle;
+    padding: 0.45rem !important;
+
+
+  }
+
+   //textarea{
+   //  cursor: pointer;
+   //}
+}
+

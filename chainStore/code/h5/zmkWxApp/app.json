@@ -1,0 +1,16 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/main/main",
+    "pages/pay/pay",
+    "pages/address/address",
+    "pages/auth/auth"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "智美预约",
+    "navigationBarTextStyle": "black"
+  }
+}

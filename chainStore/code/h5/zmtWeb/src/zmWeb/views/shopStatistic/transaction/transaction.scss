@@ -1,0 +1,94 @@
+@media (min-width: 306px) and (max-width: 989px) {
+  .text-right {
+    text-align: left !important;
+    margin-top: 16px;
+  }
+  // 字体
+  .statistics-fontZize {
+    font-size: 28px !important;
+  }
+  // p标签下外边距
+  p {
+    margin-bottom: 5px !important;
+  }
+  //   左右padding为零
+  .pl-0 {
+    padding-left: 0 !important;
+    //   padding-right:0 !important;
+  }
+
+  .sm_style {
+    background: #fff !important;
+    padding: 5px 5px;
+    .dropdown-menu {
+      width: 100% !important;
+      top: 30px !important;
+      background: white;
+      i.i_left1 {
+        left: 75px !important;
+      }
+      i.i_left2 {
+        left: 175px !important;
+      }
+    }
+    .sm_p {
+      padding: 0 5px !important;
+    }
+
+    .data_pl {
+      padding-left: 5px !important;
+      //   padding-right:15px !important;
+    }
+    .data_pl2 {
+      padding-left: 8px !important;
+    }
+    .data_ml {
+      padding-left: 20px !important;
+    }
+
+    .sm_ml {
+      margin-left: 50px !important;
+      margin-top: 5px !important;
+    }
+
+  }
+  // table
+  .table th, .table td {
+    padding: 5px 0 !important;
+    font-size: 14px;
+  }
+  .PriActive {
+    color: #fff;
+    background: #4678fa !important;
+  }
+  // app端隐藏查看订单
+  .is_Show {
+    display: none !important;
+  }
+}
+
+@media (min-width: 989px) {
+  .PriActive {
+    color: #fff;
+    background: #4678fa !important;
+  }
+  // 全局
+  .my_flex {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: flex;
+  }
+  .flex {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    -webkit-flex: 1;
+    -moz-box-flex: 1;
+    flex: 1;
+  }
+  .sm_style {
+    background: #fff;
+    padding: 25px 15px;
+  }
+}

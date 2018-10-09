@@ -1,0 +1,30 @@
+/* views/appointment/comps/appointmentCell/appointmentCell.wxss */
+@import "../../../../app.wxss";
+.weui-cell{
+  padding:50rpx;
+  height: 40rpx;
+}
+/* .weui-cells::after{
+   border-bottom: 1px; 
+} */
+.cell-title{
+  font-size: 28rpx;
+  color: #333
+}
+.cell-content{
+  font-size: 28rpx;
+  color: #999
+}
+.cell-placeholder{
+  font-size: 28rpx;
+  color: #dddddd
+}
+.weui-cell__ft{
+  width: 400rpx;
+  line-height: 30rpx;
+    word-break: break-all;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+    overflow: hidden;
+}
+

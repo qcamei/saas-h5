@@ -1,0 +1,12 @@
+
+.sureBtn{
+  margin-top: 30px;
+}
+.sureBtn{
+  background-color: #4678FA;
+  color: white;
+  margin-left: 15px;
+  margin-right: 15px;
+  height: 45px;
+   font-size: 18px;
+}

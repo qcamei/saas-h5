@@ -1,0 +1,33 @@
+<view-body-comp [headerArr]="['岗位管理']" >
+      <div class="text-right" style="margin-bottom: 15px;"  fxLayout="row" fxLayoutAlign="end center">
+        <zm-btn-new [name]="'新建'" (zmbtnClick)="goAddStoreAdminRole()"></zm-btn-new>
+      </div>
+      <!--<zm-table>-->
+        <!--<thead>-->
+          <!--<th>岗位名称</th>-->
+          <!--<th>操作</th>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+          <!--<tr *ngFor="let item of viewData.roleList">-->
+            <!--<td>{{item.name}}</td>-->
+            <!--<td class="text-center">-->
+              <!--<span class="font-c1 cur-hand mg-r-10" (click)="goEditAdminRole(item.id)">编辑</span>-->
+              <!--<span class="font-c1 cur-hand " (click)="deleteAdminRole(item)">删除</span>-->
+            <!--</td>-->
+          <!--</tr>-->
+        <!--</tbody>-->
+      <!--</zm-table>-->
+
+  <ng-template #tdA let-item="item">{{item.name}}</ng-template>
+  <ng-template #tdB let-item="item">
+    <a class="zmCurHand" style="margin-right: 5px;"  (click)="goEditAdminRole(item.id)">编辑</a>
+    <a class="zmCurHand" style="margin-right: 5px;"  (click)="deleteAdminRole(item)">删除</a>
+  </ng-template>
+
+  <zm-mat-table [tdTemplateList]="[tdA,tdB]" [thNameList]="['岗位名称','操作']" [itemList]="viewData.roleList"></zm-mat-table>
+
+
+  <no-data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.roleList" [text]=" '没有数据'" [showImg]="'noData'"></no-data>
+
+  <zm-page [totalSize]="viewData.recordCount" [curPage]="viewData.page" (pageChange) = "getPageData($event)"></zm-page>
+</view-body-comp>

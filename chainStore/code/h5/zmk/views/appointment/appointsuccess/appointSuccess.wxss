@@ -1,0 +1,17 @@
+/* views/appointment/appointsuccess/appointSuccess.wxss */
+page{
+  background-color: white
+}
+.weui-msg__title{
+  font-size: 18px;
+  color: #333;
+}
+.weui-msg__text-area{
+  margin-bottom: 0px
+}
+.cheak-btn{
+  text-align: center;
+  font-size: 18px;
+  color: #4678FA;
+  padding: 10px
+}

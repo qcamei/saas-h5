@@ -1,0 +1,67 @@
+@import '~@angular/material/theming';
+
+// Custom color maps
+$mat-white: (
+    500: white,
+    contrast: (
+        500: $black-87-opacity
+    )
+);
+
+$mat-black: (
+    500: black,
+    contrast: (
+        500: white,
+    )
+);
+
+
+$mat-fusedark: (
+  50: #e8eaf6,
+  100: #c5cae9,
+  200: #9fa8da,
+  300: #7986cb,
+  400: #5c6bc0,
+  500: #3f51b5,
+  600: #3949ab,
+  700: #303f9f,
+  800: #283593,
+  900: #1a237e,
+  A100: #8c9eff,
+  A200: #536dfe,
+  A400: #3d5afe,
+  A700: #304ffe,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+// Define the Material palettes
+$primary: mat-palette($mat-fusedark, 600, 400, 700);
+$accent: mat-palette($mat-light-blue, 600, 400, 700);
+$warn: mat-palette($mat-red);
+
+// Create the Material theme object
+$theme: mat-light-theme($primary, $accent, $warn);
+
+// Store the background and foreground colors for easier access
+$background: map-get($theme, background);
+$foreground: map-get($theme, foreground);
+
+// Force the input field font sizes to 16px
+$typography: mat-typography-config(
+    $input: mat-typography-level(16px, 1.125, 400)
+)

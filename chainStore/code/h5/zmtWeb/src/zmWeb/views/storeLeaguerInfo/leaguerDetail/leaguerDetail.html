@@ -1,0 +1,221 @@
+
+<view-body-comp [headerArr]="['会员列表','查看会员']">
+    <div class="disFlex c-leaguer-body" style="padding: 0 30px;">
+      <div class=" c-mess" style="width: calc(25% - 40px)">
+        <div class="c-mess-con text-center">
+          <div style="width: 120px;height:120px;margin:0 auto 25px;border-radius: 50%;">
+            <img *ngIf="viewData.headImg" src={{viewData.headImg}} style="width: 100%;height:100%;border-radius: 50%;"/>
+            <p class="mg-t-20 fz-18 " style="color:#333333">{{viewData.leaguer.name?viewData.leaguer.name:'-'}}</p>
+          </div>
+          <button class="c-list-btn ">{{viewData.leaguer.customerType | customerTypePipe}}</button>
+        </div>
+      </div>
+      <div class="col-lg-9 c-mess" style="margin-left: 40px;width: 75%;">
+        <div class="c-mess-tab disFlex">
+          <div class="flex c-messPan mg-r-20">
+            <div class="mg-b-20 disFlex"><span>呢称:</span> <span>{{viewData.leaguer.aliasName?viewData.leaguer.aliasName:'-'}}</span></div>
+            <div class="mg-b-20 disFlex"><span>性别:</span> <span>{{viewData.leaguer.sex == 1?'男':'女'}}</span></div>
+            <div class="mg-b-20 disFlex"><span>生日:</span> <span>{{viewData.leaguer.birthday&&viewData.leaguer.birthday>0?(viewData.leaguer.birthday | date:'yyyy/MM/dd'):'-'}}</span></div>
+            <div class="mg-b-20 disFlex"><span>身份证号:</span><span>{{viewData.leaguer.idCard?viewData.leaguer.idCard:'-'}}</span></div>
+            <div class="mg-b-20 disFlex"><span>负责人:</span><span>{{viewData.buserNames}}</span></div>
+            <div class=" disFlex"><span>工作单位:</span><span>{{viewData.leaguer.company?viewData.leaguer.company:'-'}}</span></div>
+          </div>
+          <div class="flex c-messPan">
+            <div class="mg-b-20 disFlex"><span>联系地址:</span> <span>{{viewData.leaguer.address?viewData.leaguer.address:'-'}}</span></div>
+            <div class="mg-b-20 disFlex"><span>手机号:</span> <span>{{viewData.leaguer.phone?viewData.leaguer.phone:'-'}}</span></div>
+            <div class="mg-b-20 disFlex"><span>微信号:</span> <span>{{viewData.leaguer.wechatNumber?viewData.leaguer.wechatNumber:'-'}}</span></div>
+            <div class="mg-b-20 disFlex"><span>介绍人:</span> <span>{{viewData.leaguer.recommender?viewData.leaguer.recommender:'-'}}</span></div>
+            <div class="mg-b-20 disFlex"><span>会员来源:</span> <span>{{viewData.leaguer.originId | leaguerOriginPipe:viewData.leaguerOriginConfigMap}}</span></div>
+            <div class=" disFlex"><span>职位:</span> <span>{{viewData.leaguer.job?viewData.leaguer.job:'-'}}</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:20px;">
+          <ng-template  #tabA>
+            <div style="min-height:653px;">
+                <div style="padding:5px ;">
+                  <h4 class="fz-18 font-bold mg-b-20">会员卡信息</h4>
+
+                  <ng-template #tdAA let-item="item">{{viewData.membershipCard && viewData.membershipCard.number?viewData.membershipCard.number:'-'}}</ng-template>
+                  <ng-template #tdAB let-item="item">{{viewData.membershipCard && viewData.membershipCard.name?viewData.membershipCard.name:'-'}}</ng-template>
+                  <ng-template #tdAC let-item="item"><i class="fa fa-yen mg-r-5"></i>{{item.balance?(item.balance | number:'1.2-2'):'-'}}<span *ngIf="!item.balance" class="fa fa-yen" ></span></ng-template>
+                  <ng-template #tdAD let-item="item">{{viewData.membershipCard && viewData.membershipCard.prodDiscount|discountPipe}}</ng-template>
+                  <ng-template #tdAE let-item="item">{{viewData.membershipCard && viewData.membershipCard.goodsDiscount|discountPipe}}</ng-template>
+                  <ng-template #tdAF let-item="item">{{viewData.membershipCard && viewData.membershipCard.prdCardDiscount|discountPipe}}</ng-template>
+                  <ng-template #tdAG let-item="item">{{viewData.membershipCard && viewData.membershipCard.packagePrjDiscount|discountPipe}}</ng-template>
+                  <ng-template #tdAH let-item="item">{{item.limitUnit==0?'永久':item.limitTime+(item.limitUnit | limitUnitPipe)}}</ng-template>
+                  <ng-template #tdAI let-item="item">{{item.settingTime>0?(item.settingTime | date:'yyyy/MM/dd'):'-'}}</ng-template>
+                  <ng-template #tdAJ let-item="item">
+                    {{item.limitUnit==0?'永久':(item.endTime | date:'yyyy/MM/dd')}}
+                  </ng-template>
+
+                  <zm-mat-table style="padding:5px;" *ngIf="viewData.leaguer.leaguerMemberCard" [tdTemplateList]="[tdAA,tdAB,tdAC,tdAD,tdAE,tdAF,tdAG,tdAH,tdAI,tdAJ]" [thNameList]="['会员卡号','会员卡','会员卡余额','项目折扣','商品折扣','次卡折扣','套餐折扣','有效期','设置会员卡时间','到期时间']" [itemList]="[viewData.leaguer.leaguerMemberCard]"></zm-mat-table>
+
+                </div>
+                <div class="mg-t-40" *ngIf="viewData.labelList.length > 0" style="padding:5px">
+
+                  <h4 class="fz-18 font-bold mg-b-20">标签</h4>
+                  <div>
+                    <zm-labels-ro [label]="''" [zmValue]="viewData.labelList | attrList:'name'" ></zm-labels-ro>
+                  </div>
+                </div>
+                <div class="mg-t-40" *ngIf="viewData.expandAttrList.length > 0" style="padding:5px">
+                  <h4 class="fz-18 font-bold mg-b-20">扩展信息</h4>
+                  <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                    <zm-input-text fxFlex="1 1 49%"
+                                   *ngFor="let item of viewData.expandAttrList"
+                                   [label]="item.label"  [placeholder]="" [zmValue]="item.value"  [disabled]="true"></zm-input-text>
+                  </div>
+                </div>
+              </div>
+          </ng-template>
+
+          <ng-template  #tabB>
+            <div style="min-height:653px;">
+            <mat-toolbar style="padding-top:15px;margin-top:15px;margin-bottom:15px;">
+              <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" class="zmFullWidth">
+                <span>跟进记录</span>
+                <zm-btn-new [name]="'新建'"  (zmbtnClick)="goAddRecord()"></zm-btn-new>
+              </mat-toolbar-row>
+            </mat-toolbar>
+
+            <div class="item" style="margin:20px 0px 20px 0px;"  *ngFor="let item of viewData.leaguerRecordList">
+              <!--<p class="mg-b-30 fz-14" style="font-weight: 600;">{{item.title}}</p>-->
+              <div class="disFlex mg-b-30 fz-14" style="justify-content: space-between;">
+                <div class="disFlex">
+                  <span>{{item.createdTime | times}}</span>
+                  <span class="mg-l-30">{{item.creatorName}}</span>
+
+                  <span *ngIf="item.relateOrder&&orderIdIsValid(item.relateOrder.orderId)" class="mg-l-30">关联订单：
+                    <span style="color:#03a9f4;" matTooltip="{{item.relateOrder.orderContent}}">{{item.relateOrder.orderContent}}</span>
+                  </span>
+                  <div class="mg-l-30" *ngIf="item.relateProduct&&item.relateProduct.prdIds&&(item.relateProduct.prdIds.length>0)">
+                    关联项目：
+                    <span style="width:30px;color:#03a9f4; margin-right:5px;" matTooltip="{{getRelateProduct(item.id).length>0?getRelateProduct(item.id).join('、'):''}}">{{getRelateProduct(item.id).length>0?getRelateProduct(item.id)[0]:"-"}}</span>
+                  </div>
+                </div>
+
+                <span>
+                  <a class="action mg-r-20 cur-hand" (click)="goEditRecordInfo(item.id)">编辑</a>
+                  <a class="action cur-hand"  (click)="deleteRecordInfo(item.id)">删除</a>
+                </span>
+              </div>
+              <div class="content fz-14">
+                <div><blockquote><p>{{item.content}}</p></blockquote></div>
+                <zm-img-record [(imgArr)]="item.imgPaths" [delImg]="false"></zm-img-record>
+              </div>
+              <div style="border-bottom:1px solid #ebeef2;margin-top: 10px"></div>
+            </div>
+
+            <hr style="margin:0;" *ngIf="viewData.leaguerRecordList.length == 0">
+            <no-data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.leaguerRecordList" [text]=" '没有数据'" [showImg]="'noData'"></no-data>
+            <zm-page [totalSize]="viewData.leaguerRecordCount" [curPage]="viewData.leaguerRecordPage" (pageChange) = "getLeaguerRecordPageData($event)"></zm-page>
+          </div>
+          </ng-template>
+
+
+          <ng-template  #tabC>
+
+            <div style="padding:5px;">
+                <mat-toolbar style="margin-bottom: 15px;padding-top:20px;">
+                  <mat-toolbar-row fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="zmFullWidth">
+                    <div fxLayout="row wrap"  fxLayoutGap="20px" class="fullwidth">
+                      <div style="width:150px">
+                        <zm-select  [label]="'订单类型'" nameValues="开单收银:0,会员充值:1"  [(zmValue)]="viewData.orderQueryForm.orderType"   (selectCallback)="findOrders()"></zm-select>
+                      </div>
+                      <div style="width:150px">
+                        <zm-select-string [noAll]="true" [label]="'订单状态'" [selectList]="[{name:'全部',value:''},{name:'待收款',value:'0'},{name:'已收款',value:'1'},{name:'退单',value:'3,4'}]"  [(zmValue)]="viewData.orderQueryForm.status"   (selectCallback)="findOrders()"></zm-select-string>
+                      </div>
+                      <div  fxFlexAlign="center"  >
+                        <zm-search-box [label]=" '订单查询'" [placeholder]="'编号'" [(zmValue)]="viewData.orderQueryForm.numberOrName" (callBack)="findOrders()"></zm-search-box>
+                      </div>
+                    </div>
+                  </mat-toolbar-row>
+                  <mat-toolbar-row>
+                    <zm-search-date [label]="'消费时间'" [placeholder]="'请选择消费时间'" [(curValue)]="viewData.minTime" (callback)="findOrders()"></zm-search-date>
+                    <zm-search-date [label]="'至'" [placeholder]="'请选择消费时间'" [(curValue)]="viewData.maxTime" (callback)="findOrders()"></zm-search-date>
+                    <zm-btn-Date style="margin-left: 50px;" [values]="['今天','昨天','七天内']" (zmbtnClick)="chooseConsumeTime($event)"></zm-btn-Date>
+                  </mat-toolbar-row>
+                </mat-toolbar>
+
+                <ng-template #tdCA let-item="item">{{item.createdTime | times}}</ng-template>
+                <ng-template #tdCB let-item="item">{{item.number}}</ng-template>
+                <ng-template #tdCC let-item="item">{{item.orderType == 0?'开单收银':'会员充值'}}</ng-template>
+                <ng-template #tdCD let-item="item">
+                  &yen;{{item.cost | number:'1.2-2'}}
+                  <p *ngIf="item.chargeBackCost&&(item.chargeBackCost>0)" style="margin:0;color:red;">退款:{{item.chargeBackCost}}</p>
+                </ng-template>
+                <ng-template #tdCE let-item="item">{{item.status|orderStatusPipe}}</ng-template>
+                <ng-template #tdCF let-item="item">
+                  <a class="zmCurHand" style="margin-right: 5px;" (click)="goOrderDetail(item)">查看</a>
+                  <a class="zmCurHand" style="margin-right: 5px;" (click)="goEditBonus(item)">修改提成</a>
+                </ng-template>
+
+                <zm-mat-table [tdTemplateList]="[tdCA,tdCB,tdCC,tdCD,tdCE,tdCF]" [thNameList]="['创建时间','订单编号','订单类型','金额','状态','操作']" [itemList]="viewData.orderList"></zm-mat-table>
+
+
+                <no-data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.orderList" [text]=" '没有数据'" [showImg]="'noData'"></no-data>
+                <zm-page [totalSize]="viewData.recordCount" [curPage]="viewData.page" (pageChange) = "getPageData($event)"></zm-page>
+            </div>
+
+          </ng-template>
+
+          <ng-template  #tabD>
+
+            <ng-template #tdDA let-item="item"><img src={{item.cardImgUrl}} style="width:168px;padding:10px 0px;"/></ng-template>
+            <ng-template #tdDB let-item="item">{{item.cardName?item.cardName:'-'}}</ng-template>
+            <ng-template #tdDC let-item="item">{{item.cardType}}</ng-template>
+
+            <ng-template #tdDD let-item="item">
+              <span  *ngIf="item.cardProductList.length==0">-</span>
+              <ul  *ngIf="item.cardProductList.length>0" style="padding: 5px 0px;">
+                <li *ngFor="let itemPrd of item.cardProductList">
+                  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+                    <div fxLayoutAlign="end" style="width:50%">{{itemPrd.name}}</div>
+                    <div fxLayoutAlign="start" style="width:50%"><span class="font-c1">{{itemPrd.restCount == -1?'无限':itemPrd.restCount}}/{{itemPrd.count == -1?'无限':itemPrd.count}}</span></div>
+                  </div>
+                </li>
+              </ul>
+            </ng-template>
+            <ng-template #tdDE let-item="item">{{item.validPeriodUnit == 0?'永久':(item.validPeriod+(item.validPeriodUnit|limitUnitPipe))}}</ng-template>
+            <ng-template #tdDF let-item="item">{{item.purchaseTime | date:'yyyy/MM/dd'}}</ng-template>
+            <ng-template #tdDG let-item="item">{{item.endTime == 0?'永久':(item.endTime | date:'yyyy/MM/dd')}}</ng-template>
+            <ng-template #tdDH let-item="item">{{item.state | leaguerCardEnumPipe}}</ng-template>
+
+
+            <ng-template #tdDI let-item="item">
+              <a class="zmCurHand" style="margin-right: 5px;" (click)="goProductCardDetail(item.cardId)">查看</a>
+            </ng-template>
+
+
+            <zm-mat-table [tdTemplateList]="[tdDA,tdDB,tdDC,tdDD,tdDE,tdDF,tdDG,tdDH,tdDI]"
+                            [thNameList]="['次卡图片','次卡名称','次卡分类','内容','有效期','购买时间','到期日期','状态','操作']"
+                            [itemList]="viewData.prdCardDataListTmp"></zm-mat-table>
+
+            <no-data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.prdCardDataListTmp" [text]=" '没有数据'" [showImg]="'noData'"></no-data>
+            <zm-page [totalSize]="viewData.cardRecordCount" [curPage]="viewData.cardPage" (pageChange) = "getCardPageData($event)"></zm-page>
+          </ng-template>
+
+
+          <ng-template  #tabE>
+
+            <ng-template #tdDA let-item="item"><img src={{item.imgUrl}} height="40" width="40"/></ng-template>
+            <ng-template #tdDB let-item="item">{{item.number?item.number:'-'}}</ng-template>
+            <ng-template #tdDC let-item="item">{{item.name}}</ng-template>
+            <ng-template #tdDD let-item="item">{{item.type | productCardItemTypePipe}}</ng-template>
+            <ng-template #tdDE let-item="item">{{item.count}}</ng-template>
+            <ng-template #tdDF let-item="item">{{item.restCount}}</ng-template>
+            <ng-template #tdDG let-item="item">{{item.purchaseTime | times:'yyyy/MM/dd'}}</ng-template>
+
+            <zm-mat-table [tdTemplateList]="[tdDA,tdDB,tdDC,tdDD,tdDE,tdDF,tdDG]"
+                          [thNameList]="['产品图片','产品编号','产品名称','产品分类','预存次数','剩余次数','购买时间']"
+                          [itemList]="viewData.productDataListTmp"></zm-mat-table>
+
+            <no-data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.productDataListTmp" [text]=" '没有数据'" [showImg]="'noData'"></no-data>
+            <zm-page [totalSize]="viewData.cardRecordCount" [curPage]="viewData.cardPage" (pageChange) = "getCardPageData($event)"></zm-page>
+          </ng-template>
+
+      <zm-mat-tabs  [tabTemplateList]="[tabA,tabB,tabC,tabD,tabE]" [tabNameList]="['会员信息','跟进记录','订单记录','次卡详情','预存']" [selectedIndex]="defaultTab"></zm-mat-tabs>
+    </div>
+</view-body-comp>

@@ -1,0 +1,60 @@
+<view-header-comp [headerArr]="['等级列表','新建等级']"></view-header-comp>
+<view-body-comp>
+  <content>
+    <div class="d-flex">
+    <div class="col-md-6">
+      <zm_input_number [label]=" '等级编号'" [placeholder]="'请输入等级编号'" [numberList]="viewData.numberList"
+                       [(zmValue)]="viewData.addForm.number"></zm_input_number>
+
+      <zm_input_text [label]=" '等级名称'" [placeholder]="'请输入等级名称'" [(zmValue)]="viewData.addForm.name"
+                   [(zmPass)]="viewData.addForm.namePass"></zm_input_text>
+
+        <div class="row">
+          <div class="col-md-9">
+            <zm_select_type [label]="'等级分类'" [selectList]="viewData.typeList"
+                            [(zmValue)]="viewData.addForm.typeId" ></zm_select_type>
+          </div>
+          <div class="col-md-3 ">
+             <button class="btn btn-primary btn-block" (zmbtnClick)="addVipLevelType()">新建分类</button>
+          </div>
+
+        </div>
+
+      <zm_input_text [label]=" '时长（月）'" [placeholder]="'请输入时长'" [(zmValue)]="viewData.addForm.validPeriod" [(zmPass)]="viewData.addForm.validPeriodPass"></zm_input_text>
+
+      <zm_input_text_Group [(zmValue)]="viewData.addForm.vipContent"></zm_input_text_Group>
+
+      <zm_input_price [label]="'开通收费'" [placeholder]="'请输入金额'" [(price)]="viewData.addForm.openCharge"></zm_input_price>
+
+      <zm_input_price [label]="'续费收费'" [placeholder]="'请输入金额'" [(price)]="viewData.addForm.renewCharge"></zm_input_price>
+
+      <div class="form-group row mb-0 ">
+        <label class="col-md-2 col-form-label text-center px-0">是否上架</label>
+        <div class="col-md-10 pt-1">
+          <switch-button-comp [(state)]="viewData.addForm.state"></switch-button-comp>
+        </div>
+      </div>
+      <div class="w-50 mt-5">
+         <zm_btn_md notRepeatSubmit name="保存" (zmbtnClick)="addVipLevel()"></zm_btn_md>
+      </div>
+
+    </div>
+
+
+    <div class="col-md-6">
+      <div *ngIf="viewData.loadingFinish" style="margin-bottom:20px">
+        <zm_role_menu [storeMenu] = "viewData.storeMenu" (callback)="getPermSet($event)"></zm_role_menu>
+      </div>
+
+      <div class="form-group form-inline">
+        <label class="col-md-2 col-form-label text-center px-0"><span class="text-danger">*</span>等级图片</label>
+        <zm_single_file [label]="'上传图片'" [requestUrl]="viewData.pageData.requestUrl"
+                        [appendKey]="'imgs'" (callback)="showImg($event)"></zm_single_file>
+      </div>
+      <zm_img_preview [(imgArr)]="viewData.addForm.imgPaths"
+                      [(imgLength)]="viewData.pageData.limitCount"></zm_img_preview>
+
+    </div>
+  </div>
+  </content>
+</view-body-comp>

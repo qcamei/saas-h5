@@ -1,0 +1,32 @@
+<!--views/appointment/comps/productcell/productCell.wxml-->
+<view class="weui-panel__bd" data-cellModel='{{cellModel}}' bindtap='cellClick'>
+
+  <view class="weui-media-box weui-media-box_appmsg">
+      <view class=" weui-media-box__hd_in-appmsg">
+      <image wx:if="{{cellModel.selected}}" class="beautician-selected" src='../../../../images/icon_beautician_selected.png'></image>
+      <image wx:if="{{!cellModel.selected}}" class="beautician-selected" src='../../../../images/icon_beautician_un_select.png'></image>
+    </view>
+    <view class="weui-media-box__hd">
+      <image class="weui-media-box__thumb" src='{{cellModel.headImg}}' />
+      <text>{{cellModel.countDispaly}}</text>
+    </view>
+    <view class="weui-media-box__bd ">
+      <view class="weui-media-box__title">{{cellModel.name}}</view>
+       <view class="weui-media-box__price_wrapper">
+        <text class="weui-media-box__desc">{{cellModel.typeName}}</text>
+        <view class="weui-media-box__count_wrapper display_inline">
+          <view class="weui-media-box__count_down display_inline"  data-cellModel='{{cellModel}}' catchtap='coutDownClick'>-</view>
+          <text class="weui-media-box__count display_inline">{{cellModel.buyCount}}</text>
+          <view class="weui-media-box__count_up display_inline" data-cellModel='{{cellModel}}' catchtap='coutUpClick'>+</view>
+        </view>
+       </view>
+    </view>
+  </view>
+</view>
+
+<view wx:if="{{cellModel.selected}}" class="serve weui-media-box_appmsg weui-cells_after-title" data-cellModel='{{cellModel}}' catchtap='selectBeauticianClick'>
+    <image style="margin-right: 10rpx;vertical-align: middle;width:24rpx; height: 24rpx;"src='../../../../images/icon_appointment_beautician.png'></image>
+    <view class="weui-cell__bd cell-title">服务人员</view>
+    <view class="weui-cell__ft weui-cell__ft_in-access cell-content">{{cellModel.buserArrName}}</view>
+</view>
+

@@ -1,0 +1,52 @@
+
+// 全局
+// 自定义宽度**************
+.c-hued{width:100px !important;}
+// 自定义宽度end**************
+
+// order------------------------------
+// 小手
+.cur-hand{cursor: pointer;}
+// input 框上下箭头
+::-webkit-inner-spin-button { -webkit-appearance: none; /* 上下小箭头按钮，你丫太丑了，滚粗，负分 */  }
+// order  end------------------------------
+
+
+
+// 自定义颜色start////////////////////////////////////////////////////////////////
+.bg-my-orange{background:$my-orange;}
+// 表单th栏背景色
+.bg-my-gray{
+    background:$my-gray;
+}
+
+.bg-th{background-color: #f4f6fa !important;border-bottom: none;}
+// 灰色背景色
+
+// 查询列自定义背景(下拉框)
+.set-bg{background-color:#F4F6FA !important;}
+
+// 自定义颜色end/////////////////////////////////////////////////////////////////
+
+// 自定义table  ######################
+.table thead th { border-bottom: 1px solid #e9ecef; } 
+// 自定义table字体
+.table{ font-size:0.85rem;}
+// 自定义table  end  ######################
+
+
+// 统计表的金额字体
+.statistics-fontZize{
+    font-size:$my-font-size30;
+}
+
+
+
+// bootstrap  样式修改&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+
+// bootstrap  样式修改&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&   结束
+
+
+

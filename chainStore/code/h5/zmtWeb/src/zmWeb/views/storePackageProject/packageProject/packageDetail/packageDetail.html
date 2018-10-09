@@ -1,0 +1,95 @@
+<view-body-comp [headerArr]="['套餐列表','查看套餐']">
+      <div>
+        <zm-table-detail>
+          <tbody>
+
+          <tr>
+            <th style="width:230px;">套餐名称</th>
+            <td >{{viewData.packageDetail.name}}</td>
+          </tr>
+
+          <tr>
+            <th >套餐编号</th>
+            <td >{{viewData.packageDetail.number}}</td>
+          </tr>
+          <tr>
+            <th >套餐分类</th>
+            <td >{{viewData.packageDetail.typeId|packageTypePipe:viewData.packageTypeMap}}</td>
+          </tr>
+          <tr>
+            <th >售价</th>
+            <td ><i class="fa fa-yen mr-1"></i>{{viewData.packageDetail.sellPrice|number:'1.2-2'}}</td>
+          </tr>
+          <tr>
+            <th >套餐内容</th>
+            <td style="padding:5px;">
+                <zm-table-detail style="text-align:center">
+                  <thead>
+                    <th>内容名称</th>
+                    <th>内容类型</th>
+                    <th>售价</th>
+                    <th>数量</th>
+                    <th>单个平均价格</th>
+                    <th>操作</th>
+                  </thead>
+                  <tbody>
+                  <!-- 循环 -->
+                  <tr *ngFor="let item of viewData.packageContentList">
+                    <td>{{item.name?item.name:'-'}}</td>
+                    <td>{{item.itemType|itemTypePipe}}</td>
+                    <td>{{item.price|number:'1.2-2'}}</td>
+                    <td>{{item.count==-1?'无限':item.count}}</td>
+                    <td>{{item.discountPrice|number:'1.2-2'}}</td>
+                    <td><a class="text-primary cur-hand" (click)="showDetail(item)">查看</a></td>
+                  </tr>
+                  </tbody>
+                </zm-table-detail>
+
+        </td>
+        </tr>
+        <tr>
+          <th>状态</th>
+          <td >{{viewData.packageDetail.state|packageStatePipe}}</td>
+        </tr>
+        <tr>
+          <th>是否促销</th>
+          <td>{{viewData.packageDetail.promotionFlag==0?'否':'是'}}</td>
+        </tr>
+        <tr *ngIf="viewData.packageDetail.promotionFlag == 1">
+          <th>促销价格</th>
+          <td><i class="fa fa-yen mr-1"></i>{{viewData.packageDetail.promotionPrice|number:'1.2-2'}}</td>
+        </tr>
+        <tr>
+          <th >套餐介绍</th>
+          <td style="word-break: break-all; word-wrap:break-word;line-break: anywhere">{{viewData.packageDetail.descript?viewData.packageDetail.descript:'-'}}</td>
+        </tr>
+
+
+        <tr>
+          <th>图片</th>
+          <td>
+            <ul style="max-width:600px;">
+              <div *ngIf="viewData.packageDetail.imgPaths!=null" fxLayout="row warp" fxLayoutAlign="start center">
+                <li style="width:100px;height:100px;margin:0 10px 10px 0;" *ngFor="let item of viewData.packageDetail.imgPaths">
+                  <img class="w-100 h-100" src="{{item | imgPrePath}}" alt="Avatar" >
+                </li>
+              </div>
+              <li style="width:100px;height:100px;margin:5px 5px 0 0;" *ngIf="viewData.packageDetail.imgPaths==null && viewData.packageDetail.defaultImg">
+                <img class="w-100 h-100" src="{{viewData.packageDetail.defaultImg |imgPrePath}} " alt="">
+              </li>
+              <li style="width:100px;height:100px;margin:5px 5px 0 0;" *ngIf="viewData.packageDetail.imgPaths==null && viewData.packageDetail.defaultImg === ''">
+                <img class="w-100 h-100" src="{{viewData.defaultImg |imgPrePath}} " alt="">
+              </li>
+            </ul>
+          </td>
+        </tr>
+
+        </tbody>
+        </zm-table-detail>
+
+        <div class="mt-5" style="max-width:100%;margin-top: 20px;" fxLayout="row" fxLayoutAlign="end">
+          <zm-btn-large *ngIf="viewData.packageDetail.origin==0 &&viewData.packageDetail.state==1" notRepeatSubmit name="编辑" (zmbtnClick)="goEditPage(viewData.packageDetail.id)"></zm-btn-large>
+        </div>
+
+      </div>
+</view-body-comp>

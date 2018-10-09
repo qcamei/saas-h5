@@ -1,0 +1,4 @@
+{
+  "component": true,
+  "usingComponents": {"comp-product-cell":"../productcell/productCell"}
+}

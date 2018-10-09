@@ -1,0 +1,96 @@
+@media (min-width: 306px) and (max-width: 767.98px) {
+        .text-right{
+            text-align: left !important;
+            margin-top:16px;
+        }
+        // 字体
+        .statistics-fontZize{
+            font-size:18px !important;
+        }
+        // p标签下外边距
+        p{
+            margin-bottom:5px !important;
+        }
+       .echart_pl{
+        padding-left:5px !important;
+       }
+    //   左右padding为零
+      .pl-0{
+          padding-left:0 !important;
+          padding-right:0 !important;
+      }
+      .row{
+          width:calc(100% - -15px)
+      }
+
+    //   图表左填充
+      .echart_pl{
+          padding-left:20px !important;
+      }
+
+      .d-flex{
+          display:block !important;
+      }
+      .data_pl{
+          padding-left:20px !important;
+          padding-right:5px !important;
+      }
+    //   昨日今日栏
+      .data_ml{
+          padding-left:20px !important;
+          padding-top:0 !important;
+      }
+    // 第二个选择日期左边距对齐
+      .sm_ml{
+          margin-left:50px !important;
+          margin-top:5px !important;
+      }
+      .curstom_henght{
+        height:auto !important;
+        overflow: auto;
+      }
+
+}  //end
+
+
+.nameDiv {
+  display: inline-block;
+  width: 200px;
+  border: 2px solid #03a9f4;
+  border-radius: 6px;
+  // padding: 8px 10px;
+  padding-left:15px;
+  height:35px;
+  line-height: 32px;
+  position: relative;
+}
+
+
+// 营业收入
+
+.mb-16{
+    margin-bottom:16px;
+}
+.echart_pl{
+    padding-left:48px;
+}
+
+.activeDefault{
+    color:#4678fa;
+    border-bottom:2px solid #4678fa;
+  }
+  .curstom_henght{
+    height:488px;overflow: auto;
+  }
+// @media (min-width: 768px) and (max-width: 2299.98px) {
+
+//  }
+
+.boldActive{
+  font-weight:bold ;
+  font-size:18px;
+  color:#000000 !important;
+}
+.gray{
+  color:gray;
+}

@@ -1,0 +1,5 @@
+
+<view-body-comp [headerArr]="['订单列表','新建记录']">
+  <add-record-comp *ngIf="orderId&&leaguerId" [leaguerId]="leaguerId" [orderId]="orderId" (callback)="callback()"></add-record-comp>
+</view-body-comp>
+

@@ -1,0 +1,138 @@
+.consumerPurchase {
+  height: 150px;
+  background: -webkit-gradient(linear, left top, right top, from(#439fed), to(#4678fa));
+  background: linear-gradient(to right, #439fed, #4678fa);
+  border-radius: 8px;
+  font-size: 34px;
+  color: #fff;
+  cursor: default;
+}
+
+@media screen and (max-width:1024px) {
+  .consumerPurchase {
+    font-size: 18px;
+    height: 80px;
+  }
+  .icon-classify{
+  	height:28px;
+  	width: 28px;
+  }
+}
+@media screen and (min-width:1024px) and (max-width:1280px) {
+  .consumerPurchase {
+    font-size: 18px;
+    height: 80px;
+  }
+  .icon-classify{
+  	height:28px;
+  	width: 28px;
+  }
+}
+
+@media screen and (min-width:1280px) and (max-width:1366px) {
+  .consumerPurchase {
+    font-size: 22px;
+    height: 108px;
+  }
+  .icon-classify{
+  	height:34px;
+  	width: 34px;
+  }
+}
+
+@media screen and (min-width:1366px) and (max-width:1440px) {
+  .consumerPurchase {
+    font-size: 25px;
+  }
+  .icon-classify{
+  	height:36px;
+  	width: 36px;
+  }
+}
+
+@media screen and (min-width:1440px) and (max-width:1680px) {
+  .consumerPurchase {
+    font-size: 30px;
+    height: 112px;
+  }
+  .icon-classify{
+  	height:40px;
+  	width: 40px;
+  }
+}
+
+@media screen and (min-width:1680px) and (max-width:1920px) {
+  .consumerPurchase {
+    font-size: 34px;
+    height:132px;
+  }
+  .icon-classify{
+  	height:45px;
+  	width: 45px;
+  }
+}
+@media screen and (min-width:1920px) {
+  .consumerPurchase {
+    font-size: 34px;
+    height: 150px;
+  }
+  .icon-classify{
+  	height:45px;
+  	width: 45px;
+  }
+}
+
+.memberRecharge {
+  @extend .consumerPurchase;
+  background: -webkit-gradient(linear, left top, right top, from(#21cfb9), to(#22e8b2));
+  background: linear-gradient(to right, #21cfb9, #22e8b2);
+}
+
+.addCustomer {
+  @extend .consumerPurchase;
+  background: -webkit-gradient(linear, left top, right top, from(#f54040), to(#f34672));
+  background: linear-gradient(to right, #f54040, #f34672);
+}
+
+.addAppointment {
+  @extend .consumerPurchase;
+  background: -webkit-gradient(linear, left top, right top, from(#f85812), to(#f38c1d));
+  background: linear-gradient(to right, #f85812, #f38c1d);
+}
+.expire-btn-qq{
+  width: 150px;
+  height:45px;
+  line-height: 45px;
+  text-align: center;
+  background:#fff;
+  color:#4678fa;
+  border:1px solid #4678fa;
+  border-radius:6px;
+  cursor: pointer;
+}
+.expire-btn-confirm{
+  @extend .expire-btn-qq;
+  color:#fff;
+  background:#4678fa;
+}
+@media screen and (max-width:1680px) {
+  .todayAppoint{
+    display: block;
+  }
+  .unfinishedWF{
+    display: block;
+  }
+}
+@media screen and (min-width:1680px) {
+  .todayAppoint{
+    // display: inline-block;
+    width: 49%;
+    // margin-right: 1%;
+    float: left;
+  }
+  .unfinishedWF{
+    // display: inline-block;
+    width:49%;
+    float: right;
+  }
+}

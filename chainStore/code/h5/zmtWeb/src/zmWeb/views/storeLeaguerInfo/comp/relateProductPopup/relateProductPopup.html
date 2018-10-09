@@ -1,0 +1,48 @@
+<!--选择关联项目弹框-->
+<div animation-modal>
+  <h2 mat-dialog-title>
+    选择关联项目
+  </h2>
+  <mat-dialog-content fusePerfectScrollbar>
+    <div style="margin-bottom:10px;font-weight: bold">已关联订单</div>
+    <zm-table-detail>
+      <thead style="text-align: center">
+          <th>订单内容</th>
+          <th>跟进人员</th>
+          <th>金额</th>
+          <th>交易时间</th>
+          <!--<th>操作</th>-->
+      </thead>
+      <tbody style="text-align: center">
+          <tr *ngIf="data">
+            <td>{{data.content}}</td>
+            <td>{{data.creatorName}}</td>
+            <td *ngIf="data.status == 0">
+              &yen;{{data.cost | number:'1.2-2'}}
+            </td>
+            <td *ngIf="data.status != 0">
+              &yen;{{data.realPay | number:'1.2-2'}}
+              <p *ngIf="data.chargeBackCost!=0" style="margin:0;color:red;">退款 : {{data.chargeBackCost}}</p>
+            </td>
+            <td>{{data.createdTime |times}}</td>
+            <!--<td class="action"(click)="goDetail(data)">查看详情</td>-->
+          </tr>
+      </tbody>
+    </zm-table-detail>
+
+    <div style="margin:10px 0px;font-weight: bold">选择项目</div>
+
+    <ng-template #tdA let-item="item">{{item.pgName}}</ng-template>
+    <ng-template #tdB let-item="item">{{item.number}}</ng-template>
+    <ng-template #tdC let-item="item">{{item.typeId|productTypePipe:productTypeMap}}</ng-template>
+
+    <zm-mat-table-checkbox [checkAttr]="'isSelected'"  [tdTemplateList]="[tdA,tdB,tdC]"
+                           [thNameList]="['项目名称','编号','类型']" [itemList]="productItems" (onSelected)="selectItem()"></zm-mat-table-checkbox>
+
+  </mat-dialog-content>
+  <mat-dialog-actions fxLayout="row" fxLayoutAlign="end" fxLayoutGap="20px">
+    <zm-btn-md (click)="cancel()" name="取消" [stroked] ="true"></zm-btn-md>
+    <zm-btn-md  (click)="confirm()" [disabled]="selectedProductListTmp.length==0" name="确定" ></zm-btn-md>
+  </mat-dialog-actions>
+</div>
+

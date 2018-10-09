@@ -1,0 +1,57 @@
+
+<view-body-comp [headerArr]="['开单收银']">
+
+
+    <!--<bill-progress [workFlowData]="wFDataWraper.getWorkFlowData()"></bill-progress>-->
+
+    <!-- 选择会员 start -->
+    <div style="background:#ffffff;">
+        <!-- 开单时间 -->
+        <zm-card [showHeader]="false" [withCollapse]="false" [expanded]="true" *ngIf="isAddOldRecord">
+                <div style="padding-top:16px;" fxLayout="column" fxLayoutAlign="start">
+
+                    <div  fxLayout="row" fxLayoutAlign="start center"fxLayoutGap="20px">
+                        <span  class="text-bold" style="width:120px;font-size:18px;">开单日期</span>
+                            <zm-search-date [label]=" '开单时间' " [placeholder]="'请选择开单时间'"  [(curValue)]="date"  (curValueChange)="onDateChange()"></zm-search-date>
+                            <zm-time [label]="'设置时间'"   [(currentValue)]="time"></zm-time>
+                        <!-- <zm-search-date [label]=" '预约时间' " [placeholder]="'请选择预约时间'"  [(curValue)]="viewData.minTime" (callback)="getAppointmentByReq()"></zm-search-date>
+                        <zm-search-date [label]=" '至' " [placeholder]="'请选择预约时间'" [(curValue)]="viewData.maxTime" (callback)="getAppointmentByReq()"></zm-search-date> -->
+                    </div>
+                    <p class="my-0"><b class="mr-12">说明:</b>补单支持选择开单日期和时间，默认为系统当前时间，选择并提交订单后的付款时间将与开单时间保存为同一时间</p>
+                </div>
+        </zm-card >
+
+    <!-- 开单编号 -->
+    <zm-card-box  [withCollapse]="false" [expanded]="false">
+       <header fxLayout="row warp" fxLayoutAlign="center center" >
+           <label style="width:140px;color:#2a2a2a;" class="fz-18 mg-b-0 font-bold">开单编号</label>
+            <div class="nameDiv fz-14 cur-hand">
+              <input type="text" placeholder="请输入开单编号" maxlength=10 [(ngModel)]="wFDataWraper.number" />
+            </div>
+       </header>
+    </zm-card-box>
+
+    <select-leaguer-comp [wFDataWraper]="wFDataWraper" [fromPage]="2"></select-leaguer-comp>
+    <!-- 选择会员 end -->
+
+    <!-- 选择跟进人员 start -->
+    <select-follow-comp [wFDataWraper]="wFDataWraper"></select-follow-comp>
+    <!-- 选择跟进人员 end -->
+
+    <!-- 划卡 start -->
+    <select-reduce-card-comp *ngIf="wFDataWraper.isLeaguer" [leaguerId]="wFDataWraper.leaguerId" [wFDataWraper]="wFDataWraper"></select-reduce-card-comp>
+    <!-- 划卡 end -->
+
+    <!-- 购买 start -->
+    <select-consume-comp [wFDataWraper]="wFDataWraper"></select-consume-comp>
+    <!-- 购买 end -->
+
+    <!-- 提成设置 start -->
+    <!--<bonus-comp [wFDataWraper]="wFDataWraper"></bonus-comp>-->
+    <!-- 提成设置 end -->
+
+    <!-- 结算 start -->
+    <order-comp #orderComp [wFDataWraper]="wFDataWraper"></order-comp>
+    <!-- 结算 end -->
+    </div>
+</view-body-comp>

@@ -1,0 +1,44 @@
+<view-body-comp [headerArr]="['欠款管理','欠款详情']">
+
+  <div style="color: #333;font-size: 24px;margin: 15px 0 30px 0;" class="disFlex align-center">
+    当前欠款总额<span class="mg-r-10 mg-l-10">:</span>
+    <span style="font-size: 30px;"><i class="fa fa-yen mg-r-10"></i>{{viewData.arrearageTotalAmount |number:'1.2-2'}}</span>
+  </div>
+
+  <mat-toolbar style="padding-top:15px;margin-bottom:15px;">
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="zmFullWidth">
+
+      <div fxLayout="row "  fxLayoutGap="20px" >
+
+        <div style="width:200px">
+          <zm-search-date [label]="'时间'" [placeholder]="'请选择时间'" [(curValue)]="viewData.minTime" (callback)="findByTime()"></zm-search-date>
+        </div>
+        <div style="width:200px">
+          <zm-search-date [label]="'至'" [placeholder]="'请选择时间'" [(curValue)]="viewData.maxTime" (callback)="findByTime()"></zm-search-date>
+        </div>
+        <div style="width:100px" >
+          <zm-select-number  [label]="'类型'" [selectList]="[{name:'欠款',value:0},{name:'清账',value:1}]" [(zmValue)]="viewData.status" (selectCallback)="findByStatus()"></zm-select-number>
+        </div>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <ng-template #tdA let-item="item">{{item.createdTime |times}}</ng-template>
+  <ng-template #tdB let-item="item">{{item.orderNumber}}</ng-template>
+  <ng-template #tdC let-item="item">{{item.status | arrearageStatusPipe}}</ng-template>
+  <ng-template #tdD let-item="item"><i class="fa fa-yen mg-r-5"></i>{{item.balanceDue |number:'1.2-2'}}</ng-template>
+  <ng-template #tdE let-item="item">
+    <a class="zmCurHand" style="margin-right: 5px;" *ngIf="item.status == 0" (click)="pay(item)">还款</a>
+    <a class="zmCurHand" style="margin-right: 5px;" (click)="showPayRecordPopup(item)">还款记录</a>
+    <a class="zmCurHand" style="margin-right: 5px;" (click)="goOrderDetail(item.orderId)">查看订单</a>
+  </ng-template>
+
+  <zm-mat-table [tdTemplateList]="[tdA,tdB,tdC,tdD,tdE]" [thNameList]="['时间','订单号','类型','当前欠款','操作']"
+                [itemList]="viewData.arrearageList"></zm-mat-table>
+
+  <no-data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.arrearageList" [text]=" '没有数据'"
+           [showImg]="'noData'"></no-data>
+
+  <zm-page [totalSize]="viewData.recordCount" [curPage]="viewData.page" (pageChange)="getPageData($event)"></zm-page>
+
+</view-body-comp>

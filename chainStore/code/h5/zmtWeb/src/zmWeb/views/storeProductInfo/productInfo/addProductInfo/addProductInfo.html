@@ -1,0 +1,61 @@
+<view-body-comp [headerArr]="['项目列表','新建项目']">
+
+  <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+
+    <div style="width:45%">
+
+      <zm-input-pcode label="项目编号" placeholder="请输入项目编号"
+                      [(zmValue)]="viewData.addFormData.number"
+                      [(zmPass)]="viewData.addFormData.numberPass"></zm-input-pcode>
+
+      <zm-input-name label="项目名称" placeholder="请输入项目名称" maxlength="15"
+                     [(zmValue)]="viewData.addFormData.name" [(zmPass)]="viewData.addFormData.namePass"></zm-input-name>
+
+      <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between center">
+        <zm-select fxFlex="1 1" [noAll]="true" [label]="'项目分类'" [selectList]="viewData.typeList" [name]="'name'"
+                   [value]="'id'"
+                   [(zmValue)]="viewData.addFormData.typeId"></zm-select>
+        <zm-btn-small fxFlex="0 0 80px" name="新建分类" (zmbtnClick)="addType()"></zm-btn-small>
+      </div>
+
+      <zm-input-price [required]="false" [label]="'项目售价'" [placeholder]="'请输入项目售价'"
+                      [(zmValue)]="viewData.addFormData.price"></zm-input-price>
+
+      <zm-input-price [required]="false" [label]="'项目成本'" [placeholder]="'请输入项目成本'"
+                      [(zmValue)]="viewData.addFormData.cost"></zm-input-price>
+
+      <zm-input-textarea [label]="'项目介绍'" [placeholder]="'请输入200字以内的项目介绍'" [(text)]="viewData.addFormData.descript"
+                         [maxlength]="200"></zm-input-textarea>
+
+      <switch-button-comp [(state)]="viewData.addFormData.state" label="上架状态"></switch-button-comp>
+
+
+      <switch-button-comp [(state)]="viewData.addFormData.promotionFlag" label="是否促销"></switch-button-comp>
+
+      <zm-input-price *ngIf="viewData.addFormData.promotionFlag" [required]="false" [label]="'促销价格'"
+                      [placeholder]="'请输入促销价格（小于售价）'"
+                      [(zmValue)]="viewData.addFormData.promotionPrice"></zm-input-price>
+
+
+      <div fxLayout="row" fxLayoutAlign="end" style="width: 100%">
+        <zm-btn-large name="保存" [disabled]="!(viewData.addFormData.numberPass && viewData.addFormData.namePass)"
+                      (zmbtnClick)="addProduct()"></zm-btn-large>
+      </div>
+
+
+    </div>
+
+    <div style="width:45%">
+      <div class="form-group form-inline">
+        <div style="width:80px;height:36px;">
+          <zm_img_cropper [label]="'上传图片'" [aspectRatio]="4/3" [requestUrl]="viewData.requestUrl"
+                          (callback)="showImg($event)"></zm_img_cropper>
+        </div>
+      </div>
+      <zm-img-preview [(imgArr)]="viewData.addFormData.imgPathList"
+                      [(imgLength)]="viewData.limitCount"></zm-img-preview>
+    </div>
+
+  </div>
+
+</view-body-comp>

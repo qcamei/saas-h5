@@ -1,0 +1,58 @@
+<view-body-comp [headerArr]="['次卡列表']">
+
+  <mat-toolbar style="padding-top:15px;margin-bottom:15px;">
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="zmFullWidth">
+      <div fxLayout="row "  fxLayoutGap="20px" >
+
+        <div style="width:150px">
+          <zm-select-number [label]="'状态'" [selectList]="[{name:'已上架',value:0},{name:'已下架',value:1}]" [(zmValue)]="viewData.status" (selectCallback)="getProductCardDetailListByReq()"></zm-select-number>
+        </div>
+        <div style="width:150px">
+          <zm-select-string [label]="'次卡分类'"  name="name" value="id"  [selectList]="viewData.productCardTypeList"[(zmValue)]="viewData.queryForm.typeId" (selectCallback)="getProductCardDetailListByReq()"></zm-select-string>
+        </div>
+        <div  fxFlexAlign="center"  >
+          <zm_search_box [label]=" '次卡查询'" [placeholder]="'次卡编号/名称'" [(zmValue)]="viewData.queryForm.cardNameOrNumber" (callBack)="getProductCardDetailListByReq()"></zm_search_box>
+        </div>
+      </div>
+      <div fxLayout="row "  fxLayoutGap="20px" >
+        <div fxFlexAlign="center" ><zm_btn_small [name]="'上架'" (zmbtnClick)="batchChangeState(0)"></zm_btn_small></div>
+        <div fxFlexAlign="center" ><zm_btn_small [name]="'下架'" (zmbtnClick)="batchChangeState(1)"></zm_btn_small></div>
+        <div fxFlexAlign="center" ><zm_btn_new [name]="'新建次卡'" (zmbtnClick)="goAddProductCard()"></zm_btn_new></div>
+        <div fxFlexAlign="center" ><zm_btn_new [name]="'新建分类'" (zmbtnClick)="goAddProductCardType()"></zm_btn_new></div>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+
+  <ng-template #tdA let-item="item">
+    <div class="zmImgDiv">
+      <img  *ngIf="item.imgPath" src="{{item.imgPath|imgPrePath}}" />
+      <img *ngIf="!item.imgPath" src="{{item.defaultImg|imgPrePath}}" />
+    </div>
+  </ng-template>
+  <ng-template #tdB let-item="item">{{item.number}}</ng-template>
+  <ng-template #tdC let-item="item">{{item.name}}</ng-template>
+  <ng-template #tdD let-item="item">{{item.typeId|prdCardTypeNamePipe:viewData.productCardTypeMap}}</ng-template>
+  <ng-template #tdE let-item="item"><i class="fa fa-yen mr-1"></i>{{item.sellPrice|number:'1.2-2'}}</ng-template>
+  <ng-template #tdF let-item="item">
+    <span *ngIf="item.validPeriodUnit==0">{{item.validPeriodUnit|validPeriodUnitPipe}}</span>
+    <span *ngIf="item.validPeriodUnit!=0">{{item.validPeriod}}{{item.validPeriodUnit|validPeriodUnitPipe}}</span>
+  </ng-template>
+  <ng-template #tdG let-item="item">{{item.applyStoreIds && item.applyStoreIds.length}}</ng-template>
+  <ng-template #tdH let-item="item">{{item.status |statePipe}}</ng-template>
+  <ng-template #tdI let-item="item">
+    <a class="zmCurHand" style="margin-right: 5px;"  *ngIf=" item.status == 0" (click)="changeState(item.id,1)">{{item.status | statePipe2}}</a>
+    <a class="zmCurHand" style="margin-right: 5px;"  *ngIf=" item.status == 1" (click)="changeState(item.id,0)">{{item.status | statePipe2}}</a>
+    <a class="zmCurHand" style="margin-right: 5px;"  [routerLink]="['/main/chainCard/productCard/detail/'+item.id]">查看</a>
+    <a class="zmCurHand" style="margin-right: 5px;" *ngIf="item.sellFlag == 0 && item.status == 1" [routerLink]="['/main/chainCard/productCard/update/'+item.id]">编辑</a>
+
+    <!--<a class="zmCurHand" style="margin-right: 5px;"   *ngIf="item.sellFlag == 0 && item.status == 1" (click)="deletePrdCard(item)">删除</a>-->
+    <!--<a class="zmCurHand" style="margin-right: 5px;" (click)="allotStores(item)">分配</a>-->
+  </ng-template>
+  <zm-mat-table-checkbox  [tdTemplateList]="[tdA,tdB,tdC,tdD,tdE,tdF,tdG,tdH,tdI]" [thNameList]="['图片','次卡编号','次卡名称','次卡分类','售价','有效期','适用门店','状态','操作']" [itemList]="viewData.productCardList"></zm-mat-table-checkbox>
+
+  <no_data [loadingFinish]="viewData.loadingFinish" [dataList]="viewData.productCardList" [text]=" '没有数据'" [showImg]="'noData'"></no_data>
+
+  <zm_page [totalSize]="viewData.recordCount" [curPage]="viewData.curPage" (pageChange) = "getPageData($event)"></zm_page>
+</view-body-comp>
+

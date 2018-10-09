@@ -1,0 +1,9 @@
+<!--views/appointment/comps/appointmentCell/appointmentCell.wxml-->
+<view class=" weui-cells_after-title" data-cellModel='{{cellModel}}' bindtap='cellClick'>
+  <view url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <image src="{{cellModel.icon}}" style="margin-right: 10rpx;vertical-align: middle;width:32rpx; height: 32rpx;"></image>
+    <view class="weui-cell__bd cell-title">{{cellModel.title}}</view>
+    <view wx:if='{{cellModel.content}}' class="weui-cell__ft weui-cell__ft_in-access cell-content">{{cellModel.content}}</view>
+    <view wx:else class="weui-cell__ft weui-cell__ft_in-access cell-placeholder">{{cellModel.placeHoder}}</view>
+  </view>
+</view>

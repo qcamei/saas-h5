@@ -1,0 +1,45 @@
+<view-body-comp [headerArr]="['管理设置','预约设置']">
+    <div class="c-addAp-body mg-t-20 pd-b-25" style="border-bottom:1px solid #ebeef2;">
+      <div style=" font-weight:600;color: #2a2a2a;font-size: 1.125rem;">
+        预约时间设置
+      </div>
+      <div class="fz-14 mg-t-15 mg-b-20">*说明：设置预约时间后顾客预约时将只在该时间段内可选。</div>
+      <div class="col-md-12 col-lg-12 col-sm-12  disFlex time" style="padding: 0;margin-left:-20px;">
+        <zm-time [label]="'开始时间'" [(currentValue)]="viewData.startTime"></zm-time>
+        <zm-time [label]="'结束时间'" [(currentValue)]="viewData.endTime"></zm-time>
+      </div>
+      <div class="disFlex col-md-12 col-lg-12 col-sm-12 mg-t-15 mg-b-20" style="justify-content: flex-end;">
+        <button class="btn c-btn-blue cur-hand" style="padding:7px 53px;" (click)="updateAppointConfig()">保存</button>
+      </div>
+    </div>
+
+    <div class="c-addAp-body mg-t-30" style="border-radius:14px;">
+      <div style=" font-weight:600;color: #2a2a2a;font-size: 1.125rem;">
+        预约取消原因
+      </div>
+      <div class="fz-14 mg-t-15 mg-b-20">
+        <span>*说明：设置后取消预约时，原因可从下方原因选择。最多可编辑10条</span>
+        <span style="float: right;"><zm-btn-new [name]="'新建'" (zmbtnClick)="addCancelReason()"></zm-btn-new></span>
+      </div>
+      <div style="width:600px">
+          <zm-table-detail >
+            <thead style="max-width:600px;">
+            <th style="width:70%;">取消原因</th>
+            <th style="width:30%;">操作</th>
+            </thead>
+            <tr *ngFor="let item of viewData.cancelAppointList">
+              <td style="width:70%;" class="text-center">{{item.reason}}</td>
+              <td *ngIf="item.id != 1" style="width:30%;" class="text-center">
+                <span class="font-c1 cur-hand mg-r-10" (click)="editCancelReason(item)">编辑</span>
+                <span class="font-c1 cur-hand " (click)="deleteCancelReason(item)">删除</span>
+              </td>
+              <td *ngIf="item.id == 1" style="width:30%;" class="text-center">
+                <span class="mg-r-10">-</span>
+              </td>
+            </tr>
+            </tbody>
+          </zm-table-detail>
+      </div>
+
+    </div>
+</view-body-comp>

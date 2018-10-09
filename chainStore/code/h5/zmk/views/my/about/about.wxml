@@ -1,0 +1,19 @@
+<view class="about">
+
+    <image src="../../../images/icon_company.png"></image>
+
+  <view class="app-slogan">智美预约，美丽每一刻</view>
+
+  <view class="app-introduction">
+    智美预约是专为爱美用户进行在线预约项目、跟踪订单的小程序。
+  </view>
+
+  <view class="logout-button" bindtap='logOutClick' wx:if="{{loginInfo}}">
+    退出当前账号
+  </view>
+  
+  <view  class="Copyright">
+    <text>Copyright © 2017-2018 Kimey Times</text>
+  </view>
+
+</view>

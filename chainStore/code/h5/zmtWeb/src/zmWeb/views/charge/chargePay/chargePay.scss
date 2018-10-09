@@ -1,0 +1,16 @@
+.pay-active{
+    border:2px solid #4C7CFB;
+    border-radius:20px;
+    padding:5px 35px;
+    margin-left:5%;
+    color:#4C7CFB;
+}
+.pay-active:hover{
+   box-shadow:0 0 5px #4C7CFB;
+}
+.pay-uncheck{
+    border:2px solid #cac6c6;
+    border-radius:20px;
+    padding:5px 35px;
+    margin-left:5%;
+}

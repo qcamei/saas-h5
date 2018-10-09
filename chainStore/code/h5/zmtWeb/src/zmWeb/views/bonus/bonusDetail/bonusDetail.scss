@@ -1,0 +1,247 @@
+.btn{
+  padding: 0.75rem 0.35rem;
+}
+thead th {
+  font-weight: bold;
+  background-color: #f4f6fa !important;
+  border-bottom-width: 1px !important;
+}
+tbody tr{
+  margin-top: -1px;
+}
+tbody tr:nth-of-type(odd){
+  background-color: #ffffff;
+}
+tbody tr:nth-of-type(even),tbody tr:nth-of-type(even) input,tbody tr:nth-of-type(even) select{
+  background-color:#f9fafc;
+}
+tbody .c-tr:hover{
+  background-color: #e7f3fd;
+}
+tbody a{cursor:pointer;}
+tbody a:hover{text-decoration: none;color:#03a9f4 !important;}
+
+th, td{
+  vertical-align: middle !important;
+  font-size: 14px;
+  word-wrap:break-word;
+  word-break: break-all;
+}
+.table-bordered thead th{
+  border-bottom-width: 1px !important;
+}
+select.form-control:not([size]):not([multiple]){
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background-image:url(../../../../assets/images/arrow.png);
+  background-repeat: no-repeat;
+  background-position:95% 50%;
+  font-size: 14px;
+  padding-right: 25px;
+}
+select.c-form-select:not([size]):not([multiple]){
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background-image:url(../../../../assets/images/arrow.png);
+  background-repeat: no-repeat;
+  background-position:95% 50%;
+  font-size: 14px;
+  padding-right: 25px;
+}
+select::-ms-expand { display: none; }
+input[type=number] {
+  -moz-appearance: textfield;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+button:focus{
+  box-shadow: none;
+}
+.table {
+  font-size: 14px;
+  margin-bottom: 0;
+}
+.scrollTable {
+  border: none;
+}
+.scrollTable tbody {
+  display: block;
+  height: 400px;
+  overflow-y: auto;
+}
+.scrollTable thead {
+  display: table;
+  width: -moz-calc(100% - 10px);
+  width: calc(100% - 10px);
+  width: 100%;
+  table-layout: fixed;
+}
+.scrollTable tr{
+  display: table;
+  width: 100%;
+}
+
+.text-center{
+  text-align: center;
+}
+.text-left{
+  text-align: left;
+}
+.mg-t-10{
+  margin-top:10px;
+}
+.disFlex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: flex;
+}
+.flex {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  -webkit-flex: 1;
+  -moz-box-flex: 1;
+  flex: 1;
+}
+.mg-b-20{
+  margin-bottom:20px;
+}
+.mg-b-0{
+  margin-bottom:0;
+}
+.mg-l-20{
+  margin-left:20px;
+}
+.mg-l-10{
+  margin-left:10px;
+}
+.mg-r-20{
+  margin-right: 20px;
+}
+.mg-r-5{
+  margin-right:5px;
+}
+.align-center{
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  align-items: center;
+}
+.font-bold{
+  font-weight:bold;
+}
+.fz-14{
+  font-size:14px;
+}
+
+.form-control {
+  padding: 0 10px;
+  height: 30px !important;
+  width: auto;
+  display: inline-block;
+  margin-left: 10px;
+}
+.c-client-title {
+  padding: 1.25rem 1.25rem 0;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.c-label {
+  width: 70px;
+  text-align: right;
+}
+
+
+
+.c-btn-data {
+  color: #999;
+  border: none;
+  width: 60px;
+  height: 30px;
+  font-size: 14px;
+  border: 1px solid #dadfe6;
+  padding: 0 !important;
+  cursor: pointer;
+  outline: none;
+}
+//查询select
+.c-leaguer-select {
+  align-items: center;
+  .form-select {
+    font-size: 14px;
+    padding: 0 10px;
+    height: 30px !important;
+    width: auto;
+    display: inline-block;
+    margin-left: 5px;
+  }
+}
+
+//查询select
+//input查询
+.c-first-input {
+  border-radius: 6px 0 0 6px;
+  background: #F4F6FA;
+  height: 30px;
+  border: 1px solid #ECEFF3;
+  padding: 0 10px;
+  outline: none;
+  width: 120px;
+  font-size: 14px;
+}
+
+.c-prdlist-btn {
+  color: #fff;
+  background:#03a9f4;
+  border: none;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  height: 30px;
+  padding: 0 15px;
+  font-size: 14px;
+  margin-left: -5px;
+  cursor: pointer;
+  outline: none;
+}
+
+//input查询
+//时间选择
+.c-input-data {
+  border-top-left-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
+  border: 2px solid #dadfe6;
+  border-right: none;
+  height: 30px;
+  font-size: 14px;
+  padding-left: 10px;
+  margin-left:10px;
+  outline: none;
+  width: 160px;
+}
+
+.c-client-data {
+  outline: none;
+  height: 30px;
+  border: 2px solid #dadfe6 !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-top-right-radius: 0.375rem;
+  border-bottom-right-radius: 0.375rem;
+  background: transparent;
+}
+
+.c-client-data:focus {
+  border-color: #dadfe6;
+}
+
+//时间选择
+.scrollTable tbody tr td{
+  word-break: break-all;
+}
+

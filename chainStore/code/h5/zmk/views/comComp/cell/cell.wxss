@@ -1,0 +1,27 @@
+.zmk-cell {
+  height: 70px;
+  padding-left: 10px;
+  color: #333333;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background: #FFF;
+  font-size: 16px;
+  border-bottom: 1px solid #F0F0F0;
+}
+.zmk-cell:first-child {
+  margin-top: 0;
+}
+.zmk-cell-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 25px;
+}
+.zmk-cell-name {
+  flex: 1;
+}
+.zmk-cell-img {
+  width: 15px;
+  height: 15px;
+  margin-right: 25rpx; 
+}

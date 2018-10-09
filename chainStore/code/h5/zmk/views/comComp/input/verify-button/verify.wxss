@@ -1,0 +1,8 @@
+.verify {
+  width: 30%;
+  text-align: right;
+  height: 62rpx;
+  line-height: 62rpx;
+  color: #4678FA;
+  font-size: 34rpx;
+}

@@ -1,0 +1,35 @@
+/* views/appointment/comps/beauticiancell/beauticianCell.wxss */
+@import "../../../../app.wxss";
+.weui-media-box__thumb{
+   height: 50px;
+  width: 50px;
+  border: solid;
+  border-color:white; 
+  background-color: white;
+  border-radius: 25px 
+}
+.weui-media-box__title{
+  font-size: 14px;
+  color: #333333
+}
+.beautician-selected{
+  width: 16px;
+  height: 16px;
+  margin-left: 0px;
+}
+.weui-media-box__hd{
+  height: 56px;
+  width: 32rpx;
+}
+.line{
+  background-color: #eeeeee;
+  height: 1px
+}
+.head {
+  width:60px;
+}
+.weui-media-box_appmsg {
+  background: #ffffff;
+  padding:15px 15px;
+  margin:20rpx 0;
+}

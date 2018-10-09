@@ -1,0 +1,54 @@
+<view class="order-detail-container">
+
+  <view class="store-name">{{orderInfo.storeName}}</view>
+    
+  <view class="store-address">
+    <image src="../../../../images/icon_store_location.png"></image>
+    <view>{{orderInfo.storeAddress}}</view>
+  </view>
+
+  <view class="detail-item">
+    <view class="item-title">预约状态</view>
+    <view class="item-value">{{status}}</view>
+  </view>
+
+  <view class="detail-item">
+    <view class="item-title">预约号</view>
+    <view class="item-value">
+      <view>{{orderInfo.id}}</view>
+    </view>
+  </view>
+
+  <!-- <view class="detail-item">
+    <view class="item-title">预约人</view>
+    <view class="item-value item-service">
+      <view style="width: 65%;">{{orderInfo.creatorName}}</view>
+      <view style="width: 35%;">{{orderInfo.creatorPhone}}</view>
+    </view>
+  </view> -->
+
+  <view class="detail-item">
+    <view class="item-title">服务项目</view>
+    <view class="item-value">{{orderInfo.productName}}</view>
+  </view>
+
+  <view class="detail-item">
+    <view class="item-title">服务人员</view>
+    <view class="item-value">{{orderInfo.buserName}}</view>
+  </view>
+
+  <view class="detail-item">
+    <view class="item-title">预约时间</view>
+    <view class="item-value">{{orderInfo.appointmentTime}}</view>
+  </view>
+
+  <view class="detail-item">
+    <view class="item-title">提交预约时间</view>
+    <view class="item-value">{{orderInfo.createdTime}}</view>
+  </view>
+
+  <view class="cancel-order" wx:if="{{status == '待接单'}}">
+    <button hover-class='hover-button' bindtap='cancelOrder'>取消预约</button>
+  </view>
+
+</view>

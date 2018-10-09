@@ -1,0 +1,13 @@
+/* pages/pay/pay.wxss */
+.loadingImg{
+ width:100px;
+ height: 16px;
+ margin-left:5px;
+ display: inline-block;
+}
+.payText{
+  margin-left:5px;
+}
+.payTextContainer{
+  text-align: center;
+}

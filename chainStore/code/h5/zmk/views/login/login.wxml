@@ -1,0 +1,46 @@
+<view class="">
+
+  <view class="login-text-view">登录</view>
+
+  <view class="login-info">
+    <view class="info-view">
+      <view class="info-title">手机号码</view>
+      <view class="info-input">
+        <input type="number" placeholder-class="placeholder-class" placeholder="请输入手机号" bindinput="phoneEvent" value=''></input>
+      </view>
+    </view>
+    <view class="info-view">
+      <view class="info-title">验证码</view>
+      <view class="info-input verify-view">
+        <input type="number" placeholder-class="placeholder-class" placeholder="请输入验证码" bindinput="verifyCodeEvent" value=''></input>
+        <view style="{{ verifyClick || !reasonablePhone ? 'color: #BFC1C2' : '' }} " bindtap="clickVerifyButton">{{ verifyClick ? '等待'+CountdownCount+'s' : "发送验证码" }}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="login">
+    <button bindtap="clickLoginButton" hover-class='click-button' style="{{ !verifyCode || !reasonablePhone ? 'background:rgba(70,120,250,1);opacity:0.4;' : '' }}">登录</button>
+  </view>
+
+  <view class="protocol">
+    <view>点击“登录”即表示您同意协议：</view>
+    <view style="width: 240rpx;">
+      <navigator url="./protocol/protocol">《智美预约用户协议》</navigator>
+    </view>
+
+  </view>
+
+
+  <!-- <view class="phone">
+    <text>手机号</text>
+    <input type="number" placeholder="请输入手机号"  bindinput="phoneEvent"></input>
+  </view>
+  <view class="verify-code">
+    <text>验证码</text>
+    <input type="number" placeholder="" bindinput="verifyCodeEvent"></input>
+    <view class="verify-button {{ verifyClick || !reasonablePhone ? 'verify-button-disabled' : '' }} " bindtap="clickVerifyButton">{{ verifyClick ? CountdownCount : "获取验证码" }}</view>
+  </view> -->
+
+  <!-- <zm-verify-button title="发送验证码" reasonable="true" bindclickEvent="clickVerifyButton" verify-click="true"></zm-verify-button> -->
+  
+</view>

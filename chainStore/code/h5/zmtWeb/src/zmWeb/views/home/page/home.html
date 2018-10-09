@@ -1,0 +1,51 @@
+<view-body-comp>
+   <div fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="20px">
+     <div class="flex consumerPurchase disFlex align-center hor-center cur-hand mat-elevation-z3" (click)="turnToAddPurchase()">
+       <img src="assets/images/consumerPurchase.png" alt="" class="icon-classify">
+       <span class="mg-l-20 font-bold">开单收银</span>
+     </div>
+
+     <div class="flex memberRecharge disFlex align-center hor-center mg-l-30 cur-hand mat-elevation-z3" (click)="turnToAddRecharge()">
+       <img src="assets/images/memberRecharge.png" alt="" class="icon-classify">
+       <span class="mg-l-20 font-bold">会员充值</span>
+     </div>
+
+     <div class="flex addCustomer disFlex align-center hor-center mg-l-30 cur-hand mat-elevation-z3" (click)="turnToAddLeaguer()">
+       <img src="assets/images/addCustomer.png" alt="" class="icon-classify">
+       <span class="mg-l-20 font-bold">新增会员</span>
+     </div>
+
+     <div class="flex addAppointment disFlex align-center hor-center mg-l-30 cur-hand mat-elevation-z3" (click)="turnToAddAppoint()">
+       <img src="assets/images/addAppointment.png" alt="" class="icon-classify">
+       <span class="mg-l-20 font-bold">新增预约</span>
+     </div>
+
+   </div>
+
+    <div fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="20px">
+        <home-todayAppoint-comp style="width:47%;" [storeId]="viewData.storeId" class="todayAppoint"></home-todayAppoint-comp>
+
+        <home-unfinishedWF-comp style="width:47%;" [storeId]="viewData.storeId" class="unfinishedWF"></home-unfinishedWF-comp>
+    </div>
+
+
+
+</view-body-comp>
+<!--模态框-->
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class=" modal-header">
+    <h4 class="modal-title">提醒</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-center" style="padding-bottom: 30px;padding-top: 40px;">
+      <img src="assets/images/error/error-1.png" alt="">
+      <p class="font-bold fz-18 mg-t-20">店铺会员服务还有29天到期，请及时续费</p>
+      <div class="mg-t-40">
+        <button class="expire-btn-qq">续费</button>
+        <button class="expire-btn-confirm mg-l-20">确定</button>
+      </div>
+  </div>
+</ng-template>
+<!--模态框-->

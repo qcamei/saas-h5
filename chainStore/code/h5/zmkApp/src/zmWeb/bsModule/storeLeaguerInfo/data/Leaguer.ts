@@ -1,0 +1,41 @@
+import {LeaguerMemberCard} from "./LeaguerMemberCard";
+export class Leaguer {
+    constructor(){}
+    id:string;
+    name:string;
+    sex:number;
+    phone:number;
+    entityState:number;
+    headImg:string;
+    buserIds:Array<number>;
+    birthday:number;
+    dateType:number;
+    idCard:string;
+    aliasName:string;
+    wechatNumber:string;
+    recommender:string;
+    origin:string;
+    address:string;
+    company:string;
+    job:string;
+    cuserId:number;
+    createdTime:number;
+    lastUpdateTime:number;
+    lastConsumeTime:number;
+    firstConsumeTime:number;
+    consumeAmount:number;
+    consumeCount:number;
+    avgPrice:number;
+    monthRate:number;
+    leaguerMemberCard:LeaguerMemberCard;
+    leaguerProductCardMap:any;//Map<String,LeaguerProductCard>;
+    leaguerPrdCardIndex:number;
+    telephone:string;
+    age:number;
+    lunarDay:number;
+    customerType:number;
+    consumeLevel:number;
+    attention:number;
+    beauticianId:number;
+    beauticianName:string;
+}

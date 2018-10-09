@@ -1,0 +1,78 @@
+<view-body-comp [headerArr]="['套餐列表','编辑套餐']">
+  <zm-card [expanded]="true" [withCollapse]="false">
+    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="20px">
+
+      <div style="width: 50%">
+
+        <zm-input-pcode label="套餐编号" placeholder="请输入套餐编号"
+                        [(zmValue)]="viewData.pageData.defaultNumber" [(zmPass)]="viewData.pageData.defaultNumberPass"
+                        [oriCode]="viewData.packageDetail.number"
+                        [existList]="viewData.packageNumberList"></zm-input-pcode>
+
+
+        <zm-input-name label="套餐名称" placeholder="请输入套餐名称" maxlength="15"
+                       [(zmValue)]="viewData.packageDetail.name"
+                       [(zmPass)]="viewData.packageDetail.namePass"></zm-input-name>
+
+        <div fxLayout="row" fxLayoutGap="10px;" fxLayoutAlign="space-between center">
+          <zm-select-string fxFlex="1 1" [noAll]="true" [label]="'套餐分类'" [selectList]="viewData.typeList"
+                            [name]="'name'" [value]="'id'"
+                            [(zmValue)]="viewData.packageDetail.typeId"></zm-select-string>
+          <zm-btn-small fxFlex="0 0 80px" name="新建分类" (zmbtnClick)="addType()"></zm-btn-small>
+        </div>
+      </div>
+
+      <div style="width: 50%">
+
+        <div class="form-group form-inline">
+          <!--<zm-input-file [label]="'上传图片'" [maxCount]="viewData.pageData.maxCount" [limitCount]="viewData.pageData.limitCount" [requestUrl]="requestUrl" [appendKey]="'imgs'" (callback)="showImg($event)"></zm-input-file>-->
+          <div style="width:80px;height:36px;">
+            <zm_img_cropper [label]="'上传图片'" [aspectRatio]="4/3" [requestUrl]="requestUrl"
+                            (callback)="showImg($event)"></zm_img_cropper>
+          </div>
+        </div>
+        <zm-img-preview [(imgArr)]="viewData.pageData.imgPathListTmp"
+                        [(imgLength)]="viewData.pageData.limitCount"></zm-img-preview>
+
+      </div>
+    </div>
+  </zm-card>
+  <!-- 套餐内容 -->
+  <zm-card [expanded]="true" [withCollapse]="false">
+    <package-content-comp [(packageContentList)]="viewData.packageContentList"
+                          [(sellPrice)]="viewData.packageDetail.sellPrice"
+                          [(totalPrice)]="viewData.pageData.totalPrice"></package-content-comp>
+    <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="5px" style="width:100%;margin-top: 5px;">
+      <label>产品总价</label>
+      <span style="color:#555;">￥</span>
+      <span>{{viewData.pageData.totalPrice|number:'1.2-2'}}</span>
+    </div>
+  </zm-card>
+
+  <zm-card [expanded]="true" [withCollapse]="false">
+    <zm-input-price [label]="'套餐售价'" [placeholder]="'请输入套餐售价'" [(zmValue)]="viewData.packageDetail.sellPrice"
+                    (keyup.enter)="autoSetDiscount()" (mouseleave)="autoSetDiscount()"></zm-input-price>
+    <zm-input-textarea [label]="'套餐介绍'" [placeholder]="'请输入200字以内的套餐介绍'"
+                       [(text)]="viewData.packageDetail.descript" [maxlength]="200"></zm-input-textarea>
+
+    <switch-button-comp label="上架状态" [(state)]="viewData.pageData.state"></switch-button-comp>
+
+
+    <switch-button-comp [(state)]="viewData.pageData.promotionFlag" label="是否促销"></switch-button-comp>
+
+
+    <zm-input-price *ngIf="viewData.pageData.promotionFlag" [label]="'促销价格'" [placeholder]="'请输入促销价格'"
+                    [(zmValue)]="viewData.packageDetail.promotionPrice"></zm-input-price>
+
+    <div fxLayout="row" fxLayoutAlign="end" style="margin-top: 20px;">
+      <zm-btn-large fxFlexAlign="end"
+                    [disabled]="!(viewData.pageData.defaultNumberPass && viewData.packageDetail.namePass && viewData.packageContentList.length>0)"
+                    name="保存" (zmbtnClick)="editPackage()"></zm-btn-large>
+    </div>
+
+
+  </zm-card>
+
+
+</view-body-comp>
+

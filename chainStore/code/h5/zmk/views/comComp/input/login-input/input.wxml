@@ -1,0 +1,7 @@
+<view class="info-view">
+  <view class="info-title">{{title}}</view>
+  <view class="info-input verify-view" wx:if="{{needVerify}}">
+    <input type="number" placeholder-class="placeholder-class" placeholder="{{placeholder}}"  bindinput="verifyCodeEvent" value=''></input>
+    <view style="{{ verifyClick || !reasonablePhone ? 'color: #BFC1C2' : '' }} " bindtap="clickVerifyButton">{{ verifyClick ? '等待'+CountdownCount+'s' : "发送验证码" }}</view>
+  </view>
+</view>

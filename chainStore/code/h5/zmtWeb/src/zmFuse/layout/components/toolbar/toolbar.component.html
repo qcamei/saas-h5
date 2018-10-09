@@ -1,0 +1,115 @@
+<mat-toolbar class="p-0 mat-elevation-z1">
+
+    <mat-progress-bar *ngIf="showLoadingBar" class="loading-bar" color="accent" mode="indeterminate"></mat-progress-bar>
+
+    <div fxFlex fxFill fxLayout="row" fxLayoutAlign="start center">
+
+        <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
+
+            <button mat-icon-button class="navbar-toggle-button"
+                    *ngIf="!hiddenNavbar && !rightNavbar" (click)="toggleSidebarOpen('navbar')" fxHide.gt-md>
+                <mat-icon class="secondary-text">menu</mat-icon>
+            </button>
+
+            <div class="toolbar-separator" *ngIf="!hiddenNavbar && !rightNavbar" fxHide.gt-md></div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" *ngIf="horizontalNavbar">
+                <div class="logo ml-16">
+                    <img class="logo-icon" src="assets/images/logos/fuse.svg">
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
+
+            <button  mat-button class="user-button" (click)="goGetQrcode()" fxLayoutAlign="start center">
+                <mat-icon  style="font-size:22px;color:#03a9f4;" fxHide.xs>crop_free</mat-icon>
+                获取二维码
+            </button>
+            <div class="toolbar-separator"></div>
+
+            <button mat-button [matMenuTriggerFor]="storeMenu" class="user-button">
+              <div fxLayout="row" fxLayoutAlign="center center">
+                <img src="assets/images/icon-shop.png">
+                <span class="ml-4">{{data.storeName}}</span>
+                <mat-icon fxHide.xs>keyboard_arrow_down</mat-icon>
+              </div>
+            </button>
+            <mat-menu #storeMenu="matMenu" [overlapTrigger]="false">
+
+              <button mat-menu-item *ngFor="let item of data.storeList" (click)="toogleStore(item)">
+                {{item.name}}
+              </button>
+
+            </mat-menu>
+
+            <div class="toolbar-separator"></div>
+
+
+            <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2668006398&amp;site=qq&amp;menu=yes" style="text-decoration:none;color:#333;">
+
+              <div class="cur-hand" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" style="width:150px;font-size:14px;">
+                  <img src="assets/images/icon/question.png" alt="" />
+                  <span>客服咨询</span>
+                </div>
+            </a>
+            <div class="toolbar-separator"></div>
+
+            <div *ngIf="data.showDevice" class="zmCurHand" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" style="width:150px;font-size:14px;">
+              <img src="assets/images/icon/deviceinfo.png" alt="" />
+              <span routerLink="/main/buserDevice/userDeviceList">设备概览</span>
+            </div>
+            <div class="toolbar-separator"></div>
+
+            <!-- 通知消息 -->
+            <div class="zmCurHand px-12" fxLayout="row" fxLayoutAlign="center center">
+                <div class="m-0" fxLayoutAlign="center center" [matBadgeHidden]="data.messageBadge == 0" matBadge="{{data.messageBadge > 0 ? data.messageBadge.toString() : ''}}" matBadgeColor="warn" (click)="goBuserCenterList()" matTooltip="{{data.messageBadge > 0 ? '你有'+ data.messageBadge + '条未读的信息,请及时查看': null}}" >
+                    <mat-icon  mat-list-icon>notifications_none</mat-icon>
+                </div>
+            </div>
+              <div class="toolbar-separator"></div>
+
+            <button mat-button [matMenuTriggerFor]="userMenu"
+                    class="user-button">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <img class="avatar" [src]="data.imgUrl">
+                    <span class="username mr-12" fxHide fxShow.gt-sm>{{data.userName}}{{data.userRole != ''?'('+data.userRole+')':''}}</span>
+                    <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
+                </div>
+            </button>
+
+            <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
+
+                <button mat-menu-item (click)="goBUserInfoPage()">个人中心</button>
+
+                <button *ngIf="data.userPermData.isBoss" mat-menu-item (click)="goCharge()">续费升级</button>
+
+                <button mat-menu-item (click)="goChangePasswordPage()">修改密码</button>
+
+                <button mat-menu-item  (click)="logOut()">退出</button>
+
+            </mat-menu>
+
+            <div class="toolbar-separator"></div>
+
+
+            <!--<button mat-icon-button-->
+                    <!--class="quick-panel-toggle-button"-->
+                    <!--(click)="toggleSidebarOpen('quickPanel')"aria-label="Toggle quick panel">-->
+                <!--<mat-icon class="icon">format_list_bulleted</mat-icon>-->
+            <!--</button>-->
+
+            <!--<div class="toolbar-separator" *ngIf="!hiddenNavbar && rightNavbar" fxHide fxShow.gt-xs></div>-->
+
+            <!--<button mat-icon-button class="navbar-toggle-button"-->
+                    <!--*ngIf="!hiddenNavbar && rightNavbar" (click)="toggleSidebarOpen('navbar')" fxHide.gt-md>-->
+                <!--<mat-icon class="secondary-text">menu</mat-icon>-->
+            <!--</button>-->
+
+        </div>
+
+    </div>
+
+</mat-toolbar>

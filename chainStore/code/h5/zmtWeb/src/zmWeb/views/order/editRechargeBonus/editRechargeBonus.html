@@ -1,0 +1,63 @@
+
+<view-body-comp [headerArr]="['订单列表','修改提成']">
+  <zm-card [header]="'跟进人员'">
+    <div class="disFlex align-center">
+      <label style="margin-bottom: 0;font-weight: bold">服务人员</label>
+      <div class="cur-hand pos-r mg-l-20 disFlex align-center pd-l-10 pd-r-20"
+           style="width:200px;min-height: 35px;border:2px solid #03a9f4;border-radius: 6px;"
+           (click)="setServicePerson()">
+        <div class="flex">
+          {{viewData.staffName}}
+        </div>
+        <i class="fa fa-plus pos-a color-theme" style="top:10px;right:0px;"></i>
+      </div>
+    </div>
+  </zm-card>
+
+  <zm-card [header]="'基本信息'">
+    <zm-table-detail style="text-align:center">
+      <thead>
+      <th>创建时间</th>
+      <th>付款时间</th>
+      <th>订单编号</th>
+      <th>订单类型</th>
+      <th>跟进人员</th>
+      <th>应结金额</th>
+      <th>订单状态</th>
+      </thead>
+      <tbody>
+      <tr>
+        <td>{{viewData.simpleOrderInfo.createdTime|times}}</td>
+        <td>{{viewData.simpleOrderInfo.payTime |times}}</td>
+        <td>{{viewData.simpleOrderInfo.number?viewData.simpleOrderInfo.number:"-"}}</td>
+        <td>{{viewData.simpleOrderInfo.orderType|orderTypePipe}}</td>
+        <td>{{viewData.simpleOrderInfo.buserName?viewData.simpleOrderInfo.buserName:"-"}}</td>
+        <td>{{viewData.simpleOrderInfo.cost?(viewData.simpleOrderInfo.cost|number:'1.2-2'):"-"}}</td>
+        <td>{{viewData.simpleOrderInfo.status |orderStatusPipe}}</td>
+      </tr>
+      </tbody>
+    </zm-table-detail>
+  </zm-card>
+
+  <zm-card [header]="'会员充值信息'" *ngIf="viewData.rechargeDetail">
+    <zm-table-detail style="text-align:center">
+      <tbody>
+      <tr>
+        <td>实收金额</td>
+        <td>￥{{viewData.rechargeDetail.pay | number:'1.2-2'}}</td>
+      </tr>
+      <tr>
+        <td>额外赠送金额</td>
+        <td>￥{{viewData.rechargeDetail.largess | number:'1.2-2'}}</td>
+      </tr>
+      <tr>
+        <td>实充金额</td>
+        <td>￥{{viewData.rechargeDetail.amount | number:'1.2-2'}}</td>
+      </tr>
+      </tbody>
+    </zm-table-detail>
+  </zm-card>
+
+</view-body-comp>
+
+

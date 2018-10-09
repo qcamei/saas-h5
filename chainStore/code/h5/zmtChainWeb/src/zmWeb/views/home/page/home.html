@@ -1,0 +1,43 @@
+
+<view-body-comp>
+  <div fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="20px">
+
+    <div fxLayout="column" fxLayoutAlign="center center" class="flex consumerPurchase cur-hand" (click)="goLibraryList()">
+      <div class="disFlex " fxLayout="row">
+          <img src="assets/images/home/home_production.png" alt="" class="icon-classify">
+          <span class="mg-l-20 font-bold">产品库</span>
+      </div>
+      <div class="mt-5 fz-18">Production Library</div>
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="center center" class="flex memberRecharge cur-hand" (click)="goClerkManage()">
+      <div class="disFlex " fxLayout="row">
+        <img src="assets/images/home/home_staff.png" alt="" class="icon-classify">
+        <span class="mg-l-20 font-bold">员工管理</span>
+      </div>
+      <div class="mt-5 fz-18">Staff Management</div>
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="center center" class="flex addCustomer cur-hand" (click)="goStoreManage()">
+      <div class="disFlex " fxLayout="row">
+        <img src="assets/images/home/home_store.png" alt="" class="icon-classify">
+        <span class="mg-l-20 font-bold">店铺管理</span>
+      </div>
+      <div class="mt-5 fz-18">Shop Management</div>
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="center center" class="flex addAppointment cur-hand" (click)="goMemCardManage()">
+      <div class="disFlex " fxLayout="row">
+        <img src="assets/images/home/home_vip.png" alt="" class="icon-classify">
+        <span class="mg-l-20 font-bold">会员卡管理</span>
+      </div>
+      <div class="mt-5 fz-18">Membership card</div>
+    </div>
+
+  </div>
+
+
+  <no_data [loadingFinish]="true" [dataList]="viewData.list" [text]=" '欢迎使用 智美通连锁总部管理系统...' " [showImg]="'noData'"></no_data>
+
+</view-body-comp>
+
